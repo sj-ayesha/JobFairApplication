@@ -1,0 +1,12 @@
+@import '../../styles/custom.scss';
+.footer {
+    &-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 25px;
+
+        &__text {
+            color: $color-light-gray;
+        }
+    }
+}
