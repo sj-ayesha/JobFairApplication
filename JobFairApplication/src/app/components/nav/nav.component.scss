@@ -1,0 +1,23 @@
+@import '../../styles/custom.scss';
+
+.router-links{
+    margin-top: 20px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+img{
+    max-width: 142px;
+    &:hover,&:focus{
+        cursor: pointer;
+        outline: none;
+    }
+}
+a{
+
+    color: $color-light-black;
+    text-decoration: none;
+    &:hover{
+        color: $color-light-red;
+    }
+}
