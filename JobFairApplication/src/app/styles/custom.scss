@@ -8,18 +8,26 @@ body {
 
 h1 {
     font-size: 60px;
+    color: $color-light-black;
 }
 
 h2 {
     font-size: 50px;
+    color: $color-light-black;
 }
 
 h3 {
     font-size: 36px;
+    color: $color-light-black;
 }
 
 h4 {
     font-size: 28px;
+    color: $color-light-black;
+}
+h5 {
+    font-size: 24px;
+    color: $color-light-black;
 }
 @media only screen and (max-width: 768px) {
     .main h1{
