@@ -20,9 +20,54 @@
           </ion-col>
         </ion-row>
       </div>
-      <div class="ion-text-left">
-        <app-list-candidate-job></app-list-candidate-job>
-      </div>
+      <ion-row class="lists">
+        <ion-col size="6" size-md size="12" size-sm>
+          <ion-card>
+            <ion-card-header>
+              <h3>List of Candidates</h3>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item class="candidate-item" [routerLink]="['/candidate-list']" routerLinkActive="router-link-active">
+                <ion-avatar slot="start">
+                  <img src="../../../assets/img/avatar_male.jpg">
+                </ion-avatar>
+                <ion-label>
+                  <h5>Justice Paul Cuevas</h5>
+                  <p>dolor sit amet</p>
+                  <p>consectetur adipiscing elit. Duis ut urna neque.</p>
+                </ion-label>
+              </ion-item>
+              <ion-item class="candidate-item" [routerLink]="['/candidate-list']" routerLinkActive="router-link-active">
+                <ion-avatar slot="start">
+                  <img src="../../../assets/img/avatar_female.jpg">
+                </ion-avatar>
+                <ion-label>
+                  <h5>Maliyah Sheppard</h5>
+                  <p>dolor sit amet</p>
+                  <p>consectetur adipiscing elit. Duis ut urna neque.</p>
+                </ion-label>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6" size-md size="12" size-sm>
+          <ion-card>
+            <ion-card-header>
+              <h3>Job Category</h3>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-avatar slot="start">
+                  <img src="../../../assets/img/avatar_male.jpg">
+                </ion-avatar>
+                <h5>Justice Paul Cuevas</h5>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
     </div>
   </ion-row>
 </ion-content>
+

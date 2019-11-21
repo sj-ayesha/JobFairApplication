@@ -25,7 +25,7 @@ import { ListCandidateJobComponent } from '../../components/list-candidate-job/l
   declarations: [
     HomePage,
     // NavComponent,
-    // FooterComponent
+    // FooterComponent,
     ListCandidateJobComponent
   ]
 })
