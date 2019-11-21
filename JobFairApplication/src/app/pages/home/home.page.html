@@ -1,8 +1,28 @@
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-row>
+    <div class="ion-text-center">
+      <div class="main">
+        <h1>WELCOME TO ELCA</h1>
+        <h3>The inde­pendent Swiss IT company</h3>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item class="venue-input" color="red">
+              <ion-label>Please select a venue..</ion-label>
+              <ion-select interface="popover">
+                <ion-select-option value="nes">UTM</ion-select-option>
+                <ion-select-option value="n64">UOM</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div class="venue-button">
+              <ion-button color="light">Add Candidate</ion-button>
+              <ion-button color="dark">View Job List</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="ion-text-left">
+        <app-list-candidate-job></app-list-candidate-job>
+      </div>
+    </div>
+  </ion-row>
 </ion-content>
-
-

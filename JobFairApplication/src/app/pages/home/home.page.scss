@@ -1,1 +1,61 @@
+@import '../../styles/custom.scss';
+// welcome
+.ion-text-center{
+    background-image: url('../../../assets/img/banner_4.png');
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: 100% !important;
+    background-repeat: no-repeat;
+}
 
+.main{
+    color: white;
+    font-family: "Poppins", sans-serif;
+    max-width: 630px;
+    margin: 4% auto;
+}
+.main h1{
+    font-weight: 600;
+}
+.main h3{
+    font-weight: 400;
+}
+.venue-input{
+    margin:0 auto;
+    color: white;
+    margin-top:30px;
+}
+.venue-button{
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+}
+ion-button{
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+}
+ion-label, ion-select-option{
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .ion-text-center{
+        background-image: none;
+        background-color: $color-light-red;
+        height: 50%
+    }
+    .venue-input{
+        margin-top:20px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .ion-text-center{
+        height: 60%;
+    }
+    ion-button{
+        font-size: 15px;
+    }
+}

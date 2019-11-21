@@ -8,6 +8,8 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 
+import { Directive } from '@angular/core';
+
 @NgModule({
   imports: [
     CommonModule,

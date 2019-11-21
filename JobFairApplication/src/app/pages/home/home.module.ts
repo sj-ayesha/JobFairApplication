@@ -8,6 +8,7 @@ import { HomePage } from './home.page';
 
 // import { NavComponent } from '../../components/nav/nav.component';
 // import { FooterComponent } from '../../components/footer/footer.component';
+import { ListCandidateJobComponent } from '../../components/list-candidate-job/list-candidate-job.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { HomePage } from './home.page';
     HomePage,
     // NavComponent,
     // FooterComponent
+    ListCandidateJobComponent
   ]
 })
 export class HomePageModule {}
