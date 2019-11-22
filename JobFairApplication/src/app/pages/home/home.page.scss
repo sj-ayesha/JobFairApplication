@@ -17,9 +17,15 @@
 }
 .main h1{
     font-weight: 600;
+    color:white;
 }
 .main h3{
     font-weight: 400;
+    color:white;
+}
+.venue{
+    max-width: 458px;
+    margin: 0 auto;
 }
 .venue-input{
     margin:0 auto;
@@ -42,12 +48,32 @@ ion-label, ion-select-option{
 .candidate-item{
     margin-bottom:20px;
 }
-
+.category-item h5{
+    font-size:20px;
+}
+.category-item:hover{
+    cursor: pointer;
+}
+.category-item:focus{
+    outline:none;
+}
+@media only screen and (max-width: 1024px) {
+    .ion-text-center{
+        background-image: none;
+        background-color: $color-light-red;
+        height: 33%;
+        // max-height:350px;
+    }
+    .lists h3{
+        font-size:30px;
+    }
+}
 @media only screen and (max-width: 768px) {
     .ion-text-center{
         background-image: none;
         background-color: $color-light-red;
-        height: 50%
+        height: 40%;
+        max-height:350px;
     }
     .venue-input{
         margin-top:20px;
@@ -62,3 +88,20 @@ ion-label, ion-select-option{
         font-size: 15px;
     }
 }
+// @media only screen and (max-width: 415px) {
+//     .ion-text-center{
+//         height: 45%;
+//     }
+// }
+
+// @media only screen and (max-width: 380px) {
+//     .ion-text-center{
+//         height: 44%;
+//     }
+// }
+
+// @media only screen and (max-width: 360px) {
+//     .ion-text-center{
+//         height: 60%;
+//     }
+// }
