@@ -1,9 +1,10 @@
 <ion-content padding>
-    <div class="wrapper-content">
 
+    <div class="wrapper-content">
+        <h4>Information</h4>
         <form [formGroup]="addCandidate">
             <ion-row>
-                <ion-col size="6" size-md size="12" size-sm>
+                <ion-col col-md-6 size="12" size-sm>
                     <ion-item>
                         <ion-input formControlName="firstname" type="text" placeholder="First Name"></ion-input>
                     </ion-item>
@@ -16,7 +17,7 @@
                         </ng-container>
                     </div>
                 </ion-col>
-                <ion-col size="6" size-md size="12" size-sm>
+                <ion-col col-md-6 size="12" size-sm>
                     <ion-item>
                         <ion-input formControlName="lastname" type="text" placeholder="Last Name"></ion-input>
                     </ion-item>
@@ -28,11 +29,119 @@
                             </div>
                         </ng-container>
                     </div>
-                    <ion-input type="text"></ion-input>
-                    <ion-input type="number"></ion-input>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6" size-md size="12" size-sm>
+                    <ion-item>
+                        <ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
+                    </ion-item>
+                    <div class="error-messages">
+                        <ng-container *ngFor='let error of error_messages.email'>
+                            <div class="error-message"
+                                *ngIf="addCandidate.get('email').hasError(error.type) && (addCandidate.get('email').dirty || addCandidate.get('email').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ion-col>
+                <ion-col size="6" size-md size="12" size-sm>
+                    <ion-item>
+                        <ion-input formControlName="phone" type="tel" placeholder="Tel: "></ion-input>
+                    </ion-item>
+                    <div class="error-messages">
+                        <ng-container *ngFor='let error of error_messages.phone'>
+                            <div class="error-message"
+                                *ngIf="addCandidate.get('phone').hasError(error.type) && (addCandidate.get('phone').dirty || addCandidate.get('phone').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6" size-md size="12" size-sm>
+                    <ion-item>
+                        <ion-label floating color="medium">Gender</ion-label>
+                        <ion-select interface="popover" formControlName="gender" cancelText="Cancel" okText="OK">
+                            <ion-select-option *ngFor="let gender of genders" [value]="gender">{{ gender }}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <div class="error-messages">
+                        <ng-container *ngFor='let error of error_messages.gender'>
+                            <div class="error-message"
+                                *ngIf="addCandidate.get('gender').hasError(error.type) && (addCandidate.get('gender').dirty || addCandidate.get('gender').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ion-col>
+                <ion-col size="6" size-md size="12" size-sm>
+                    <ion-item>
+                        <ion-input formControlName="nationality" type="text" placeholder="Nationality"></ion-input>
+                    </ion-item>
+                    <div class="error-messages">
+                        <ng-container *ngFor='let error of error_messages.nationality'>
+                            <div class="error-message"
+                                *ngIf="addCandidate.get('nationality').hasError(error.type) && (addCandidate.get('nationality').dirty || addCandidate.get('nationality').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="12" size-md size="12" size-sm>
+                    <ion-item>
+                        <ion-input formControlName="address" type="text" placeholder="Address"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <h4>Qualification</h4>
+            <ion-row>
+                <ion-col size="6" size-md size="12" size-sm>
+                    <ion-item>
+                        <ion-label floating color="medium">Qualification</ion-label>
+                        <ion-select interface="popover" formControlName="qualification" cancelText="Cancel" okText="OK">
+                            <ion-select-option *ngFor="let qualification of qualifications" [value]="qualification">
+                                {{ qualification }}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <div class="error-messages">
+                        <ng-container *ngFor='let error of error_messages.qualification'>
+                            <div class="error-message"
+                                *ngIf="addCandidate.get('qualification').hasError(error.type) && (addCandidate.get('qualification').dirty || addCandidate.get('qualification').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ion-col>
+                <ion-col size="6" size-md size="12" size-sm>
+                    <ion-item>
+                        <ion-label floating color="medium">Division</ion-label>
+                        <ion-select interface="popover" formControlName="division" cancelText="Cancel" okText="OK">
+                            <ion-select-option *ngFor="let division of divisions" [value]="division">{{ division }}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6" size-md size="12" size-sm>
+                    <ion-item>
+                        <ion-input formControlName="institution" type="text" placeholder="Institution"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="6" size-md size="12" size-sm>
+                    <ion-item>
+                        <ion-label fixed color="medium">Graduation Date</ion-label>
+                        <ion-datetime display-format="MMM YYYY" picker-format="YYYY-MM" value="2019-01-01">
+                        </ion-datetime>
+                    </ion-item>        
                 </ion-col>
             </ion-row>
         </form>
-
     </div>
 </ion-content>
