@@ -1,3 +1,16 @@
-<ion-content>
-
+<ion-content padding>
+    <form [formGroup]="addCandidate">
+        <ion-item>
+            <ion-input formControlName="firstname" type="text" placeholder="First Name"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+            <ng-container *ngFor='let error of error_messages.firstname'>
+                <div class="error-message" *ngIf="addCandidate.get('firstname').hasError(error.type) && (addCandidate.get('firstname').dirty || addCandidate.get('firstname').touched)">
+                    {{ error.message }}
+                </div>
+            </ng-container>
+        </div>
+        <ion-input type="text"></ion-input>
+        <ion-input type="number"></ion-input>
+    </form>
 </ion-content>

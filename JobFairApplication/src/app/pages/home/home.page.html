@@ -4,7 +4,7 @@
       <div class="main">
         <h1>WELCOME TO ELCA</h1>
         <h3>The inde­pendent Swiss IT company</h3>
-        <ion-row>
+        <ion-row class="venue">
           <ion-col size="12">
             <ion-item class="venue-input" color="red">
               <ion-label>Please select a venue..</ion-label>
@@ -32,12 +32,12 @@
                   <img src="../../../assets/img/avatar_male.jpg">
                 </ion-avatar>
                 <ion-label>
-                  <h5>Justice Paul Cuevas</h5>
+                  <h5>Justice Cuevas</h5>
                   <p>dolor sit amet</p>
                   <p>consectetur adipiscing elit. Duis ut urna neque.</p>
                 </ion-label>
               </ion-item>
-              <ion-item class="candidate-item" [routerLink]="['/candidate-list']" routerLinkActive="router-link-active">
+              <ion-item class="candidate-item" [routerLink]="['/candidate-add-profile']" routerLinkActive="router-link-active">
                 <ion-avatar slot="start">
                   <img src="../../../assets/img/avatar_female.jpg">
                 </ion-avatar>
@@ -56,18 +56,47 @@
             <ion-card-header>
               <h3>Job Category</h3>
             </ion-card-header>
-            <ion-card-content>
-              <ion-item>
-                <ion-avatar slot="start">
-                  <img src="../../../assets/img/avatar_male.jpg">
-                </ion-avatar>
-                <h5>Justice Paul Cuevas</h5>
-              </ion-item>
-            </ion-card-content>
+            <ion-row>
+              <ion-col size="2" size-md size="6" size-sm>
+                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                  <img src="../../../assets/img/job_category/software_engineer.png">
+                  <h5>Software Engineer</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="2" size-md size="6" size-sm>
+                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active"> 
+                  <img src="../../../assets/img/job_category/hr.png">
+                  <h5>Human Resource</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="2" size-md size="6" size-sm>
+                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                  <img src="../../../assets/img/job_category/management.png">
+                  <h5>Manager</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="2" size-md size="6" size-sm>
+                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                  <img src="../../../assets/img/job_category/BA.png">
+                  <h5>Business Analyst</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="2" size-md size="6" size-sm>
+                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                  <img src="../../../assets/img/job_category/QA.png">
+                  <h5>Quality Assurance</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="2" size-md size="6" size-sm>
+                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                  <img src="../../../assets/img/job_category/architect.png">
+                  <h5>Architect</h5>
+                </ion-card-content>
+              </ion-col>
+            </ion-row>
           </ion-card>
         </ion-col>
       </ion-row>
     </div>
   </ion-row>
 </ion-content>
-
