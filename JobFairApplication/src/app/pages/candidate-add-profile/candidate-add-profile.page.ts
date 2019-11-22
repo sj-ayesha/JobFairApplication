@@ -12,9 +12,14 @@ export class CandidateAddProfilePage implements OnInit {
   // tslint:disable-next-line: variable-name
   error_messages = {
     firstname: [
-      { type: 'required', message: 'First Name is required'},
-      { type: 'maxLength', message: 'First Name must be less than 30 letters'},
-      { type: 'pattern', message: 'Invalid First Name'}
+      { type: 'required', message: '⚠ First Name is required'},
+      { type: 'maxLength', message: '⚠ First Name must be less than 30 letters'},
+      { type: 'pattern', message: '⚠ Invalid Last Name'}
+    ],
+    lastname: [
+      { type: 'required', message: '⚠ Last Name is required'},
+      { type: 'maxLength', message: '⚠ Last Name must be less than 30 letters'},
+      { type: 'pattern', message: '⚠ Invalid Last Name'}
     ]
   };
 
@@ -22,7 +27,8 @@ export class CandidateAddProfilePage implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.addCandidate = this.formBuilder.group({
-      firstname: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required]))
+      firstname: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
+      lastname: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required]))
     });
   }
 
