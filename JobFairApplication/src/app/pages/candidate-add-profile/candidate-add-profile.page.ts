@@ -12,7 +12,20 @@ export class CandidateAddProfilePage implements OnInit {
   genders: Array<string>;
   qualifications: Array<string>;
   divisions: Array<string>;
+  durations: Array<string>;
+  // skills: Array<string>;
   // tslint:disable-next-line: variable-name
+  public skills = [
+    { val: 'Angular', isChecked: true },
+    { val: 'C#', isChecked: false },
+    { val: 'Java', isChecked: false },
+    { val: 'React', isChecked: false },
+    { val: 'Vue', isChecked: false },
+    { val: 'SQL', isChecked: false },
+  ];
+
+  public name = "awad";
+
   error_messages = {
     firstname: [
       { type: 'required', message: '⚠ First Name is required'},
@@ -41,7 +54,7 @@ export class CandidateAddProfilePage implements OnInit {
     ],
     qualification: [
       { type: 'required', message: '⚠ Qualification is required.' },
-    ],
+    ]
   };
 
   constructor(
@@ -65,7 +78,11 @@ export class CandidateAddProfilePage implements OnInit {
       qualification: new FormControl('', Validators.required),
       division: new FormControl(''),
       address: new FormControl(''),
-      institution: new FormControl('')
+      institution: new FormControl(''),
+      position: new FormControl(''),
+      company: new FormControl(''),
+      duration: new FormControl(''),
+      skill: new FormControl('')
     });
   }
 
@@ -86,10 +103,83 @@ export class CandidateAddProfilePage implements OnInit {
       '2nd Class',
       '3rd Class'
     ];
+    this.durations = [
+      '< 1 year',
+      '1 year',
+      '2 years',
+      '3 years',
+      '4 years',
+      '5 years',
+      '6 years',
+      '7 years',
+      '8 years',
+      '9 years',
+      '10 years',
+      '> 10 years',
+    ];
   }
 
   ionViewWillLoad() {
 
   }
 
+  duplicate(){
+    console.log('Hi');
+    const div = document.createElement('div');
+
+    div.className = 'row';
+
+    div.innerHTML = `
+    <ion-row id="duplicater">
+    <ion-col col-md-6 size="12" size-sm>
+        <ion-item>
+            <ion-input formControlName="position" type="text" placeholder="Position"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+            <ng-container *ngFor='let error of error_messages.position'>
+                <div class="error-message"
+                    *ngIf="addCandidate.get('position').hasError(error.type) && (addCandidate.get('position').dirty || addCandidate.get('position').touched)">
+                    {{ error.message }}
+                </div>
+            </ng-container>
+        </div>
+    </ion-col>
+    <ion-col col-md-6 size="12" size-sm>
+        <ion-item>
+            <ion-input formControlName="company" type="text" placeholder="Company"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+            <ng-container *ngFor='let error of error_messages.company'>
+                <div class="error-message"
+                    *ngIf="addCandidate.get('company').hasError(error.type) && (addCandidate.get('company').dirty || addCandidate.get('company').touched)">
+                    {{ error.message }}
+                </div>
+            </ng-container>
+        </div>
+    </ion-col>
+</ion-row>
+<ion-row>
+    <ion-col size="6" size-md size="12" size-sm>
+        <ion-item>
+            <ion-label floating color="medium">*Duration</ion-label>
+            <ion-select interface="popover" formControlName="duration" cancelText="Cancel" okText="OK">
+                <ion-select-option *ngFor="let duration of durations" [value]="duration">
+                    {{ duration }}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <div class="error-messages">
+            <ng-container *ngFor='let error of error_messages.duration'>
+                <div class="error-message"
+                    *ngIf="addCandidate.get('duration').hasError(error.type) && (addCandidate.get('duration').dirty || addCandidate.get('duration').touched)">
+                    {{ error.message }}
+                </div>
+            </ng-container>
+        </div>
+    </ion-col>
+</ion-row>
+  `;
+
+    document.getElementById('content').appendChild(div);
+  }
 }

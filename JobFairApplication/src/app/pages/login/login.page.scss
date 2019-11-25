@@ -1,5 +1,10 @@
 @import '../../styles/custom.scss';
-
+.ion-align-items-center{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
 .login {
     &-content {
         &__img {
