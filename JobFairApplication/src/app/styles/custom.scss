@@ -1,4 +1,5 @@
 $color-light-red: #ff483a;
+$color-orange-red: #d2492a;
 $color-light-black: #414344;
 $color-light-gray: #f5f5f5;
 
@@ -29,6 +30,11 @@ h5 {
     font-size: 24px;
     color: $color-light-black;
 }
+
+h6 {
+    font-size: 20px;
+    color: $color-light-black;
+}
 @media only screen and (max-width: 768px) {
     .main h1{
         font-size:50px;
@@ -52,4 +58,8 @@ h5 {
 .wrapper-content {
     max-width: 1500px;
     margin: 0 auto;
+}
+
+.btn {
+    font-family: "Poppins", sans-serif;
 }
