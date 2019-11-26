@@ -4,21 +4,6 @@
         <div class="title">
             <ion-icon class="icon-users" ios="ios-people" md="md-people"></ion-icon><h3>List of Candidates</h3>
         </div>
-        <!-- <div class="row bottom-container" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="100" data-aos-offset="5" *ngIf="cardetails.length > 0">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="totalNumberOfCars">
-                    <p class="para">TOTAL NUMBER OF CARS: {{cardetails.length}}</p>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12 amountDisplay">
-                  <div class="showNumberOfCars">
-                    <p class="leftpara">SHOW </p>
-                    <input class="number" type="number" id="numberOfItems" [(ngModel)]="value" min="1" max="15"
-                      placeholder="{{numberOfItems}}">
-                    <p class="rightpara">CARS ON THE PAGE</p><button id="add" (click)="onAdd()">Enter</button>
-                  </div>
-                </div>
-              </div> -->
     </ion-card-header>
     <ion-card-content>
         <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active">

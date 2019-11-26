@@ -16,23 +16,30 @@
 
         <ion-col size="6" class="ion-padding">
           <ion-searchbar
-          [(ngModel)]="searchTerm"
-          (ionChange)="setFilteredItems()"
-        ></ion-searchbar>
+            [(ngModel)]="searchTerm"
+            (ionChange)="setFilteredItems()"
+          ></ion-searchbar>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col size="12" class="title-container">
-            <ion-icon class="list-icon" ios="ios-list" md="md-list"></ion-icon>
-          <h4 class="ion-text-uppercase">Job list</h4>
+          <ion-icon class="list-icon" ios="ios-list" md="md-list"></ion-icon>
+          <h3 class="ion-text-uppercase">Job list</h3>
         </ion-col>
       </ion-row>
 
+      <ion-row>
+          <ion-col size="12">
+            <p class="ion-float-right ion-margin-end">Select Job</p>
+          </ion-col>
+        </ion-row>
+
       <div class="job-list-container">
         <ion-row class="job-box" *ngFor="let item of items">
-          <ion-col size="11" (click)="styleAccordion()" >
+          <ion-col size="11" (click)="styleAccordion()">
             <button class="collapsible">{{ item.title }}</button>
+
             <div class="content">
               <ion-row>
                 <ion-col size="6">
@@ -70,6 +77,30 @@
                     </ul>
                   </div>
                 </ion-col>
+
+                <ion-col size="6">
+                  <div class="job-summary">
+                      <ion-card>
+                          <ion-card-content>
+                            <h6>Job Summary</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna
+                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <div class="icon-detail">
+                                    <div class="location icon">
+                                      <ion-icon name="locate" class="icon"></ion-icon>
+                                      <span>Mauritius</span>             
+                                    </div>
+                                    <div class="time">
+                                      <ion-icon name="time" class="icon"></ion-icon>
+                                      <span>Full Time</span>
+                                    </div>
+                                  </div>
+                          </ion-card-content>
+                        </ion-card>
+                  </div>
+                </ion-col>
               </ion-row>
             </div>
           </ion-col>
@@ -88,6 +119,19 @@
           </ion-col>
         </ion-row>
       </div>
+
+      <ion-row>
+        <ion-col size="12" class="ion-padding">
+            
+          <ion-button
+            color="dark"
+            [routerLink]="['/candidate-add-profile']"
+            routerLinkActive="router-link-active"
+            class="ion-float-right btn"
+            >Fill in details<ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></ion-button
+          >
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </div>
 </ion-content>
