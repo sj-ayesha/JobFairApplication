@@ -160,4 +160,14 @@
   .questions:checked ~ .question::before{
     content: 'Less Info '
   }
+
+  .title-container {
+    display: flex;
+    align-items: center;
+
+    .list-icon {
+      font-size: 30px;
+      padding: 10px;
+    }
+  }
   

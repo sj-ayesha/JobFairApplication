@@ -6,7 +6,7 @@ import { DataService } from '../../services/data.service';
   templateUrl: './job-list.page.html',
   styleUrls: ['./job-list.page.scss'],
 })
-export class JobListPage implements OnInit, AfterViewInit {
+export class JobListPage implements OnInit {
 
   jobs: any;
   public searchTerm: string = "";
