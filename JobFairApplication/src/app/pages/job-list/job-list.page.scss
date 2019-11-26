@@ -10,7 +10,7 @@
 }
 
 .collapsible {
-    background-color: $color-orange-red;
+    background-color: $color-light-black;
     color: white;
     cursor: pointer;
     padding: 15px;
@@ -23,7 +23,7 @@
   
   .active,
   .collapsible:hover {
-    background-color: $color-orange-red;
+    background-color: $color-light-black;
   }
   
   .collapsible:after {
@@ -149,7 +149,7 @@
     &__item {
       width: 35px;
       height: 35px;
-      margin: 5px;
+      margin: 7px;
     }
   }
   

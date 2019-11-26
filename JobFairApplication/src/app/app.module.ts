@@ -10,19 +10,19 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { ComponentsModule } from './components/components.module';
-// import { NavComponent } from './components/nav/nav.component';
-// import { FooterComponent } from './components/footer/footer.component';
+// import { ComponentsModule } from './components/components.module';
+import { NavComponent } from './components/nav/nav.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    // NavComponent,
-    // FooterComponent
+    NavComponent,
+    FooterComponent
   ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentsModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,

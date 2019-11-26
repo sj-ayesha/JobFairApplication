@@ -7,7 +7,7 @@
         <ion-row class="venue">
           <ion-col size="12">
             <ion-item class="venue-input" color="red">
-              <ion-label position="floating">Please select a venue..</ion-label>
+              <ion-label position="floating">Venue</ion-label>
               <ion-select interface="popover">
                 <ion-select-option value="UTM">UTM</ion-select-option>
                 <ion-select-option value="UOM">UOM</ion-select-option>
@@ -15,8 +15,9 @@
               </ion-select>
             </ion-item>
             <div class="venue-button">
+              <ion-button color="light" [routerLink]="['/candidate-add-profile']" routerLinkActive="router-link-active">
+                Add Candidate</ion-button>
               <ion-button color="dark" [routerLink]="['/job-list']">View Job List</ion-button>
-              <ion-button color="light" [routerLink]="['/candidate-add-profile']" routerLinkActive="router-link-active" >Add Candidate</ion-button>
             </div>
           </ion-col>
         </ion-row>
@@ -28,7 +29,7 @@
               <h3>List of Candidates</h3>
             </ion-card-header>
             <ion-card-content>
-              <ion-item class="candidate-item" [routerLink]="['/candidate-list']" routerLinkActive="router-link-active">
+              <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active">
                 <ion-avatar slot="start">
                   <img src="../../../assets/img/avatar_male.jpg">
                 </ion-avatar>
@@ -38,7 +39,7 @@
                   <p>consectetur adipiscing elit. Duis ut urna neque.</p>
                 </ion-label>
               </ion-item>
-              <ion-item class="candidate-item" [routerLink]="['/candidate-list']" routerLinkActive="router-link-active">
+              <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active">
                 <ion-avatar slot="start">
                   <img src="../../../assets/img/avatar_female.jpg">
                 </ion-avatar>
@@ -49,7 +50,9 @@
                 </ion-label>
               </ion-item>
             </ion-card-content>
+            <ion-button class="btn-view-more" color="dark" [routerLink]="['/candidate-list']">View more</ion-button>
           </ion-card>
+
         </ion-col>
 
         <ion-col size="6" size-md size="12" size-sm>
@@ -59,37 +62,43 @@
             </ion-card-header>
             <ion-row>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" [routerLink]="['/job-list']"
+                  routerLinkActive="router-link-active">
                   <img src="../../../assets/img/job_category/software_engineer.png">
                   <h5>Software Engineer</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active"> 
+                <ion-card-content class="category-item" [routerLink]="['/job-list']"
+                  routerLinkActive="router-link-active">
                   <img src="../../../assets/img/job_category/hr.png">
                   <h5>Human Resource</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" [routerLink]="['/job-list']"
+                  routerLinkActive="router-link-active">
                   <img src="../../../assets/img/job_category/management.png">
                   <h5>Manager</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" [routerLink]="['/job-list']"
+                  routerLinkActive="router-link-active">
                   <img src="../../../assets/img/job_category/BA.png">
                   <h5>Business Analyst</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" [routerLink]="['/job-list']"
+                  routerLinkActive="router-link-active">
                   <img src="../../../assets/img/job_category/QA.png">
                   <h5>Quality Assurance</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" [routerLink]="['/job-list']"
+                  routerLinkActive="router-link-active">
                   <img src="../../../assets/img/job_category/architect.png">
                   <h5>Architect</h5>
                 </ion-card-content>

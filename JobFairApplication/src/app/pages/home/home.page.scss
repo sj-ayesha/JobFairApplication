@@ -45,9 +45,9 @@ ion-label, ion-select-option{
     font-family: "Poppins", sans-serif;
     font-size: 20px;
 }
-.candidate-item{
-    margin-bottom:20px;
-}
+// .candidate-item{
+//     margin-bottom:20px;
+// }
 .category-item h5{
     font-size:20px;
 }
@@ -56,6 +56,9 @@ ion-label, ion-select-option{
 }
 .category-item:focus{
     outline:none;
+}
+.btn-view-more{
+    margin-bottom: 25px;
 }
 @media only screen and (max-width: 1024px) {
     .ion-text-center{
