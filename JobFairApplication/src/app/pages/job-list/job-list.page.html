@@ -15,33 +15,24 @@
         </ion-col>
 
         <ion-col size="6" class="ion-padding">
-          <input
-            type="text"
-            placeholder="Search"
-            class="form-control"
-            name="search"
-            [(ngModel)]="filter"
-            id="search"
-          />
-          <label
-            for="search"
-            class="glyphicon glyphicon-search"
-            rel="tooltip"
-            title="Search"
-          ></label>
+          <ion-searchbar
+          [(ngModel)]="searchTerm"
+          (ionChange)="setFilteredItems()"
+        ></ion-searchbar>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col size="12">
+            <ion-icon ios="ios-list" md="md-list"></ion-icon>
           <h4 class="ion-text-uppercase">Job list</h4>
         </ion-col>
       </ion-row>
 
       <div class="job-list-container">
-        <ion-row class="job-box" *ngFor="let job of jobs">
-          <ion-col size="11">
-            <button class="collapsible">{{ job.name }}</button>
+        <ion-row class="job-box" *ngFor="let item of items">
+          <ion-col size="11" (click)="styleAccordion()" >
+            <button class="collapsible">{{ item.title }}</button>
             <div class="content">
               <ion-row>
                 <ion-col size="6">
@@ -89,7 +80,7 @@
                     <label for="option1" class="question">Apply</label>
                   </div> -->
               <ion-checkbox
-                color="dark"
+                color="danger"
                 class="btn-checkbox__item"
               ></ion-checkbox>
             </div>

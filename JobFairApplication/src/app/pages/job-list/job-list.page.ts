@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-job-list',
@@ -8,38 +9,41 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 export class JobListPage implements OnInit, AfterViewInit {
 
   jobs: any;
+  public searchTerm: string = "";
+  public items: any;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    
-
-    this.jobs = [
-      { id: 1, name: 'Software Engineer' },
-      { id: 2, name: 'Front End Developer' },
-      { id: 3, name: 'JAVASCRIPT Developer' },
-      { id: 4, name: 'ANGULAR Devloper' },
-      { id: 5, name: 'REACT Developer' },
-      { id: 6, name: 'NODEJS Developer' }
-    ];
+        this.setFilteredItems();
   }
 
-  ngAfterViewInit() {
-    this.styleAccordion();
+  setFilteredItems() {
+    this.items = this.dataService.filterItems(this.searchTerm);
   }
+
+  // ngAfterViewInit() {
+  //   this.styleAccordion();
+  // }
+
+  // ngOnChanges(): void {
+
+  //   this.styleAccordion();
+  // }
 
   styleAccordion() {
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
+    console.log('test');
+    let coll = document.getElementsByClassName('collapsible');
+    let i;
 
     for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
+      coll[i].addEventListener('click', function() {
+        this.classList.toggle('active');
+        let content = this.nextElementSibling;
         if (content.style.maxHeight) {
           content.style.maxHeight = null;
         } else {
-          content.style.maxHeight = content.scrollHeight + "px";
+          content.style.maxHeight = content.scrollHeight + 'px';
         }
       });
     }
