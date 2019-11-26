@@ -29,11 +29,18 @@ h4 {
 h5 {
     font-size: 24px;
     color: $color-light-black;
+    
+    @media only screen and (max-width: 768px) {
+        font-size: 20px;
+    }
 }
 
 h6 {
     font-size: 20px;
     color: $color-light-black;
+    @media only screen and (max-width: 768px) {
+        font-size: 18px;
+    }
 }
 @media only screen and (max-width: 768px) {
     .main h1{

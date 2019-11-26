@@ -1,6 +1,12 @@
 <ion-content>
   <div class="wrapper-content">
     <ion-grid>
+        <ion-row>
+            <ion-col size="12" class="title-container">
+              <ion-icon class="list-icon" ios="ios-list" md="md-list"></ion-icon>
+              <h3 class="ion-text-uppercase">Job list</h3>
+            </ion-col>
+          </ion-row>
       <ion-row>
         <ion-col size="6" class="ion-padding">
           <ion-item class="venue-input">
@@ -19,13 +25,6 @@
             [(ngModel)]="searchTerm"
             (ionChange)="setFilteredItems()"
           ></ion-searchbar>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col size="12" class="title-container">
-          <ion-icon class="list-icon" ios="ios-list" md="md-list"></ion-icon>
-          <h3 class="ion-text-uppercase">Job list</h3>
         </ion-col>
       </ion-row>
 
