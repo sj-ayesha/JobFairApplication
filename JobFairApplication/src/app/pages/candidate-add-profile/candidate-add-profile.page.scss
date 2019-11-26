@@ -1,5 +1,22 @@
 .error-messages {
-    font-size : 0.7em;
+    font-size : 0.9em;
     color: red;
-    text-align: center;
+}
+.title{
+    display: flex;
+}
+
+.icon-add{
+    font-size: 35px;
+    padding-top: 19px;
+    padding-right: 10px;
+}
+
+ion-button{
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+}
+
+ion-datetime{
+    padding-bottom: 1px;
 }

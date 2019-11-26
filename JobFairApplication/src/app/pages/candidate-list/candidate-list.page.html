@@ -1,3 +1,31 @@
-<ion-content>
-
+<ion-content padding>
+    <div class="wrapper-content">
+    <ion-card-header>
+        <div class="title">
+            <ion-icon class="icon-users" ios="ios-people" md="md-people"></ion-icon><h3>List of Candidates</h3>
+        </div>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active">
+            <ion-avatar slot="start">
+                <img src="../../../assets/img/avatar_male.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h5>Justice Cuevas</h5>
+                <p>dolor sit amet</p>
+                <p>consectetur adipiscing elit. Duis ut urna neque.</p>
+            </ion-label>
+        </ion-item>
+        <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active">
+            <ion-avatar slot="start">
+                <img src="../../../assets/img/avatar_female.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h5>Maliyah Sheppard</h5>
+                <p>dolor sit amet</p>
+                <p>consectetur adipiscing elit. Duis ut urna neque.</p>
+            </ion-label>
+        </ion-item>
+    </ion-card-content>
+    </div>
 </ion-content>

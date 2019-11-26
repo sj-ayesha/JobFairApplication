@@ -8,12 +8,14 @@ import { JobListPageRoutingModule } from './job-list-routing.module';
 
 import { JobListPage } from './job-list.page';
 
+import { ComponentsModule } from '../../components/components.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    JobListPageRoutingModule
+    JobListPageRoutingModule, ComponentsModule
   ],
   declarations: [JobListPage]
 })
