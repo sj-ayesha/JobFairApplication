@@ -1,5 +1,7 @@
 {
   "name": "JobFairApplication",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

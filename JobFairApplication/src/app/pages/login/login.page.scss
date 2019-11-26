@@ -1,5 +1,10 @@
 @import '../../styles/custom.scss';
-
+.ion-align-items-center{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
 .login {
     &-content {
         &__img {
@@ -50,6 +55,11 @@
         }
         
     }
+}
+
+ion-button{
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
 }
 // .login-screen--animation {
 //     background: linear-gradient(253deg, #0cc898, #1797d2, #864fe1);
