@@ -18,29 +18,33 @@
         <ion-row>
           <div class="info">
             <div class="interviewer-detail">
-              <h6>Interview Date:</h6>
               <ion-item>
-                <ion-label>MM DD YY</ion-label>
-                <ion-datetime
-                  displayFormat="MM DD YY"
-                  placeholder="Select Date"
-                ></ion-datetime>
-              </ion-item>
+                <ion-label position="floating" color="medium" class="label-info">*Interview Date</ion-label>
+                <ion-datetime display-format="MMM YYYY" picker-format="YYYY-MM" value="2019-01-01">
+                </ion-datetime>
+            </ion-item>
             </div>
             <div class="interviewer-detail">
-              <h6>Venue:</h6>
-              <ion-item class="venue-input" color="red">
+              <ion-item>
+                <ion-label position="floating" color="medium" class="label-info">*Venue</ion-label>
                 <ion-select interface="popover">
-                  <ion-select-option value="UTM">UTM</ion-select-option>
-                  <ion-select-option value="UOM">UOM</ion-select-option>
-                  <ion-select-option value="CTI">CTI</ion-select-option>
+                    <ion-select-option>UTM
+                    </ion-select-option>
+                    <ion-select-option>UOM
+                    </ion-select-option>
+                    <ion-select-option>UDM
+                    </ion-select-option>
+                    <ion-select-option>CTI
+                    </ion-select-option>
                 </ion-select>
-              </ion-item>
+            </ion-item>
             </div>
 
             <div class="interviewer-detail">
-              <h6>Interviewer Name:</h6>
-              <ion-input placeholder="Enter Input"></ion-input>
+              <ion-item>
+                <ion-label position="floating" color="medium" class="label-info">Interviewer Name</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
             </div>
           </div>
           <ion-col col-md-12 size="12">
