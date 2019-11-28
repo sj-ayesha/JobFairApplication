@@ -46,8 +46,11 @@ ion-label, ion-select-option{
     font-size: 20px;
 }
 // .candidate-item{
-//     margin-bottom:20px;
+//     max-width: 155px;
 // }
+.category-item {
+    max-width: 155px;
+}
 .category-item h5{
     font-size:20px;
 }

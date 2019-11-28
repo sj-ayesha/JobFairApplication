@@ -152,11 +152,11 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-            <div class="add-qualification-button ion-text-right">
+            <!-- <div class="add-qualification-button ion-text-right">
                 <ion-button class='btn' color="danger">
                     <ion-icon ios="ios-add" md="md-add"></ion-icon>Add Qualification
                 </ion-button>
-            </div>
+            </div> -->
 
             <h4>Experience</h4>
             <ion-row id="duplicater">
@@ -209,11 +209,11 @@
                     </div>
                 </ion-col>
             </ion-row>
-            <div class="add-experience-button ion-text-right">
+            <!-- <div class="add-experience-button ion-text-right">
                 <ion-button class='btn' id="button" (click)="duplicate()" color="danger">
                     <ion-icon ios="ios-add" md="md-add"></ion-icon>Add Experience
                 </ion-button>
-            </div>
+            </div> -->
 
             <div id="content">
 
@@ -231,9 +231,16 @@
                     </ion-list>
                 </ion-col>
             </ion-row>
-            <div class="submit-button ion-text-right">
-                <ion-button class='btn' color="dark">Submit</ion-button>
+            <div class="btn-actions">
+                    <div class="btn-back ion-text-left">
+              
+                            <ion-button class="btn" color="light" [routerLink]="['/job-list']" routerLinkActive="router-link-active" >  <ion-icon name="arrow-back"></ion-icon>Back</ion-button>
+                        </div>
+                        <div class="submit-button ion-text-right">
+                                <ion-button class='btn' color="dark">Submit</ion-button>
+                            </div>
             </div>
+
         </form>
     </div>
 </ion-content>

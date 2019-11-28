@@ -20,3 +20,12 @@ ion-button{
 ion-datetime{
     padding-bottom: 1px;
 }
+
+.btn-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn-back {
+      margin: 0 10px;
+    }
+  }
