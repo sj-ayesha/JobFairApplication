@@ -21,7 +21,11 @@ ion-datetime{
     padding-bottom: 1px;
 }
 
-.icon-plane{
-    margin-left:5px;
-    font-size: 24px;
-}
+.btn-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn-back {
+      margin: 0 10px;
+    }
+  }

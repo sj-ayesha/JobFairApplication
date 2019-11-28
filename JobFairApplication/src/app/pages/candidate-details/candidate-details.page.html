@@ -7,8 +7,8 @@
     <ion-row>
       <ion-col col-md-2 size="3">
         <ion-card padding>
-          <div class="jobs-selected" *ngFor="let job of jobs">
-            <h6>{{ job.name }}</h6>
+          <div class="jobs-selected" *ngFor="let item of items">
+            <p>{{ item.title }}</p>
             <ion-checkbox color="danger" class="btn-checkbox__item">
             </ion-checkbox>
           </div>
@@ -19,37 +19,67 @@
           <div class="info">
             <div class="interviewer-detail">
               <ion-item>
-                <ion-label position="floating" color="medium" class="label-info">*Interview Date</ion-label>
-                <ion-datetime display-format="MMM YYYY" picker-format="YYYY-MM" value="2019-01-01">
+                <ion-label position="floating" color="medium" class="label-info"
+                  >*Interview Date</ion-label
+                >
+                <ion-datetime
+                  display-format="MMM YYYY"
+                  picker-format="YYYY-MM"
+                  value="2019-01-01"
+                >
                 </ion-datetime>
-            </ion-item>
+              </ion-item>
             </div>
             <div class="interviewer-detail">
               <ion-item>
-                <ion-label position="floating" color="medium" class="label-info">*Venue</ion-label>
+                <ion-label position="floating" color="medium" class="label-info"
+                  >*Venue</ion-label
+                >
                 <ion-select interface="popover">
-                    <ion-select-option>UTM
-                    </ion-select-option>
-                    <ion-select-option>UOM
-                    </ion-select-option>
-                    <ion-select-option>UDM
-                    </ion-select-option>
-                    <ion-select-option>CTI
-                    </ion-select-option>
+                  <ion-select-option>UTM </ion-select-option>
+                  <ion-select-option>UOM </ion-select-option>
+                  <ion-select-option>UDM </ion-select-option>
+                  <ion-select-option>CTI </ion-select-option>
                 </ion-select>
-            </ion-item>
+              </ion-item>
             </div>
 
             <div class="interviewer-detail">
               <ion-item>
-                <ion-label position="floating" color="medium" class="label-info">Interviewer Name</ion-label>
+                <ion-label position="floating" color="medium" class="label-info"
+                  >Interviewer Name</ion-label
+                >
                 <ion-input type="text"></ion-input>
-            </ion-item>
+              </ion-item>
             </div>
           </div>
           <ion-col col-md-12 size="12">
             <ion-card class="candidate-details" padding>
-              <h5>Name: Justice Cuevas</h5>
+              <div class="information">
+                  <h5>Information</h5>
+                  <p>Name: {{ candidate[0].firstName}} {{ candidate[0].lastname}}</p>
+                  <p>Gender: {{candidate[0].gender}}</p>
+                  <p>Phone Number: {{candidate[0].phoneNum}}</p>
+                  <p>Email: {{candidate[0].email}}</p>
+                  <p>Address: {{candidate[0].address}}</p>
+                  <p>Nationality: {{candidate[0].nationality}}</p>
+              </div>
+
+              <div class="qualifications">
+                <h5>Qualification(s)</h5>
+                <p>Qualification Level: {{ candidate[0].qualification[0].title}}</p>
+                <p>Division: {{ candidate[0].qualification[0].division}}</p>
+                <p>Institution: {{ candidate[0].qualification[0].institution}}</p>
+                <p>Graduation Date: {{ candidate[0].qualification[0].graduationDate}}</p>
+              </div>
+
+              <div class="experience">
+                  <h5>Experience(s)</h5>
+                  <p>Company: {{ candidate[0].experience[0].companyName}}</p>
+                  <p>Job Title: {{ candidate[0].experience[0].position}}</p>
+                  <p>Duration: {{ candidate[0].experience[0].duration}}</p>
+              </div>
+
             </ion-card>
           </ion-col>
         </ion-row>
@@ -67,30 +97,50 @@
                 </ion-textarea>
               </ion-item>
               <div class="status">
-                <div id="ck-button-rejected">
+                  <ion-radio-group class="btn-radio-group">
+                  
+                      <ion-item>
+                        <ion-label>Rejected</ion-label>
+                        <ion-radio color="danger"slot="start" value="reject" checked></ion-radio>
+                      </ion-item>
+                  
+                      <ion-item>
+                        <ion-label>Proceed to next interview</ion-label>
+                        <ion-radio color="success" slot="start" value="proceed"></ion-radio>
+                      </ion-item>
+                    </ion-radio-group>
+                <!-- <div id="ck-button-rejected">
                   <label>
-                    <input type="checkbox" value="1" /><span>Rejected</span>
+                    <input type="radio" value="1" /><span>Rejected</span>
                   </label>
                 </div>
                 <div id="ck-button-pending">
                   <label>
-                    <input type="checkbox" value="1" /><span>Pending</span>
+                    <input type="radio" value="1" /><span>Pending</span>
                   </label>
                 </div>
                 <div id="ck-button-next">
                   <label>
-                    <input type="checkbox" value="1" /><span
+                    <input type="radio" value="1" /><span
                       >Proceed to next interview</span
                     >
                   </label>
-                </div>
+                </div> -->
               </div>
             </ion-card>
           </ion-col>
         </ion-row>
-        <div class="save-button ion-text-right">
-          <ion-button class="btn" color="dark">Save</ion-button>
+        <div class="btn-actions">
+            <div class="btn-back ion-text-left">
+              
+                <ion-button class="btn" color="light" [routerLink]="['/candidate-list']" routerLinkActive="router-link-active" >  <ion-icon name="arrow-back"></ion-icon>Back</ion-button>
+            </div>
+            <div class="save-button ion-text-right">
+                <ion-button class="btn" color="dark">Save</ion-button>
+              </div>
+
         </div>
+
       </ion-col>
     </ion-row>
   </div>

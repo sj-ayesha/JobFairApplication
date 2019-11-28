@@ -8,12 +8,12 @@ export class DataService {
 
   constructor() {
     this.items = [
-      { title: "Software" },
-      { title: "Front" },
-      { title: "Back" },
-      { title: "QA" },
-      { title: "Manager" },
-      { title: "HR" }
+      { title: 'Software Developer' },
+      { title: 'Front Developer' },
+      { title: 'Back Developer' },
+      { title: 'QA' },
+      { title: 'Manager' },
+      { title: 'HR' }
     ];
    }
 
@@ -21,5 +21,9 @@ export class DataService {
     return this.items.filter(item => {
       return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
     });
+  }
+
+  public getJobs() {
+    return this.items;
   }
 }

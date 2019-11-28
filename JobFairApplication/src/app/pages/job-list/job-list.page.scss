@@ -46,12 +46,18 @@
     background-color: white;
   
     ul {
-      list-style: none;
+      // list-style: none;
       padding-left: 10px;
+
+      li {
+        line-height: 20px;
+        padding: 5px 0;
+      }
     }
+
+
   
     ul li:before {
-      content: "✓";
       padding-right: 10px;
     }
   }
@@ -196,6 +202,25 @@
   .job-summary {
     p {
       padding: 10px 0;
+      color: black;
+    }
+  }
+
+  .btn-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn-back {
+      margin: 0 10px;
+    }
+  }
+
+  .job-description {
+    p {
+      margin: 20px 0;
+    }
+
+    &-box {
       color: black;
     }
   }
