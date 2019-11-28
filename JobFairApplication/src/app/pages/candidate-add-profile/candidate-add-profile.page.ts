@@ -24,8 +24,6 @@ export class CandidateAddProfilePage implements OnInit {
     { val: 'SQL', isChecked: false },
   ];
 
-  public name = "awad";
-
   error_messages = {
     firstname: [
       { type: 'required', message: '⚠ First Name is required'},
