@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
+import { Candidate } from 'src/app/model/candidate';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  candidates : Candidate[];
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit() {
+    this.populateCandidate();
+  }
+
+  populateCandidate(){
+    this.apiService.getAllCandidates().subscribe(data => {
+      this.candidates = data;
+      
+    });
+  }
 
 }
