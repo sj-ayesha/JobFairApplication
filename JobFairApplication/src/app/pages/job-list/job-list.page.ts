@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { ApiService } from 'src/app/services/api.service';
+import { Job } from 'src/app/model/job';
 
 @Component({
   selector: 'app-job-list',
@@ -8,14 +10,16 @@ import { DataService } from '../../services/data.service';
 })
 export class JobListPage implements OnInit {
 
-  jobs: any;
+  // jobs: any;
+  Jobs : Job[];
   public searchTerm: string = "";
   public items: any;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private apiService: ApiService) { }
 
   ngOnInit() {
         this.setFilteredItems();
+        this.populateJob();
   }
 
   setFilteredItems() {
@@ -47,6 +51,12 @@ export class JobListPage implements OnInit {
         }
       });
     }
+  }
+
+  populateJob(){
+    this.apiService.getAllJobs().subscribe(data => {
+      this.Jobs = data;
+    });
   }
 
 }

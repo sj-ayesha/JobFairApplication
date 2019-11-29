@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Candidate } from '../model/candidate';
+import { Job } from '../model/job';
 
 
 @Injectable({
@@ -16,9 +17,11 @@ export class ApiService {
     return this.http.get<Candidate[]>(this.baseUrl + 'candidate/all');
   }
 
-  saveCandidate(candidate: Candidate): Observable<Candidate[]>{
-    return this.http.post<Candidate[]>(this.baseUrl,Candidate);
+  getAllJobs(): Observable<Job[]>{
+    return this.http.get<Job[]>(this.baseUrl + 'job/all');
   }
 
-
+  saveCandidate(candidate: Candidate): Observable<Candidate[]> {
+    return this.http.post<Candidate[]>(this.baseUrl, Candidate);
+  }
 }
