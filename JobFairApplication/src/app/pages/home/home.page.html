@@ -69,46 +69,11 @@
               <h3>Job Category</h3>
             </ion-card-header>
             <ion-row>
-              <ion-col size="2" size-md size="6" size-sm>
+              <ion-col size="2" size-md size="6" size-sm *ngFor="let category of categoryTitle">
                 <ion-card-content class="category-item" [routerLink]="['/job-list']" 
                   routerLinkActive="router-link-active" [queryParams]="">
-                  <img src="../../../assets/img/job_category/software_engineer.png">
-                  <h5>Software Engineer</h5>
-                </ion-card-content>
-              </ion-col>
-              <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
-                  <img src="../../../assets/img/job_category/hr.png">
-                  <h5>Human Resource</h5>
-                </ion-card-content>
-              </ion-col>
-              <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
-                  <img src="../../../assets/img/job_category/management.png">
-                  <h5>Manager</h5>
-                </ion-card-content>
-              </ion-col>
-              <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
-                  <img src="../../../assets/img/job_category/BA.png">
-                  <h5>Business Analyst</h5>
-                </ion-card-content>
-              </ion-col>
-              <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
-                  <img src="../../../assets/img/job_category/QA.png">
-                  <h5>Quality Assurance</h5>
-                </ion-card-content>
-              </ion-col>
-              <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
-                  <img src="../../../assets/img/job_category/architect.png">
-                  <h5>Architect</h5>
+                  <img src="{{ category.img }}">
+                  <h5>{{ category.title }}</h5>
                 </ion-card-content>
               </ion-col>
             </ion-row>
