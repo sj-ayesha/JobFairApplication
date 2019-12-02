@@ -5,17 +5,17 @@
             <h3>Candidate Details</h3>
         </div>
         <h4>Information</h4>
-        <form [formGroup]="addCandidate">
+        <form [formGroup]="formInformation">
             <ion-row>
                 <ion-col col-md-6 size="12" size-sm>
                     <ion-item>
                         <ion-label position="floating" color="medium">*First Name</ion-label>
-                        <ion-input formControlName="firstname" type="text" ></ion-input>
+                        <ion-input formControlName="firstname" type="text"></ion-input>
                     </ion-item>
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.firstname'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('firstname').hasError(error.type) && (addCandidate.get('firstname').dirty || addCandidate.get('firstname').touched)">
+                                *ngIf="formInformation.get('firstname').hasError(error.type) && (formInformation.get('firstname').dirty || formInformation.get('firstname').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -29,7 +29,7 @@
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.lastname'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('lastname').hasError(error.type) && (addCandidate.get('lastname').dirty || addCandidate.get('lastname').touched)">
+                                *ngIf="formInformation.get('lastname').hasError(error.type) && (formInformation.get('lastname').dirty || formInformation.get('lastname').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -45,7 +45,7 @@
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.email'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('email').hasError(error.type) && (addCandidate.get('email').dirty || addCandidate.get('email').touched)">
+                                *ngIf="formInformation.get('email').hasError(error.type) && (formInformation.get('email').dirty || formInformation.get('email').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -59,7 +59,7 @@
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.phone'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('phone').hasError(error.type) && (addCandidate.get('phone').dirty || addCandidate.get('phone').touched)">
+                                *ngIf="formInformation.get('phone').hasError(error.type) && (formInformation.get('phone').dirty || formInformation.get('phone').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -78,7 +78,7 @@
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.gender'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('gender').hasError(error.type) && (addCandidate.get('gender').dirty || addCandidate.get('gender').touched)">
+                                *ngIf="formInformation.get('gender').hasError(error.type) && (formInformation.get('gender').dirty || formInformation.get('gender').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -92,7 +92,7 @@
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.nationality'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('nationality').hasError(error.type) && (addCandidate.get('nationality').dirty || addCandidate.get('nationality').touched)">
+                                *ngIf="formInformation.get('nationality').hasError(error.type) && (formInformation.get('nationality').dirty || formInformation.get('nationality').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -107,7 +107,9 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-            <h4>Qualification</h4>
+        </form>
+        <h4>Qualification</h4>
+        <form [formGroup]="formQualification">
             <ion-row>
                 <ion-col size="6" size-md size="12" size-sm>
                     <ion-item>
@@ -121,7 +123,7 @@
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.qualification'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('qualification').hasError(error.type) && (addCandidate.get('qualification').dirty || addCandidate.get('qualification').touched)">
+                                *ngIf="formQualification.get('qualification').hasError(error.type) && (formQualification.get('qualification').dirty || formQualification.get('qualification').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -152,13 +154,15 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-            <!-- <div class="add-qualification-button ion-text-right">
+        </form>
+        <!-- <div class="add-qualification-button ion-text-right">
                 <ion-button class='btn' color="danger">
                     <ion-icon ios="ios-add" md="md-add"></ion-icon>Add Qualification
                 </ion-button>
             </div> -->
 
-            <h4>Experience</h4>
+        <h4>Experience</h4>
+        <form [formGroup]="formExperience">
             <ion-row id="duplicater">
                 <ion-col col-md-6 size="12" size-sm>
                     <ion-item>
@@ -168,7 +172,7 @@
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.position'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('position').hasError(error.type) && (addCandidate.get('position').dirty || addCandidate.get('position').touched)">
+                                *ngIf="formExperience.get('position').hasError(error.type) && (formExperience.get('position').dirty || formExperience.get('position').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -182,7 +186,7 @@
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.company'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('company').hasError(error.type) && (addCandidate.get('company').dirty || addCandidate.get('company').touched)">
+                                *ngIf="formExperience.get('company').hasError(error.type) && (formExperience.get('company').dirty || formExperience.get('company').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -202,24 +206,26 @@
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.duration'>
                             <div class="error-message"
-                                *ngIf="addCandidate.get('duration').hasError(error.type) && (addCandidate.get('duration').dirty || addCandidate.get('duration').touched)">
+                                *ngIf="formExperience.get('duration').hasError(error.type) && (formExperience.get('duration').dirty || formExperience.get('duration').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
                     </div>
                 </ion-col>
             </ion-row>
-            <!-- <div class="add-experience-button ion-text-right">
+        </form>
+        <!-- <div class="add-experience-button ion-text-right">
                 <ion-button class='btn' id="button" (click)="duplicate()" color="danger">
                     <ion-icon ios="ios-add" md="md-add"></ion-icon>Add Experience
                 </ion-button>
             </div> -->
 
-            <div id="content">
+        <div id="content">
 
-            </div>
+        </div>
 
-            <h4>Skills</h4>
+        <h4>Skills</h4>
+        <form [formGroup]="formSkills">
             <ion-row>
                 <ion-col>
                     <ion-list>
@@ -231,16 +237,18 @@
                     </ion-list>
                 </ion-col>
             </ion-row>
-            <div class="btn-actions">
-                    <div class="btn-back ion-text-left">
-              
-                            <ion-button class="btn" color="light" [routerLink]="['/job-list']" routerLinkActive="router-link-active" >  <ion-icon name="arrow-back"></ion-icon>Back</ion-button>
-                        </div>
-                        <div class="submit-button ion-text-right">
-                                <ion-button class='btn' color="dark">Submit</ion-button>
-                            </div>
-            </div>
-
         </form>
+        <div class="btn-actions">
+            <div class="btn-back ion-text-left">
+
+                <ion-button class="btn" color="light" [routerLink]="['/job-list']"
+                    routerLinkActive="router-link-active">
+                    <ion-icon name="arrow-back"></ion-icon>Back
+                </ion-button>
+            </div>
+            <div class="submit-button ion-text-right">
+                <ion-button class='btn' color="dark">Submit</ion-button>
+            </div>
+        </div>
     </div>
 </ion-content>

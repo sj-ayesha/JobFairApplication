@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { JobListPage } from './pages/job-list/job-list.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -10,6 +11,10 @@ const routes: Routes = [
   },
   {
     path: 'job-list',
+    loadChildren: () => import('./pages/job-list/job-list.module').then( m => m.JobListPageModule)
+  },
+  {
+    path: 'job-list/:id',
     loadChildren: () => import('./pages/job-list/job-list.module').then( m => m.JobListPageModule)
   },
   {
