@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, Form } from '@angular/forms';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-candidate-add-profile',
@@ -8,6 +9,10 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class CandidateAddProfilePage implements OnInit {
   addCandidate: FormGroup;
+  formInformation: FormGroup;
+  formQualification: FormGroup;
+  formExperience: FormGroup;
+  formSkills: FormGroup;
 
   genders: Array<string>;
   qualifications: Array<string>;
@@ -58,7 +63,7 @@ export class CandidateAddProfilePage implements OnInit {
   constructor(
     private formBuilder: FormBuilder
   ) {
-    this.addCandidate = this.formBuilder.group({
+    this.formInformation = this.formBuilder.group({
       firstname: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
       lastname: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
       email: new FormControl('', Validators.compose([
@@ -73,13 +78,20 @@ export class CandidateAddProfilePage implements OnInit {
         Validators.required
       ])),
       gender: new FormControl('', Validators.required),
+      address: new FormControl('')
+    });
+    this.formQualification = this.formBuilder.group({
       qualification: new FormControl('', Validators.required),
       division: new FormControl(''),
-      address: new FormControl(''),
       institution: new FormControl(''),
+    });
+
+    this.formExperience = this.formBuilder.group({
       position: new FormControl(''),
       company: new FormControl(''),
       duration: new FormControl(''),
+    });
+    this.formSkills = this.formBuilder.group({
       skill: new FormControl('')
     });
   }
