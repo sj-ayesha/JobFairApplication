@@ -55,29 +55,33 @@
           </div>
           <ion-col col-md-12 size="12">
             <ion-card class="candidate-details" padding>
-              <div class="information">
+              <div class="information" *ngIf="candidates as candidate">
                   <h5>Information</h5>
-                  <p>Name: {{ candidate[0].firstName}} {{ candidate[0].lastname}}</p>
-                  <p>Gender: {{candidate[0].gender}}</p>
-                  <p>Phone Number: {{candidate[0].phoneNum}}</p>
-                  <p>Email: {{candidate[0].email}}</p>
-                  <p>Address: {{candidate[0].address}}</p>
-                  <p>Nationality: {{candidate[0].nationality}}</p>
+                  <p><b>Name:</b> {{ candidate.firstName}} {{ candidate.lastname}}</p>
+                  <p><b>Gender:</b> {{candidate.gender}}</p>
+                  <p><b>Phone Number:</b> {{candidate.telNumber}}</p>
+                  <p><b>Email:</b> {{candidate.email}}</p>
+                  <p><b>Address:</b> {{candidate.address}}</p>
+                  <p><b>Nationality:</b> {{candidate.nationality}}</p>
               </div>
 
-              <div class="qualifications">
+              <div class="qualifications" >
                 <h5>Qualification(s)</h5>
-                <p>Qualification Level: {{ candidate[0].qualification[0].title}}</p>
-                <p>Division: {{ candidate[0].qualification[0].division}}</p>
-                <p>Institution: {{ candidate[0].qualification[0].institution}}</p>
-                <p>Graduation Date: {{ candidate[0].qualification[0].graduationDate}}</p>
+                <div *ngFor="let qualification of qualifications">
+                <p><b>Qualification Level:</b> {{ qualification.title }}</p>
+                <p><b>Division:</b> {{ qualification.division }}</p>
+                <p><b>Institution:</b> {{ qualification.institution }}</p>
+                <p><b>Graduation Date:</b> {{ qualification.graduationDate }}</p>
+              </div>
               </div>
 
-              <div class="experience">
+              <div class="experience" >
                   <h5>Experience(s)</h5>
-                  <p>Company: {{ candidate[0].experience[0].companyName}}</p>
-                  <p>Job Title: {{ candidate[0].experience[0].position}}</p>
-                  <p>Duration: {{ candidate[0].experience[0].duration}}</p>
+                  <div *ngFor="let experience of experiences">
+                  <p><b>Company:</b> {{ experience.companyName}}</p>
+                  <p><b>Job Title:</b> {{ experience.position}}</p>
+                  <p><b>Duration:</b> {{ experience.duration}}</p>
+                </div>
               </div>
 
             </ion-card>
@@ -133,7 +137,7 @@
         <div class="btn-actions">
             <div class="btn-back ion-text-left">
               
-                <ion-button class="btn" color="light" [routerLink]="['/candidate-list']" routerLinkActive="router-link-active" >  <ion-icon name="arrow-back"></ion-icon>Back</ion-button>
+                <ion-button class="btn" color="light" [routerLink]="['/home']" routerLinkActive="router-link-active" >  <ion-icon name="arrow-back"></ion-icon>Back</ion-button>
             </div>
             <div class="save-button ion-text-right">
                 <ion-button class="btn" color="dark">Save</ion-button>

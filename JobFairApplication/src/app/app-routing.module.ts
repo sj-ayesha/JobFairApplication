@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/job-list/job-list.module').then( m => m.JobListPageModule)
   },
   {
-    path: 'job-list/:id',
+    path: 'job-list/:category',
     loadChildren: () => import('./pages/job-list/job-list.module').then( m => m.JobListPageModule)
   },
   {
@@ -23,6 +23,10 @@ const routes: Routes = [
   },
   {
     path: 'candidate-details',
+    loadChildren: () => import('./pages/candidate-details/candidate-details.module').then( m => m.CandidateDetailsPageModule)
+  },
+  {
+    path: 'candidate-details/:candidateId',
     loadChildren: () => import('./pages/candidate-details/candidate-details.module').then( m => m.CandidateDetailsPageModule)
   },
   {

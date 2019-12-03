@@ -11,11 +11,10 @@
         <ion-col size="6" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium"
-              >Please position..</ion-label
-            >
-            <ion-select interface="popover">
-              <ion-select-option value="student">Student</ion-select-option>
-              <ion-select-option value="senior">Senior</ion-select-option>
+              >Please select position..</ion-label>
+            <ion-select interface="popover" class="ion-float-left">
+              <ion-select-option value="student" selected="selected">Fresher</ion-select-option>
+              <ion-select-option value="senior">Experience</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -23,8 +22,8 @@
         <ion-col size="6" class="ion-padding">
           <ion-searchbar
             [(ngModel)]="searchTerm"
-            (ionChange)="setFilteredItems()"
-          ></ion-searchbar>
+            (ionChange)="setFilteredItems()" class="ion-float-right">
+          </ion-searchbar>
         </ion-col>
       </ion-row>
 
@@ -34,10 +33,12 @@
           </ion-col>
         </ion-row>
 
+        
+
       <div class="job-list-container">
-        <ion-row class="job-box" *ngFor="let item of items">
+        <ion-row class="job-box" *ngFor="let job of jobs">
           <ion-col size="11" (click)="styleAccordion()">
-            <button class="collapsible">{{ item.title }}</button>
+            <button class="collapsible">{{ job.title }}</button>
 
             <div class="content">
               <ion-row>
@@ -48,7 +49,7 @@
                           <div class="job-description">
                           <h6>Job Description</h6>
                           <p>
-                            As a professional in recruiting you create the basis for the further growth of ELCA. You are responsible for the entire recruiting process in Bern.
+                              {{ job.description }}
                           </p>
                         </div>
       
@@ -56,24 +57,8 @@
                           <h6>Job Qualification</h6>
                           <ul>
                             <li>
-                              <ion-label>Lead the recruitment for our location in Bern including selecting and evaluating applications received, leading interview and handle the offer process on all candidate levels</ion-label>
-                            </li>
-                            <li>
-                              <ion-label>Managing applications and correspondence in German and English, including coordination with recruitment agencies</ion-label>
-                            </li>
-                            <li>
-                                <ion-label>Searching for and approaching suitable candidates using several recruiting channels including direct search</ion-label>
-                              </li>
-                              <li>
-                                  <ion-label>Creating and maintaining requirement profiles and publishing job ads</ion-label>
-                                </li>
-                                <li>
-                                    <ion-label>HR reports and statistics</ion-label>
-                                  </li>
-                                  <li>
-                                      <ion-label>Organizing and implementing recruiting events for junior and senior candidates</ion-label>
-                                    </li>
-      
+                              <ion-label>{{ job.qualificationNeeded }}</ion-label>
+                            </li>      
                           </ul>
                         </div>
       
@@ -81,17 +66,8 @@
                           <h6>Job Experience</h6>
                           <ul>
                             <li>
-                              <ion-label>You have completed a higher education or a specialized HR education followed by 4 or more years of experience in a similar role. You are familiar to social media and you are interested in technology and the IT field.</ion-label>
+                              <ion-label>{{ job.minimumExperience }}</ion-label>
                             </li>
-                            <li>
-                              <ion-label>In addition, you are an organizational talent and your strengths are social skills, reliability, strong ability to work in a team and independent, pragmatically working style</ion-label>
-                            </li>
-                            <li>
-                                <ion-label>You have excellent communication skills in German and English, French is a plus.</ion-label>
-                              </li>
-                              <li>
-                                  <ion-label>A strong network in the IT market in Bern is a big advantage.</ion-label>
-                                </li>
                           </ul>
                         </div>
                       </ion-card-content>
@@ -99,7 +75,7 @@
 
                 </ion-col>
 
-                <ion-col size="4">
+                <!-- <ion-col size="4">
                   <div class="job-summary">
                       <ion-card>
                           <ion-card-content>
@@ -121,7 +97,7 @@
                           </ion-card-content>
                         </ion-card>
                   </div>
-                </ion-col>
+                </ion-col> -->
               </ion-row>
             </div>
           </ion-col>

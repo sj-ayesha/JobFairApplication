@@ -8,12 +8,6 @@
             <h3>List of Candidates</h3>
           </div>
         </ion-col>
-
-
-
-
-
-
         <ion-col size="6" class="ion-no-padding">
           <div class="btn-order">
 
@@ -33,12 +27,16 @@
       </ion-row>
     </ion-card-header>
     <ion-card-content>
-      <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active" *ngFor="let candidate of candidates">
-        <ion-avatar slot="start">
-          <img src="../../../assets/img/avatar_male.jpg" />
+      <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active"
+        *ngFor="let candidate of candidates">
+        <ion-avatar *ngIf="candidate.gender=='Male'" slot="start">
+          <img src="../../../assets/img/avatar_male.jpg">
+        </ion-avatar>
+        <ion-avatar *ngIf="candidate.gender=='Female'" slot="start">
+          <img src="../../../assets/img/avatar_female.jpg">
         </ion-avatar>
         <ion-label>
-          <h5>{{candidate.firstName}} {{candidate.lastName}}</h5> 
+          <h5>{{candidate.firstName}} {{candidate.lastName}}</h5>
           <p>{{candidate.currentLevel}}</p>
           <p>Available from: {{candidate.availabilityDate}}</p>
         </ion-label>
@@ -56,10 +54,12 @@
     </ion-card-content>
     <ion-row>
       <ion-col size="12" class="ion-padding">
-        <p class="ion-float-right">Total number of candidates: 4 </p>
+        <p class="ion-float-left">Total number of candidates: 4 </p>
+        <ion-button class="btn ion-float-right" color="light" [routerLink]="['/home']"
+          routerLinkActive="router-link-active">
+          <ion-icon name="arrow-back"></ion-icon>Back
+        </ion-button>
       </ion-col>
     </ion-row>
-
-
   </div>
 </ion-content>

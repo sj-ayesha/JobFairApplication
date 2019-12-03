@@ -7,11 +7,9 @@
         <ion-row class="venue">
           <ion-col size="12">
             <ion-item class="venue-input" color="red">
-              <ion-label position="floating">Venue</ion-label>
-              <ion-select interface="popover">
-                <ion-select-option value="UTM">UTM</ion-select-option>
-                <ion-select-option value="UOM">UOM</ion-select-option>
-                <ion-select-option value="CTI">CTI</ion-select-option>
+              <ion-label position="floating">Select Venue</ion-label>
+              <ion-select interface="popover" *ngFor="let venue of venues">
+                <ion-select-option value="{{venue.venueId}}">{{venue.venueName}}</ion-select-option>
               </ion-select>
             </ion-item>
             <div class="venue-button">
@@ -28,19 +26,21 @@
             <ion-card-header>
               <h3>List of Candidates</h3>
             </ion-card-header>
-            <ion-card-content>
+            <ion-card-content *ngFor="let candidate of candidates; let i = index">
 
-              <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active" *ngFor="let candidate of candidates">
+              <ion-item class="candidate-item" (click)="routeTo(candidate.candidateId)" *ngIf="i < 5">
 
-                <ion-avatar slot="start">
+                <ion-avatar *ngIf="candidate.gender=='Male'" slot="start">
                   <img src="../../../assets/img/avatar_male.jpg">
+                </ion-avatar>
+                <ion-avatar *ngIf="candidate.gender=='Female'" slot="start">
+                  <img src="../../../assets/img/avatar_female.jpg">
                 </ion-avatar>
 
                 <ion-label>
                   <h5>{{candidate.firstName}} {{candidate.lastName}}</h5> 
                   <p>{{candidate.currentLevel}}</p>
                   <p>Available from: {{candidate.availabilityDate}}</p>
-
                 </ion-label>
 
               </ion-item>
@@ -70,43 +70,37 @@
             </ion-card-header>
             <ion-row>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']" 
-                  routerLinkActive="router-link-active" [queryParams]="">
+                <ion-card-content class="category-item" (click)="routeCategoryTo('software-engineer')">
                   <img src="../../../assets/img/job_category/software_engineer.png">
                   <h5>Software Engineer</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" (click)="routeCategoryTo('human-resource')">
                   <img src="../../../assets/img/job_category/hr.png">
                   <h5>Human Resource</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" (click)="routeCategoryTo('manager')">
                   <img src="../../../assets/img/job_category/management.png">
                   <h5>Manager</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" (click)="routeCategoryTo('business-analyst')">
                   <img src="../../../assets/img/job_category/BA.png">
                   <h5>Business Analyst</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" (click)="routeCategoryTo('quality-assurance')">
                   <img src="../../../assets/img/job_category/QA.png">
                   <h5>Quality Assurance</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" [routerLink]="['/job-list']"
-                  routerLinkActive="router-link-active">
+                <ion-card-content class="category-item" (click)="routeCategoryTo('architect')">
                   <img src="../../../assets/img/job_category/architect.png">
                   <h5>Architect</h5>
                 </ion-card-content>

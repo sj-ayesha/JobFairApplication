@@ -48,6 +48,9 @@ ion-label, ion-select-option{
 // .candidate-item{
 //     max-width: 155px;
 // }
+.candidate-item:hover{
+    cursor: pointer;
+}
 .category-item {
     max-width: 155px;
 }

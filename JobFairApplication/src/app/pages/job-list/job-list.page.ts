@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Job } from 'src/app/model/job';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-job-list',
@@ -11,19 +12,14 @@ import { Job } from 'src/app/model/job';
 export class JobListPage implements OnInit {
 
   // jobs: any;
-  Jobs : Job[];
+  jobs: Job[];
   public searchTerm: string = "";
   public items: any;
 
-  constructor(private dataService: DataService, private apiService: ApiService) { }
+  constructor(private dataService: DataService, private apiService: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-        this.setFilteredItems();
-        this.populateJob();
-  }
-
-  setFilteredItems() {
-    this.items = this.dataService.filterItems(this.searchTerm);
+    this.populateJob();
   }
 
   // ngAfterViewInit() {
@@ -36,12 +32,11 @@ export class JobListPage implements OnInit {
   // }
 
   styleAccordion() {
-    console.log('test');
     let coll = document.getElementsByClassName('collapsible');
     let i;
 
     for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener('click', function() {
+      coll[i].addEventListener('click', function () {
         this.classList.toggle('active');
         let content = this.nextElementSibling;
         if (content.style.maxHeight) {
@@ -53,10 +48,16 @@ export class JobListPage implements OnInit {
     }
   }
 
-  populateJob(){
-    this.apiService.getAllJobs().subscribe(data => {
-      this.Jobs = data;
-    });
+  populateJob() {
+    const category: any = this.route.snapshot.paramMap.get('category');
+    if (category != null) {
+      this.apiService.getJobsByCategory(category).subscribe(data => {
+        this.jobs = data;
+      },
+        error => {
+          alert("No jobs available!");
+        }
+      );
+    } 
   }
-
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Venue } from 'src/app/model/venue';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -10,15 +11,32 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 export class HomePage {
 
   candidates: Candidate[];
+  venues: Venue[];
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     this.populateCandidate();
+    this.populateVenue();
   }
 
   populateCandidate(){
     this.apiService.getAllCandidates().subscribe(data => {
       this.candidates = data;
+      console.log( this.candidates);
+    });
+  }
+
+  routeTo(candidateId: number) {
+        this.router.navigate(['/candidate-details', candidateId]);
+  } 
+
+  routeCategoryTo(category:String) {
+        this.router.navigate(['/job-list',category]);
+  } 
+
+  populateVenue(active:boolean = true){
+    this.apiService.getVenueByActive(active).subscribe(data=>{
+      this.venues = data;
     });
   }
 
