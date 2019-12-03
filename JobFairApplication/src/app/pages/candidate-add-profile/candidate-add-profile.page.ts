@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, Form } from '@angular/forms';
-import { TouchSequence } from 'selenium-webdriver';
+import { Skill } from 'src/app/model/skill';
+import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-candidate-add-profile',
@@ -15,19 +17,24 @@ export class CandidateAddProfilePage implements OnInit {
   formSkills: FormGroup;
 
   genders: Array<string>;
-  qualifications: Array<string>;
+  currentLevels: Array<string>;
+  academyYears: Array<string>;
+  jobTypes: Array<string>;
+  titles: Array<string>;
   divisions: Array<string>;
   durations: Array<string>;
+  skills: Skill[];
+  candidateId: Number;
   // skills: Array<string>;
   // tslint:disable-next-line: variable-name
-  public skills = [
-    { val: 'Angular', isChecked: true },
-    { val: 'C#', isChecked: false },
-    { val: 'Java', isChecked: false },
-    { val: 'React', isChecked: false },
-    { val: 'Vue', isChecked: false },
-    { val: 'SQL', isChecked: false },
-  ];
+  // public skills = [
+  //   { val: 'Angular', isChecked: true },
+  //   { val: 'C#', isChecked: false },
+  //   { val: 'Java', isChecked: false },
+  //   { val: 'React', isChecked: false },
+  //   { val: 'Vue', isChecked: false },
+  //   { val: 'SQL', isChecked: false },
+  // ];
 
   error_messages = {
     firstname: [
@@ -55,44 +62,59 @@ export class CandidateAddProfilePage implements OnInit {
     gender: [
       { type: 'required', message: '⚠ Gender is required.' },
     ],
-    qualification: [
-      { type: 'required', message: '⚠ Qualification is required.' },
+    title: [
+      { type: 'required', message: '⚠ Title is required.' },
+    ],
+    academyYear: [
+      { type: 'required', message: '⚠ Academy Year is required.' },
     ]
   };
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private apiService: ApiService,
+    private router: Router
   ) {
     this.formInformation = this.formBuilder.group({
-      firstname: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
-      lastname: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
+      firstName: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
+      lastName: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      phone: new FormControl('', Validators.compose([
+      telNumber: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{7,12}$')
       ])),
       nationality: new FormControl('', Validators.compose([
         Validators.required
       ])),
+      mobileNumber: new FormControl(''),
       gender: new FormControl('', Validators.required),
-      address: new FormControl('')
+      address: new FormControl(''),
+      availabilityDate: new FormControl(''),
+      currentAcademicYear: new FormControl(''),
+      jobType: new FormControl(''),
+      registrationDate: new FormControl(''),
+      currentLevel: new FormControl(''),
     });
     this.formQualification = this.formBuilder.group({
-      qualification: new FormControl('', Validators.required),
+      title: new FormControl('', Validators.required),
       division: new FormControl(''),
       institution: new FormControl(''),
+      graduationDate: new FormControl(''),
+      candidateId: new FormControl(''),
     });
 
     this.formExperience = this.formBuilder.group({
       position: new FormControl(''),
-      company: new FormControl(''),
+      companyName: new FormControl(''),
       duration: new FormControl(''),
+      candidateId: new FormControl('')
     });
     this.formSkills = this.formBuilder.group({
-      skill: new FormControl('')
+      skill: new FormControl(''),
+      candidateId: new FormControl('')
     });
   }
 
@@ -101,7 +123,29 @@ export class CandidateAddProfilePage implements OnInit {
       'Male',
       'Female'
     ];
-    this.qualifications = [
+
+    this.jobTypes = [
+      'Full-Time',
+      'Half-Time',
+      'Intern-ship'
+    ];
+
+    this.currentLevels = [
+      'Fresher',
+      'Experience'
+    ];
+
+    this.academyYears = [
+      '1st Year 1st Semester',
+      '1st Year 2nd Semester',
+      '2nd Year 1st Semester',
+      '2nd Year 2nd Semester',
+      '3rd Year 1st Semester',
+      '3rd Year 2nd Semester',
+      'Graduated'
+    ];
+
+    this.titles = [
       'HSC',
       'Diploma',
       'Degree',
@@ -109,9 +153,15 @@ export class CandidateAddProfilePage implements OnInit {
       'PHD'
     ];
     this.divisions = [
-      '1st Class',
-      '2nd Class',
-      '3rd Class'
+      '1st Class Honours',
+      '2nd Class 1st Division Honours',
+      '2nd Class 2nd Division Honours',
+      '3rd Class Honours',
+      'Pass Degree',
+      'MSc with Distinction',
+      'MSc with Merit',
+      'MSc',
+      'No Award'
     ];
     this.durations = [
       '< 1 year',
@@ -127,6 +177,8 @@ export class CandidateAddProfilePage implements OnInit {
       '10 years',
       '> 10 years',
     ];
+
+    this.populateSkills();
   }
 
   ionViewWillLoad() {
@@ -191,5 +243,61 @@ export class CandidateAddProfilePage implements OnInit {
   `;
 
     document.getElementById('content').appendChild(div);
+  }
+
+  populateSkills(){
+    this.apiService.getAllSkills().subscribe(data=>{
+      this.skills = data;
+    });
+  }
+
+  submitCandidate(){
+    // this.apiService.saveCandidate(this.formInformation.value).subscribe(data=>{
+    //   alert("Candidate saved successfully!");
+    //   // this.router.navigate(['home']);
+    // },
+    // error => {
+    //   alert("Data not saved!");
+    // }
+    // );
+
+    this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data=>{
+      this.candidateId = data.candidateId;
+      this.formQualification.patchValue(
+        {
+        candidateId:this.candidateId
+      });
+
+      this.formExperience.patchValue({
+        candidateId:this.candidateId
+      });
+
+      this.formSkills.patchValue({
+        candidateId:this.candidateId
+      });
+
+      // this.apiService.saveQualification(this.formQualification.value).subscribe(data=>{
+      //   alert("Qualification saved successfully!");
+      // },
+      // error => {
+      //   alert("Data not saved!");
+      // }
+      // );
+
+      // this.apiService.saveExperience(this.formExperience.value).subscribe(data=>{
+      //   alert("Experience saved successfully!");
+      // },
+      // error => {
+      //   alert("Data not saved!");
+      // }
+      // );
+
+      // this.apiService.saveCandidateSkill(this.formSkills.value).subscribe(data=>{
+      //   console.log(data);
+      // });
+
+      
+
+    });
   }
 }
