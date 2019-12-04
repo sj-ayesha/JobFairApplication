@@ -54,12 +54,12 @@
                 <ion-col size="6" size-md size="12" size-sm>
                     <ion-item>
                         <ion-label position="floating" color="medium">*Mobile Number: 5XXXXXXX</ion-label>
-                        <ion-input formControlName="phoneNumber" type="tel"></ion-input>
+                        <ion-input formControlName="mobileNumber" type="tel"></ion-input>
                     </ion-item>
                     <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.phoneNumber'>
+                        <ng-container *ngFor='let error of error_messages.mobileNumber'>
                             <div class="error-message"
-                                *ngIf="formInformation.get('phoneNumber').hasError(error.type) && (formInformation.get('phoneNumber').dirty || formInformation.get('phoneNumber').touched)">
+                                *ngIf="formInformation.get('mobileNumber').hasError(error.type) && (formInformation.get('mobileNumber').dirty || formInformation.get('mobileNumber').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -133,13 +133,13 @@
                         </ion-select>
                     </ion-item>
                     <div class="error-messages">
-                            <ng-container *ngFor='let error of error_messages.currentLevel'>
-                                <div class="error-message"
-                                    *ngIf="formInformation.get('currentLevel').hasError(error.type) && (formInformation.get('currentLevel').dirty || formInformation.get('currentLevel').touched)">
-                                    {{ error.message }}
-                                </div>
-                            </ng-container>
-                        </div>
+                        <ng-container *ngFor='let error of error_messages.currentLevel'>
+                            <div class="error-message"
+                                *ngIf="formInformation.get('currentLevel').hasError(error.type) && (formInformation.get('currentLevel').dirty || formInformation.get('currentLevel').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
                 </ion-col>
             </ion-row>
 
@@ -165,13 +165,13 @@
                         </ion-select>
                     </ion-item>
                     <div class="error-messages">
-                            <ng-container *ngFor='let error of error_messages.jobType'>
-                                <div class="error-message"
-                                    *ngIf="formInformation.get('jobType').hasError(error.type) && (formInformation.get('jobType').dirty || formInformation.get('jobType').touched)">
-                                    {{ error.message }}
-                                </div>
-                            </ng-container>
-                        </div>
+                        <ng-container *ngFor='let error of error_messages.jobType'>
+                            <div class="error-message"
+                                *ngIf="formInformation.get('jobType').hasError(error.type) && (formInformation.get('jobType').dirty || formInformation.get('jobType').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
                 </ion-col>
             </ion-row>
 
@@ -245,16 +245,8 @@
                         </ion-datetime>
                     </ion-item>
                 </ion-col>
-
             </ion-row>
-            <ion-row>
-                <ion-col size="6" size-md size="12" size-sm>
-                    <ion-item>
-                        <ion-label position="floating" color="medium">Candidate id</ion-label>
-                        <ion-input formControlName="candidateId" type="text"></ion-input>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
+            <ion-input formControlName="candidateId" type="text" hidden></ion-input>
         </form>
         <!-- <div class="add-qualification-button ion-text-right">
                 <ion-button class='btn' color="danger">
@@ -313,15 +305,7 @@
                         </ng-container>
                     </div>
                 </ion-col>
-
-                <ion-row>
-                    <ion-col size="6" size-md size="12" size-sm>
-                        <ion-item>
-                            <ion-label position="floating" color="medium">Candidate id</ion-label>
-                            <ion-input formControlName="candidateId" type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
+                <ion-input formControlName="candidateId" type="text" hidden></ion-input>
             </ion-row>
         </form>
         <!-- <div class="add-experience-button ion-text-right">
@@ -331,9 +315,7 @@
             </div> -->
 
         <div id="content">
-
         </div>
-
         <h4>Skills</h4>
         <form [formGroup]="formSkills">
             <ion-row>
@@ -342,17 +324,13 @@
                         <ion-item *ngFor="let skill of skills">
                             <ion-label>{{ skill.skillName }}</ion-label>
                             <ion-checkbox color="danger" class="messageCheckbox" slot="end"
-                                [(ngModel)]="skill.isChecked" formControlName="skill" value="{{skill.skillId}}">
+                                [(ngModel)]="skill.isChecked" formControlName="skill" value="{{skill.skillId}}"
+                                (ionChange)="checkCheckBoxvalue($event,skill)">
                             </ion-checkbox>
                         </ion-item>
                     </ion-list>
                 </ion-col>
-                <ion-col size="6" size-md size="12" size-sm>
-                    <ion-item>
-                        <ion-label position="floating" color="medium">Candidate id</ion-label>
-                        <ion-input formControlName="candidateId" type="text"></ion-input>
-                    </ion-item>
-                </ion-col>
+                <ion-input formControlName="candidateId" type="text" hidden></ion-input>
             </ion-row>
         </form>
         <div class="btn-actions">

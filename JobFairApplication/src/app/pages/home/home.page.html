@@ -8,8 +8,8 @@
           <ion-col size="12">
             <ion-item class="venue-input" color="red">
               <ion-label position="floating">Select Venue</ion-label>
-              <ion-select interface="popover" *ngFor="let venue of venues">
-                <ion-select-option value="{{venue.venueId}}">{{venue.venueName}}</ion-select-option>
+              <ion-select interface="popover" >
+                <ion-select-option value="{{venue.venueId}}" *ngFor="let venue of venues">{{venue.venueName}}</ion-select-option>
               </ion-select>
             </ion-item>
             <div class="venue-button">

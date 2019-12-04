@@ -61,7 +61,7 @@ export class ApiService {
     return this.http.post<Qualification[]>(this.baseUrl + 'qualification',qualification);
   }
 
-  saveCandidateSkill(skill: Skill): Observable<Skill[]>{
+  saveCandidateSkill(skill: Skill[]): Observable<Skill[]>{
     return this.http.post<Skill[]>(this.baseUrl + 'candidate-skill',skill);
   }
 }

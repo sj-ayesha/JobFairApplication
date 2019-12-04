@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, Form } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, Form, FormArray } from '@angular/forms';
 import { Skill } from 'src/app/model/skill';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-candidate-add-profile',
@@ -25,6 +26,8 @@ export class CandidateAddProfilePage implements OnInit {
   durations: Array<string>;
   skills: Skill[];
   candidateId: Number;
+  selectedDay: String = '';
+
   // skills: Array<string>;
   // tslint:disable-next-line: variable-name
   // public skills = [
@@ -195,7 +198,7 @@ export class CandidateAddProfilePage implements OnInit {
       '> 10 years',
     ];
 
-    // this.populateSkills();
+    this.populateSkills();
   }
 
   ionViewWillLoad() {
@@ -262,55 +265,70 @@ export class CandidateAddProfilePage implements OnInit {
     document.getElementById('content').appendChild(div);
   }
 
-  // populateSkills(){
-  //   this.apiService.getAllSkills().subscribe(data=>{
-  //     this.skills = data;
-  //   });
-  // }
+  populateSkills(){
+    this.apiService.getAllSkills().subscribe(data=>{
+      this.skills = data;
+    });
+  }
 
-  // submitCandidate(){
-    // this.apiService.saveCandidate(this.formInformation.value).subscribe(data=>{
-    //   alert("Candidate saved successfully!");
-    //   // this.router.navigate(['home']);
-    // },
-    // error => {
-    //   alert("Data not saved!");
-    // }
-    // );
+  checkCheckBoxvalue(event : CustomEvent,skill:Skill){
+    skill.checked = event.detail.checked;
+    skill.candidateId = this.formSkills.get('candidateId').value;
+  }
 
-    // this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data=>{
-    //   this.candidateId = data.candidateId;
-    //   this.formQualification.patchValue(
-    //     {
-    //     candidateId:this.candidateId
-    //   });
 
-    //   this.formExperience.patchValue({
-    //     candidateId:this.candidateId
-    //   });
+  submitCandidate(){
+    this.apiService.saveCandidate(this.formInformation.value).subscribe(data=>{
+      alert("Candidate saved successfully!");
 
-    //   this.formSkills.patchValue({
-    //     candidateId:this.candidateId
-    //   });
+      this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data=>{
+        this.candidateId = data.candidateId;
+        this.formQualification.patchValue(
+          {
+          candidateId:this.candidateId
+        });
+  
+        this.formExperience.patchValue({
+          candidateId:this.candidateId
+        });
+  
+        this.formSkills.patchValue({
+          candidateId:this.candidateId
+        });
+        
+  
+        // this.apiService.saveQualification(this.formQualification.value).subscribe(data=>{
+        //   alert("Qualification saved successfully!");
+        // },
+        // error => {
+        //   alert("Data not saved!");
+        // }
+        // );
+  
+        // this.apiService.saveExperience(this.formExperience.value).subscribe(data=>{
+        //   alert("Experience saved successfully!");
+        // },
+        // error => {
+        //   alert("Data not saved!");
+        // }
+        // );
 
-      // this.apiService.saveQualification(this.formQualification.value).subscribe(data=>{
-      //   alert("Qualification saved successfully!");
-      // },
-      // error => {
-      //   alert("Data not saved!");
-      // }
-      // );
+        this.skills.filter(x => {
+          x.candidateId = this.candidateId;
+        })
+  
+        this.apiService.saveCandidateSkill(this.skills).subscribe(data=>{
+         alert("skill saved");
+        });
 
-      // this.apiService.saveExperience(this.formExperience.value).subscribe(data=>{
-      //   alert("Experience saved successfully!");
-      // },
-      // error => {
-      //   alert("Data not saved!");
-      // }
-      // );
+        console.log(this.skills);
 
-      // this.apiService.saveCandidateSkill(this.formSkills.value).subscribe(data=>{
-      //   console.log(data);
-      // });
-    // });
+      });
+      // this.router.navigate(['home']);
+    },
+    error => {
+      alert("Data not saved!");
+    }
+    );
+}
 }
