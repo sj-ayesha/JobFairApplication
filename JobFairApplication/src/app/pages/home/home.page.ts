@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
+import { CategoryService } from '../../services/category.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Venue } from 'src/app/model/venue';
 @Component({
@@ -9,6 +10,8 @@ import { Venue } from 'src/app/model/venue';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+
+  categoryTitle: [];
 
   candidates: Candidate[];
   venues: Venue[];
