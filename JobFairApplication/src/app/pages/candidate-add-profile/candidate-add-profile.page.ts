@@ -37,12 +37,12 @@ export class CandidateAddProfilePage implements OnInit {
   // ];
 
   error_messages = {
-    firstname: [
+    firstName: [
       { type: 'required', message: '⚠ First Name is required'},
       { type: 'maxLength', message: '⚠ First Name must be less than 30 letters'},
       { type: 'pattern', message: '⚠ First Name is invalid'}
     ],
-    lastname: [
+    lastName: [
       { type: 'required', message: '⚠ Last Name is required'},
       { type: 'maxLength', message: '⚠ Last Name must be less than 30 letters'},
       { type: 'pattern', message: '⚠ Last Name is invalid'}
@@ -51,11 +51,13 @@ export class CandidateAddProfilePage implements OnInit {
       { type: 'required', message: '⚠ Email is required.' },
       { type: 'pattern', message: '⚠ Email is invalid.' }
     ],
-    phone: [
-      { type: 'required', message: '⚠ Phone is required.' },
-      { type: 'pattern', message: '⚠ Phone number is invalid' }
+    telNumber: [
+      { type: 'pattern', message: '⚠ Telephone number is invalid' }
     ],
-
+    phoneNumber: [
+      { type: 'required', message: '⚠ Mobile number is required.' },
+      { type: 'pattern', message: '⚠ Mobile number is invalid' }
+    ],
     nationality: [
       { type: 'required', message: '⚠ Nationality is required.' },
     ],
@@ -63,10 +65,22 @@ export class CandidateAddProfilePage implements OnInit {
       { type: 'required', message: '⚠ Gender is required.' },
     ],
     title: [
-      { type: 'required', message: '⚠ Title is required.' },
+      { type: 'required', message: '⚠ Qualification is required.' },
     ],
     academyYear: [
       { type: 'required', message: '⚠ Academy Year is required.' },
+    ],
+    division: [
+      { type: 'required', message: '⚠ Division is required.' },
+    ],
+    availabilityDate: [
+      { type: 'required', message: '⚠ Availability Date is required.' },
+    ],
+    jobType: [
+      { type: 'required', message: '⚠ Job Type is required.' },
+    ],
+    currentLevel: [
+      { type: 'required', message: '⚠ Current Level is required.' },
     ]
   };
 
@@ -82,9 +96,12 @@ export class CandidateAddProfilePage implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      telNumber: new FormControl('', Validators.compose([
+      phoneNumber: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{7,12}$')
+        Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{7,7}$')
+      ])),
+      telNumber: new FormControl('', Validators.compose([
+        Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{6,6}$')
       ])),
       nationality: new FormControl('', Validators.compose([
         Validators.required
@@ -92,11 +109,11 @@ export class CandidateAddProfilePage implements OnInit {
       mobileNumber: new FormControl(''),
       gender: new FormControl('', Validators.required),
       address: new FormControl(''),
-      availabilityDate: new FormControl(''),
+      availabilityDate: new FormControl('', Validators.required),
       currentAcademicYear: new FormControl(''),
-      jobType: new FormControl(''),
+      jobType: new FormControl('', Validators.required),
       registrationDate: new FormControl(''),
-      currentLevel: new FormControl(''),
+      currentLevel: new FormControl('', Validators.required),
     });
     this.formQualification = this.formBuilder.group({
       title: new FormControl('', Validators.required),
@@ -178,7 +195,7 @@ export class CandidateAddProfilePage implements OnInit {
       '> 10 years',
     ];
 
-    this.populateSkills();
+    // this.populateSkills();
   }
 
   ionViewWillLoad() {
@@ -245,13 +262,13 @@ export class CandidateAddProfilePage implements OnInit {
     document.getElementById('content').appendChild(div);
   }
 
-  populateSkills(){
-    this.apiService.getAllSkills().subscribe(data=>{
-      this.skills = data;
-    });
-  }
+  // populateSkills(){
+  //   this.apiService.getAllSkills().subscribe(data=>{
+  //     this.skills = data;
+  //   });
+  // }
 
-  submitCandidate(){
+  // submitCandidate(){
     // this.apiService.saveCandidate(this.formInformation.value).subscribe(data=>{
     //   alert("Candidate saved successfully!");
     //   // this.router.navigate(['home']);
@@ -261,20 +278,20 @@ export class CandidateAddProfilePage implements OnInit {
     // }
     // );
 
-    this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data=>{
-      this.candidateId = data.candidateId;
-      this.formQualification.patchValue(
-        {
-        candidateId:this.candidateId
-      });
+    // this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data=>{
+    //   this.candidateId = data.candidateId;
+    //   this.formQualification.patchValue(
+    //     {
+    //     candidateId:this.candidateId
+    //   });
 
-      this.formExperience.patchValue({
-        candidateId:this.candidateId
-      });
+    //   this.formExperience.patchValue({
+    //     candidateId:this.candidateId
+    //   });
 
-      this.formSkills.patchValue({
-        candidateId:this.candidateId
-      });
+    //   this.formSkills.patchValue({
+    //     candidateId:this.candidateId
+    //   });
 
       // this.apiService.saveQualification(this.formQualification.value).subscribe(data=>{
       //   alert("Qualification saved successfully!");
@@ -295,9 +312,5 @@ export class CandidateAddProfilePage implements OnInit {
       // this.apiService.saveCandidateSkill(this.formSkills.value).subscribe(data=>{
       //   console.log(data);
       // });
-
-      
-
-    });
-  }
+    // });
 }
