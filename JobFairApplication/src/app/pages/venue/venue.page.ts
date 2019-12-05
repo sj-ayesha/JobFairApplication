@@ -7,21 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VenuePage implements OnInit {
 
-  venues: any;
+  venues: Array<any>;
   public select ="";
   constructor() { }
 
   ngOnInit() {
-
     this.venues = [
       { id: '1', venueName: 'UOM'},
       { id: '2', venueName: 'UTM'}
     ];
   }
 
-  selected(){
-    let a = document.getElementById('input').nodeValue;
-    console.log('asaw', a);
+  selected(id){
+    localStorage.setItem('venue id', id.target.value);
   }
-
 }

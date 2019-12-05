@@ -27,6 +27,7 @@ export class CandidateAddProfilePage implements OnInit {
   skills: Skill[];
   candidateId: Number;
   selectedDay: String = '';
+  public today: any;
 
   // skills: Array<string>;
   // tslint:disable-next-line: variable-name
@@ -41,14 +42,14 @@ export class CandidateAddProfilePage implements OnInit {
 
   error_messages = {
     firstName: [
-      { type: 'required', message: '⚠ First Name is required'},
-      { type: 'maxLength', message: '⚠ First Name must be less than 30 letters'},
-      { type: 'pattern', message: '⚠ First Name is invalid'}
+      { type: 'required', message: '⚠ First Name is required' },
+      { type: 'maxLength', message: '⚠ First Name must be less than 30 letters' },
+      { type: 'pattern', message: '⚠ First Name is invalid' }
     ],
     lastName: [
-      { type: 'required', message: '⚠ Last Name is required'},
-      { type: 'maxLength', message: '⚠ Last Name must be less than 30 letters'},
-      { type: 'pattern', message: '⚠ Last Name is invalid'}
+      { type: 'required', message: '⚠ Last Name is required' },
+      { type: 'maxLength', message: '⚠ Last Name must be less than 30 letters' },
+      { type: 'pattern', message: '⚠ Last Name is invalid' }
     ],
     email: [
       { type: 'required', message: '⚠ Email is required.' },
@@ -139,6 +140,14 @@ export class CandidateAddProfilePage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.today = new Date();
+    let dd = String(this.today.getDate()).padStart(2, '0');
+    let mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = this.today.getFullYear();
+    
+    console.log("date", this.today);
+
     this.genders = [
       'Male',
       'Female'
@@ -205,7 +214,7 @@ export class CandidateAddProfilePage implements OnInit {
 
   }
 
-  duplicate(){
+  duplicate() {
     console.log('Hi');
     const div = document.createElement('div');
 
@@ -265,70 +274,70 @@ export class CandidateAddProfilePage implements OnInit {
     document.getElementById('content').appendChild(div);
   }
 
-  populateSkills(){
-    this.apiService.getAllSkills().subscribe(data=>{
+  populateSkills() {
+    this.apiService.getAllSkills().subscribe(data => {
       this.skills = data;
     });
   }
 
-  checkCheckBoxvalue(event : CustomEvent,skill:Skill){
+  checkCheckBoxvalue(event: CustomEvent, skill: Skill) {
     skill.checked = event.detail.checked;
     skill.candidateId = this.formSkills.get('candidateId').value;
   }
 
 
-  submitCandidate(){
-    this.apiService.saveCandidate(this.formInformation.value).subscribe(data=>{
-      alert("Candidate saved successfully!");
+  submitCandidate() {
+    // this.apiService.saveCandidate(this.formInformation.value).subscribe(data => {
+    //   alert("Candidate saved successfully!");
 
-      this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data=>{
-        this.candidateId = data.candidateId;
-        this.formQualification.patchValue(
-          {
-          candidateId:this.candidateId
-        });
-  
-        this.formExperience.patchValue({
-          candidateId:this.candidateId
-        });
-  
-        this.formSkills.patchValue({
-          candidateId:this.candidateId
-        });
-        
-  
-        this.apiService.saveQualification(this.formQualification.value).subscribe(data=>{
-          alert("Qualification saved successfully!");
-        },
-        error => {
-          alert("Data not saved!");
-        }
-        );
-  
-        this.apiService.saveExperience(this.formExperience.value).subscribe(data=>{
-          alert("Experience saved successfully!");
-        },
-        error => {
-          alert("Data not saved!");
-        }
-        );
+    //   this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data => {
+    //     this.candidateId = data.candidateId;
+    //     this.formQualification.patchValue(
+    //       {
+    //         candidateId: this.candidateId
+    //       });
 
-        this.skills.filter(x => {
-          x.candidateId = this.candidateId;
-        })
-  
-        this.apiService.saveCandidateSkill(this.skills).subscribe(data=>{
-         alert("skill saved");
-        });
+    //     this.formExperience.patchValue({
+    //       candidateId: this.candidateId
+    //     });
 
-        console.log(this.skills);
+    //     this.formSkills.patchValue({
+    //       candidateId: this.candidateId
+    //     });
 
-      });
-      // this.router.navigate(['home']);
-    },
-    error => {
-      alert("Data not saved!");
-    }
-    );
-}
+
+    //     this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
+    //       alert("Qualification saved successfully!");
+    //     },
+    //       error => {
+    //         alert("Data not saved!");
+    //       }
+    //     );
+
+    //     this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
+    //       alert("Experience saved successfully!");
+    //     },
+    //       error => {
+    //         alert("Data not saved!");
+    //       }
+    //     );
+
+    //     this.skills.filter(x => {
+    //       x.candidateId = this.candidateId;
+    //     })
+
+    //     this.apiService.saveCandidateSkill(this.skills).subscribe(data => {
+    //       alert("skill saved");
+    //     });
+
+    //     console.log(this.skills);
+
+    //   });
+    //   // this.router.navigate(['home']);
+    // },
+    //   error => {
+    //     alert("Data not saved!");
+    //   }
+    // );
+  }
 }
