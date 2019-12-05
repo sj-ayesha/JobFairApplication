@@ -48,6 +48,10 @@ ion-label, ion-select-option{
 // .candidate-item{
 //     max-width: 155px;
 // }
+
+ion-list{
+    background: transparent;
+}
 .candidate-item:hover{
     cursor: pointer;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { CandidatesService } from 'src/app/services/candidates.service';
 import { ApiService } from 'src/app/services/api.service';
@@ -14,17 +14,16 @@ import { Experience } from 'src/app/model/experience';
   styleUrls: ['./candidate-details.page.scss'],
 })
 export class CandidateDetailsPage implements OnInit {
-  myForm: FormGroup;
   jobs: any;
   public items: any;
   public candidate1: any;
   candidates : Candidate[];
   qualifications: Qualification[];
   experiences: Experience[];
+  public today: any; 
 
   constructor(private formBuilder: FormBuilder, private dataService: DataService, private candidateDetails: CandidatesService,private apiService: ApiService,private route: ActivatedRoute) {
-    
-   }
+}
 
   ngOnInit() {
     this.items = this.dataService.getJobs();
@@ -34,6 +33,13 @@ export class CandidateDetailsPage implements OnInit {
     this.getCandidateById(candiateId);
     this.getQualificationByCandidateId(candiateId);
     this.getExperienceByCandidateId(candiateId);
+
+    this.today = new Date();
+    let dd = String(this.today.getDate()).padStart(2, '0');
+    let mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = this.today.getFullYear(); 
+ 
+
   }
 
   getCandidateById(candidateId:Number){

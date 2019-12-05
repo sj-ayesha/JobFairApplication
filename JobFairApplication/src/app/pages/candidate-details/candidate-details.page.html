@@ -5,16 +5,24 @@
       <h3>Candidate Profile</h3>
     </div>
     <ion-row>
-      <ion-col col-md-2 size="3">
+      <ion-col col-md-2 size="2">
         <ion-card padding>
-          <div class="jobs-selected" *ngFor="let item of items">
-            <p>{{ item.title }}</p>
-            <ion-checkbox color="danger" class="btn-checkbox__item">
-            </ion-checkbox>
+          <ion-card-title>Jobs Applied: </ion-card-title>
+          <div class="jobs-selected" *ngFor="let item of items; let i = index">
+            <div class="jobs-selected--title">
+              <span>{{i + 1}}. </span><p>{{ item.title }}</p>
+            </div>
+
+            <!-- <div class="jobs-selected--checkbox">
+                <ion-checkbox color="danger" class="btn-checkbox__item">
+                  </ion-checkbox>
+            </div> -->
+
+
           </div>
         </ion-card>
       </ion-col>
-      <ion-col col-md-10 size="9">
+      <ion-col col-md-10 size="10">
         <ion-row>
           <div class="info">
             <div class="interviewer-detail">
@@ -23,9 +31,8 @@
                   >*Interview Date</ion-label
                 >
                 <ion-datetime
-                  display-format="MMM YYYY"
-                  picker-format="YYYY-MM"
-                  value="2019-01-01"
+                  display-format="DD MMM YYYY"
+                  value="{{ today }}" [disabled]='true'
                 >
                 </ion-datetime>
               </ion-item>
@@ -45,12 +52,10 @@
             </div>
 
             <div class="interviewer-detail">
-              <ion-item>
-                <ion-label position="floating" color="medium" class="label-info"
-                  >Interviewer Name</ion-label
-                >
-                <ion-input type="text"></ion-input>
-              </ion-item>
+                <ion-item>
+                    <ion-label position="floating" color="medium">*Interviewer Name</ion-label>
+                    <ion-input type="text"></ion-input>
+                </ion-item>
             </div>
           </div>
           <ion-col col-md-12 size="12">
@@ -87,16 +92,34 @@
             </ion-card>
           </ion-col>
         </ion-row>
+        <ion-row class="previous-feedback">
+          <ion-col col-md-12 size="12">
+            <ion-card>
+              <ion-card-header>
+
+                <ion-card-title>Feedbacks</ion-card-title>
+                <div class="feedbacks">
+                  <ion-card-subtitle class="feedbacks-subtitle">Interviewer Name</ion-card-subtitle>
+                  <ion-card-subtitle class="feedbacks-subtitle">Date</ion-card-subtitle>
+                </div>
+
+              </ion-card-header>
+            
+              <ion-card-content>
+                Very Good
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
         <ion-row>
           <ion-col col-md-12 size="12">
             <ion-card padding>
-              <h6>Feedback</h6>
-              <ion-item>
+              <ion-item class="add-feedback">
                 <!-- <ion-label>Comments: </ion-label> -->
                 <ion-textarea
                   rows="6"
                   cols="20"
-                  placeholder="Enter any comments here..."
+                  placeholder="Enter your feedback here..."
                 >
                 </ion-textarea>
               </ion-item>

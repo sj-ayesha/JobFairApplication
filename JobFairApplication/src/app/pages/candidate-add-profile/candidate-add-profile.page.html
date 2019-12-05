@@ -13,7 +13,7 @@
                         <ion-input formControlName="firstName" type="text"></ion-input>
                     </ion-item>
                     <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.firstname'>
+                        <ng-container *ngFor='let error of error_messages.firstName'>
                             <div class="error-message"
                                 *ngIf="formInformation.get('firstName').hasError(error.type) && (formInformation.get('firstName').dirty || formInformation.get('firstName').touched)">
                                 {{ error.message }}
@@ -27,7 +27,7 @@
                         <ion-input formControlName="lastName" type="text"></ion-input>
                     </ion-item>
                     <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.lastname'>
+                        <ng-container *ngFor='let error of error_messages.lastName'>
                             <div class="error-message"
                                 *ngIf="formInformation.get('lastName').hasError(error.type) && (formInformation.get('lastName').dirty || formInformation.get('lastName').touched)">
                                 {{ error.message }}
@@ -57,9 +57,9 @@
                         <ion-input formControlName="mobileNumber" type="tel"></ion-input>
                     </ion-item>
                     <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.mobileNumber'>
+                        <ng-container *ngFor='let error of error_messages.phoneNumber'>
                             <div class="error-message"
-                                *ngIf="formInformation.get('mobileNumber').hasError(error.type) && (formInformation.get('mobileNumber').dirty || formInformation.get('mobileNumber').touched)">
+                                *ngIf="formInformation.get('phoneNumber').hasError(error.type) && (formInformation.get('phoneNumber').dirty || formInformation.get('phoneNumber').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -89,14 +89,6 @@
                         <ion-label position="floating" color="medium">Tel Number: 5XXXXXXX</ion-label>
                         <ion-input formControlName="telNumber" type="tel"></ion-input>
                     </ion-item>
-                    <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.telNumber'>
-                            <div class="error-message"
-                                *ngIf="formInformation.get('telNumber').hasError(error.type) && (formInformation.get('telNumber').dirty || formInformation.get('telNumber').touched)">
-                                {{ error.message }}
-                            </div>
-                        </ng-container>
-                    </div>
                 </ion-col>
             </ion-row>
             <ion-row>
@@ -179,7 +171,7 @@
                 <ion-col size="6" size-md size="12" size-sm>
                     <ion-item>
                         <ion-label position="floating" color="medium">*Availability Date</ion-label>
-                        <ion-datetime formControlName="availabilityDate"></ion-datetime>
+                        <ion-datetime formControlName="availabilityDate" min="2020-01-01" max="2021-12-31"></ion-datetime>
                     </ion-item>
                     <div class="error-messages">
                         <ng-container *ngFor='let error of error_messages.availabilityDate'>
@@ -194,7 +186,8 @@
                 <ion-col size="6" size-md size="12" size-sm>
                     <ion-item>
                         <ion-label position="floating" color="medium">Registration Date</ion-label>
-                        <ion-datetime formControlName="registrationDate"></ion-datetime>
+                        <ion-datetime formControlName="registrationDate" value="{{today}}" placeholder="Select Date" [disabled] = "true">
+                        </ion-datetime>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -240,7 +233,7 @@
                 <ion-col size="6" size-md size="12" size-sm>
                     <ion-item>
                         <ion-label position="floating" color="medium">Graduation Date</ion-label>
-                        <ion-datetime display-format="MMM YYYY" formControlName="graduationDate"
+                        <ion-datetime display-format="MMM YYYY" min="2000-01-01" max="2020-12-01" formControlName="graduationDate"
                             picker-format="YYYY-MM">
                         </ion-datetime>
                     </ion-item>
@@ -276,14 +269,6 @@
                         <ion-label position="floating" color="medium">Company</ion-label>
                         <ion-input formControlName="companyName" type="text"></ion-input>
                     </ion-item>
-                    <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.companyName'>
-                            <div class="error-message"
-                                *ngIf="formExperience.get('companyName').hasError(error.type) && (formExperience.get('companyName').dirty || formExperience.get('companyName').touched)">
-                                {{ error.message }}
-                            </div>
-                        </ng-container>
-                    </div>
                 </ion-col>
             </ion-row>
             <ion-row>
@@ -296,14 +281,6 @@
                             </ion-select-option>
                         </ion-select>
                     </ion-item>
-                    <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.duration'>
-                            <div class="error-message"
-                                *ngIf="formExperience.get('duration').hasError(error.type) && (formExperience.get('duration').dirty || formExperience.get('duration').touched)">
-                                {{ error.message }}
-                            </div>
-                        </ng-container>
-                    </div>
                 </ion-col>
                 <ion-input formControlName="candidateId" type="text" hidden></ion-input>
             </ion-row>
@@ -321,8 +298,8 @@
             <ion-row>
                 <ion-col>
                     <ion-list>
-                        <ion-item *ngFor="let skill of skills">
-                            <ion-label>{{ skill.skillName }}</ion-label>
+                        <ion-item *ngFor="let control of skillsArray.controls; let i = index;">
+                            <!-- <ion-label>{{ control.skillName }}</ion-label> -->
                             <ion-checkbox color="danger" class="messageCheckbox" slot="end"
                                 [(ngModel)]="skill.isChecked" formControlName="skill" value="{{skill.skillId}}"
                                 (ionChange)="checkCheckBoxvalue($event,skill)">

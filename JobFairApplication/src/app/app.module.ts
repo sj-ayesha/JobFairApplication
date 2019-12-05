@@ -19,7 +19,7 @@ import { FooterComponent } from './components/footer/footer.component';
   declarations: [
     AppComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
