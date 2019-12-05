@@ -14,9 +14,20 @@
     display: flex;
     justify-content: space-between;
 
+    &--title {
+        display: flex;
+        align-items: center;
+
+        span {
+            font-size: 17px;
+            color: black;
+        }
+    }
+
     p {
         font-size: 17px;
         color: black;
+        padding: 0 10px;
         @media only screen and (max-width: 768px) {
             max-width: 100px;
         }
@@ -202,3 +213,30 @@ ion-button{
     display: flex;
     justify-content: space-between;
 }
+
+.feedbacks {
+    display: flex;
+    padding: 10px 0;
+
+    &-subtitle {
+        padding-right: 25px;
+    }
+}
+
+.qualifications {
+    h5 {
+        font-size: 20px;
+    }
+}
+
+.experience {
+    h5 {
+        font-size: 20px;
+    }
+}
+
+// .btn-checkbox__item:disabled, .btn-checkbox__ite[disabled] {
+//     color: #f04141;
+//       opacity: 1;
+//       background: #f04141;
+// }
