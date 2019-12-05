@@ -1,0 +1,30 @@
+@import '../../styles/custom.scss';
+.venue-container{
+    height: 100%;
+}
+.ion-align-items-center{
+    margin: 0;
+    position: relative;
+    top: 40%;
+    transform: translate(0, -50%);
+}
+.wrapper{
+    max-width: 300px;
+    margin:0 auto;
+}
+.venue-content__img{
+    text-align:center;
+}
+.venue-content__img img{
+    max-width: 164px;
+}
+ion-item{
+    color: rgb(175, 175, 175);
+}
+ion-button{
+    margin-top:20px;
+    display: grid;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+}

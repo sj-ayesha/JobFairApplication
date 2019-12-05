@@ -35,6 +35,20 @@
                         </ng-container>
                     </div>
                 </ion-col>
+                <ion-col col-md-6 size="12" size-sm>
+                    <ion-item>
+                        <ion-label position="floating" color="medium">*Last Name</ion-label>
+                        <ion-input formControlName="lastName" type="text"></ion-input>
+                    </ion-item>
+                    <div class="error-messages">
+                        <ng-container *ngFor='let error of error_messages.lastname'>
+                            <div class="error-message"
+                                *ngIf="formInformation.get('lastName').hasError(error.type) && (formInformation.get('lastName').dirty || formInformation.get('lastName').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col size="6" size-md size="12" size-sm>
@@ -321,8 +335,8 @@
             <ion-row>
                 <ion-col>
                     <ion-list>
-                        <ion-item *ngFor="let skill of skills">
-                            <ion-label>{{ skill.skillName }}</ion-label>
+                        <ion-item *ngFor="let control of skillsArray.controls; let i = index;">
+                            <!-- <ion-label>{{ control.skillName }}</ion-label> -->
                             <ion-checkbox color="danger" class="messageCheckbox" slot="end"
                                 [(ngModel)]="skill.isChecked" formControlName="skill" value="{{skill.skillId}}"
                                 (ionChange)="checkCheckBoxvalue($event,skill)">
