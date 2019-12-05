@@ -34,4 +34,8 @@ export class CandidateListPage implements OnInit {
       this.candidates = data;
     });
   }
+
+  routeTo(candidateId: number) {
+        this.router.navigate(['/candidate-details', candidateId]);
+  } 
 }

@@ -27,7 +27,7 @@
       </ion-row>
     </ion-card-header>
     <ion-card-content>
-      <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active"
+      <ion-item class="candidate-item" (click)="routeTo(candidate.candidateId)"
         *ngFor="let candidate of candidates">
         <ion-avatar *ngIf="candidate.gender=='Male'" slot="start">
           <img src="../../../assets/img/avatar_male.jpg">

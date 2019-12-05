@@ -32,7 +32,11 @@ const routes: Routes = [
   {
     path: 'candidate-add-profile',
     loadChildren: () => import('./pages/candidate-add-profile/candidate-add-profile.module').then( m => m.CandidateAddProfilePageModule)
+  },  {
+    path: 'venue',
+    loadChildren: () => import('./pages/venue/venue.module').then( m => m.VenuePageModule)
   },
+
 ];
 
 @NgModule({
