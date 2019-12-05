@@ -297,21 +297,21 @@ export class CandidateAddProfilePage implements OnInit {
         });
         
   
-        // this.apiService.saveQualification(this.formQualification.value).subscribe(data=>{
-        //   alert("Qualification saved successfully!");
-        // },
-        // error => {
-        //   alert("Data not saved!");
-        // }
-        // );
+        this.apiService.saveQualification(this.formQualification.value).subscribe(data=>{
+          alert("Qualification saved successfully!");
+        },
+        error => {
+          alert("Data not saved!");
+        }
+        );
   
-        // this.apiService.saveExperience(this.formExperience.value).subscribe(data=>{
-        //   alert("Experience saved successfully!");
-        // },
-        // error => {
-        //   alert("Data not saved!");
-        // }
-        // );
+        this.apiService.saveExperience(this.formExperience.value).subscribe(data=>{
+          alert("Experience saved successfully!");
+        },
+        error => {
+          alert("Data not saved!");
+        }
+        );
 
         this.skills.filter(x => {
           x.candidateId = this.candidateId;
