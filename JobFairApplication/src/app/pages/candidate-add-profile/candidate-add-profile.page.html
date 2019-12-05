@@ -298,8 +298,8 @@
             <ion-row>
                 <ion-col>
                     <ion-list>
-                        <ion-item *ngFor="let control of skillsArray.controls; let i = index;">
-                            <!-- <ion-label>{{ control.skillName }}</ion-label> -->
+                        <ion-item *ngFor="let skill of skills; let i = index;">
+                            <ion-label>{{ skill.skillName }}</ion-label>
                             <ion-checkbox color="danger" class="messageCheckbox" slot="end"
                                 [(ngModel)]="skill.isChecked" formControlName="skill" value="{{skill.skillId}}"
                                 (ionChange)="checkCheckBoxvalue($event,skill)">
