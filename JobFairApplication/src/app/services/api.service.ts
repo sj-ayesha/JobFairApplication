@@ -7,6 +7,8 @@ import { Venue } from '../model/venue';
 import { Qualification } from '../model/qualification';
 import { Experience } from '../model/experience';
 import { Skill } from '../model/skill';
+import { VenueJob } from '../model/venueJob';
+import { CandidateVenueJob } from '../model/candidateVenueJob';
 
 
 @Injectable({
@@ -23,6 +25,10 @@ export class ApiService {
 
   getJobsByCategory(category: String): Observable<Job[]>{
     return this.http.get<Job[]>(this.baseUrl + 'job/category/' + category);
+  }
+
+  getAllJobs():Observable<Job[]>{
+    return this.http.get<Job[]>(this.baseUrl + 'job/all');
   }
 
   getCandidateIdByEmail(email: String): Observable<Candidate[]>{
@@ -63,5 +69,13 @@ export class ApiService {
 
   saveCandidateSkill(skill: Skill[]): Observable<Skill[]>{
     return this.http.post<Skill[]>(this.baseUrl + 'candidate-skill',skill);
+  }
+
+  getJobsByVenueId(venueId:Number): Observable<VenueJob[]>{
+    return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/' + venueId);
+  }
+
+  getCandidatesByVenueId(venueId:Number): Observable<CandidateVenueJob[]>{
+    return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId);
   }
 }

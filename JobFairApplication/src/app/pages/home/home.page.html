@@ -26,21 +26,21 @@
             <ion-card-header>
               <h3>List of Candidates</h3>
             </ion-card-header>
-            <ion-card-content *ngFor="let candidate of candidates; let i = index">
+            <ion-card-content *ngFor="let candidateVenueJob of candidateVenueJobs; let i = index">
 
               <ion-item class="candidate-item" (click)="routeTo(candidate.candidateId)" *ngIf="i < 5">
 
-                <ion-avatar *ngIf="candidate.gender=='Male'" slot="start">
+                <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Male'" slot="start">
                   <img src="../../../assets/img/avatar_male.jpg">
                 </ion-avatar>
-                <ion-avatar *ngIf="candidate.gender=='Female'" slot="start">
+                <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
                   <img src="../../../assets/img/avatar_female.jpg">
                 </ion-avatar>
 
                 <ion-label>
-                  <h5>{{candidate.firstName}} {{candidate.lastName}}</h5> 
-                  <p>{{candidate.currentLevel}}</p>
-                  <p>Available from: {{candidate.availabilityDate}}</p>
+                  <h5>{{candidateVenueJob.candidate.firstName}} {{candidateVenueJob.candidate.lastName}}</h5> 
+                  <p>{{candidateVenueJob.candidate.currentLevel}}</p>
+                  <p>Available from: {{candidateVenueJob.candidate.availabilityDate}}</p>
                 </ion-label>
 
               </ion-item>

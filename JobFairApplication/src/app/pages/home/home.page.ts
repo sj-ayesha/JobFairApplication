@@ -4,6 +4,7 @@ import { Candidate } from 'src/app/model/candidate';
 import { CategoryService } from '../../services/category.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Venue } from 'src/app/model/venue';
+import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -15,6 +16,7 @@ export class HomePage {
 
   candidates: Candidate[];
   venues: Venue[];
+  candidateVenueJobs: CandidateVenueJob[];
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
@@ -23,9 +25,9 @@ export class HomePage {
   }
 
   populateCandidate(){
-    this.apiService.getAllCandidates().subscribe(data => {
-      this.candidates = data;
-      console.log( this.candidates);
+    this.apiService.getCandidatesByVenueId(1).subscribe(data => {
+      this.candidateVenueJobs = data;
+      console.log( this.candidateVenueJobs);
     });
   }
 
@@ -42,5 +44,4 @@ export class HomePage {
       this.venues = data;
     });
   }
-
 }

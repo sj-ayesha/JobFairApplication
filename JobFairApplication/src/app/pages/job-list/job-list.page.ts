@@ -3,6 +3,7 @@ import { DataService } from '../../services/data.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Job } from 'src/app/model/job';
 import { ActivatedRoute } from '@angular/router';
+import { VenueJob } from 'src/app/model/venueJob';
 
 @Component({
   selector: 'app-job-list',
@@ -13,6 +14,7 @@ export class JobListPage implements OnInit {
 
   // jobs: any;
   jobs: Job[];
+  venueJobs: VenueJob[];
   public searchTerm: string = "";
   public items: any;
 
@@ -20,6 +22,7 @@ export class JobListPage implements OnInit {
 
   ngOnInit() {
     this.populateJob();
+    this.getAllJobsByVenueId();
   }
 
   // ngAfterViewInit() {
@@ -59,5 +62,16 @@ export class JobListPage implements OnInit {
         }
       );
     } 
+  }
+
+  getAllJobsByVenueId(){
+    this.apiService.getJobsByVenueId(1).subscribe(data=>{
+      this.venueJobs = data;
+      // console.log(data);
+    },
+      error => {
+      alert("No jobs available!");
+    }
+    );
   }
 }
