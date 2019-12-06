@@ -18,6 +18,7 @@ export class JobListPage implements OnInit {
   public searchTerm: string = "";
   public items: any;
   showMsg: boolean = false;
+  noJobsAvailable = false;
 
   constructor(private router: Router, private apiService: ApiService, private route: ActivatedRoute) { }
 
@@ -70,11 +71,12 @@ export class JobListPage implements OnInit {
 
   getAllJobsByVenueIdAndCategory(){
     const category: any = this.route.snapshot.paramMap.get('jobQueryParam');
-    this.apiService.getJobsByVenueIdAndCategory(1,category).subscribe(data=>{
+    this.apiService.getJobsByVenueIdAndCategory(1, category).subscribe(data => {
       this.venueJobs = data;
     },
       error => {
-      alert("No jobs available!");
+      alert('No jobs available!');
+      this.noJobsAvailable = true;
     }
     );
   }
