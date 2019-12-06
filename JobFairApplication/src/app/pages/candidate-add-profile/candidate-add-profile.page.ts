@@ -290,49 +290,49 @@ export class CandidateAddProfilePage implements OnInit {
     this.apiService.saveCandidate(this.formInformation.value).subscribe(data => {
       alert("Candidate saved successfully!");
 
-      this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data => {
-        this.candidateId = data.candidateId;
-        this.formQualification.patchValue(
-          {
-            candidateId: this.candidateId
-          });
+      // this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data => {
+      //   this.candidateId = data.candidateId;
+      //   this.formQualification.patchValue(
+      //     {
+      //       candidateId: this.candidateId
+      //     });
 
-        this.formExperience.patchValue({
-          candidateId: this.candidateId
-        });
+      //   this.formExperience.patchValue({
+      //     candidateId: this.candidateId
+      //   });
 
-        this.formSkills.patchValue({
-          candidateId: this.candidateId
-        });
+      //   this.formSkills.patchValue({
+      //     candidateId: this.candidateId
+      //   });
 
 
-        this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
-          alert("Qualification saved successfully!");
-        },
-          error => {
-            alert("Data not saved!");
-          }
-        );
+      //   this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
+      //     alert("Qualification saved successfully!");
+      //   },
+      //     error => {
+      //       alert("Data not saved!");
+      //     }
+      //   );
 
-        this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
-          alert("Experience saved successfully!");
-        },
-          error => {
-            alert("Data not saved!");
-          }
-        );
+      //   this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
+      //     alert("Experience saved successfully!");
+      //   },
+      //     error => {
+      //       alert("Data not saved!");
+      //     }
+      //   );
 
-        this.skills.filter(x => {
-          x.candidateId = this.candidateId;
-        })
+      //   this.skills.filter(x => {
+      //     x.candidateId = this.candidateId;
+      //   })
 
-        this.apiService.saveCandidateSkill(this.skills).subscribe(data => {
-          alert("skill saved");
-        });
+      //   this.apiService.saveCandidateSkill(this.skills).subscribe(data => {
+      //     alert("skill saved");
+      //   });
 
-        console.log(this.skills);
+      //   console.log(this.skills);
 
-      });
+      // });
       // this.router.navigate(['home']);
     },
       error => {

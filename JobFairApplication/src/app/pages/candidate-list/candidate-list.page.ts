@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {CandidatesService} from '../../services/candidates.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
+import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 
 @Component({
   selector: 'app-candidate-list',
@@ -11,7 +12,7 @@ import { Candidate } from 'src/app/model/candidate';
 })
 export class CandidateListPage implements OnInit {
   candidateDetails: any[];
-  candidates : Candidate[];
+  candidateVenueJobs: CandidateVenueJob[];
 
   constructor(private router: Router, private candidateService: CandidatesService, private route: ActivatedRoute, private apiService: ApiService) { }
 
@@ -30,8 +31,9 @@ export class CandidateListPage implements OnInit {
   }
 
   populateCandidate(){
-    this.apiService.getAllCandidates().subscribe(data => {
-      this.candidates = data;
+    this.apiService.getCandidatesByVenueId(1).subscribe(data => {
+      this.candidateVenueJobs = data;
+      console.log( this.candidateVenueJobs);
     });
   }
 

@@ -19,9 +19,9 @@
                 <ion-progress-bar color="dark" value="0.2"></ion-progress-bar>
               </ion-list>
             <div class="venue-button">
-              <ion-button color="light" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
+              <ion-button color="light" (click)="routeToJob('by-venue')">
                 View venue jobs</ion-button>
-              <ion-button color="dark" [routerLink]="['/job-list']">View All Jobs</ion-button>
+              <ion-button color="dark">View All Jobs</ion-button>
             </div>
           </ion-col>
         </ion-row>
@@ -34,7 +34,7 @@
             </ion-card-header>
             <ion-card-content *ngFor="let candidateVenueJob of candidateVenueJobs; let i = index">
 
-              <ion-item class="candidate-item" (click)="routeTo(candidate.candidateId)" *ngIf="i < 5">
+              <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)" *ngIf="i < 5">
 
                 <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Male'" slot="start">
                   <img src="../../../assets/img/avatar_male.jpg">
@@ -62,37 +62,37 @@
             </ion-card-header>
             <ion-row>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" (click)="routeCategoryTo('software-engineer')">
+                <ion-card-content class="category-item" (click)="routeToJob('software-engineer')">
                   <img src="../../../assets/img/job_category/software_engineer.png">
                   <h5>Software Engineer</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" (click)="routeCategoryTo('human-resource')">
+                <ion-card-content class="category-item" (click)="routeToJob('human-resource')">
                   <img src="../../../assets/img/job_category/hr.png">
                   <h5>Human Resource</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" (click)="routeCategoryTo('manager')">
+                <ion-card-content class="category-item" (click)="routeToJob('manager')">
                   <img src="../../../assets/img/job_category/management.png">
                   <h5>Manager</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" (click)="routeCategoryTo('business-analyst')">
+                <ion-card-content class="category-item" (click)="routeToJob('business-analyst')">
                   <img src="../../../assets/img/job_category/BA.png">
                   <h5>Business Analyst</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" (click)="routeCategoryTo('quality-assurance')">
+                <ion-card-content class="category-item" (click)="routeToJob('quality-assurance')">
                   <img src="../../../assets/img/job_category/QA.png">
                   <h5>Quality Assurance</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" (click)="routeCategoryTo('architect')">
+                <ion-card-content class="category-item" (click)="routeToJob('architect')">
                   <img src="../../../assets/img/job_category/architect.png">
                   <h5>Architect</h5>
                 </ion-card-content>

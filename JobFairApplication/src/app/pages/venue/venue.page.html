@@ -9,7 +9,7 @@
           <ion-item class="venue-input" color="red">
             <ion-label position="floating" color="dark">Venue</ion-label>
             <ion-select   interface="popover" (ionChange)="selected($event)">
-              <ion-select-option *ngFor="let venue of venues" value="{{venue.id}}">{{venue.venueName}}</ion-select-option>
+              <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}}</ion-select-option>
             </ion-select>
           </ion-item>
             <ion-button color="dark" [routerLink]="['/home']" routerLinkActive="router-link-active">Get Started</ion-button>

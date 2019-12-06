@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Job } from 'src/app/model/job';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VenueJob } from 'src/app/model/venueJob';
 
 @Component({
@@ -18,11 +18,16 @@ export class JobListPage implements OnInit {
   public searchTerm: string = "";
   public items: any;
 
-  constructor(private dataService: DataService, private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private apiService: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.populateJob();
-    this.getAllJobsByVenueId();
+
+    const allJobsByVenueId: String = this.route.snapshot.paramMap.get('jobQueryParam');
+    if(allJobsByVenueId == 'by-venue'){
+      this.getAllJobsByVenueId();
+    } else {
+      this.getAllJobsByVenueIdAndCategory();
+    }
   }
 
   // ngAfterViewInit() {
@@ -51,23 +56,21 @@ export class JobListPage implements OnInit {
     }
   }
 
-  populateJob() {
-    const category: any = this.route.snapshot.paramMap.get('category');
-    if (category != null) {
-      this.apiService.getJobsByCategory(category).subscribe(data => {
-        this.jobs = data;
-      },
-        error => {
-          alert("No jobs available!");
-        }
-      );
-    } 
-  }
-
   getAllJobsByVenueId(){
     this.apiService.getJobsByVenueId(1).subscribe(data=>{
       this.venueJobs = data;
       // console.log(data);
+    },
+      error => {
+      alert("No jobs available!");
+    }
+    );
+  }
+
+  getAllJobsByVenueIdAndCategory(){
+    const category: any = this.route.snapshot.paramMap.get('jobQueryParam');
+    this.apiService.getJobsByVenueIdAndCategory(1,category).subscribe(data=>{
+      this.venueJobs = data;
     },
       error => {
       alert("No jobs available!");
