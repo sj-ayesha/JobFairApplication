@@ -237,6 +237,7 @@ export class CandidateAddProfilePage implements OnInit {
       cssClass: 'toast-custom'
     });
     toast.present();
+ 
   }
 
   populateSkills() {
@@ -259,7 +260,12 @@ export class CandidateAddProfilePage implements OnInit {
     } else {
       console.log(this.submitted, "sucessful");
       this.successMsg();
+      this.formInformation.reset();
+      this.formQualification.reset();
+      this.formExperience.reset();
+      this.formSkills.reset();
     }
+  
   }
 
   submitCandidate() {
