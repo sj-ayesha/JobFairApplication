@@ -17,6 +17,7 @@ export class JobListPage implements OnInit {
   venueJobs: VenueJob[];
   public searchTerm: string = "";
   public items: any;
+  showMsg: boolean = false;
 
   constructor(private router: Router, private apiService: ApiService, private route: ActivatedRoute) { }
 
