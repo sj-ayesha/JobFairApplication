@@ -19,16 +19,10 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   baseUrl: string = 'http://localhost:8081/'; // url to access backend
 
+  // candidates
+
   getAllCandidates(): Observable<Candidate[]>{
     return this.http.get<Candidate[]>(this.baseUrl + 'candidate/all');
-  }
-
-  getJobsByCategory(category: String): Observable<Job[]>{
-    return this.http.get<Job[]>(this.baseUrl + 'job/category/' + category);
-  }
-
-  getAllJobs():Observable<Job[]>{
-    return this.http.get<Job[]>(this.baseUrl + 'job/all');
   }
 
   getCandidateIdByEmail(email: String): Observable<Candidate[]>{
@@ -43,13 +37,55 @@ export class ApiService {
     return this.http.get<Candidate[]>(this.baseUrl + 'candidate/' + candidateId );
   }
 
+  // candidate venue job
+
+  getCandidatesByVenueId(venueId:Number): Observable<CandidateVenueJob[]>{
+    return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId);
+  }
+
+  // candidate skills
+
+  saveCandidateSkill(skill: Skill[]): Observable<Skill[]>{
+    return this.http.post<Skill[]>(this.baseUrl + 'candidate-skill',skill);
+  }
+
+  // jobs
+
+  getJobsByCategory(category: String): Observable<Job[]>{
+    return this.http.get<Job[]>(this.baseUrl + 'job/category/' + category);
+  }
+
+  getAllJobs():Observable<Job[]>{
+    return this.http.get<Job[]>(this.baseUrl + 'job/all');
+  }
+
+  // venue-job
+
+  getJobsByVenueId(venueId:Number): Observable<VenueJob[]>{
+    return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/' + venueId);
+  }
+
+  getJobsByVenueIdAndCategory(venueId:Number,category:String): Observable<VenueJob[]>{
+    return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/category?venueId=' + venueId + '&category=' + category);
+  }
+
+  // venue
+
   getVenueByActive(active:boolean): Observable<Venue[]>{
     return this.http.get<Venue[]>(this.baseUrl + 'venue/active/' + active);
   }
 
+  // qualifications
+
   getQualificationByCandidateId(candidateId:Number): Observable<Qualification[]>{
     return this.http.get<Qualification[]>(this.baseUrl + 'qualification/candidate/' + candidateId);
   }
+
+  saveQualification(qualification: Qualification): Observable<Qualification[]>{
+    return this.http.post<Qualification[]>(this.baseUrl + 'qualification',qualification);
+  }
+
+  // experience
 
   getExperienceByCandidateId(candidateId:Number): Observable<Experience[]>{
     return this.http.get<Experience[]>(this.baseUrl + 'experience/candidate/' + candidateId);
@@ -59,23 +95,9 @@ export class ApiService {
     return this.http.post<Experience[]>(this.baseUrl + 'experience',experience);
   }
 
+  // skills
+
   getAllSkills():Observable<Skill[]>{
     return this.http.get<Skill[]>(this.baseUrl + 'skill/all');
-  }
-
-  saveQualification(qualification: Qualification): Observable<Qualification[]>{
-    return this.http.post<Qualification[]>(this.baseUrl + 'qualification',qualification);
-  }
-
-  saveCandidateSkill(skill: Skill[]): Observable<Skill[]>{
-    return this.http.post<Skill[]>(this.baseUrl + 'candidate-skill',skill);
-  }
-
-  getJobsByVenueId(venueId:Number): Observable<VenueJob[]>{
-    return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/' + venueId);
-  }
-
-  getCandidatesByVenueId(venueId:Number): Observable<CandidateVenueJob[]>{
-    return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId);
   }
 }

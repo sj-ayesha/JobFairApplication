@@ -53,13 +53,21 @@ export class CandidateDetailsPage implements OnInit {
     this.apiService.getQualificationByCandidateId(candidateId).subscribe(data=>{
       this.qualifications = data;
       // console.log(this.qualifications);
-    });
+    },
+    error => {
+      alert("No Qualification found!");
+    }
+    );
   }
 
   getExperienceByCandidateId(candidateId:Number){
     this.apiService.getExperienceByCandidateId(candidateId).subscribe(data=>{
       this.experiences = data;
       // console.log(this.experiences);
-    });
+    },
+    error => {
+      alert("No Experience found!");
+    }
+    );
   }
 }

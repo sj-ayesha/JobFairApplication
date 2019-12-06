@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Venue } from 'src/app/model/venue';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-venue',
@@ -7,18 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VenuePage implements OnInit {
 
-  venues: Array<any>;
+  venues: Venue[];
   public select ="";
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.venues = [
-      { id: '1', venueName: 'UOM'},
-      { id: '2', venueName: 'UTM'}
-    ];
+    this.getVenueByActive();
   }
 
   selected(id){
-    localStorage.setItem('venue id', id.target.value);
+    localStorage.setItem('venue_id', id.target.value);
+  }
+
+  getVenueByActive(){
+    this.apiService.getVenueByActive(true).subscribe(data=>{
+      this.venues = data;
+      // console.log(this.venues);
+    });
   }
 }

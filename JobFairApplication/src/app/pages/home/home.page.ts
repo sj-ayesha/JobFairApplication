@@ -27,7 +27,7 @@ export class HomePage {
   populateCandidate(){
     this.apiService.getCandidatesByVenueId(1).subscribe(data => {
       this.candidateVenueJobs = data;
-      console.log( this.candidateVenueJobs);
+      // console.log( this.candidateVenueJobs);
     });
   }
 
@@ -35,9 +35,9 @@ export class HomePage {
         this.router.navigate(['/candidate-details', candidateId]);
   } 
 
-  routeCategoryTo(category:String) {
-        this.router.navigate(['/job-list',category]);
-  } 
+  routeToJob(jobQueryParam:String) {
+        this.router.navigate(['/job-list',jobQueryParam]);
+  }
 
   populateVenue(active:boolean = true){
     this.apiService.getVenueByActive(active).subscribe(data=>{
