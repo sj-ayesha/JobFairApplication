@@ -17,12 +17,13 @@ export class JobListPage implements OnInit {
   venueJobs: VenueJob[];
   public searchTerm: string = "";
   public items: any;
+  showMsg: boolean = false;
 
   constructor(private dataService: DataService, private apiService: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.populateJob();
-    this.getAllJobsByVenueId();
+    // this.getAllJobsByVenueId();
   }
 
   // ngAfterViewInit() {
@@ -56,12 +57,17 @@ export class JobListPage implements OnInit {
     if (category != null) {
       this.apiService.getJobsByCategory(category).subscribe(data => {
         this.jobs = data;
+
       },
-        error => {
-          alert("No jobs available!");
+        error => {      
         }
       );
-    } 
+    }
+    else {
+      if (5 == 5) {
+        this.showMsg = true;
+      }
+    }
   }
 
   getAllJobsByVenueId(){
