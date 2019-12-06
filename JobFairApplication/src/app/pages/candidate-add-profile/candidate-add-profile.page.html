@@ -5,7 +5,7 @@
             <h3>Candidate Details</h3>
         </div>
         <h4>Information</h4>
-        <form [formGroup]="formInformation">
+        <form [formGroup]="formInformation" (ngSubmit)="onSubmit()">
             <ion-row>
                 <ion-col col-md-6 size="12" size-sm>
                     <ion-item>
@@ -193,7 +193,7 @@
             </ion-row>
         </form>
         <h4>Qualification</h4>
-        <form [formGroup]="formQualification">
+        <form [formGroup]="formQualification" (ngSubmit)="onSubmit()">
             <ion-row>
                 <ion-col size="6" size-md size="12" size-sm>
                     <ion-item>
@@ -240,6 +240,7 @@
                 </ion-col>
             </ion-row>
             <ion-input formControlName="candidateId" type="text" hidden></ion-input>
+            
         </form>
         <!-- <div class="add-qualification-button ion-text-right">
                 <ion-button class='btn' color="danger">
@@ -248,7 +249,7 @@
             </div> -->
 
         <h4>Experience</h4>
-        <form [formGroup]="formExperience">
+        <form [formGroup]="formExperience" (ngSubmit)="onSubmit()">
             <ion-row id="duplicater">
                 <ion-col col-md-6 size="12" size-sm>
                     <ion-item>
@@ -294,7 +295,7 @@
         <div id="content">
         </div>
         <h4>Skills</h4>
-        <form [formGroup]="formSkills">
+        <form [formGroup]="formSkills" (ngSubmit)="onSubmit()">
             <ion-row>
                 <ion-col>
                     <ion-list>
@@ -319,7 +320,8 @@
                 </ion-button>
             </div>
             <div class="submit-button ion-text-right">
-                <ion-button class='btn' color="dark" (click)="submitCandidate()">Submit</ion-button>
+                <!-- <ion-button class='btn' color="dark" (click)="submitCandidate()">Submit</ion-button> -->
+                <ion-button class='btn' (click)="onSubmit()" type="submit" color="dark">Submit</ion-button>
             </div>
         </div>
     </div>

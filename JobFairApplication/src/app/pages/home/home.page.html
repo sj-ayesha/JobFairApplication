@@ -13,11 +13,11 @@
               </ion-select>
             </ion-item> -->
             <ion-list>
-                <ion-list-header>
-                  <ion-label color="light">Total number of candidates: 20</ion-label>
-                </ion-list-header>
-                <ion-progress-bar color="dark" value="0.2"></ion-progress-bar>
-              </ion-list>
+              <ion-list-header>
+                <ion-label color="light">Total number of candidates: 20</ion-label>
+              </ion-list-header>
+              <ion-progress-bar color="dark" value="0.2"></ion-progress-bar>
+            </ion-list>
             <div class="venue-button">
               <ion-button color="light" [routerLink]="['/job-list']" routerLinkActive="router-link-active">
                 View venue jobs</ion-button>
@@ -43,7 +43,7 @@
                   <img src="../../../assets/img/avatar_female.jpg">
                 </ion-avatar>
                 <ion-label>
-                  <h5>{{candidateVenueJob.candidate.firstName}} {{candidateVenueJob.candidate.lastName}}</h5> 
+                  <h5>{{candidateVenueJob.candidate.firstName}} {{candidateVenueJob.candidate.lastName}}</h5>
                   <p>{{candidateVenueJob.candidate.currentLevel}}</p>
                   <p>Available from: {{candidateVenueJob.candidate.availabilityDate}}</p>
                 </ion-label>
@@ -61,12 +61,6 @@
               <h3>Job Category</h3>
             </ion-card-header>
             <ion-row>
-              <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" (click)="routeCategoryTo('software-engineer')">
-                  <img src="../../../assets/img/job_category/software_engineer.png">
-                  <h5>Software Engineer</h5>
-                </ion-card-content>
-              </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
                 <ion-card-content class="category-item" (click)="routeCategoryTo('human-resource')">
                   <img src="../../../assets/img/job_category/hr.png">
@@ -86,15 +80,21 @@
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" (click)="routeCategoryTo('quality-assurance')">
-                  <img src="../../../assets/img/job_category/QA.png">
-                  <h5>Quality Assurance</h5>
+                <ion-card-content class="category-item" (click)="routeCategoryTo('architect')">
+                  <img src="../../../assets/img/job_category/architect_1.png">
+                  <h5>Architect</h5>
                 </ion-card-content>
               </ion-col>
               <ion-col size="2" size-md size="6" size-sm>
-                <ion-card-content class="category-item" (click)="routeCategoryTo('architect')">
-                  <img src="../../../assets/img/job_category/architect.png">
-                  <h5>Architect</h5>
+                <ion-card-content class="category-item" (click)="routeCategoryTo('software-engineer')">
+                  <img src="../../../assets/img/job_category/software_engineer.png">
+                  <h5>Software Engineer</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="2" size-md size="6" size-sm>
+                <ion-card-content class="category-item" (click)="routeCategoryTo('quality-assurance')">
+                  <img src="../../../assets/img/job_category/QA.png">
+                  <h5>Quality Assurance</h5>
                 </ion-card-content>
               </ion-col>
             </ion-row>
