@@ -7,7 +7,9 @@
     justify-content: space-between;
 }
 img{
-    max-width: 142px;
+    // max-width: 142px;
+    max-width: 178px;
+    max-height: 24px;
     &:hover,&:focus{
         cursor: pointer;
         outline: none;

@@ -17,7 +17,6 @@ export class JobListPage implements OnInit {
   venueJobs: VenueJob[];
   public searchTerm: string = "";
   public items: any;
-  showMsg: boolean = false;
   noJobsAvailable = false;
 
   constructor(private router: Router, private apiService: ApiService, private route: ActivatedRoute) { }
@@ -64,7 +63,8 @@ export class JobListPage implements OnInit {
       // console.log(data);
     },
       error => {
-      alert("No jobs available!");
+      // alert("No jobs available!");
+      this.noJobsAvailable = true;
     }
     );
   }
@@ -75,7 +75,7 @@ export class JobListPage implements OnInit {
       this.venueJobs = data;
     },
       error => {
-      alert('No jobs available!');
+      // alert('No jobs available!');
       this.noJobsAvailable = true;
     }
     );

@@ -46,7 +46,11 @@ export class CandidateDetailsPage implements OnInit {
     this.apiService.getCandidateById(candidateId).subscribe(data=>{
       this.candidates = data;
       // console.log(this.candidates);
-    });
+    },
+    error => {
+      // alert("No Candidate found!");
+    }
+    );
   }
 
   getQualificationByCandidateId(candidateId:Number){
@@ -55,7 +59,7 @@ export class CandidateDetailsPage implements OnInit {
       // console.log(this.qualifications);
     },
     error => {
-      alert("No Qualification found!");
+      // alert("No Qualification found!");
     }
     );
   }
@@ -66,7 +70,7 @@ export class CandidateDetailsPage implements OnInit {
       // console.log(this.experiences);
     },
     error => {
-      alert("No Experience found!");
+      // alert("No Experience found!");
     }
     );
   }

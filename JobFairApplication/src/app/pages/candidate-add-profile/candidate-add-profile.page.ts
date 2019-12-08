@@ -32,6 +32,9 @@ export class CandidateAddProfilePage implements OnInit {
   submitted = false;
 
   x = false;
+  day: any;
+  month: any;
+  year: any;
 
   // skills: Array<string>;
   // tslint:disable-next-line: variable-name
@@ -144,12 +147,16 @@ export class CandidateAddProfilePage implements OnInit {
     });
   }
 
+  date: any;
+
   ngOnInit() {
 
     this.today = new Date();
-    let dd = String(this.today.getDate()).padStart(2, '0');
-    let mm = String(this.today.getMonth() + 1).padStart(2, '0');
-    let yyyy = this.today.getFullYear();
+    this.day = String(this.today.getDate());
+    this.month = this.today.getMonth() + 1;
+    this.year = this.today.getFullYear();
+
+    this.date = (this.month + ' ' + this.day + ' ' + this.year);
 
     this.genders = [
       'Male',
@@ -265,7 +272,6 @@ export class CandidateAddProfilePage implements OnInit {
       this.formExperience.reset();
       this.formSkills.reset();
     }
-  
   }
 
   submitCandidate() {

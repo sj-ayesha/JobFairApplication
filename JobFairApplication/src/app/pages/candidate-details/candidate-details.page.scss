@@ -210,8 +210,8 @@ ion-button{
 }
 
 .candidate-details {
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
 }
 
 .feedbacks {
@@ -222,7 +222,11 @@ ion-button{
         padding-right: 25px;
     }
 }
-
+.information {
+    h5{
+        font-size: 20px;
+    }
+}
 .qualifications {
     h5 {
         font-size: 20px;
@@ -230,6 +234,11 @@ ion-button{
 }
 
 .experience {
+    h5 {
+        font-size: 20px;
+    }
+}
+.skill {
     h5 {
         font-size: 20px;
     }

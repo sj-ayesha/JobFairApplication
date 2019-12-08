@@ -5,12 +5,13 @@
       <h3>Candidate Profile</h3>
     </div>
     <ion-row>
-      <ion-col col-md-2 size="2">
+      <ion-col col-md-2 size="2" col-sm-3 size="3">
         <ion-card padding>
           <ion-card-title>Jobs Applied: </ion-card-title>
           <div class="jobs-selected" *ngFor="let item of items; let i = index">
             <div class="jobs-selected--title">
-              <span>{{i + 1}}. </span><p>{{ item.title }}</p>
+              <span>{{i + 1}}. </span>
+              <p>{{ item.title }}</p>
             </div>
 
             <!-- <div class="jobs-selected--checkbox">
@@ -22,26 +23,19 @@
           </div>
         </ion-card>
       </ion-col>
-      <ion-col col-md-10 size="10">
+      <ion-col col-md-10 size="10" col-sm-9 size="9">
         <ion-row>
           <div class="info">
             <div class="interviewer-detail">
               <ion-item>
-                <ion-label position="floating" color="medium" class="label-info"
-                  >*Interview Date</ion-label
-                >
-                <ion-datetime
-                  display-format="DD MMM YYYY"
-                  value="{{ today }}" [disabled]='true'
-                >
+                <ion-label position="floating" color="medium" class="label-info">*Interview Date</ion-label>
+                <ion-datetime display-format="DD MMM YYYY" value="{{ today }}" [disabled]='true'>
                 </ion-datetime>
               </ion-item>
             </div>
             <div class="interviewer-detail">
               <ion-item>
-                <ion-label position="floating" color="medium" class="label-info"
-                  >*Venue</ion-label
-                >
+                <ion-label position="floating" color="medium" class="label-info">*Venue</ion-label>
                 <ion-select interface="popover">
                   <ion-select-option>UTM </ion-select-option>
                   <ion-select-option>UOM </ion-select-option>
@@ -52,45 +46,63 @@
             </div>
 
             <div class="interviewer-detail">
-                <ion-item>
-                    <ion-label position="floating" color="medium">*Interviewer Name</ion-label>
-                    <ion-input type="text"></ion-input>
-                </ion-item>
+              <ion-item>
+                <ion-label position="floating" color="medium">*Interviewer Name</ion-label>
+                <ion-input type="text"></ion-input>
+              </ion-item>
             </div>
           </div>
           <ion-col col-md-12 size="12">
             <ion-card class="candidate-details" padding>
-              <div class="information" *ngIf="candidates as candidate">
-                  <h5>Information</h5>
-                  <p><b>Name:</b> {{ candidate.firstName}} {{ candidate.lastname}}</p>
-                  <p><b>Gender:</b> {{candidate.gender}}</p>
-                  <p><b>Phone Number:</b> {{candidate.telNumber}}</p>
-                  <p><b>Email:</b> {{candidate.email}}</p>
-                  <p><b>Address:</b> {{candidate.address}}</p>
-                  <p><b>Nationality:</b> {{candidate.nationality}}</p>
-              </div>
+              <ion-row>
+                <ion-col col-md-4 size="4">
+                  <div class="information">
+                    <h5>Information</h5>
+                    <div *ngFor="let candidate of candidates">
+                      <p><b>Name:</b> {{ candidate.firstName}} {{ candidate.lastName}}</p>
+                      <p><b>Gender:</b> {{candidate.gender}}</p>
+                      <p><b>Phone Number:</b> {{candidate.telNumber}}</p>
+                      <p><b>Email:</b> {{candidate.email}}</p>
+                      <p><b>Address:</b> {{candidate.address}}</p>
+                      <p><b>Nationality:</b> {{candidate.nationality}}</p>
+                    </div>
+                  </div>
+                </ion-col>
 
-              <div class="qualifications" >
-                <h5>Qualification(s)</h5>
-                <div *ngFor="let qualification of qualifications">
-                <p><b>Qualification Level:</b> {{ qualification.title }}</p>
-                <p><b>Division:</b> {{ qualification.division }}</p>
-                <p><b>Institution:</b> {{ qualification.institution }}</p>
-                <p><b>Graduation Date:</b> {{ qualification.graduationDate }}</p>
-              </div>
-              </div>
+                <ion-col col-md-4 size="4">
+                  <div class="qualifications">
+                    <h5>Qualification(s)</h5>
+                    <div *ngFor="let qualification of qualifications">
+                      <p><b>Qualification Level:</b> {{ qualification.title }}</p>
+                      <p><b>Division:</b> {{ qualification.division }}</p>
+                      <p><b>Institution:</b> {{ qualification.institution }}</p>
+                      <p><b>Graduation Date:</b> {{ qualification.graduationDate }}</p>
+                    </div>
+                  </div>
+                </ion-col>
 
-              <div class="experience" >
-                  <h5>Experience(s)</h5>
-                  <div *ngFor="let experience of experiences">
-                  <p><b>Company:</b> {{ experience.companyName}}</p>
-                  <p><b>Job Title:</b> {{ experience.position}}</p>
-                  <p><b>Duration:</b> {{ experience.duration}}</p>
-                </div>
-              </div>
+                <ion-col col-md-4 size="4">
+                  <div class="experience">
+                    <h5>Experience(s)</h5>
+                    <div *ngFor="let experience of experiences">
+                      <p><b>Company:</b> {{ experience.companyName}}</p>
+                      <p><b>Job Title:</b> {{ experience.position}}</p>
+                      <p><b>Duration:</b> {{ experience.duration}}</p>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
 
+              <ion-row>
+                <ion-col col-md-4 size="4">
+                  <div class="skill">
+                    <h5>Skill(s)</h5>
+                  </div>
+                </ion-col>
+              </ion-row>
             </ion-card>
           </ion-col>
+
         </ion-row>
         <ion-row class="previous-feedback">
           <ion-col col-md-12 size="12">
@@ -104,7 +116,7 @@
                 </div>
 
               </ion-card-header>
-            
+
               <ion-card-content>
                 Very Good
               </ion-card-content>
@@ -116,26 +128,22 @@
             <ion-card padding>
               <ion-item class="add-feedback">
                 <!-- <ion-label>Comments: </ion-label> -->
-                <ion-textarea
-                  rows="6"
-                  cols="20"
-                  placeholder="Enter your feedback here..."
-                >
+                <ion-textarea rows="6" cols="20" placeholder="Enter your feedback here...">
                 </ion-textarea>
               </ion-item>
               <div class="status">
-                  <ion-radio-group class="btn-radio-group">
-                  
-                      <ion-item>
-                        <ion-label>Rejected</ion-label>
-                        <ion-radio color="danger"slot="start" value="reject" checked></ion-radio>
-                      </ion-item>
-                  
-                      <ion-item>
-                        <ion-label>Proceed to next interview</ion-label>
-                        <ion-radio color="success" slot="start" value="proceed"></ion-radio>
-                      </ion-item>
-                    </ion-radio-group>
+                <ion-radio-group class="btn-radio-group">
+
+                  <ion-item>
+                    <ion-label>Rejected</ion-label>
+                    <ion-radio color="danger" slot="start" value="reject" checked></ion-radio>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Proceed to next interview</ion-label>
+                    <ion-radio color="success" slot="start" value="proceed"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
                 <!-- <div id="ck-button-rejected">
                   <label>
                     <input type="radio" value="1" /><span>Rejected</span>
@@ -158,13 +166,15 @@
           </ion-col>
         </ion-row>
         <div class="btn-actions">
-            <div class="btn-back ion-text-left">
-              
-                <ion-button class="btn" color="light" [routerLink]="['/home']" routerLinkActive="router-link-active" >  <ion-icon name="arrow-back"></ion-icon>Back</ion-button>
-            </div>
-            <div class="save-button ion-text-right">
-                <ion-button class="btn" color="dark">Save</ion-button>
-              </div>
+          <div class="btn-back ion-text-left">
+
+            <ion-button class="btn" color="light" [routerLink]="['/home']" routerLinkActive="router-link-active">
+              <ion-icon name="arrow-back"></ion-icon>Back
+            </ion-button>
+          </div>
+          <div class="save-button ion-text-right">
+            <ion-button class="btn" color="dark">Save</ion-button>
+          </div>
 
         </div>
 
