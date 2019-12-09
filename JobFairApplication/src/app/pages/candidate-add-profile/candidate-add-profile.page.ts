@@ -108,7 +108,7 @@ export class CandidateAddProfilePage implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      phoneNumber: new FormControl('', Validators.compose([
+      mobileNumber: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{7,7}$')
       ])),
@@ -118,13 +118,12 @@ export class CandidateAddProfilePage implements OnInit {
       nationality: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      mobileNumber: new FormControl(''),
       gender: new FormControl('', Validators.required),
       address: new FormControl(''),
       availabilityDate: new FormControl('', Validators.required),
       currentAcademicYear: new FormControl(''),
       jobType: new FormControl('', Validators.required),
-      registrationDate: new FormControl(''),
+      registrationDate: new FormControl(new Date()),
       currentLevel: new FormControl('', Validators.required),
     });
     this.formQualification = this.formBuilder.group({
@@ -156,8 +155,8 @@ export class CandidateAddProfilePage implements OnInit {
     this.month = this.today.getMonth() + 1;
     this.year = this.today.getFullYear();
 
-    this.date = (this.month + ' ' + this.day + ' ' + this.year);
-
+    this.date = (this.year + '-' + this.month + '-' + this.day);
+    
     this.genders = [
       'Male',
       'Female'
@@ -265,68 +264,73 @@ export class CandidateAddProfilePage implements OnInit {
       console.log(this.submitted, "not sucessful");
       this.unsuccessMsg();
     } else {
+      // this.submitCandidate();
+      this.submitCandidate();
       console.log(this.submitted, "sucessful");
       this.successMsg();
-      this.formInformation.reset();
-      this.formQualification.reset();
-      this.formExperience.reset();
-      this.formSkills.reset();
+      // this.formInformation.reset();
+      // this.formQualification.reset();
+      // this.formExperience.reset();
+      // this.formSkills.reset();
     }
   }
 
   submitCandidate() {
-    // this.apiService.saveCandidate(this.formInformation.value).subscribe(data => {
-    //   alert("Candidate saved successfully!");
+    this.apiService.saveCandidate(this.formInformation.value).subscribe(data => {
+      alert("Candidate saved successfully!");
+      this.submitQualificationAndExperience();
+      // this.router.navigate(['home']);
+    },
+      error => {
+        alert("Data not saved!");
+      }
+    );
+  }
 
-    //   this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data => {
-    //     this.candidateId = data.candidateId;
-    //     this.formQualification.patchValue(
-    //       {
-    //         candidateId: this.candidateId
-    //       });
+  submitQualificationAndExperience(){
+    this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data => {
+      this.candidateId = data.candidateId;
+      this.formQualification.patchValue(
+        {
+          candidateId: this.candidateId
+        });
 
-    //     this.formExperience.patchValue({
-    //       candidateId: this.candidateId
-    //     });
+      this.formExperience.patchValue({
+        candidateId: this.candidateId
+      });
 
-    //     this.formSkills.patchValue({
-    //       candidateId: this.candidateId
-    //     });
+      this.formSkills.patchValue({
+        candidateId: this.candidateId
+      });
 
 
-    //     this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
-    //       alert("Qualification saved successfully!");
-    //     },
-    //       error => {
-    //         alert("Data not saved!");
-    //       }
-    //     );
+      this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
+        alert("Qualification saved successfully!");
+      },
+        error => {
+          alert("Data not saved!");
+        }
+      );
 
-    //     this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
-    //       alert("Experience saved successfully!");
-    //     },
-    //       error => {
-    //         alert("Data not saved!");
-    //       }
-    //     );
+      this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
+        alert("Experience saved successfully!");
+      },
+        error => {
+          alert("Data not saved!");
+        }
+      );
 
-    //     this.skills.filter(x => {
-    //       x.candidateId = this.candidateId;
-    //     })
+      this.skills.filter(x => {
+        x.candidateId = this.candidateId;
+      })
 
-    //     this.apiService.saveCandidateSkill(this.skills).subscribe(data => {
-    //       alert("skill saved");
-    //     });
+      this.apiService.saveCandidateSkill(this.skills).subscribe(data => {
+        alert("skill saved");
+      });
 
-    //     console.log(this.skills);
+      // console.log(this.skills);
 
-    //   });
-    //   // this.router.navigate(['home']);
-    // },
-    //   error => {
-    //     alert("Data not saved!");
-    //   }
-    // );
+    });
   }
 
 

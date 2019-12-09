@@ -58,7 +58,7 @@
                 <ion-col col-md-4 size="4">
                   <div class="information">
                     <h5>Information</h5>
-                    <div *ngFor="let candidate of candidates">
+                    <div *ngIf="candidates as candidate">
                       <p><b>Name:</b> {{ candidate.firstName}} {{ candidate.lastName}}</p>
                       <p><b>Gender:</b> {{candidate.gender}}</p>
                       <p><b>Phone Number:</b> {{candidate.telNumber}}</p>

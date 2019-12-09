@@ -54,12 +54,12 @@
                 <ion-col size="6" size-md size="12" size-sm>
                     <ion-item>
                         <ion-label position="floating" color="medium">*Mobile Number: 5XXXXXXX</ion-label>
-                        <ion-input formControlName="phoneNumber" type="tel"></ion-input>
+                        <ion-input formControlName="mobileNumber" type="tel"></ion-input>
                     </ion-item>
                     <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.phoneNumber'>
+                        <ng-container *ngFor='let error of error_messages.mobileNumber'>
                             <div class="error-message"
-                                *ngIf="formInformation.get('phoneNumber').hasError(error.type) && (formInformation.get('phoneNumber').dirty || formInformation.get('phoneNumber').touched)">
+                                *ngIf="formInformation.get('mobileNumber').hasError(error.type) && (formInformation.get('mobileNumber').dirty || formInformation.get('mobileNumber').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>

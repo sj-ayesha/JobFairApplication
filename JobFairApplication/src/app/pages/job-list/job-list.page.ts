@@ -59,11 +59,14 @@ export class JobListPage implements OnInit {
 
   getAllJobsByVenueId(){
     this.apiService.getJobsByVenueId(1).subscribe(data=>{
-      this.venueJobs = data;
+      if(data.message == "NO_VENUE_JOB_AVAILABLE"){
+        this.noJobsAvailable = true;
+      } else {
+        this.venueJobs = data;
+      }
       // console.log(data);
     },
       error => {
-      // alert("No jobs available!");
       this.noJobsAvailable = true;
     }
     );
@@ -72,10 +75,13 @@ export class JobListPage implements OnInit {
   getAllJobsByVenueIdAndCategory(){
     const category: any = this.route.snapshot.paramMap.get('jobQueryParam');
     this.apiService.getJobsByVenueIdAndCategory(1, category).subscribe(data => {
-      this.venueJobs = data;
+      if(data.message == "NO_VENUE_JOB_AVAILABLE"){
+        this.noJobsAvailable = true;
+      } else {
+        this.venueJobs = data;
+      }
     },
       error => {
-      // alert('No jobs available!');
       this.noJobsAvailable = true;
     }
     );

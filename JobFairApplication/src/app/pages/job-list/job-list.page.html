@@ -30,7 +30,7 @@
         </ion-col>
       </ion-row>
 
-      <div class="job-list-container">
+      <div class="job-list-container" *ngIf="!noJobsAvailable">
         <ion-row class="job-box" *ngFor="let venueJob of venueJobs">
           <ion-col size="11" (click)="styleAccordion()">
             <button class="collapsible">{{ venueJob.job.title }}</button>

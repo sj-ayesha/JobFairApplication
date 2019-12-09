@@ -45,7 +45,7 @@ export class CandidateDetailsPage implements OnInit {
   getCandidateById(candidateId:Number){
     this.apiService.getCandidateById(candidateId).subscribe(data=>{
       this.candidates = data;
-      // console.log(this.candidates);
+      console.log(this.candidates);
     },
     error => {
       // alert("No Candidate found!");
