@@ -391,4 +391,3 @@ export class CandidateAddProfilePage implements OnInit {
     document.getElementById('content').appendChild(div);
   }
 }
-
