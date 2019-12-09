@@ -30,6 +30,9 @@ export class CandidateAddProfilePage implements OnInit {
   selectedDay: String = '';
   public today: any;
   submitted = false;
+  position: String;
+  company: String;
+  duration: String;
 
   x = false;
   day: any;
@@ -264,6 +267,7 @@ export class CandidateAddProfilePage implements OnInit {
     if (this.formQualification.invalid && this.formInformation.invalid) {
       console.log(this.submitted, "not sucessful");
       this.unsuccessMsg();
+      debugger;
     } else {
       // this.submitCandidate();
       this.submitCandidate();
@@ -278,7 +282,6 @@ export class CandidateAddProfilePage implements OnInit {
 
   submitCandidate() {
     this.apiService.saveCandidate(this.formInformation.value).subscribe(data => {
-      alert("Candidate saved successfully!");
       this.submitQualificationAndExperience();
       // this.router.navigate(['home']);
     },
@@ -304,29 +307,31 @@ export class CandidateAddProfilePage implements OnInit {
         candidateId: this.candidateId
       });
 
-
       this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
-        alert("Qualification saved successfully!");
       },
         error => {
           alert("Data not saved!");
         }
       );
 
-      this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
-        alert("Experience saved successfully!");
-      },
-        error => {
-          alert("Data not saved!");
-        }
-      );
+      this.position = this.formExperience.get('position').value;
+
+      if(this.position == ""){
+        
+      } else {
+        this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
+        },
+          error => {
+            alert("Data not saved!");
+          }
+        );
+      }
 
       this.skills.filter(x => {
         x.candidateId = this.candidateId;
       })
 
       this.apiService.saveCandidateSkill(this.skills).subscribe(data => {
-        alert("skill saved");
       });
 
       // console.log(this.skills);
