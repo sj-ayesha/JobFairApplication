@@ -70,11 +70,12 @@ ion-list{
 .btn-view-more{
     margin-bottom: 25px;
 }
+
 @media only screen and (max-width: 1024px) {
     .ion-text-center{
         background-image: none;
         background-color: $color-light-red;
-        height: 33%;
+        height: 50%;
         // max-height:350px;
     }
     .lists h3{
@@ -85,7 +86,7 @@ ion-list{
     .ion-text-center{
         background-image: none;
         background-color: $color-light-red;
-        height: 40%;
+        height: 45%;
         max-height:350px;
     }
     .venue-input{
@@ -100,6 +101,18 @@ ion-list{
     ion-button{
         font-size: 15px;
     }
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .ion-text-center {
+        height: 60%;
+    }
+
+
 }
 // @media only screen and (max-width: 415px) {
 //     .ion-text-center{
