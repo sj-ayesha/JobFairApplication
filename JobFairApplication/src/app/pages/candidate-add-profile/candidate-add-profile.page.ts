@@ -110,13 +110,14 @@ export class CandidateAddProfilePage implements OnInit {
       ])),
       phoneNumber: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{7,7}$')
+        Validators.pattern('[0-9]{8}$')
       ])),
       telNumber: new FormControl('', Validators.compose([
-        Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{6,6}$')
+        Validators.pattern('[0-9]{7}$')
       ])),
       nationality: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")
       ])),
       mobileNumber: new FormControl(''),
       gender: new FormControl('', Validators.required),
