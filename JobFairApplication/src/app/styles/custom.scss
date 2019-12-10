@@ -48,8 +48,8 @@ h5 {
 p{
     font-size: 17px;
     font-family: 'Proxima Nova Thin';
-    color: $color-light-black;
-    font-weight: 700;
+    color: $color-light-black !important;
+    font-weight: 700 !important;
 }
 
 h6 {
