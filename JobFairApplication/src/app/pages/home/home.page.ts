@@ -18,13 +18,18 @@ export class HomePage {
   candidates: Candidate[];
   venues: Venue[];
   candidateVenueJobs: CandidateVenueJob[];
-  public countCandidates: Number;
+  public countCandidates: number;
+  public percentagCountCandidates: number;
+
+  numberOfCandidates = 5;
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     this.populateCandidate();
     this.populateVenue();
     this.countCandidatesByVenue();
+
+    this.percentagCountCandidates = (((this.numberOfCandidates / 20) * 100) / 100);
   }
 
   populateCandidate(){
@@ -53,4 +58,6 @@ export class HomePage {
       this.countCandidates = data.countCandidates;
     });
   }
+
+
 }
