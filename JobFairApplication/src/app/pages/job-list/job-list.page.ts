@@ -61,11 +61,18 @@ export class JobListPage implements OnInit {
 
   getAllJobsByVenueId(){
     this.apiService.getJobsByVenueId(1).subscribe(data=>{
-      if(data.message == "NO_VENUE_JOB_AVAILABLE"){
-        this.noJobsAvailable = true;
-      } else {
-        this.venueJobs = data;
-      }
+      // if(data.message == "NO_VENUE_JOB_AVAILABLE"){
+      //   this.noJobsAvailable = true;
+      // } else {
+      //   this.venueJobs = data;
+      //   this.splitJobDescriptions = [];
+      //   for(var i = 0, len = this.venueJobs.length; i < len; i++) 
+      //   {
+      //       this.venueJobs[i].job['description'] = this.venueJobs[i].job['description'].split(";");
+            
+      //       console.log(this.venueJobs)
+      //   }
+      // }
       // console.log(data);
     },
       error => {
@@ -81,14 +88,6 @@ export class JobListPage implements OnInit {
         this.noJobsAvailable = true;
       } else {
         this.venueJobs = data;
-        this.splitJobDescriptions = [];
-        for(var i = 0, len = this.venueJobs.length; i < len; i++) 
-        {
-            this.venueJobs[i].job['description'] = this.venueJobs[i].job['description'].split(";");
-            
-            console.log(this.venueJobs)
-        }
-        console.log(this.venueJobs)
       }
     },
       error => {

@@ -5,6 +5,7 @@ import { CategoryService } from '../../services/category.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Venue } from 'src/app/model/venue';
 import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
+import { CountCandidates } from 'src/app/model/countCandidates';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -17,11 +18,13 @@ export class HomePage {
   candidates: Candidate[];
   venues: Venue[];
   candidateVenueJobs: CandidateVenueJob[];
+  public countCandidates: Number;
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     this.populateCandidate();
     this.populateVenue();
+    this.countCandidatesByVenue();
   }
 
   populateCandidate(){
@@ -42,6 +45,12 @@ export class HomePage {
   populateVenue(active:boolean = true){
     this.apiService.getVenueByActive(active).subscribe(data=>{
       this.venues = data;
+    });
+  }
+
+  countCandidatesByVenue(){
+    this.apiService.getCountByVenueId(1).subscribe(data=>{
+      this.countCandidates = data.countCandidates;
     });
   }
 }

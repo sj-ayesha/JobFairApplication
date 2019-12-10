@@ -1,5 +1,6 @@
 export class VenueJob{
     venueJobId: Number;
-    venueId: Number;
+    venue:Number;
     job:Number;
+    message:String;
 }
