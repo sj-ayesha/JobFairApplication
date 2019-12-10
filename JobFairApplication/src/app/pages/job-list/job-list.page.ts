@@ -19,7 +19,8 @@ export class JobListPage implements OnInit {
   public items: any;
   noJobsAvailable = false;
   public splitJobDescriptions;
-  
+  checked: boolean = true;
+  priority = [];
 
   constructor(private router: Router, private apiService: ApiService, private route: ActivatedRoute) { }
 
@@ -61,19 +62,11 @@ export class JobListPage implements OnInit {
 
   getAllJobsByVenueId(){
     this.apiService.getJobsByVenueId(1).subscribe(data=>{
-      // if(data.message == "NO_VENUE_JOB_AVAILABLE"){
-      //   this.noJobsAvailable = true;
-      // } else {
-      //   this.venueJobs = data;
-      //   this.splitJobDescriptions = [];
-      //   for(var i = 0, len = this.venueJobs.length; i < len; i++) 
-      //   {
-      //       this.venueJobs[i].job['description'] = this.venueJobs[i].job['description'].split(";");
-            
-      //       console.log(this.venueJobs)
-      //   }
-      // }
-      // console.log(data);
+      if(data.message == "NO_VENUE_JOB_AVAILABLE"){
+        this.noJobsAvailable = true;
+      } else {
+        this.venueJobs = data;
+      }
     },
       error => {
       this.noJobsAvailable = true;
@@ -88,6 +81,7 @@ export class JobListPage implements OnInit {
         this.noJobsAvailable = true;
       } else {
         this.venueJobs = data;
+        console.log(this.venueJobs);
       }
     },
       error => {
@@ -95,4 +89,21 @@ export class JobListPage implements OnInit {
     }
     );
   }
+
+  addPriority(event: CustomEvent,jobId: Number){
+    console.log(event.detail.checked);
+    if(event.detail.checked){
+      this.priority.push(jobId);
+      console.log(this.priority);
+      localStorage.setItem('priority',JSON.stringify(this.priority));
+    }else{
+      var index = this.priority.indexOf(jobId);
+      if(index > -1){
+        this.priority.splice(index,1);
+      }
+      console.log(this.priority);
+      localStorage.setItem('priority',JSON.stringify(this.priority));
+    }
+  }
+  
 }

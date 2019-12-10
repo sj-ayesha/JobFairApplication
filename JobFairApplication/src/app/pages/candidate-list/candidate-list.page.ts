@@ -13,6 +13,7 @@ import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 export class CandidateListPage implements OnInit {
   candidateDetails: any[];
   candidateVenueJobs: CandidateVenueJob[];
+  public countCandidates: any;
 
   constructor(private router: Router, private candidateService: CandidatesService, private route: ActivatedRoute, private apiService: ApiService) { }
 
@@ -23,6 +24,7 @@ export class CandidateListPage implements OnInit {
     //   this.candidateDetails = this.candidateDetails.filter(data => data.id === id);
     // });
     this.populateCandidate();
+    this.countCandidatesByVenue();
   }
 
   onSelect(id: number) {
@@ -33,11 +35,17 @@ export class CandidateListPage implements OnInit {
   populateCandidate(){
     this.apiService.getCandidatesByVenueId(1).subscribe(data => {
       this.candidateVenueJobs = data;
-      console.log( this.candidateVenueJobs);
+      // console.log( this.candidateVenueJobs);
     });
   }
 
   routeTo(candidateId: number) {
         this.router.navigate(['/candidate-details', candidateId]);
   } 
+
+  countCandidatesByVenue() {
+    this.apiService.getCountByVenueId(1).subscribe(data => {
+      this.countCandidates = data.countCandidates;
+    });
+  }
 }

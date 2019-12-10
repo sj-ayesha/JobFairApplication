@@ -104,7 +104,7 @@
                     <input class="btn-apply" id="option1" name="option1" type="checkbox" class="questions"/>
                     <label for="option1" class="question">Apply</label>
                   </div> -->
-              <ion-checkbox color="danger" class="btn-checkbox__item"></ion-checkbox>
+              <ion-checkbox color="danger" class="btn-checkbox__item" (ionChange)="addPriority($event,venueJob.job.jobId)"></ion-checkbox>
             </div>
             <!-- <ion-button color="dark" class="btn-apply" size="large">Apply</ion-button> -->
           </ion-col>
