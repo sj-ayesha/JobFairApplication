@@ -18,6 +18,8 @@ export class JobListPage implements OnInit {
   public searchTerm: string = "";
   public items: any;
   noJobsAvailable = false;
+  public splitJobDescriptions;
+  
 
   constructor(private router: Router, private apiService: ApiService, private route: ActivatedRoute) { }
 
@@ -79,6 +81,14 @@ export class JobListPage implements OnInit {
         this.noJobsAvailable = true;
       } else {
         this.venueJobs = data;
+        this.splitJobDescriptions = [];
+        for(var i = 0, len = this.venueJobs.length; i < len; i++) 
+        {
+            this.venueJobs[i].job['description'] = this.venueJobs[i].job['description'].split(";");
+            
+            console.log(this.venueJobs)
+        }
+        console.log(this.venueJobs)
       }
     },
       error => {

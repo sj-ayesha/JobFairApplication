@@ -42,9 +42,13 @@
                     <ion-card-content>
                       <div class="job-description">
                         <h6>Job Description</h6>
-                        <p>
-                          {{ venueJob.job.description }}
-                        </p>
+                       
+                        <ul>
+                        <li *ngFor = "let splitJobDescription of venueJob.job.description">
+                          {{ splitJobDescription }}
+                        </li> 
+                        </ul>
+                      
                       </div>
 
                       <div class="job-qualification">
