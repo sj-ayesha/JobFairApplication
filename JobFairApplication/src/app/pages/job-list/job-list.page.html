@@ -44,7 +44,7 @@
                         <h6>Job Description</h6>
                        
                         <ul>
-                        <li *ngFor = "let splitJobDescription of venueJob.job.description">
+                        <li *ngFor = "let splitJobDescription of venueJob.job.description.split(';')">
                           {{ splitJobDescription }}
                         </li> 
                         </ul>

@@ -9,6 +9,7 @@ import { Experience } from '../model/experience';
 import { Skill } from '../model/skill';
 import { VenueJob } from '../model/venueJob';
 import { CandidateVenueJob } from '../model/candidateVenueJob';
+import { CountCandidates } from '../model/countCandidates';
 
 
 @Injectable({
@@ -25,8 +26,8 @@ export class ApiService {
     return this.http.get<Candidate[]>(this.baseUrl + 'candidate/all');
   }
 
-  getCandidateIdByEmail(email: String): Observable<Candidate[]>{
-    return this.http.get<Candidate[]>(this.baseUrl + 'candidate/email?email=' + email);
+  getCandidateIdByEmail(email: String): Observable<Candidate>{
+    return this.http.get<Candidate>(this.baseUrl + 'candidate/email?email=' + email);
   }
 
   saveCandidate(candidate: Candidate): Observable<Candidate[]> {
@@ -41,6 +42,10 @@ export class ApiService {
 
   getCandidatesByVenueId(venueId:Number): Observable<CandidateVenueJob[]>{
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId);
+  }
+
+  getCountByVenueId(venueId:Number): Observable<CountCandidates>{
+    return this.http.get<CountCandidates>(this.baseUrl + 'candidate-venue-job/count-candidates/' + venueId);
   }
 
   // candidate skills
@@ -65,8 +70,8 @@ export class ApiService {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/' + venueId);
   }
 
-  getJobsByVenueIdAndCategory(venueId:Number,category:String): Observable<VenueJob[]>{
-    return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/category?venueId=' + venueId + '&category=' + category);
+  getJobsByVenueIdAndCategory(venueId:Number,category:String): Observable<VenueJob[] | any>{
+    return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/category?venueId=' + venueId + '&category=' + category);
   }
 
   // venue
