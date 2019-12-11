@@ -314,8 +314,7 @@
         <div class="btn-actions">
             <div class="btn-back ion-text-left">
 
-                <ion-button class="btn" color="light" [routerLink]="['/job-list']"
-                    routerLinkActive="router-link-active">
+                <ion-button class="btn" color="light" (click)="routeToJob('by-venue')">
                     <ion-icon name="arrow-back"></ion-icon>Back
                 </ion-button>
             </div>

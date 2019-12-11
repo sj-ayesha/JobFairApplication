@@ -10,6 +10,7 @@ import { Skill } from '../model/skill';
 import { VenueJob } from '../model/venueJob';
 import { CandidateVenueJob } from '../model/candidateVenueJob';
 import { CountCandidates } from '../model/countCandidates';
+import { CandidateVenueJobPriority } from '../model/candidateVenueJobPriority';
 
 
 @Injectable({
@@ -46,6 +47,18 @@ export class ApiService {
 
   getCountByVenueId(venueId:Number): Observable<CountCandidates>{
     return this.http.get<CountCandidates>(this.baseUrl + 'candidate-venue-job/count-candidates/' + venueId);
+  }
+
+  saveCandidateVenueJob(candidateVenueJobPriority: CandidateVenueJobPriority): Observable<CandidateVenueJobPriority> {
+    return this.http.post<CandidateVenueJobPriority>(this.baseUrl + 'candidate-venue-job',candidateVenueJobPriority);
+  }
+
+  getCandidateByDESC(venueId:Number): Observable<CandidateVenueJob[]>{
+    return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-desc/' + venueId);
+  }
+
+  getCandidateByASC(venueId:Number): Observable<CandidateVenueJob[]>{
+    return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-asc/' + venueId);
   }
 
   // candidate skills

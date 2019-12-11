@@ -12,8 +12,8 @@
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Please select position..</ion-label>
             <ion-select interface="popover" class="ion-float-left">
-              <ion-select-option value="student" selected="selected">Fresher</ion-select-option>
-              <ion-select-option value="senior">Experience</ion-select-option>
+              <ion-select-option value="fresher" selected="selected">Fresher</ion-select-option>
+              <ion-select-option value="senior">Senior</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -32,7 +32,7 @@
 
       <div class="job-list-container" *ngIf="!noJobsAvailable">
         <ion-row class="job-box" *ngFor="let venueJob of venueJobs">
-          <ion-col size="11" (click)="styleAccordion()">
+          <ion-col size="11">
             <button class="collapsible">{{ venueJob.job.title }}</button>
 
             <div class="content">

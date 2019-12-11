@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Job } from 'src/app/model/job';
@@ -14,7 +14,7 @@ export class JobListPage implements OnInit {
 
   // jobs: any;
   jobs: Job[];
-  venueJobs: VenueJob[];
+  public venueJobs: VenueJob[];
   public searchTerm: string = "";
   public items: any;
   noJobsAvailable = false;
@@ -22,16 +22,20 @@ export class JobListPage implements OnInit {
   checked: boolean = true;
   priority = [];
 
-  constructor(private router: Router, private apiService: ApiService, private route: ActivatedRoute) { }
-
-  ngOnInit() {
-
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private route: ActivatedRoute
+    ){
     const allJobsByVenueId: String = this.route.snapshot.paramMap.get('jobQueryParam');
-    if(allJobsByVenueId == 'by-venue'){
+    if (allJobsByVenueId == 'by-venue') {
       this.getAllJobsByVenueId();
     } else {
       this.getAllJobsByVenueIdAndCategory();
     }
+  }
+
+  ngOnInit() {
   }
 
   // ngAfterViewInit() {
@@ -45,10 +49,10 @@ export class JobListPage implements OnInit {
 
   styleAccordion() {
     let coll = document.getElementsByClassName('collapsible');
-    let i;
 
-    for (i = 0; i < coll.length; i++) {
+    for (let i = 0; i < coll.length; i++) {
       coll[i].addEventListener('click', function () {
+
         this.classList.toggle('active');
         let content = this.nextElementSibling;
         if (content.style.maxHeight) {
@@ -60,50 +64,58 @@ export class JobListPage implements OnInit {
     }
   }
 
-  getAllJobsByVenueId(){
-    this.apiService.getJobsByVenueId(1).subscribe(data=>{
-      if(data.message == "NO_VENUE_JOB_AVAILABLE"){
+  getAllJobsByVenueId() {
+    this.apiService.getJobsByVenueId(1).subscribe(data => {
+      if (data.message == "NO_VENUE_JOB_AVAILABLE") {
         this.noJobsAvailable = true;
       } else {
         this.venueJobs = data;
+        setTimeout(() => {
+          this.styleAccordion();
+        }, 0);
       }
     },
       error => {
-      this.noJobsAvailable = true;
-    }
+        this.noJobsAvailable = true;
+      }
     );
   }
 
-  getAllJobsByVenueIdAndCategory(){
+  getAllJobsByVenueIdAndCategory() {
     const category: any = this.route.snapshot.paramMap.get('jobQueryParam');
     this.apiService.getJobsByVenueIdAndCategory(1, category).subscribe(data => {
-      if(data.message == "NO_VENUE_JOB_AVAILABLE"){
+      if (data.message == "NO_VENUE_JOB_AVAILABLE") {
         this.noJobsAvailable = true;
       } else {
         this.venueJobs = data;
-        console.log(this.venueJobs);
+        setTimeout(() => {
+          this.styleAccordion();
+        }, 0);
       }
     },
       error => {
-      this.noJobsAvailable = true;
-    }
+        this.noJobsAvailable = true;
+      }
     );
   }
 
-  addPriority(event: CustomEvent,jobId: Number){
+  addPriority(event: CustomEvent, jobId: Number) {
     console.log(event.detail.checked);
-    if(event.detail.checked){
+    if (event.detail.checked) {
       this.priority.push(jobId);
       console.log(this.priority);
-      localStorage.setItem('priority',JSON.stringify(this.priority));
-    }else{
+      localStorage.setItem('priority', JSON.stringify(this.priority));
+    } else {
       var index = this.priority.indexOf(jobId);
-      if(index > -1){
-        this.priority.splice(index,1);
+      if (index > -1) {
+        this.priority.splice(index, 1);
       }
       console.log(this.priority);
-      localStorage.setItem('priority',JSON.stringify(this.priority));
+      localStorage.setItem('priority', JSON.stringify(this.priority));
     }
   }
   
+  routeToJob(jobQueryParam: String) {
+    this.router.navigate(['/job-list', jobQueryParam]);
+  }
 }

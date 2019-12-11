@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, Form, FormArray } from '@angular/forms';
 import { Skill } from 'src/app/model/skill';
 import { ApiService } from 'src/app/services/api.service';
-import { Router } from '@angular/router';
+import { Router, ChildActivationStart } from '@angular/router';
 import { element } from 'protractor';
 import { ToastController } from '@ionic/angular';
 
@@ -221,6 +221,7 @@ export class CandidateAddProfilePage implements OnInit {
     ];
 
     this.populateSkills();
+    this.saveCandidateVenueJob();
   }
 
   ionViewWillLoad() {
@@ -259,6 +260,10 @@ export class CandidateAddProfilePage implements OnInit {
   checkCheckBoxvalue(event: CustomEvent, skill: Skill) {
     skill.checked = event.detail.checked;
     skill.candidateId = this.formSkills.get('candidateId').value;
+  }
+
+  routeToJob(jobQueryParam: String) {
+    this.router.navigate(['/job-list', jobQueryParam]);
   }
 
   onSubmit() {
@@ -339,6 +344,25 @@ export class CandidateAddProfilePage implements OnInit {
     });
   }
 
+  saveCandidateVenueJob(){
+    var test = window.localStorage.getItem("priority");
+    var value = test[1]
+    // test.replace('[','p');
+    console.log(value);
+    const priority = {
+      venueJob: {
+        venueJobId: parseInt(window.localStorage.getItem("venue_id"))
+      },
+      candidate: {
+        candidateId: 4
+      },
+      jobPriority: window.localStorage.getItem("priority"),
+    }
+    console.log(priority);
+    // this.apiService.saveCandidateVenueJob(priority).subscribe(data=>{
+    //   console.log("Saved")
+    // });
+  }
 
   duplicate() {
     console.log('Hi');
