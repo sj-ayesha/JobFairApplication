@@ -10,15 +10,20 @@
         </ion-col>
         <ion-col size="6" size-md size="12" size-sm class="ion-no-padding">
           <div class="btn-order">
+            <div class="search-container">
+              <ion-searchbar #test></ion-searchbar>
+              <ion-button (click)='searchByLastName(test.value)' class="btn" color="light" size="small">
+                <ion-icon name="search"></ion-icon>
+              </ion-button>
+            </div>
 
-            <ion-searchbar class=""></ion-searchbar>
             <div class="btn-asc ion-padding">
-              <ion-button class="btn" color="light" size="small">
+              <ion-button (click)='getCandidateByAsc()' class="btn" color="light" size="small">
                 <ion-icon name="arrow-up"></ion-icon>
               </ion-button>
             </div>
             <div class="btn-desc ion-padding-top ion-padding-bottom ion-padding-end">
-              <ion-button class="btn" color="light" size="small">
+              <ion-button (click)='getCandidateByDesc()' class="btn" color="light" size="small">
                 <ion-icon name="arrow-down"></ion-icon>
               </ion-button>
             </div>

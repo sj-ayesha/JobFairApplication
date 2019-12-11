@@ -48,4 +48,22 @@ export class CandidateListPage implements OnInit {
       this.countCandidates = data.countCandidates;
     });
   }
+
+  getCandidateByAsc(){
+    this.apiService.getCandidateByASC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
+      this.candidateVenueJobs = data;
+    })
+  }
+
+  getCandidateByDesc(){
+    this.apiService.getCandidateByDESC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
+      this.candidateVenueJobs = data;
+    })
+  }
+
+  searchByLastName(lastName:any){
+    this.apiService.getCandidateByLastName(lastName).subscribe(data => {
+      this.candidateVenueJobs = data;
+    });
+  }
 }

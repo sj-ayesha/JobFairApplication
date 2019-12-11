@@ -339,29 +339,27 @@ export class CandidateAddProfilePage implements OnInit {
       this.apiService.saveCandidateSkill(this.skills).subscribe(data => {
       });
 
+      this.saveCandidateVenueJob(this.candidateId);
       // console.log(this.skills);
 
     });
   }
 
-  saveCandidateVenueJob(){
-    var test = window.localStorage.getItem("priority");
-    var value = test[1]
+  saveCandidateVenueJob(candidateId: Number){
+    var getJobIdLS = window.localStorage.getItem("priority");
+    var jobId = getJobIdLS[1]
     // test.replace('[','p');
-    console.log(value);
+    console.log(jobId);
     const priority = {
-      venueJob: {
-        venueJobId: parseInt(window.localStorage.getItem("venue_id"))
-      },
-      candidate: {
-        candidateId: 4
-      },
-      jobPriority: window.localStorage.getItem("priority"),
+      venueId: parseInt(window.localStorage.getItem('venue_id')),
+      jobId: parseInt(jobId),
+      candidateId: candidateId,
+      jobPriority: getJobIdLS
     }
     console.log(priority);
-    // this.apiService.saveCandidateVenueJob(priority).subscribe(data=>{
-    //   console.log("Saved")
-    // });
+    this.apiService.saveCandidateVenueJob(priority).subscribe(data=>{
+      console.log("Saved")
+    });
   }
 
   duplicate() {

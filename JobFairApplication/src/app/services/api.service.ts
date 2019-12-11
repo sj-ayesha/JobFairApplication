@@ -61,6 +61,10 @@ export class ApiService {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-asc/' + venueId);
   }
 
+  getCandidateByLastName(lastName: String): Observable<CandidateVenueJob[]> {
+    return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/lastname/' + lastName);
+  }
+
   // candidate skills
 
   saveCandidateSkill(skill: Skill[]): Observable<Skill[]>{

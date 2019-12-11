@@ -30,7 +30,7 @@ export class HomePage {
   }
 
   populateCandidate() {
-    this.apiService.getCandidatesByVenueId(1).subscribe(data => {
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.candidateVenueJobs = data;
       // console.log( this.candidateVenueJobs);
     });
