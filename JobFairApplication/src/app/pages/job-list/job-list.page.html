@@ -18,9 +18,19 @@
           </ion-item>
         </ion-col>
 
-        <ion-col size="6" class="ion-padding">
-          <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" class="ion-float-right">
-          </ion-searchbar>
+        <ion-col size="6" class="filter-search ion-padding">
+          <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" class="ion-float-right">
+          </ion-searchbar> -->
+          <ion-item class="search-input">
+              <ion-input placeholder="Search" type="text" #test></ion-input>
+          </ion-item>
+          <ion-button
+            class="btn btn--search"
+            color="dark"
+            size="small"
+          >
+            <ion-icon name="search"></ion-icon>
+          </ion-button>
         </ion-col>
       </ion-row>
 

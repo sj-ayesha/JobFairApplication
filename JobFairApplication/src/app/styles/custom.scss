@@ -2,6 +2,12 @@ $color-light-red: #E23615;
 $color-light-black: #414344;
 $color-light-gray: #A0A0A0;
 
+.ion-color-elca {
+    --ion-color-red: var(--ion-color-light-red);
+    --ion-color-light-black: var(--ion-color-light-black);
+    --ion-color-light-gray: var(--ion-color-light-gray);
+  }
+
 * {
     font-family: 'Proxima Nova Regular';
 }

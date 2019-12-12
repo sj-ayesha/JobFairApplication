@@ -2,53 +2,94 @@
   <div class="wrapper-content">
     <ion-card-header>
       <ion-row>
-          <ion-col size="12">
-              <div class="title">
-                  <ion-icon class="icon-users" ios="ios-people" md="md-people"></ion-icon>
-                  <h3>List of Candidates</h3>
-                </div>
-          </ion-col>
+        <ion-col size="12">
+          <div class="title">
+            <ion-icon
+              class="icon-users"
+              ios="ios-people"
+              md="md-people"
+            ></ion-icon>
+            <h3>List of Candidates</h3>
+          </div>
+        </ion-col>
       </ion-row>
 
       <ion-row class="filter-row">
-          <ion-col size="6">
-              <div class="btn-order">
-                  <div class="search-container">
-                    <ion-searchbar #test class="no-padding"></ion-searchbar>
-                  </div>
-                  </div>
+        <ion-col size="6">
+          <div class="btn-order">
+            <div class="search-container">
+              <!-- <ion-input #test class="no-padding"></ion-input> -->
+              <ion-item class="search-input">
+                  <ion-input placeholder="Search" type="text" #test></ion-input>
+              </ion-item>
+              <ion-button
+                (click)="searchByLastName(test.value)"
+                class="btn btn--search"
+                color="dark"
+                size="small"
+              >
+                <ion-icon name="search"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </ion-col>
 
-            </ion-col>
-    
-            <ion-col size="6" class="ion-padding btn-order">
-                <div class="btn-asc ion-padding">
-                    <ion-button (click)='getCandidateByAsc()' class="btn" color="light" size="small">
-                      <ion-icon name="arrow-up"></ion-icon>
-                    </ion-button>
-                  </div>
-                  <div class="btn-desc ion-padding-top ion-padding-bottom ion-padding-end">
-                    <ion-button (click)='getCandidateByDesc()' class="btn" color="light" size="small">
-                      <ion-icon name="arrow-down"></ion-icon>
-                    </ion-button>
-                  </div>
-            </ion-col>
+        <ion-col size="6" class="ion-padding btn-order">
+          <div class="btn-asc ion-padding">
+            <ion-button
+              (click)="getCandidateByAsc()"
+              class="btn"
+              color="light"
+              size="small"
+            >
+              <ion-icon name="arrow-up"></ion-icon>
+            </ion-button>
+          </div>
+          <div
+            class="btn-desc ion-padding-top ion-padding-bottom ion-padding-end"
+          >
+            <ion-button
+              (click)="getCandidateByDesc()"
+              class="btn"
+              color="light"
+              size="small"
+            >
+              <ion-icon name="arrow-down"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
       </ion-row>
     </ion-card-header>
     <ion-card-content>
-      <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
-        *ngFor="let candidateVenueJob of candidateVenueJobs">
-        <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Male'" slot="start">
-          <img src="../../../assets/img/avatar_male.jpg">
+      <ion-item
+        class="candidate-item"
+        (click)="routeTo(candidateVenueJob.candidate.candidateId)"
+        *ngFor="let candidateVenueJob of candidateVenueJobs"
+      >
+        <ion-avatar
+          *ngIf="candidateVenueJob.candidate.gender=='Male'"
+          slot="start"
+        >
+          <img src="../../../assets/img/avatar_male.jpg" />
         </ion-avatar>
-        <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
-          <img src="../../../assets/img/avatar_female.jpg">
+        <ion-avatar
+          *ngIf="candidateVenueJob.candidate.gender=='Female'"
+          slot="start"
+        >
+          <img src="../../../assets/img/avatar_female.jpg" />
         </ion-avatar>
         <ion-label>
-          <h5>{{candidateVenueJob.candidate.firstName}} {{candidateVenueJob.candidate.lastName}}</h5>
+          <h5>
+            {{candidateVenueJob.candidate.firstName}}
+            {{candidateVenueJob.candidate.lastName}}
+          </h5>
           <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
-          <p><b>Available from:</b> {{candidateVenueJob.candidate.availabilityDate}}</p>
+          <p>
+            <b>Available from:</b>
+            {{candidateVenueJob.candidate.availabilityDate}}
+          </p>
         </ion-label>
-        <ion-label slot="end">
+        <ion-label slot="end">
           <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
           <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
           <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
@@ -68,9 +109,15 @@
 
     <ion-row>
       <ion-col size="12" class="ion-padding">
-        <p class="ion-float-left">Total number of candidates: {{countCandidates}} </p>
-        <ion-button class="btn ion-float-right" color="light" [routerLink]="['/home']"
-          routerLinkActive="router-link-active">
+        <p class="ion-float-left">
+          Total number of candidates: {{countCandidates}}
+        </p>
+        <ion-button
+          class="btn ion-float-right"
+          color="light"
+          [routerLink]="['/home']"
+          routerLinkActive="router-link-active"
+        >
           <ion-icon name="arrow-back"></ion-icon>Back
         </ion-button>
       </ion-col>
