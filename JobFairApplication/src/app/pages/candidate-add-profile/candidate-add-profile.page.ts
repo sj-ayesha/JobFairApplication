@@ -271,16 +271,20 @@ export class CandidateAddProfilePage implements OnInit {
     if (this.formQualification.invalid && this.formInformation.invalid) {
       console.log(this.submitted, "not sucessful");
       this.unsuccessMsg();
-      debugger;
     } else {
       // this.submitCandidate();
       this.submitCandidate();
       console.log(this.submitted, "sucessful");
       this.successMsg();
-      // this.formInformation.reset();
-      // this.formQualification.reset();
-      // this.formExperience.reset();
-      // this.formSkills.reset();
+
+      setTimeout(() => {
+        this.formInformation.reset();
+        this.formQualification.reset();
+        this.formExperience.reset();
+        this.formSkills.reset();
+        this.router.navigate(['home']);
+      }, 2000);
+
     }
   }
 
@@ -290,7 +294,7 @@ export class CandidateAddProfilePage implements OnInit {
       // this.router.navigate(['home']);
     },
       error => {
-        alert("Data not saved!");
+        // alert("Data not saved!");
       }
     );
   }
@@ -314,7 +318,7 @@ export class CandidateAddProfilePage implements OnInit {
       this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
       },
         error => {
-          alert("Data not saved!");
+          // alert("Data not saved!");
         }
       );
 
@@ -326,7 +330,7 @@ export class CandidateAddProfilePage implements OnInit {
         this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
         },
           error => {
-            alert("Data not saved!");
+            // alert("Data not saved!");
           }
         );
       }
