@@ -14,6 +14,7 @@ export class CandidateListPage implements OnInit {
   candidateDetails: any[];
   candidateVenueJobs: CandidateVenueJob[];
   public countCandidates: any;
+  noCandidatesAvailable = false;
 
   constructor(private router: Router, private candidateService: CandidatesService, private route: ActivatedRoute, private apiService: ApiService) { }
 
@@ -35,7 +36,7 @@ export class CandidateListPage implements OnInit {
   populateCandidate(){
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       if(data.message == "NO_CANDIDATE_VENUE_JOB_AVAILABLE"){
-
+        this.noCandidatesAvailable = true;
       } else {
         this.candidateVenueJobs = data;
       // console.log( this.candidateVenueJobs);
