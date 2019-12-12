@@ -33,9 +33,13 @@ export class CandidateListPage implements OnInit {
   }
 
   populateCandidate(){
-    this.apiService.getCandidatesByVenueId(1).subscribe(data => {
-      this.candidateVenueJobs = data;
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
+      if(data.message == "NO_CANDIDATE_VENUE_JOB_AVAILABLE"){
+
+      } else {
+        this.candidateVenueJobs = data;
       // console.log( this.candidateVenueJobs);
+      }
     });
   }
 
@@ -44,7 +48,7 @@ export class CandidateListPage implements OnInit {
   } 
 
   countCandidatesByVenue() {
-    this.apiService.getCountByVenueId(1).subscribe(data => {
+    this.apiService.getCountByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.countCandidates = data.countCandidates;
     });
   }

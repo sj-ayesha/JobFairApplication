@@ -7,7 +7,7 @@
           <h3 class="ion-text-uppercase">Job list</h3>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="!noJobsAvailable">
         <ion-col size="6" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Please select position..</ion-label>

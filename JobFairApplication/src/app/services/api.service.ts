@@ -122,4 +122,9 @@ export class ApiService {
   getAllSkills():Observable<Skill[]>{
     return this.http.get<Skill[]>(this.baseUrl + 'skill/all');
   }
+
+  getSkillByCandidateId(candidateId:Number): Observable<Skill[]>{
+    return this.http.get<Skill[]>(this.baseUrl + 'candidate-skill/candidate/' +candidateId)
+  }
+
 }

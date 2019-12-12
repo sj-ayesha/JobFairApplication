@@ -25,14 +25,17 @@ export class HomePage {
 
   ngOnInit() {
     this.populateCandidate();
-    this.populateVenue();
     this.countCandidatesByVenue();
   }
 
   populateCandidate() {
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
+      if(data.message == "NO_CANDIDATE_VENUE_JOB_AVAILABLE"){
+
+      } else {
       this.candidateVenueJobs = data;
       // console.log( this.candidateVenueJobs);
+      }
     });
   }
 
@@ -44,14 +47,8 @@ export class HomePage {
     this.router.navigate(['/job-list', jobQueryParam]);
   }
 
-  populateVenue(active: boolean = true) {
-    this.apiService.getVenueByActive(active).subscribe(data => {
-      this.venues = data;
-    });
-  }
-
   countCandidatesByVenue() {
-    this.apiService.getCountByVenueId(1).subscribe(data => {
+    this.apiService.getCountByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.countCandidates = data.countCandidates;
       this.percentagCountCandidates = (this.countCandidates / 100);
     });
