@@ -221,7 +221,7 @@ export class CandidateAddProfilePage implements OnInit {
     ];
 
     this.populateSkills();
-    this.saveCandidateVenueJob();
+    // this.saveCandidateVenueJob();
   }
 
   ionViewWillLoad() {

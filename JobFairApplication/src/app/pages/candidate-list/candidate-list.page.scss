@@ -14,6 +14,7 @@ h5{
 
 .btn-order {
     display: flex;
+    justify-content: flex-end;
 }
 
 .candidate-item:hover{
@@ -21,6 +22,13 @@ h5{
 }
 
 .search-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+
+.filter-row {
     display: flex;
     align-items: center;
 }
