@@ -7,7 +7,7 @@ import { Candidate } from 'src/app/model/candidate';
 import { ActivatedRoute } from '@angular/router';
 import { Qualification } from 'src/app/model/qualification';
 import { Experience } from 'src/app/model/experience';
-import { Skill } from 'src/app/model/skill';
+import { Skills } from 'src/app/model/skills';
 
 @Component({
   selector: 'app-candidate-details',
@@ -19,9 +19,9 @@ export class CandidateDetailsPage implements OnInit {
   public items: any;
   public candidate1: any;
   candidates : Candidate[];
-  qualifications: Qualification[];
+  qualifications: Array<Qualification> = [];
   experiences: Experience[];
-  skills: Skill[];
+  skills: Skills[];
   public today: any; 
 
   constructor(private formBuilder: FormBuilder, private dataService: DataService, private candidateDetails: CandidatesService,private apiService: ApiService,private route: ActivatedRoute) {
@@ -59,7 +59,7 @@ export class CandidateDetailsPage implements OnInit {
   getQualificationByCandidateId(candidateId:Number){
     this.apiService.getQualificationByCandidateId(candidateId).subscribe(data=>{
       this.qualifications = data;
-      // console.log(this.qualifications);
+      console.log(this.qualifications);
     },
     error => {
       // alert("No Qualification found!");
