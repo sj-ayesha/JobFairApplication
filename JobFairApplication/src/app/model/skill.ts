@@ -3,4 +3,5 @@ export class Skill {
     skillName:String;
     checked:boolean = false;
     candidateId: Number;
+    message:String;
 }

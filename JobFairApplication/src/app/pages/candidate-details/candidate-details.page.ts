@@ -7,6 +7,7 @@ import { Candidate } from 'src/app/model/candidate';
 import { ActivatedRoute } from '@angular/router';
 import { Qualification } from 'src/app/model/qualification';
 import { Experience } from 'src/app/model/experience';
+import { Skill } from 'src/app/model/skill';
 
 @Component({
   selector: 'app-candidate-details',
@@ -20,6 +21,7 @@ export class CandidateDetailsPage implements OnInit {
   candidates : Candidate[];
   qualifications: Qualification[];
   experiences: Experience[];
+  skills: Skill[];
   public today: any; 
 
   constructor(private formBuilder: FormBuilder, private dataService: DataService, private candidateDetails: CandidatesService,private apiService: ApiService,private route: ActivatedRoute) {
@@ -33,6 +35,7 @@ export class CandidateDetailsPage implements OnInit {
     this.getCandidateById(candiateId);
     this.getQualificationByCandidateId(candiateId);
     this.getExperienceByCandidateId(candiateId);
+    this.getSkillByCandidateId(candiateId);
 
     this.today = new Date();
     let dd = String(this.today.getDate()).padStart(2, '0');
@@ -45,7 +48,7 @@ export class CandidateDetailsPage implements OnInit {
   getCandidateById(candidateId:Number){
     this.apiService.getCandidateById(candidateId).subscribe(data=>{
       this.candidates = data;
-      console.log(this.candidates);
+      // console.log(this.candidates);
     },
     error => {
       // alert("No Candidate found!");
@@ -68,6 +71,21 @@ export class CandidateDetailsPage implements OnInit {
     this.apiService.getExperienceByCandidateId(candidateId).subscribe(data=>{
       this.experiences = data;
       // console.log(this.experiences);
+    },
+    error => {
+      // alert("No Experience found!");
+    }
+    );
+  }
+
+  getSkillByCandidateId(candidateId:Number){
+    this.apiService.getSkillByCandidateId(candidateId).subscribe(data=>{
+      if(data.message == "NO_CANDIDATE_SKILL_AVAILABLE"){
+
+      } else {
+      this.skills = data;
+      console.log(this.skills)
+      }
     },
     error => {
       // alert("No Experience found!");

@@ -37,5 +37,6 @@ export class CandidateVenueJob {
             currentAcademicYear: String;
         },
         jobPriority: String;
+        message:String;
     }
 }

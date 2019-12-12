@@ -7,7 +7,7 @@
     <ion-row>
       <ion-col col-md-2 size="2" col-sm-3 size="3">
         <ion-card padding>
-          <ion-card-title>Jobs Applied: </ion-card-title>
+          <ion-card-title><b>Jobs Applied:</b> </ion-card-title>
           <div class="jobs-selected" *ngFor="let item of items; let i = index">
             <div class="jobs-selected--title">
               <span>{{i + 1}}. </span>
@@ -57,7 +57,7 @@
               <ion-row>
                 <ion-col col-md-4 size="4">
                   <div class="information">
-                    <h5>Information</h5>
+                    <h5><b>Information</b></h5>
                     <div *ngIf="candidates as candidate">
                       <p><b>Name:</b> {{ candidate.firstName}} {{ candidate.lastName}}</p>
                       <p><b>Gender:</b> {{candidate.gender}}</p>
@@ -71,7 +71,7 @@
 
                 <ion-col col-md-4 size="4">
                   <div class="qualifications">
-                    <h5>Qualification(s)</h5>
+                    <h5><b>Qualification(s)</b></h5>
                     <div *ngFor="let qualification of qualifications">
                       <p><b>Qualification Level:</b> {{ qualification.title }}</p>
                       <p><b>Division:</b> {{ qualification.division }}</p>
@@ -83,7 +83,7 @@
 
                 <ion-col col-md-4 size="4">
                   <div class="experience">
-                    <h5>Experience(s)</h5>
+                    <h5><b>Experience(s)</b></h5>
                     <div *ngFor="let experience of experiences">
                       <p><b>Company:</b> {{ experience.companyName}}</p>
                       <p><b>Job Title:</b> {{ experience.position}}</p>
@@ -96,7 +96,10 @@
               <ion-row>
                 <ion-col col-md-4 size="4">
                   <div class="skill">
-                    <h5>Skill(s)</h5>
+                    <h5><b>Skill(s)</b></h5>
+                    <div *ngFor="let skill of skills">
+                      <p>{{ skill.skill.skillName }}</p>
+                    </div>
                   </div>
                 </ion-col>
               </ion-row>
@@ -109,7 +112,7 @@
             <ion-card>
               <ion-card-header>
 
-                <ion-card-title>Feedbacks</ion-card-title>
+                <ion-card-title><b>Feedbacks</b></ion-card-title>
                 <div class="feedbacks">
                   <ion-card-subtitle class="feedbacks-subtitle">Interviewer Name</ion-card-subtitle>
                   <ion-card-subtitle class="feedbacks-subtitle">Date</ion-card-subtitle>

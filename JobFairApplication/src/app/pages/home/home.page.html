@@ -19,7 +19,7 @@
               <ion-progress-bar color="dark" value="{{percentagCountCandidates}}"></ion-progress-bar>
             </ion-list>
             <div class="venue-button">
-              <ion-button color="light" (click)="routeToJob('by-venue')">
+              <ion-button class="btn" color="light" (click)="routeToJob('by-venue')">
                 Apply Jobs</ion-button>
               <!-- <ion-button color="dark">View All Jobs</ion-button> -->
             </div>
@@ -43,13 +43,13 @@
                   <img src="../../../assets/img/avatar_female.jpg">
                 </ion-avatar>
                 <ion-label>
-                  <h5>{{candidateVenueJob.candidate.firstName}} {{candidateVenueJob.candidate.lastName}}</h5>
-                  <p>{{candidateVenueJob.candidate.currentLevel}}</p>
-                  <p>Available from: {{candidateVenueJob.candidate.availabilityDate}}</p>
+                  <h5><b>{{candidateVenueJob.candidate.firstName}} {{candidateVenueJob.candidate.lastName}}</b></h5>
+                  <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
+                  <p><b>Available from:</b> {{candidateVenueJob.candidate.availabilityDate}}</p>
                 </ion-label>
               </ion-item>
             </ion-card-content>
-            <ion-button class="btn-view-more" color="dark" [routerLink]="['/candidate-list']">View more</ion-button>
+            <ion-button class="btn btn-view-more" color="dark" [routerLink]="['/candidate-list']">View more</ion-button>
           </ion-card>
         </ion-col>
 
