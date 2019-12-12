@@ -49,7 +49,10 @@
                 </ion-label>
               </ion-item>
             </ion-card-content>
-            <ion-button class="btn btn-view-more" color="dark" [routerLink]="['/candidate-list']">View more</ion-button>
+            <ion-card-content *ngIf="noCandidatesAvailable">
+              <img class="not-available" src="../../../assets/img/Not Available/no-entry.png">
+            </ion-card-content>
+            <ion-button *ngIf="!noCandidatesAvailable" class="btn btn-view-more" color="dark" [routerLink]="['/candidate-list']">View more</ion-button>
           </ion-card>
         </ion-col>
 

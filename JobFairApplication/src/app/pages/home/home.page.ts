@@ -20,6 +20,7 @@ export class HomePage {
   candidateVenueJobs: CandidateVenueJob[];
   public countCandidates: any;
   public percentagCountCandidates: Number;
+  noCandidatesAvailable = false;
 
   constructor(private router: Router, private apiService: ApiService) { }
 
@@ -31,7 +32,7 @@ export class HomePage {
   populateCandidate() {
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       if(data.message == "NO_CANDIDATE_VENUE_JOB_AVAILABLE"){
-
+        this.noCandidatesAvailable = true;
       } else {
       this.candidateVenueJobs = data;
       // console.log( this.candidateVenueJobs);
