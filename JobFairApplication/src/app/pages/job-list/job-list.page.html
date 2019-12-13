@@ -22,12 +22,12 @@
           <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" class="ion-float-right">
           </ion-searchbar> -->
           <ion-item class="search-input">
-              <ion-input placeholder="Search" type="text" #test></ion-input>
+              <ion-input placeholder="Search" type="text" #title></ion-input>
           </ion-item>
           <ion-button
             class="btn btn--search"
             color="dark"
-            size="small"
+            size="small" (click)="searchByTitle(title.value)"
           >
             <ion-icon name="search"></ion-icon>
           </ion-button>
@@ -140,7 +140,7 @@
             </ion-button>
           </div>
           <div class="btn-fill-details" *ngIf="!noJobsAvailable">
-            <ion-button color="dark" [routerLink]="['/candidate-add-profile']" routerLinkActive="router-link-active"
+            <ion-button color="dark" (click)="applyOnlyFive()" routerLinkActive="router-link-active"
               class="ion-float-right btn">Apply<ion-icon ios="ios-arrow-forward" md="md-arrow-forward">
               </ion-icon>
             </ion-button>

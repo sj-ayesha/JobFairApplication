@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Job } from 'src/app/model/job';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenueJob } from 'src/app/model/venueJob';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-job-list',
@@ -25,8 +26,9 @@ export class JobListPage implements OnInit {
   constructor(
     private router: Router,
     private apiService: ApiService,
-    private route: ActivatedRoute
-    ){
+    private route: ActivatedRoute,
+    private toastCtrl: ToastController
+  ) {
     const allJobsByVenueId: String = this.route.snapshot.paramMap.get('jobQueryParam');
     if (allJobsByVenueId == 'by-venue') {
       this.getAllJobsByVenueId();
@@ -36,6 +38,7 @@ export class JobListPage implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   // ngAfterViewInit() {
@@ -46,6 +49,17 @@ export class JobListPage implements OnInit {
 
   //   this.styleAccordion();
   // }
+  async unsuccessMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Please select a maximum of 5 jobs',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
 
   styleAccordion() {
     let coll = document.getElementsByClassName('collapsible');
@@ -114,8 +128,29 @@ export class JobListPage implements OnInit {
       localStorage.setItem('priority', JSON.stringify(this.priority));
     }
   }
-  
+
   routeToJob(jobQueryParam: String) {
     this.router.navigate(['/job-list', jobQueryParam]);
+  }
+
+  applyOnlyFive() {
+    const count = JSON.parse(localStorage.priority).length;
+    console.log(count);
+    if (count <= 5) {
+      this.router.navigate(['candidate-add-profile']);
+    }
+    else {
+      this.unsuccessMsg();
+    }
+  }
+
+  searchByTitle(title:String){
+    let venueId = parseInt(window.localStorage.getItem('venue_id'));
+    this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
+      this.venueJobs = data;
+      setTimeout(() => {
+        this.styleAccordion();
+      }, 0);
+    });
   }
 }

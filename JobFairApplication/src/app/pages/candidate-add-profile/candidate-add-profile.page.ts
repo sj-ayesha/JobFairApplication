@@ -176,7 +176,7 @@ export class CandidateAddProfilePage implements OnInit {
 
     this.currentLevels = [
       'Fresher',
-      'Experience'
+      'Senior'
     ];
 
     this.academyYears = [
@@ -357,7 +357,7 @@ export class CandidateAddProfilePage implements OnInit {
       this.apiService.saveCandidateSkill(this.CandidateSkills).subscribe(data => {
       });
 
-      // this.saveCandidateVenueJob(this.candidateId);
+      this.saveCandidateVenueJob(this.candidateId);
       console.log(this.CandidateSkills);
 
     });

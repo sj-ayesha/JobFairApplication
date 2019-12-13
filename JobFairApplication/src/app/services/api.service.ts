@@ -91,6 +91,10 @@ export class ApiService {
     return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/category?venueId=' + venueId + '&category=' + category);
   }
 
+  searchJobByTitle(venueId: Number, title: String): Observable<VenueJob[]> {
+    return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/title' + '?venueId=' + venueId + '&title=' + title);
+  }
+
   // venue
 
   getVenueByActive(active:boolean): Observable<Venue[]>{
@@ -126,5 +130,7 @@ export class ApiService {
   getSkillByCandidateId(candidateId:Number): Observable<Skill[] | any>{
     return this.http.get<Skill[] | any>(this.baseUrl + 'candidate-skill/candidate/' +candidateId)
   }
+
+
 
 }
