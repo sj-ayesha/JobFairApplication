@@ -5,6 +5,18 @@
     margin-bottom: 14px;
     display: flex;
     justify-content: space-between;
+
+    &--right {
+        display: flex;
+        align-items: center;
+
+        .venue-name {
+            font-size: 20px;
+            padding: 0 45px;
+            color: $color-light-red !important;
+            font-weight: 900;
+        }
+    }
 }
 img{
     // max-width: 142px;

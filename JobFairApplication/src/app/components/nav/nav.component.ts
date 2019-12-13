@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
+  public venueName: String;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.venueName = window.localStorage.getItem('venue_id');
+  }
 
 }
