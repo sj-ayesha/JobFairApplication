@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  login: FormGroup;
+  formLogin: FormGroup;
   loggedIn: boolean;
+  submitted = false;
 
   error_messages = {
     username: [
@@ -27,9 +29,10 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginLogoutService: LoginLogoutService,
-    private router: Router
+    private router: Router,
+    private toastCtrl: ToastController
   ) {
-    this.login = this.formBuilder.group({
+    this.formLogin = this.formBuilder.group({
       username: new FormControl('', Validators.compose([
         Validators.maxLength(3),
         Validators.minLength(3),
@@ -43,10 +46,29 @@ export class LoginPage implements OnInit {
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
   }
 
-  LogInEnter(){
-    this.loggedIn = true;
-    localStorage.setItem("user", "user")
-    this.loginLogoutService.loginUser();
-    // console.log(this.loggedIn);
+  async unsuccessMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Invalid Username or Password',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+
+  }
+
+  LogInEnter() {
+    this.submitted = true;
+    // tslint:disable-next-line: max-line-length
+    if (this.formLogin.invalid) {
+      console.log(this.submitted, "not sucessful");
+      this.unsuccessMsg();
+    } else {
+      this.loggedIn = true;
+      localStorage.setItem("user", "userId")
+      this.loginLogoutService.loginUser();
+      // console.log(this.loggedIn);
+    }
   }
 }

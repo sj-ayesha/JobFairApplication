@@ -15,6 +15,8 @@
             padding: 0 45px;
             color: $color-light-red !important;
             font-weight: 900;
+            margin-top:0;
+            margin-bottom: 0;
         }
     }
 }
@@ -34,5 +36,10 @@ a{
     // font-family: "Poppins", sans-serif;
     &:hover{
         color: $color-light-red;
+        cursor: pointer;
     }
+}
+
+.dissableRediretion:hover{
+    cursor: not-allowed;
 }

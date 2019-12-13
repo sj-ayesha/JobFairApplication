@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit, OnDestroy {
   public venueName: String;
-
+  count: number;
+  dissabled = true;
   private sessionStateSubscription: Subscription;
   loggedIn: boolean;
   constructor(private loginLogoutService: LoginLogoutService, private router: Router) { }
@@ -22,6 +23,7 @@ export class NavComponent implements OnInit, OnDestroy {
     this.loggedIn = !!localStorage.getItem('user');
     this.venueName = window.localStorage.getItem('venue_id');
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
+    
   }
 
   ngOnDestroy(){
@@ -35,12 +37,20 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   navigateToHome(){
-    const count = JSON.parse(localStorage.user).length;
-    if (count == 1){
+    // this.count = JSON.parse(localStorage.priority).length;
+    // console.log(this.count);
+    // if (this.count >= 1){
+    //   this.router.navigate(['/home']);
+    // }
+    // else {
+    //   console.log("cannott");
+    // }
+    if (localStorage.user !== undefined){
       this.router.navigate(['/home']);
+      
     }
-    else {
-      console.log("cannott");
+    else{
+      this.dissabled = true;
     }
   }
 
