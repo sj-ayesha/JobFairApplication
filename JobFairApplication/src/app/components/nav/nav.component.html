@@ -3,7 +3,8 @@
   <!-- <img src='../../../assets/img/Logo.png' routerLink="/home"> -->
   <img src='../../../assets/img/recruitix_logo.png' routerLink="/home">
     <!-- <a routerLink="/home">Home</a> -->
-    <a routerLink="/login">Login</a>
+    <a *ngIf="!loggedIn"routerLink="/login">Login</a>
+    <a *ngIf="loggedIn" (click)="logout()">Logout</a>
     <!-- <a routerLink="/job-list">Job-List</a>
     <a routerLink="/candidate-list">Candidate-List</a>
     <a routerLink="/candidate-details">Candidate-Details</a>

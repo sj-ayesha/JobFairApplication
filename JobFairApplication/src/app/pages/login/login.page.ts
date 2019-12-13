@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { LoginLogoutService } from 'src/app/services/login-logout.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +10,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class LoginPage implements OnInit {
   login: FormGroup;
+  loggedIn: boolean;
 
   error_messages = {
     username: [
@@ -22,7 +25,9 @@ export class LoginPage implements OnInit {
     ]
   };
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loginLogoutService: LoginLogoutService,
+    private router: Router
   ) {
     this.login = this.formBuilder.group({
       username: new FormControl('', Validators.compose([
@@ -35,6 +40,13 @@ export class LoginPage implements OnInit {
     });
   }
   ngOnInit() {
+    // this.loggedIn = this.loginLogoutService.isLoggedIn;
   }
 
+  LogInEnter(){
+    this.loggedIn = true;
+    localStorage.setItem("user", "user")
+    this.loginLogoutService.loginUser();
+    // console.log(this.loggedIn);
+  }
 }
