@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit, OnDestroy {
+  public venueName: String;
 
   private sessionStateSubscription: Subscription;
   loggedIn: boolean;
@@ -18,6 +19,7 @@ export class NavComponent implements OnInit, OnDestroy {
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
     // console.log("veryy good", this.loginLogoutService.isLoggedIn);
     this.loggedIn = !!localStorage.getItem('user');
+    this.venueName = window.localStorage.getItem('venue_id');
 
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
   }
