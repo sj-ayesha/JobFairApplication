@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +13,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
   private sessionStateSubscription: Subscription;
   loggedIn: boolean;
-  constructor(private loginLogoutService: LoginLogoutService) { }
+  constructor(private loginLogoutService: LoginLogoutService, private router: Router) { }
 
   ngOnInit() {
     // this.loginLogoutService.navigateToVenue();
@@ -20,7 +21,6 @@ export class NavComponent implements OnInit, OnDestroy {
     // console.log("veryy good", this.loginLogoutService.isLoggedIn);
     this.loggedIn = !!localStorage.getItem('user');
     this.venueName = window.localStorage.getItem('venue_id');
-
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
   }
 
@@ -32,6 +32,16 @@ export class NavComponent implements OnInit, OnDestroy {
     this.loggedIn = false;
     localStorage.removeItem('user');
     this.loginLogoutService.logoutUser();
+  }
+
+  navigateToHome(){
+    const count = JSON.parse(localStorage.user).length;
+    if (count == 1){
+      this.router.navigate(['/home']);
+    }
+    else {
+      console.log("cannott");
+    }
   }
 
 }
