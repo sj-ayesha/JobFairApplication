@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, Form, FormArray } from '@angular/forms';
-import { Skill } from 'src/app/model/skill';
+import { CandidateSkill } from 'src/app/model/CandidateSkill';
 import { ApiService } from 'src/app/services/api.service';
 import { Router, ChildActivationStart } from '@angular/router';
 import { element } from 'protractor';
 import { ToastController } from '@ionic/angular';
+import { Skills } from 'src/app/model/skills';
 
 @Component({
   selector: 'app-candidate-add-profile',
@@ -25,7 +26,8 @@ export class CandidateAddProfilePage implements OnInit {
   titles: Array<string>;
   divisions: Array<string>;
   durations: Array<string>;
-  skills: Skill[];
+  CandidateSkills: CandidateSkill[] = [];
+  skills: Skills[];
   candidateId: Number;
   selectedDay: String = '';
   public today: any;
@@ -145,7 +147,7 @@ export class CandidateAddProfilePage implements OnInit {
       candidateId: new FormControl('')
     });
     this.formSkills = this.formBuilder.group({
-      skill: new FormControl(''),
+      skillId: new FormControl(''),
       candidateId: new FormControl('')
     });
   }
@@ -168,7 +170,7 @@ export class CandidateAddProfilePage implements OnInit {
 
     this.jobTypes = [
       'Full-Time',
-      'Half-Time',
+      'Part-Time',
       'Intern-ship'
     ];
 
@@ -252,11 +254,24 @@ export class CandidateAddProfilePage implements OnInit {
 
   populateSkills() {
     this.apiService.getAllSkills().subscribe(data => {
-      this.skills = data;
+      data.forEach((element, index) => {
+        let data =       {
+          skillId: element,
+          candidateId: null,
+          checked: null,
+          message: null
+        }
+
+        if( element !== null && this) {
+          this.CandidateSkills.push(data);
+        }
+
+      });
+      console.log(this.CandidateSkills)
     });
   }
 
-  checkCheckBoxvalue(event: CustomEvent, skill: Skill) {
+  checkCheckBoxvalue(event: CustomEvent, skill: CandidateSkill) {
     skill.checked = event.detail.checked;
     skill.candidateId = this.formSkills.get('candidateId').value;
   }
@@ -335,15 +350,15 @@ export class CandidateAddProfilePage implements OnInit {
         );
       }
 
-      this.skills.filter(x => {
+      this.CandidateSkills.filter(x => {
         x.candidateId = this.candidateId;
       })
 
-      this.apiService.saveCandidateSkill(this.skills).subscribe(data => {
+      this.apiService.saveCandidateSkill(this.CandidateSkills).subscribe(data => {
       });
 
-      this.saveCandidateVenueJob(this.candidateId);
-      // console.log(this.skills);
+      // this.saveCandidateVenueJob(this.candidateId);
+      console.log(this.CandidateSkills);
 
     });
   }

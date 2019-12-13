@@ -41,8 +41,8 @@ export class ApiService {
 
   // candidate venue job
 
-  getCandidatesByVenueId(venueId:Number): Observable<CandidateVenueJob[]>{
-    return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId);
+  getCandidatesByVenueId(venueId:Number): Observable<CandidateVenueJob[] | any>{
+    return this.http.get<CandidateVenueJob[] | any>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId);
   }
 
   getCountByVenueId(venueId:Number): Observable<CountCandidates>{
@@ -123,8 +123,8 @@ export class ApiService {
     return this.http.get<Skill[]>(this.baseUrl + 'skill/all');
   }
 
-  getSkillByCandidateId(candidateId:Number): Observable<Skill[]>{
-    return this.http.get<Skill[]>(this.baseUrl + 'candidate-skill/candidate/' +candidateId)
+  getSkillByCandidateId(candidateId:Number): Observable<Skill[] | any>{
+    return this.http.get<Skill[] | any>(this.baseUrl + 'candidate-skill/candidate/' +candidateId)
   }
 
 }
