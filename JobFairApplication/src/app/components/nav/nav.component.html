@@ -1,9 +1,10 @@
 
 <div class="router-links">
   <!-- <img src='../../../assets/img/Logo.png' routerLink="/home"> -->
-  <img src='../../../assets/img/recruitix_logo.png' routerLink="/home">
+  <img src='../../../assets/img/recruitix_logo.png' (click)="navigateToHome()">
+  <!-- <img class="dissableRediretion" src='../../../assets/img/ELCA.png' (click)="navigateToHome()"> -->
   <div class="router-links--right">
-    <p class="venue-name">{{venueName}}</p>
+    <p class="venue-name">Venue: UTM</p>
     <!-- <a routerLink="/home">Home</a> -->
     <a *ngIf="!loggedIn"routerLink="/login">Login</a>
     <a *ngIf="loggedIn" (click)="logout()">Logout</a>
