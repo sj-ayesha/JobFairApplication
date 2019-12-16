@@ -45,9 +45,8 @@ export class NavComponent implements OnInit, OnDestroy {
     // else {
     //   console.log("cannott");
     // }
-    if (localStorage.user !== undefined){
+    if (localStorage.user !== undefined && localStorage.venue_id !== undefined){
       this.router.navigate(['/home']);
-      
     }
     else{
       this.dissabled = true;
