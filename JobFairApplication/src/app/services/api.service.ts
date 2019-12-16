@@ -6,11 +6,11 @@ import { Job } from '../model/job';
 import { Venue } from '../model/venue';
 import { Qualification } from '../model/qualification';
 import { Experience } from '../model/experience';
-import { Skill } from '../model/skill';
 import { VenueJob } from '../model/venueJob';
 import { CandidateVenueJob } from '../model/candidateVenueJob';
 import { CountCandidates } from '../model/countCandidates';
 import { CandidateVenueJobPriority } from '../model/candidateVenueJobPriority';
+import { Skills } from '../model/skills';
 
 
 @Injectable({
@@ -67,8 +67,8 @@ export class ApiService {
 
   // candidate skills
 
-  saveCandidateSkill(skill: Skill[]): Observable<Skill[]>{
-    return this.http.post<Skill[]>(this.baseUrl + 'candidate-skill',skill);
+  saveCandidateSkill(skill: Skills): Observable<Skills[]>{
+    return this.http.post<Skills[]>(this.baseUrl + 'candidate-skill',skill);
   }
 
   // jobs
@@ -123,12 +123,12 @@ export class ApiService {
 
   // skills
 
-  getAllSkills():Observable<Skill[]>{
-    return this.http.get<Skill[]>(this.baseUrl + 'skill/all');
+  getAllSkills():Observable<Skills[]>{
+    return this.http.get<Skills[]>(this.baseUrl + 'skill/all');
   }
 
-  getSkillByCandidateId(candidateId:Number): Observable<Skill[] | any>{
-    return this.http.get<Skill[] | any>(this.baseUrl + 'candidate-skill/candidate/' +candidateId)
+  getSkillByCandidateId(candidateId:Number): Observable<Skills[] | any>{
+    return this.http.get<Skills[] | any>(this.baseUrl + 'candidate-skill/candidate/' +candidateId)
   }
 
 

@@ -354,8 +354,8 @@ export class CandidateAddProfilePage implements OnInit {
         x.candidateId = this.candidateId;
       })
 
-      this.apiService.saveCandidateSkill(this.CandidateSkills).subscribe(data => {
-      });
+      // this.apiService.saveCandidateSkill(this.CandidateSkills).subscribe(data => {
+      // });
 
       this.saveCandidateVenueJob(this.candidateId);
       console.log(this.CandidateSkills);
