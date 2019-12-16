@@ -13,11 +13,20 @@ import { Skills } from 'src/app/model/skills';
   styleUrls: ['./candidate-add-profile.page.scss'],
 })
 export class CandidateAddProfilePage implements OnInit {
-  addCandidate: FormGroup;
-  formInformation: FormGroup;
-  formQualification: FormGroup;
-  formExperience: FormGroup;
-  formSkills: FormGroup;
+  // addCandidate: FormGroup;
+  // formInformation: FormGroup;
+  // formQualification: FormGroup;
+  // formExperience: FormGroup;
+  // formSkills: FormGroup;
+
+  formCandidateDetails: FormGroup;
+
+  // ArrayCandidateDetails: Array<string>;
+  // ArrayQualifications: Array<string>;
+  // ArrayExperiences: Array<string>;
+  // ArraySkills: Array<string>;
+
+
 
   genders: Array<string>;
   currentLevels: Array<string>;
@@ -106,7 +115,7 @@ export class CandidateAddProfilePage implements OnInit {
     private router: Router,
     private toastCtrl: ToastController
   ) {
-    this.formInformation = this.formBuilder.group({
+    this.formCandidateDetails = this.formBuilder.group({
       firstName: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
       lastName: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
       email: new FormControl('', Validators.compose([
@@ -129,26 +138,19 @@ export class CandidateAddProfilePage implements OnInit {
       availabilityDate: new FormControl('', Validators.required),
       currentAcademicYear: new FormControl(''),
       jobType: new FormControl('', Validators.required),
+
       registrationDate: new FormControl(new Date()),
+
       currentLevel: new FormControl('', Validators.required),
-    });
-    this.formQualification = this.formBuilder.group({
       title: new FormControl('', Validators.required),
       division: new FormControl(''),
       institution: new FormControl(''),
       graduationDate: new FormControl(''),
       candidateId: new FormControl(''),
-    });
-
-    this.formExperience = this.formBuilder.group({
       position: new FormControl(''),
       companyName: new FormControl(''),
       duration: new FormControl(''),
-      candidateId: new FormControl('')
-    });
-    this.formSkills = this.formBuilder.group({
       skillId: new FormControl(''),
-      candidateId: new FormControl('')
     });
   }
 
@@ -156,13 +158,20 @@ export class CandidateAddProfilePage implements OnInit {
 
   ngOnInit() {
 
+    window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
+    window.localStorage.setItem('venue_id', JSON.stringify(3));
+    
+    const getJobIdLS = window.localStorage.getItem('priority');
+    const jobId = getJobIdLS[1];
+    const FirstJobIdLS = window.localStorage.setItem('First_JobId', jobId);
+
     this.today = new Date();
     this.day = String(this.today.getDate());
     this.month = this.today.getMonth() + 1;
     this.year = this.today.getFullYear();
 
     this.date = (this.year + '-' + this.month + '-' + this.day);
-    
+
     this.genders = [
       'Male',
       'Female'
@@ -178,6 +187,7 @@ export class CandidateAddProfilePage implements OnInit {
       'Fresher',
       'Senior'
     ];
+
 
     this.academyYears = [
       '1st Year 1st Semester',
@@ -221,8 +231,44 @@ export class CandidateAddProfilePage implements OnInit {
       '10 years',
       '> 10 years',
     ];
-
     this.populateSkills();
+  }
+  
+  postCandidateDetails(){
+      const candidateDetails = {
+      firstName: this.formCandidateDetails.get('firstName').value,
+      lastName: this.formCandidateDetails.get('lastName').value,
+      email: this.formCandidateDetails.get('email').value,
+      telNumber: this.formCandidateDetails.get('telNumber').value,
+      mobileNumber: this.formCandidateDetails.get('mobileNumber').value,
+      gender: this.formCandidateDetails.get('gender').value,
+      address: this.formCandidateDetails.get('address').value,
+      nationality: this.formCandidateDetails.get('nationality').value,
+      registrationDate: this.formCandidateDetails.get('registrationDate').value,
+      availabilityDate: this.formCandidateDetails.get('availabilityDate').value,
+      currentLevel: this.formCandidateDetails.get('currentLevel').value,
+      jobType: this.formCandidateDetails.get('jobType').value,
+      currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
+      experienceDtos: [{
+        companyName: this.formCandidateDetails.get('companyName').value,
+        position: this.formCandidateDetails.get('position').value,
+        duration: this.formCandidateDetails.get('duration').value,
+      }],
+      qualificationDtos: [{
+        title: this.formCandidateDetails.get('title').value,
+        division: this.formCandidateDetails.get('division').value,
+        institution: this.formCandidateDetails.get('institution').value,
+        graduationDate: this.formCandidateDetails.get('graduationDate').value,
+      }],
+      candidateSkillDtos:[{
+        skillId: this.formCandidateDetails.get('skillId').value
+      }],
+      candidateVenueJobSaveDto:[{
+        venueId: window.localStorage.getItem('venue_id'),
+        jobId: window.localStorage.getItem('First_JobId'),
+        jobPriority: window.localStorage.getItem('priority')
+      }]
+    };
   }
 
   ionViewWillLoad() {
@@ -271,10 +317,10 @@ export class CandidateAddProfilePage implements OnInit {
     });
   }
 
-  checkCheckBoxvalue(event: CustomEvent, skill: CandidateSkill) {
-    skill.checked = event.detail.checked;
-    skill.candidateId = this.formSkills.get('candidateId').value;
-  }
+  // checkCheckBoxvalue(event: CustomEvent, skill: CandidateSkill) {
+  //   skill.checked = event.detail.checked;
+  //   skill.candidateId = this.formSkills.get('candidateId').value;
+  // }
 
   routeToJob(jobQueryParam: String) {
     this.router.navigate(['/job-list', jobQueryParam]);
@@ -283,20 +329,16 @@ export class CandidateAddProfilePage implements OnInit {
   onSubmit() {
     this.submitted = true;
     // tslint:disable-next-line: max-line-length
-    if (this.formQualification.invalid && this.formInformation.invalid) {
+    if (this.formCandidateDetails.invalid) {
       console.log(this.submitted, "not sucessful");
       this.unsuccessMsg();
     } else {
-      // this.submitCandidate();
       this.submitCandidate();
       console.log(this.submitted, "sucessful");
       this.successMsg();
 
       setTimeout(() => {
-        this.formInformation.reset();
-        this.formQualification.reset();
-        this.formExperience.reset();
-        this.formSkills.reset();
+        this.formCandidateDetails.reset();
         this.router.navigate(['home']);
       }, 2000);
 
@@ -304,8 +346,7 @@ export class CandidateAddProfilePage implements OnInit {
   }
 
   submitCandidate() {
-    this.apiService.saveCandidate(this.formInformation.value).subscribe(data => {
-      this.submitQualificationAndExperience();
+    this.apiService.saveCandidate(this.formCandidateDetails.value).subscribe(data => {
       // this.router.navigate(['home']);
     },
       error => {
@@ -314,71 +355,71 @@ export class CandidateAddProfilePage implements OnInit {
     );
   }
 
-  submitQualificationAndExperience(){
-    this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data => {
-      this.candidateId = data.candidateId;
-      this.formQualification.patchValue(
-        {
-          candidateId: this.candidateId
-        });
+  // submitQualificationAndExperience(){
+  //   this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data => {
+  //     this.candidateId = data.candidateId;
+  //     this.formQualification.patchValue(
+  //       {
+  //         candidateId: this.candidateId
+  //       });
 
-      this.formExperience.patchValue({
-        candidateId: this.candidateId
-      });
+  //     this.formExperience.patchValue({
+  //       candidateId: this.candidateId
+  //     });
 
-      this.formSkills.patchValue({
-        candidateId: this.candidateId
-      });
+  //     this.formSkills.patchValue({
+  //       candidateId: this.candidateId
+  //     });
 
-      this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
-      },
-        error => {
-          // alert("Data not saved!");
-        }
-      );
+  //     this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
+  //     },
+  //       error => {
+  //         // alert("Data not saved!");
+  //       }
+  //     );
 
-      this.position = this.formExperience.get('position').value;
+  //     this.position = this.formExperience.get('position').value;
 
-      if(this.position == ""){
+  //     if(this.position == ""){
         
-      } else {
-        this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
-        },
-          error => {
-            // alert("Data not saved!");
-          }
-        );
-      }
+  //     } else {
+  //       this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
+  //       },
+  //         error => {
+  //           // alert("Data not saved!");
+  //         }
+  //       );
+  //     }
 
-      this.CandidateSkills.filter(x => {
-        x.candidateId = this.candidateId;
-      })
+  //     this.CandidateSkills.filter(x => {
+  //       x.candidateId = this.candidateId;
+  //     })
 
-      // this.apiService.saveCandidateSkill(this.CandidateSkills).subscribe(data => {
-      // });
+  //     // this.apiService.saveCandidateSkill(this.CandidateSkills).subscribe(data => {
+  //     // });
 
-      this.saveCandidateVenueJob(this.candidateId);
-      console.log(this.CandidateSkills);
+  //     this.saveCandidateVenueJob(this.candidateId);
+  //     console.log(this.CandidateSkills);
 
-    });
-  }
+  //   });
+  // }
 
-  saveCandidateVenueJob(candidateId: Number){
-    var getJobIdLS = window.localStorage.getItem("priority");
-    var jobId = getJobIdLS[1]
-    // test.replace('[','p');
-    console.log(jobId);
-    const priority = {
-      venueId: parseInt(window.localStorage.getItem('venue_id')),
-      jobId: parseInt(jobId),
-      candidateId: candidateId,
-      jobPriority: getJobIdLS
-    }
-    console.log(priority);
-    this.apiService.saveCandidateVenueJob(priority).subscribe(data=>{
-      console.log("Saved")
-    });
-  }
+  // saveCandidateVenueJob(candidateId: Number){
+  //   var getJobIdLS = window.localStorage.getItem("priority");
+  //   var jobId = getJobIdLS[1];
+  //   // test.replace('[','p');
+  //   console.log(jobId);
+  //   const priority = {
+  //     venueId: parseInt(window.localStorage.getItem('venue_id')),
+  //     jobId: parseInt(jobId),
+  //     candidateId: candidateId,
+  //     jobPriority: getJobIdLS
+  //   }
+  //   console.log(priority);
+  //   this.apiService.saveCandidateVenueJob(priority).subscribe(data=>{
+  //     console.log("Saved")
+  //   });
+  // }
 
   duplicate() {
     console.log('Hi');
