@@ -234,7 +234,7 @@ export class CandidateAddProfilePage implements OnInit {
     this.populateSkills();
   }
   
-  postCandidateDetails(){
+  submitCandidate(){
       const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
@@ -269,6 +269,15 @@ export class CandidateAddProfilePage implements OnInit {
         jobPriority: window.localStorage.getItem('priority')
       }]
     };
+    console.log(candidateDetails);
+
+    // this.apiService.saveCandidate(candidateDetails).subscribe(data => {
+    //   // this.router.navigate(['home']);
+    // },
+    //   error => {
+    //     // alert("Data not saved!");
+    //   }
+    // );
   }
 
   ionViewWillLoad() {
@@ -317,10 +326,9 @@ export class CandidateAddProfilePage implements OnInit {
     });
   }
 
-  // checkCheckBoxvalue(event: CustomEvent, skill: CandidateSkill) {
-  //   skill.checked = event.detail.checked;
-  //   skill.candidateId = this.formSkills.get('candidateId').value;
-  // }
+  checkCheckBoxvalue(event: CustomEvent, skill: CandidateSkill) {
+    skill.checked = event.detail.checked;
+  }
 
   routeToJob(jobQueryParam: String) {
     this.router.navigate(['/job-list', jobQueryParam]);
@@ -337,22 +345,12 @@ export class CandidateAddProfilePage implements OnInit {
       console.log(this.submitted, "sucessful");
       this.successMsg();
 
-      setTimeout(() => {
-        this.formCandidateDetails.reset();
-        this.router.navigate(['home']);
-      }, 2000);
+      // setTimeout(() => {
+      //   this.formCandidateDetails.reset();
+      //   this.router.navigate(['home']);
+      // }, 2000);
 
     }
-  }
-
-  submitCandidate() {
-    this.apiService.saveCandidate(this.formCandidateDetails.value).subscribe(data => {
-      // this.router.navigate(['home']);
-    },
-      error => {
-        // alert("Data not saved!");
-      }
-    );
   }
 
   // submitQualificationAndExperience(){

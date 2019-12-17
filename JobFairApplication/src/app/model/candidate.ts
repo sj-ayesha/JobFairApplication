@@ -1,6 +1,4 @@
-import { Skills } from 'src/app/model/skills';
 export class Candidate {
-  candidateDetails: {
     firstName: String;
     lastName: String;
     email: String;
@@ -18,21 +16,20 @@ export class Candidate {
       companyName: String;
       position: String;
       duration: String;
-    }],
+    }]
     qualificationDtos: [{
       title: String;
       division: String;
       institution: String;
       graduationDate: Date;
-    }],
+    }]
     candidateSkillDtos: [{
-      skillId: Skills;
+      skillId: Number;
       checked: boolean;
-    }],
+    }]
     candidateVenueJobSaveDto: [{
       venueId: Number;
       jobId: Number;
-      jobPriority: [];
+      jobPriority: String;
     }]
-  };
 }
