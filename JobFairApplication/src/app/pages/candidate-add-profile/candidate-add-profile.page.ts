@@ -163,7 +163,7 @@ export class CandidateAddProfilePage implements OnInit {
     
     const getJobIdLS = window.localStorage.getItem('priority');
     const jobId = getJobIdLS[1];
-    const FirstJobIdLS = window.localStorage.setItem('First_JobId', jobId);
+    const FirstJobIdLS = window.localStorage.setItem('jobId', jobId);
 
     this.today = new Date();
     this.day = String(this.today.getDate());
