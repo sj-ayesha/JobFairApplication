@@ -124,7 +124,7 @@ export class JobListPage implements OnInit {
       if (index > -1) {
         this.priority.splice(index, 1);
       }
-      console.log(this.priority);
+      // console.log(this.priority);
       localStorage.setItem('priority', JSON.stringify(this.priority));
     }
   }
@@ -135,13 +135,18 @@ export class JobListPage implements OnInit {
 
   applyOnlyFive() {
     const count = JSON.parse(localStorage.priority).length;
-    console.log(count);
+    // console.log(count);
     if (count <= 5) {
       this.router.navigate(['candidate-add-profile']);
     }
     else {
       this.unsuccessMsg();
     }
+  }
+
+  back(){
+    this.router.navigate(['/home']);
+    window.localStorage.removeItem('priority');
   }
 
   searchByTitle(title:String){

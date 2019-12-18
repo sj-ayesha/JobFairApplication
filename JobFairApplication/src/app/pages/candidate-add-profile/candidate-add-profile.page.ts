@@ -160,7 +160,7 @@ export class CandidateAddProfilePage implements OnInit {
 
     // window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
     // window.localStorage.setItem('venue_id', JSON.stringify(3));
-    
+
     const getJobIdLS = window.localStorage.getItem('priority');
     const jobId = getJobIdLS[1];
     // const FirstJobIdLS = window.localStorage.setItem('jobId', jobId);
@@ -233,9 +233,14 @@ export class CandidateAddProfilePage implements OnInit {
     ];
     this.populateSkills();
   }
-  
-  submitCandidate(){
-      const candidateDetails = {
+
+
+  submitCandidate() {
+    var filteredCandidateSkills = this.CandidateSkills.filter(data => {
+      return data.checked === true;
+    });
+
+    const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
       email: this.formCandidateDetails.get('email').value,
@@ -260,16 +265,16 @@ export class CandidateAddProfilePage implements OnInit {
         institution: this.formCandidateDetails.get('institution').value,
         graduationDate: this.formCandidateDetails.get('graduationDate').value,
       }],
-      candidateSkillDtos:[{
-        skillId: this.formCandidateDetails.get('skillId').value
+      candidateSkillDtos: [{
+        skillId: filteredCandidateSkills
       }],
-      candidateVenueJobSaveDto:[{
+      candidateVenueJobSaveDto: [{
         venueId: window.localStorage.getItem('venue_id'),
         jobId: window.localStorage.getItem('First_JobId'),
         jobPriority: window.localStorage.getItem('priority')
       }]
     };
-    console.log(candidateDetails);
+    // console.log(candidateDetails);
 
     // this.apiService.saveCandidate(candidateDetails).subscribe(data => {
     //   // this.router.navigate(['home']);
@@ -309,19 +314,15 @@ export class CandidateAddProfilePage implements OnInit {
   populateSkills() {
     this.apiService.getAllSkills().subscribe(data => {
       data.forEach((element, index) => {
-        let data =       {
-          skillId: element,
-          candidateId: null,
+        let data = {
+          skills: element,
           checked: null,
-          message: null
         }
-
-        if( element !== null && this) {
+        if (element !== null && this) {
           this.CandidateSkills.push(data);
         }
-
       });
-      console.log(this.CandidateSkills)
+      // console.log(this.CandidateSkills);
     });
   }
 
@@ -349,72 +350,6 @@ export class CandidateAddProfilePage implements OnInit {
 
     }
   }
-
-  // submitQualificationAndExperience(){
-  //   this.apiService.getCandidateIdByEmail(this.formInformation.get('email').value).subscribe(data => {
-  //     this.candidateId = data.candidateId;
-  //     this.formQualification.patchValue(
-  //       {
-  //         candidateId: this.candidateId
-  //       });
-
-  //     this.formExperience.patchValue({
-  //       candidateId: this.candidateId
-  //     });
-
-  //     this.formSkills.patchValue({
-  //       candidateId: this.candidateId
-  //     });
-
-  //     this.apiService.saveQualification(this.formQualification.value).subscribe(data => {
-  //     },
-  //       error => {
-  //         // alert("Data not saved!");
-  //       }
-  //     );
-
-  //     this.position = this.formExperience.get('position').value;
-
-  //     if(this.position == ""){
-        
-  //     } else {
-  //       this.apiService.saveExperience(this.formExperience.value).subscribe(data => {
-  //       },
-  //         error => {
-  //           // alert("Data not saved!");
-  //         }
-  //       );
-  //     }
-
-  //     this.CandidateSkills.filter(x => {
-  //       x.candidateId = this.candidateId;
-  //     })
-
-  //     // this.apiService.saveCandidateSkill(this.CandidateSkills).subscribe(data => {
-  //     // });
-
-  //     this.saveCandidateVenueJob(this.candidateId);
-  //     console.log(this.CandidateSkills);
-
-  //   });
-  // }
-
-  // saveCandidateVenueJob(candidateId: Number){
-  //   var getJobIdLS = window.localStorage.getItem("priority");
-  //   var jobId = getJobIdLS[1];
-  //   // test.replace('[','p');
-  //   console.log(jobId);
-  //   const priority = {
-  //     venueId: parseInt(window.localStorage.getItem('venue_id')),
-  //     jobId: parseInt(jobId),
-  //     candidateId: candidateId,
-  //     jobPriority: getJobIdLS
-  //   }
-  //   console.log(priority);
-  //   this.apiService.saveCandidateVenueJob(priority).subscribe(data=>{
-  //     console.log("Saved")
-  //   });
-  // }
 
   duplicate() {
     console.log('Hi');

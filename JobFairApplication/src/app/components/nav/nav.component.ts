@@ -21,8 +21,10 @@ export class NavComponent implements OnInit, OnDestroy {
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
     // console.log("veryy good", this.loginLogoutService.isLoggedIn);
     this.loggedIn = !!localStorage.getItem('user');
-    this.venueName = window.localStorage.getItem('venue_id');
+    window.localStorage.setItem('venue_name', 'UOM');
+    this.venueName = window.localStorage.getItem('venue_name');
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
+
     
   }
 
