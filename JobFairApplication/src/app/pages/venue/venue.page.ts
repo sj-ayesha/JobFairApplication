@@ -44,7 +44,6 @@ export class VenuePage implements OnInit {
   selected(id) {
     localStorage.setItem('venue_id', id.target.value);
     const count = JSON.parse(localStorage.venue_id).length;
-    console.log(count);
   }
 
   getVenueByActive() {
@@ -63,11 +62,7 @@ export class VenuePage implements OnInit {
       // this.submitCandidate();
       this.submitted = true;
       this.router.navigate(['home']);
-      setTimeout(() => {
-        this.formVenue.reset();
-      }, 2000);
     }
-
   }
 
   async UnsuccessMsg() {

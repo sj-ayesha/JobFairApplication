@@ -158,12 +158,12 @@ export class CandidateAddProfilePage implements OnInit {
 
   ngOnInit() {
 
-    window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
-    window.localStorage.setItem('venue_id', JSON.stringify(3));
+    // window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
+    // window.localStorage.setItem('venue_id', JSON.stringify(3));
     
     const getJobIdLS = window.localStorage.getItem('priority');
     const jobId = getJobIdLS[1];
-    const FirstJobIdLS = window.localStorage.setItem('jobId', jobId);
+    // const FirstJobIdLS = window.localStorage.setItem('jobId', jobId);
 
     this.today = new Date();
     this.day = String(this.today.getDate());
@@ -304,7 +304,6 @@ export class CandidateAddProfilePage implements OnInit {
       cssClass: 'toast-custom'
     });
     toast.present();
- 
   }
 
   populateSkills() {
@@ -338,11 +337,9 @@ export class CandidateAddProfilePage implements OnInit {
     this.submitted = true;
     // tslint:disable-next-line: max-line-length
     if (this.formCandidateDetails.invalid) {
-      console.log(this.submitted, "not sucessful");
       this.unsuccessMsg();
     } else {
       this.submitCandidate();
-      console.log(this.submitted, "sucessful");
       this.successMsg();
 
       // setTimeout(() => {

@@ -11,7 +11,7 @@
           <ion-card-header text-center class="ion-no-padding">
             <h3>Sign in</h3>
           </ion-card-header>
-          <form [formGroup]="formLogin">
+          <form [formGroup]="formLogin" (submit)="LogInEnter()">
             <ion-card-content>
               <div class="login-content__field">
                 <ion-item class="login-content__input">
@@ -30,7 +30,7 @@
 
                 <ion-item class="login-content__input">
                   <ion-label position="floating">Password</ion-label>
-                  <ion-input formControlName="password" type="password"></ion-input>
+                  <ion-input formControlName="password" type="password" (keyup.enter)="LogInEnter()"></ion-input>
                 </ion-item>
 
                 <div class="error-messages">
@@ -44,7 +44,7 @@
 
                 <ion-row center>
                   <ion-col text-center class="ion-padding">
-                    <ion-button color="dark" (click)="LogInEnter()">Log In</ion-button>
+                    <ion-button type="submit" color="dark">Log In</ion-button>
                   </ion-col>
                 </ion-row>
               </div>

@@ -23,9 +23,9 @@ export class AppComponent implements OnInit {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     // console.log('aass');
-    if (localStorage.getItem('user')){
-      this.loginlogoutService.loginUser();
-    }
+    // if (localStorage.getItem('user')){
+    //   this.loginlogoutService.loginUser();
+    // }
   }
 
   initializeApp() {

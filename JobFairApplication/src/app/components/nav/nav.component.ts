@@ -34,6 +34,8 @@ export class NavComponent implements OnInit, OnDestroy {
     this.loggedIn = false;
     localStorage.removeItem('user');
     localStorage.removeItem('venue_id');
+    localStorage.removeItem('priority');
+    localStorage.removeItem('job_id');
     this.loginLogoutService.logoutUser();
   }
 

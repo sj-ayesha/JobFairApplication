@@ -58,13 +58,13 @@
                 <ion-col col-md-4 size="4">
                   <div class="information">
                     <h5><b>Information</b></h5>
-                    <div *ngIf="candidates as candidate">
-                      <p><b>Name:</b> {{ candidate.firstName}} {{ candidate.lastName}}</p>
-                      <p><b>Gender:</b> {{candidate.gender}}</p>
-                      <p><b>Phone Number:</b> {{candidate.telNumber}}</p>
-                      <p><b>Email:</b> {{candidate.email}}</p>
-                      <p><b>Address:</b> {{candidate.address}}</p>
-                      <p><b>Nationality:</b> {{candidate.nationality}}</p>
+                    <div>
+                      <p><b>Name:</b> {{ candidate?.firstName}} {{ candidate?.lastName}}</p>
+                      <p><b>Gender:</b> {{candidate?.gender}}</p>
+                      <p><b>Phone Number:</b> {{candidate?.mobileNumber}}</p>
+                      <p><b>Email:</b> {{candidate?.email}}</p>
+                      <p><b>Address:</b> {{candidate?.address}}</p>
+                      <p><b>Nationality:</b> {{candidate?.nationality}}</p>
                     </div>
                   </div>
                 </ion-col>
@@ -98,7 +98,7 @@
                   <div class="skill">
                     <h5><b>Skill(s)</b></h5>
                     <div *ngFor="let skill of skills">
-                      <p>{{ skill.skillId.skillName }}</p>
+                      <p>{{ skill?.skill.skillName }}</p>
                     </div>
                   </div>
                 </ion-col>
