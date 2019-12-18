@@ -31,6 +31,7 @@ export class CandidateDetailsPage implements OnInit {
   day: any;
   month: any;
   year: any;
+  status: any;
 
   error_messages = {
     interviewerName: [
@@ -84,12 +85,17 @@ export class CandidateDetailsPage implements OnInit {
     );
   }
 
+  radioButtonValue(getValue){
+    this.status = getValue.target.value;
+  }
+
   submitInterviewDetails() {
     const interviewDetails = {
       interviewDate: this.formCandidateScreening.get('interviewDate').value,
       interviewVenue: this.formCandidateScreening.get('interviewVenue').value,
       interviewerName: this.formCandidateScreening.get('interviewerName').value,
       feedback: this.formCandidateScreening.get('feedback').value,
+      status: this.status
     }
     console.log(interviewDetails);
   }

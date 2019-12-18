@@ -146,12 +146,12 @@
 
                   <ion-item>
                     <ion-label>Rejected</ion-label>
-                    <ion-radio color="danger" slot="start" value="reject" checked></ion-radio>
+                    <ion-radio color="danger" slot="start" value="0" (ionSelect)="radioButtonValue($event)"></ion-radio>
                   </ion-item>
 
                   <ion-item>
                     <ion-label>Proceed to next interview</ion-label>
-                    <ion-radio color="success" slot="start" value="proceed"></ion-radio>
+                    <ion-radio color="success" slot="start" value="1" (ionSelect)="radioButtonValue($event)"></ion-radio>
                   </ion-item>
                 </ion-radio-group>
                 <!-- <div id="ck-button-rejected">
