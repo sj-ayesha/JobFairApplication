@@ -187,8 +187,12 @@ ion-button{
     margin-right: 13px;
 }
 
-.interviewer-detail {
+.formCandidateScreening{
+    width: 100%;
+    display: -webkit-box;
     display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
 }
 
 .label-info {

@@ -191,9 +191,8 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-        </form>
         <h4>Qualification</h4>
-        <form [formGroup]="formCandidateDetails" (ngSubmit)="onSubmit()">
+        
             <ion-row>
                 <ion-col size="6" size-md size="12" size-sm>
                     <ion-item>
@@ -241,7 +240,7 @@
             </ion-row>
             <ion-input formControlName="candidateId" type="text" hidden></ion-input>
             
-        </form>
+        
         <!-- <div class="add-qualification-button ion-text-right">
                 <ion-button class='btn' color="danger">
                     <ion-icon ios="ios-add" md="md-add"></ion-icon>Add Qualification
@@ -249,7 +248,7 @@
             </div> -->
 
         <h4>Experience</h4>
-        <form [formGroup]="formCandidateDetails" (ngSubmit)="onSubmit()">
+        
             <ion-row id="duplicater">
                 <ion-col col-md-6 size="12" size-sm>
                     <ion-item>
@@ -285,7 +284,7 @@
                 </ion-col>
                 <ion-input formControlName="candidateId" type="text" hidden></ion-input>
             </ion-row>
-        </form>
+        
         <!-- <div class="add-experience-button ion-text-right">
                 <ion-button class='btn' id="button" (click)="duplicate()" color="danger">
                     <ion-icon ios="ios-add" md="md-add"></ion-icon>Add Experience
@@ -295,14 +294,14 @@
         <div id="content">
         </div>
         <h4>Skills</h4>
-        <form [formGroup]="formCandidateDetails" (ngSubmit)="onSubmit()">
+     
             <ion-row>
                 <ion-col>
                     <ion-list>
                         <ion-item *ngFor="let skill of CandidateSkills; let i = index;">
                             <ion-label>{{ skill.skills.skillName }}</ion-label>
                             <ion-checkbox color="danger" class="messageCheckbox" slot="end"
-                                [(ngModel)]="skill.isChecked" formControlName="skillId" value="{{skill.skills.skillId}}"
+                            [checked]="false" formControlName="skillId" value="{{skill.skills.skillId}}"
                                 (ionChange)="checkCheckBoxvalue($event,skill)">
                             </ion-checkbox>
                         </ion-item>
@@ -310,7 +309,7 @@
                 </ion-col>
                 <ion-input formControlName="candidateId" type="text" hidden></ion-input>
             </ion-row>
-        </form>
+ 
         <div class="btn-actions">
             <div class="btn-back ion-text-left">
 
@@ -323,5 +322,6 @@
                 <ion-button class='btn' (click)="onSubmit()" type="submit" color="dark">Submit</ion-button>
             </div>
         </div>
+        </form>
     </div>
 </ion-content>

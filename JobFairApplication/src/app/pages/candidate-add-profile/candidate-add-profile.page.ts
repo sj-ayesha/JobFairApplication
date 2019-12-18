@@ -13,20 +13,7 @@ import { Skills } from 'src/app/model/skills';
   styleUrls: ['./candidate-add-profile.page.scss'],
 })
 export class CandidateAddProfilePage implements OnInit {
-  // addCandidate: FormGroup;
-  // formInformation: FormGroup;
-  // formQualification: FormGroup;
-  // formExperience: FormGroup;
-  // formSkills: FormGroup;
-
   formCandidateDetails: FormGroup;
-
-  // ArrayCandidateDetails: Array<string>;
-  // ArrayQualifications: Array<string>;
-  // ArrayExperiences: Array<string>;
-  // ArraySkills: Array<string>;
-
-
 
   genders: Array<string>;
   currentLevels: Array<string>;
@@ -44,11 +31,10 @@ export class CandidateAddProfilePage implements OnInit {
   position: String;
   company: String;
   duration: String;
-
-  x = false;
   day: any;
   month: any;
   year: any;
+  date: any;
 
   // skills: Array<string>;
   // tslint:disable-next-line: variable-name
@@ -154,15 +140,15 @@ export class CandidateAddProfilePage implements OnInit {
     });
   }
 
-  date: any;
+ 
 
   ngOnInit() {
 
     // window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
     // window.localStorage.setItem('venue_id', JSON.stringify(3));
 
-    const getJobIdLS = window.localStorage.getItem('priority');
-    const jobId = getJobIdLS[1];
+    // const getJobIdLS = window.localStorage.getItem('priority');
+    // const jobId = getJobIdLS[1];
     // const FirstJobIdLS = window.localStorage.setItem('jobId', jobId);
 
     this.today = new Date();
@@ -322,7 +308,7 @@ export class CandidateAddProfilePage implements OnInit {
           this.CandidateSkills.push(data);
         }
       });
-      // console.log(this.CandidateSkills);
+      console.log(this.CandidateSkills);
     });
   }
 
