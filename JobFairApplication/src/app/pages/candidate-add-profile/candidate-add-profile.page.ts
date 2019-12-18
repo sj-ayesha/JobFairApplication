@@ -122,7 +122,7 @@ export class CandidateAddProfilePage implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      mobileNumber: new FormControl('', Validators.compose([
+      phoneNumber: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('[0-9]{8}$')
       ])),
@@ -245,7 +245,7 @@ export class CandidateAddProfilePage implements OnInit {
       lastName: this.formCandidateDetails.get('lastName').value,
       email: this.formCandidateDetails.get('email').value,
       telNumber: this.formCandidateDetails.get('telNumber').value,
-      mobileNumber: this.formCandidateDetails.get('mobileNumber').value,
+      phoneNumber: this.formCandidateDetails.get('phoneNumber').value,
       gender: this.formCandidateDetails.get('gender').value,
       address: this.formCandidateDetails.get('address').value,
       nationality: this.formCandidateDetails.get('nationality').value,
