@@ -13,19 +13,19 @@ import { ToastController } from '@ionic/angular';
 export class VenuePage implements OnInit {
   formVenue: FormGroup;
   venues: Venue[];
-  public select ="";
+  public select = "";
   submitted = false;
   venue: Array<string>;
-  
+
 
   error_messages = {
     venues: [
       { type: 'required', message: '⚠ Venue is required.' },
     ],
   }
-  
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router, 
-              private toastCtrl: ToastController) {
+
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router,
+    private toastCtrl: ToastController) {
     this.formVenue = this.formBuilder.group({
       venues: new FormControl('', Validators.required)
     })
@@ -41,14 +41,14 @@ export class VenuePage implements OnInit {
 
   }
 
-  selected(id){
+  selected(id) {
     localStorage.setItem('venue_id', id.target.value);
     const count = JSON.parse(localStorage.venue_id).length;
     console.log(count);
   }
 
-  getVenueByActive(){
-    this.apiService.getVenueByActive(true).subscribe(data=>{
+  getVenueByActive() {
+    this.apiService.getVenueByActive(true).subscribe(data => {
       this.venues = data;
       // console.log(this.venues);
     });
@@ -63,7 +63,9 @@ export class VenuePage implements OnInit {
       // this.submitCandidate();
       this.submitted = true;
       this.router.navigate(['home']);
-
+      setTimeout(() => {
+        this.formVenue.reset();
+      }, 2000);
     }
 
   }
