@@ -1,6 +1,6 @@
 export class CandidateVenueJobPriority {
-    venueId:Number;
-    jobId:Number;
-    candidateId:Number;
-    jobPriority:String;
+    venueId: number;
+    jobId: number;
+    candidateId: number;
+    jobPriority: string;
 }

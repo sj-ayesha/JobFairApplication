@@ -24,13 +24,13 @@ export class CandidateAddProfilePage implements OnInit {
   durations: Array<string>;
   CandidateSkills: CandidateSkill[] = [];
   skills: Skills[];
-  candidateId: Number;
-  selectedDay: String = '';
+  candidateId: number;
+  selectedDay = '';
   public today: any;
   submitted = false;
-  position: String;
-  company: String;
-  duration: String;
+  position: string;
+  company: string;
+  duration: string;
   day: any;
   month: any;
   year: any;
@@ -47,6 +47,7 @@ export class CandidateAddProfilePage implements OnInit {
   //   { val: 'SQL', isChecked: false },
   // ];
 
+  // tslint:disable-next-line: variable-name
   error_messages = {
     firstName: [
       { type: 'required', message: '⚠ First Name is required' },
@@ -117,7 +118,7 @@ export class CandidateAddProfilePage implements OnInit {
       ])),
       nationality: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")
+        Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')
       ])),
       gender: new FormControl('', Validators.required),
       address: new FormControl(''),

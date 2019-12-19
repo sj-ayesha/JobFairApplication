@@ -1,35 +1,35 @@
 export class Candidate {
-    firstName: String;
-    lastName: String;
-    email: String;
-    telNumber: Number;
-    mobileNumber: Number;
-    gender: String;
-    address: String;
-    nationality: String;
+    firstName: string;
+    lastName: string;
+    email: string;
+    telNumber: number;
+    mobileNumber: number;
+    gender: string;
+    address: string;
+    nationality: string;
     registrationDate: Date;
     availabilityDate: Date;
-    currentLevel: String;
-    jobType: String;
-    currentAcademicYear: String;
+    currentLevel: string;
+    jobType: string;
+    currentAcademicYear: string;
     experienceDtos: [{
-      companyName: String;
-      position: String;
-      duration: String;
-    }]
+      companyName: string;
+      position: string;
+      duration: string;
+    }];
     qualificationDtos: [{
-      title: String;
-      division: String;
-      institution: String;
+      title: string;
+      division: string;
+      institution: string;
       graduationDate: Date;
-    }]
+    }];
     candidateSkillDtos: [{
-      skillId: Number;
+      skillId: number;
       checked: boolean;
-    }]
+    }];
     candidateVenueJobSaveDto: [{
-      venueId: Number;
-      jobId: Number;
-      jobPriority: String;
-    }]
+      venueId: number;
+      jobId: number;
+      jobPriority: string;
+    }];
 }

@@ -17,9 +17,9 @@ export class HomePage {
 
   candidates: Candidate[];
   venues: Venue[];
-  candidateVenueJobs: CandidateVenueJob[];
+  candidateVenueJobs: CandidateVenueJob;
   public countCandidates: any;
-  public percentagCountCandidates: Number;
+  public percentagCountCandidates: number;
   noCandidatesAvailable = false;
 
   constructor(private router: Router, private apiService: ApiService) { }
@@ -30,8 +30,9 @@ export class HomePage {
   }
 
   populateCandidate() {
+    // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
-      if(data.message == "NO_CANDIDATE_VENUE_JOB_AVAILABLE"){
+      if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE'){
         this.noCandidatesAvailable = true;
       } else {
       this.candidateVenueJobs = data;
@@ -44,11 +45,12 @@ export class HomePage {
     this.router.navigate(['/candidate-details', candidateId]);
   }
 
-  routeToJob(jobQueryParam: String) {
+  routeToJob(jobQueryParam: string) {
     this.router.navigate(['/job-list', jobQueryParam]);
   }
 
   countCandidatesByVenue() {
+    // tslint:disable-next-line: radix
     this.apiService.getCountByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.countCandidates = data.countCandidates;
       this.percentagCountCandidates = (this.countCandidates / 100);

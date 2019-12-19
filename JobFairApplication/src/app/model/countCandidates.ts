@@ -1,3 +1,3 @@
 export class CountCandidates {
-    countCandidates: Number;
+    countCandidates: number;
 }

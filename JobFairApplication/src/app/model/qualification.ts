@@ -1,8 +1,8 @@
 export class Qualification {
-    qualificationId: Number;
-    title: String;
-    division:String;
-    institution:String;
-    graduationDate:Date;
-    candidateId:Number;
+    qualificationId: number;
+    title: string;
+    division: string;
+    institution: string;
+    graduationDate: Date;
+    candidateId: number;
 }

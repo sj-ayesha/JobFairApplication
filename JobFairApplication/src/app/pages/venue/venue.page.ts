@@ -24,7 +24,10 @@ export class VenuePage implements OnInit {
     ],
   }
 
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router,
+  constructor(
+    private apiService: ApiService,
+    private formBuilder: FormBuilder,
+    private router: Router,
     private toastCtrl: ToastController) {
     this.formVenue = this.formBuilder.group({
       venues: new FormControl('', Validators.required)
@@ -55,7 +58,6 @@ export class VenuePage implements OnInit {
 
   onSubmit() {
     if (this.formVenue.invalid) {
-      console.log(this.submitted, "not sucessful");
       this.submitted = false;
       this.UnsuccessMsg();
     } else {

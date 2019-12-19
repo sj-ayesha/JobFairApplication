@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {CandidatesService} from '../../services/candidates.service';
+import { CandidatesService } from '../../services/candidates.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
 import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
@@ -12,11 +12,16 @@ import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 })
 export class CandidateListPage implements OnInit {
   candidateDetails: any[];
-  candidateVenueJobs: CandidateVenueJob[];
+  candidateVenueJobs: CandidateVenueJob[]=[];
+  // candidateVenueJobsSort: CandidateVenueJob[];
   public countCandidates: any;
   noCandidatesAvailable = false;
 
-  constructor(private router: Router, private candidateService: CandidatesService, private route: ActivatedRoute, private apiService: ApiService) { }
+  constructor(
+    private router: Router,
+    private candidateService: CandidatesService,
+    private route: ActivatedRoute,
+    private apiService: ApiService) { }
 
   ngOnInit() {
     // this.route.paramMap.subscribe((params: ParamMap) => {
@@ -33,40 +38,43 @@ export class CandidateListPage implements OnInit {
     this.populateCandidate();
   }
 
-  populateCandidate(){
+  populateCandidate() {
+    // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
-      if(data.message == "NO_CANDIDATE_VENUE_JOB_AVAILABLE"){
+      if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
         this.noCandidatesAvailable = true;
       } else {
         this.candidateVenueJobs = data;
-      // console.log( this.candidateVenueJobs);
       }
     });
   }
 
-  routeTo(candidateId: number) {
-        this.router.navigate(['/candidate-details', candidateId]);
-  } 
+  routeTo(candidateId: number) {
+    this.router.navigate(['/candidate-details', candidateId]);
+  }
 
   countCandidatesByVenue() {
+    // tslint:disable-next-line: radix
     this.apiService.getCountByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.countCandidates = data.countCandidates;
     });
   }
 
-  getCandidateByAsc(){
+  getCandidateByAsc() {
+    // tslint:disable-next-line: radix
     this.apiService.getCandidateByASC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.candidateVenueJobs = data;
     })
   }
 
-  getCandidateByDesc(){
+  getCandidateByDesc() {
+    // tslint:disable-next-line: radix
     this.apiService.getCandidateByDESC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.candidateVenueJobs = data;
     })
   }
 
-  searchByLastName(lastName:any){
+  searchByLastName(lastName: any) {
     this.apiService.getCandidateByLastName(lastName).subscribe(data => {
       this.candidateVenueJobs = data;
     });

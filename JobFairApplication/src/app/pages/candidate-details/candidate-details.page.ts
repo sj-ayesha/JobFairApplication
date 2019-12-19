@@ -33,6 +33,7 @@ export class CandidateDetailsPage implements OnInit {
   year: any;
   status: any;
 
+  // tslint:disable-next-line: variable-name
   error_messages = {
     interviewerName: [
       { type: 'required', message: '⚠ interviewerName is required' },

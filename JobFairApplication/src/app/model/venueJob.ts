@@ -1,6 +1,6 @@
 export class VenueJob{
-    venueJobId: Number;
-    venue:Number;
-    job:Number;
-    message:String;
+    venueJobId: number;
+    venue: number;
+    job: number;
+    message: string;
 }

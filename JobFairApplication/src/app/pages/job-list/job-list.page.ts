@@ -20,7 +20,7 @@ export class JobListPage implements OnInit {
   public items: any;
   noJobsAvailable = false;
   public splitJobDescriptions;
-  checked: boolean = true;
+  checked = true;
   priority = [];
 
   constructor(
@@ -29,8 +29,8 @@ export class JobListPage implements OnInit {
     private route: ActivatedRoute,
     private toastCtrl: ToastController
   ) {
-    const allJobsByVenueId: String = this.route.snapshot.paramMap.get('jobQueryParam');
-    if (allJobsByVenueId == 'by-venue') {
+    const allJobsByVenueId: string = this.route.snapshot.paramMap.get('jobQueryParam');
+    if (allJobsByVenueId === 'by-venue') {
       this.getAllJobsByVenueId();
     } else {
       this.getAllJobsByVenueIdAndCategory();
@@ -62,13 +62,13 @@ export class JobListPage implements OnInit {
 
 
   styleAccordion() {
-    let coll = document.getElementsByClassName('collapsible');
+    const coll = document.getElementsByClassName('collapsible');
 
     for (let i = 0; i < coll.length; i++) {
       coll[i].addEventListener('click', function () {
 
         this.classList.toggle('active');
-        let content = this.nextElementSibling;
+        const content = this.nextElementSibling;
         if (content.style.maxHeight) {
           content.style.maxHeight = null;
         } else {
@@ -79,8 +79,9 @@ export class JobListPage implements OnInit {
   }
 
   getAllJobsByVenueId() {
+    // tslint:disable-next-line: radix
     this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
-      if (data.message == "NO_VENUE_JOB_AVAILABLE") {
+      if (data.message == 'NO_VENUE_JOB_AVAILABLE') {
         this.noJobsAvailable = true;
       } else {
         this.venueJobs = data;
@@ -113,7 +114,7 @@ export class JobListPage implements OnInit {
     );
   }
 
-  addPriority(event: CustomEvent, jobId: Number) {
+  addPriority(event: CustomEvent, jobId: number) {
     console.log(event.detail.checked);
     if (event.detail.checked) {
       this.priority.push(jobId);
@@ -129,7 +130,7 @@ export class JobListPage implements OnInit {
     }
   }
 
-  routeToJob(jobQueryParam: String) {
+  routeToJob(jobQueryParam: string) {
     this.router.navigate(['/job-list', jobQueryParam]);
   }
 
@@ -138,8 +139,7 @@ export class JobListPage implements OnInit {
     // console.log(count);
     if (count <= 5) {
       this.router.navigate(['candidate-add-profile']);
-    }
-    else {
+    } else {
       this.unsuccessMsg();
     }
   }
@@ -149,8 +149,9 @@ export class JobListPage implements OnInit {
     window.localStorage.removeItem('priority');
   }
 
-  searchByTitle(title:String){
-    let venueId = parseInt(window.localStorage.getItem('venue_id'));
+  searchByTitle(title: string){
+    // tslint:disable-next-line: radix
+    const venueId = parseInt(window.localStorage.getItem('venue_id'));
     this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
       this.venueJobs = data;
       setTimeout(() => {

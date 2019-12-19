@@ -1,42 +1,42 @@
 export class CandidateVenueJob {
 
-    candidateVenueJob: Number;
+    candidateVenueJob: number;
     venueJob: {
-        venueJobId: Number;
+        venueJobId: number;
         venue: {
-            venueId: Number;
-            venueName: String;
+            venueId: number;
+            venueName: string;
             startDate: Date;
             endDate: Date;
-            address: String;
+            address: string;
             active: boolean;
         },
         job: {
-            jobId: Number;
-            title: String;
-            level: String;
-            category: String;
-            description: String;
-            minimumExperience: String;
-            qualificationNeeded: String;
+            jobId: number;
+            title: string;
+            level: string;
+            category: string;
+            description: string;
+            minimumExperience: string;
+            qualificationNeeded: string;
         }
-        candidate: {
-            candidateId: Number;
-            firstName: String;
-            lastName: String;
-            email: String;
-            telNumber: Number;
-            mobileNumber: Number;
-            gender: String;
-            address: String;
-            nationality: String;
-            registrationDate: Date;
-            availabilityDate: Date;
-            currentLevel: String;
-            jobType: String;
-            currentAcademicYear: String;
-        },
-        jobPriority: String;
-        message:String;
-    }
+    };
+    candidate: {
+        candidateId: number;
+        firstName: string;
+        lastName: string;
+        email: string;
+        telNumber: number;
+        mobileNumber: number;
+        gender: string;
+        address: string;
+        nationality: string;
+        registrationDate: Date;
+        availabilityDate: Date;
+        currentLevel: string;
+        jobType: string;
+        currentAcademicYear: string;
+    };
+    jobPriority: string;
+    message: string;
 }

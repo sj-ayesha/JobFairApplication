@@ -14,6 +14,7 @@ export class LoginPage implements OnInit {
   loggedIn: boolean;
   submitted = false;
 
+  // tslint:disable-next-line: variable-name
   error_messages = {
     username: [
       { type: 'required', message: '⚠ Username is required.' },
@@ -62,11 +63,11 @@ export class LoginPage implements OnInit {
     this.submitted = true;
     // tslint:disable-next-line: max-line-length
     if (this.formLogin.invalid) {
-      console.log(this.submitted, "not sucessful");
+      console.log(this.submitted, 'not sucessful');
       this.unsuccessMsg();
     } else {
       this.loggedIn = true;
-      localStorage.setItem("user", "userId")
+      localStorage.setItem('user', 'userId');
       this.loginLogoutService.loginUser();
       // console.log(this.loggedIn);
     }

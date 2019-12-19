@@ -1,4 +1,4 @@
 export class Skills {
     skillId: number;
-    skillName: String;
+    skillName: string;
 }

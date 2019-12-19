@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 })
 export class LoginLogoutService {
 
-  @Output() sessionStateEmitter = new EventEmitter<boolean>()
+  @Output() sessionStateEmitter = new EventEmitter<boolean>();
   constructor(private router: Router) {
   }
 
@@ -20,7 +20,7 @@ export class LoginLogoutService {
       this.router.navigate(['/login']);
     } */
   }
-  logoutUser(){
+  logoutUser() {
     this.sessionStateEmitter.emit(false);
     this.router.navigate(['/login']);
   }

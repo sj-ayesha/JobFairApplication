@@ -42,7 +42,7 @@
     <ion-card-content *ngIf="!noCandidatesAvailable">
       <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
         *ngFor="let candidateVenueJob of candidateVenueJobs">
-        <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Male'" slot="start">
+        <ion-avatar *ngIf="candidateVenueJob.candidate.gender == 'Male'" slot="start">
           <img src="../../../assets/img/avatar_male.jpg" />
         </ion-avatar>
         <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">

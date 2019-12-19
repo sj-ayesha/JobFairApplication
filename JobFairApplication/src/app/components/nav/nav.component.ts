@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit, OnDestroy {
-  public venueName: String;
+  public venueName: string;
   count: number;
   dissabled = true;
   private sessionStateSubscription: Subscription;
@@ -24,15 +24,13 @@ export class NavComponent implements OnInit, OnDestroy {
     window.localStorage.setItem('venue_name', 'UOM');
     this.venueName = window.localStorage.getItem('venue_name');
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
-
-    
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.sessionStateSubscription.unsubscribe();
   }
 
-  logout(){
+  logout() {
     this.loggedIn = false;
     localStorage.removeItem('user');
     localStorage.removeItem('venue_id');
@@ -41,7 +39,7 @@ export class NavComponent implements OnInit, OnDestroy {
     this.loginLogoutService.logoutUser();
   }
 
-  navigateToHome(){
+  navigateToHome() {
     // this.count = JSON.parse(localStorage.priority).length;
     // console.log(this.count);
     // if (this.count >= 1){
@@ -50,12 +48,10 @@ export class NavComponent implements OnInit, OnDestroy {
     // else {
     //   console.log("cannott");
     // }
-    if (localStorage.user !== undefined && localStorage.venue_id !== undefined){
+    if (localStorage.user !== undefined && localStorage.venue_id !== undefined) {
       this.router.navigate(['/home']);
-    }
-    else{
+    } else {
       this.dissabled = true;
     }
   }
-
 }

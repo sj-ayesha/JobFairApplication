@@ -19,7 +19,7 @@ import { Skills } from '../model/skills';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://localhost:8081/'; // url to access backend
+  baseUrl = 'http://localhost:8081/'; // url to access backend
 
   // candidates
 
@@ -27,7 +27,7 @@ export class ApiService {
     return this.http.get<Candidate[]>(this.baseUrl + 'candidate/all');
   }
 
-  getCandidateIdByEmail(email: String): Observable<Candidate> {
+  getCandidateIdByEmail(email: string): Observable<Candidate> {
     return this.http.get<Candidate>(this.baseUrl + 'candidate/email?email=' + email);
   }
 
@@ -41,11 +41,11 @@ export class ApiService {
 
   // candidate venue job
 
-  getCandidatesByVenueId(venueId: Number): Observable<CandidateVenueJob[] | any> {
+  getCandidatesByVenueId(venueId: number): Observable<CandidateVenueJob[] | any> {
     return this.http.get<CandidateVenueJob[] | any>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId);
   }
 
-  getCountByVenueId(venueId: Number): Observable<CountCandidates> {
+  getCountByVenueId(venueId: number): Observable<CountCandidates> {
     return this.http.get<CountCandidates>(this.baseUrl + 'candidate-venue-job/count-candidates/' + venueId);
   }
 
@@ -53,15 +53,15 @@ export class ApiService {
     return this.http.post<CandidateVenueJobPriority>(this.baseUrl + 'candidate-venue-job', candidateVenueJobPriority);
   }
 
-  getCandidateByDESC(venueId: Number): Observable<CandidateVenueJob[]> {
+  getCandidateByDESC(venueId: number): Observable<CandidateVenueJob[]> {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-desc/' + venueId);
   }
 
-  getCandidateByASC(venueId: Number): Observable<CandidateVenueJob[]> {
+  getCandidateByASC(venueId: number): Observable<CandidateVenueJob[]> {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-asc/' + venueId);
   }
 
-  getCandidateByLastName(lastName: String): Observable<CandidateVenueJob[]> {
+  getCandidateByLastName(lastName: string): Observable<CandidateVenueJob[]> {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/lastname/' + lastName);
   }
 
@@ -73,7 +73,7 @@ export class ApiService {
 
   // jobs
 
-  getJobsByCategory(category: String): Observable<Job[]> {
+  getJobsByCategory(category: string): Observable<Job[]> {
     return this.http.get<Job[]>(this.baseUrl + 'job/category/' + category);
   }
 
@@ -83,15 +83,15 @@ export class ApiService {
 
   // venue-job
 
-  getJobsByVenueId(venueId: Number): Observable<VenueJob[] | any> {
+  getJobsByVenueId(venueId: number): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/' + venueId);
   }
 
-  getJobsByVenueIdAndCategory(venueId: Number, category: String): Observable<VenueJob[] | any> {
+  getJobsByVenueIdAndCategory(venueId: number, category: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/category?venueId=' + venueId + '&category=' + category);
   }
 
-  searchJobByTitle(venueId: Number, title: String): Observable<VenueJob[]> {
+  searchJobByTitle(venueId: number, title: string): Observable<VenueJob[]> {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/title' + '?venueId=' + venueId + '&title=' + title);
   }
 
@@ -103,7 +103,7 @@ export class ApiService {
 
   // qualifications
 
-  getQualificationByCandidateId(candidateId: Number): Observable<Qualification[]> {
+  getQualificationByCandidateId(candidateId: number): Observable<Qualification[]> {
     return this.http.get<Qualification[]>(this.baseUrl + 'qualification/candidate/' + candidateId);
   }
 
@@ -113,7 +113,7 @@ export class ApiService {
 
   // experience
 
-  getExperienceByCandidateId(candidateId: Number): Observable<Experience[]> {
+  getExperienceByCandidateId(candidateId: number): Observable<Experience[]> {
     return this.http.get<Experience[]>(this.baseUrl + 'experience/candidate/' + candidateId);
   }
 
@@ -127,7 +127,7 @@ export class ApiService {
     return this.http.get<Skills[]>(this.baseUrl + 'skill/all');
   }
 
-  getSkillByCandidateId(candidateId: Number): Observable<Skills[] | any> {
+  getSkillByCandidateId(candidateId: number): Observable<Skills[] | any> {
     return this.http.get<Skills[] | any>(this.baseUrl + 'candidate-skill/candidate/' + candidateId);
   }
 
