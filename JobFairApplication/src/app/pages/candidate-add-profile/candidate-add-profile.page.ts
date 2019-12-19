@@ -35,6 +35,9 @@ export class CandidateAddProfilePage implements OnInit {
   month: any;
   year: any;
   date: any;
+  hours: any;
+  minutes: any;
+  seconds: any;
 
   // skills: Array<string>;
   // tslint:disable-next-line: variable-name
@@ -126,7 +129,7 @@ export class CandidateAddProfilePage implements OnInit {
       currentAcademicYear: new FormControl(''),
       jobType: new FormControl('', Validators.required),
 
-      registrationDate: new FormControl(new Date()),
+      registrationDate: new FormControl(this.date),
 
       currentLevel: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
@@ -156,8 +159,13 @@ export class CandidateAddProfilePage implements OnInit {
     this.day = String(this.today.getDate());
     this.month = this.today.getMonth() + 1;
     this.year = this.today.getFullYear();
+    this.hours = this.today.getHours();
+    this.minutes = this.today.getMinutes();
+    this.seconds = this.today.getSeconds();
 
-    this.date = (this.year + '-' + this.month + '-' + this.day);
+
+    this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
+    console.log(this.date);
 
     this.genders = [
       'Male',

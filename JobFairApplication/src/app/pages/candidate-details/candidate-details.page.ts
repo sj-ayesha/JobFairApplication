@@ -31,14 +31,18 @@ export class CandidateDetailsPage implements OnInit {
   day: any;
   month: any;
   year: any;
+  hours: any;
+  minutes: any;
+  seconds: any;
   status: any;
+  getCandidateId: any;
 
   // tslint:disable-next-line: variable-name
   error_messages = {
     interviewerName: [
-      { type: 'required', message: '⚠ interviewerName is required' },
-      { type: 'maxLength', message: '⚠ interviewerName must be less than 30 letters' },
-      { type: 'pattern', message: '⚠ interviewerName is invalid' }
+      { type: 'required', message: '⚠ interviewer Name is required' },
+      { type: 'maxLength', message: '⚠ interviewer Name must be less than 30 letters' },
+      { type: 'pattern', message: '⚠ interviewer Name is invalid' }
     ],
   }
 
@@ -62,6 +66,7 @@ export class CandidateDetailsPage implements OnInit {
   ngOnInit() {
     this.items = this.dataService.getJobs();
     const candiateId: any = this.route.snapshot.paramMap.get('candidateId');
+    this.getCandidateId = candiateId;
     this.getCandidateById(candiateId);
     this.today = new Date();
 
@@ -72,8 +77,13 @@ export class CandidateDetailsPage implements OnInit {
     this.day = String(this.today.getDate());
     this.month = this.today.getMonth() + 1;
     this.year = this.today.getFullYear();
+    this.hours = this.today.getHours();
+    this.minutes = this.today.getMinutes();
+    this.seconds = this.today.getSeconds();
 
-    this.date = (this.year + '-' + this.month + '-' + this.day);
+
+    this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
+    console.log(this.date);
   }
 
   getCandidateById(candidateId: number) {
@@ -96,7 +106,8 @@ export class CandidateDetailsPage implements OnInit {
       interviewVenue: this.formCandidateScreening.get('interviewVenue').value,
       interviewerName: this.formCandidateScreening.get('interviewerName').value,
       feedback: this.formCandidateScreening.get('feedback').value,
-      status: this.status
+      status: this.status,
+      candidateId: this.getCandidateId
     }
     console.log(interviewDetails);
   }
