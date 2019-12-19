@@ -232,7 +232,7 @@ export class CandidateAddProfilePage implements OnInit {
 
 
   submitCandidate() {
-    var filteredCandidateSkills = this.CandidateSkills.filter(data => {
+    let filteredCandidateSkills = this.CandidateSkills.filter(data => {
       return data.checked === true;
     });
 
@@ -271,12 +271,12 @@ export class CandidateAddProfilePage implements OnInit {
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
       experienceDtos: this.arrayExperience,
       qualificationDtos: this.arrayQualification,
-      candidateSkillDtos: this.CandidateSkills,
+      candidateSkillDtos: filteredCandidateSkills,
       candidateVenueJobSaveDto: this.arrayVenue
     };
 
     this.apiService.saveCandidate(candidateDetails).subscribe(data => {
-      // this.router.navigate(['home']);
+        this.router.navigate(['home']);
     },
       error => {
         // alert("Data not saved!");
