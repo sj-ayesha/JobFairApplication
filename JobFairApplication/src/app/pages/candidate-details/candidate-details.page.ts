@@ -35,7 +35,7 @@ export class CandidateDetailsPage implements OnInit {
   minutes: any;
   seconds: any;
   status: any;
-  const candiateId: any = this.route.snapshot.paramMap.get('candidateId');
+  candiateId: any = this.route.snapshot.paramMap.get('candidateId');
 
   // tslint:disable-next-line: variable-name
   error_messages = {
@@ -110,9 +110,9 @@ export class CandidateDetailsPage implements OnInit {
       candidateId: parseInt(this.candiateId)
     }
     // console.log(interviewDetails);
-    // this.apiService.saveCandidateScreening(interviewDetails).subscribe(data=>{
-    //   console.log("wawa");
-    // });
+    this.apiService.saveCandidateScreening(interviewDetails).subscribe(data=>{
+      console.log("wawa");
+    });
   }
 
   async successMsg() {
