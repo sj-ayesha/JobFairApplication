@@ -39,6 +39,9 @@ export class CandidateAddProfilePage implements OnInit {
   minutes: any;
   seconds: any;
 
+  arrayExperience: any[];
+  arrayQualification: any[];
+  arrayVenue: any[];
   // skills: Array<string>;
   // tslint:disable-next-line: variable-name
   // public skills = [
@@ -69,7 +72,7 @@ export class CandidateAddProfilePage implements OnInit {
     telNumber: [
       { type: 'pattern', message: '⚠ Telephone number is invalid' }
     ],
-    phoneNumber: [
+    mobileNumber: [
       { type: 'required', message: '⚠ Mobile number is required.' },
       { type: 'pattern', message: '⚠ Mobile number is invalid' }
     ],
@@ -112,7 +115,7 @@ export class CandidateAddProfilePage implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      phoneNumber: new FormControl('', Validators.compose([
+      mobileNumber: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('[0-9]{8}$')
       ])),
@@ -129,7 +132,7 @@ export class CandidateAddProfilePage implements OnInit {
       currentAcademicYear: new FormControl(''),
       jobType: new FormControl('', Validators.required),
 
-      registrationDate: new FormControl(this.date),
+      registrationDate: new FormControl(new Date()),
 
       currentLevel: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
@@ -144,16 +147,14 @@ export class CandidateAddProfilePage implements OnInit {
     });
   }
 
- 
-
   ngOnInit() {
 
     // window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
     // window.localStorage.setItem('venue_id', JSON.stringify(3));
 
-    // const getJobIdLS = window.localStorage.getItem('priority');
-    // const jobId = getJobIdLS[1];
-    // const FirstJobIdLS = window.localStorage.setItem('jobId', jobId);
+    const getJobIdLS = window.localStorage.getItem('priority');
+    const jobId = getJobIdLS[1];
+    const FirstJobIdLS = window.localStorage.setItem('jobId', jobId);
 
     this.today = new Date();
     this.day = String(this.today.getDate());
@@ -235,12 +236,31 @@ export class CandidateAddProfilePage implements OnInit {
       return data.checked === true;
     });
 
+    this.arrayExperience = [{
+      companyName: this.formCandidateDetails.get('companyName').value,
+      position: this.formCandidateDetails.get('position').value,
+      duration: this.formCandidateDetails.get('duration').value,
+    }];
+
+    this.arrayQualification = [{
+      title: this.formCandidateDetails.get('title').value,
+      division: this.formCandidateDetails.get('division').value,
+      institution: this.formCandidateDetails.get('institution').value,
+      graduationDate: this.formCandidateDetails.get('graduationDate').value,
+    }];
+
+    this.arrayVenue = [{
+      venueId: window.localStorage.getItem('venue_id'),
+      jobId: window.localStorage.getItem('jobId'),
+      jobPriority: window.localStorage.getItem('priority')
+    }];
+
     const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
       email: this.formCandidateDetails.get('email').value,
       telNumber: this.formCandidateDetails.get('telNumber').value,
-      phoneNumber: this.formCandidateDetails.get('phoneNumber').value,
+      mobileNumber: this.formCandidateDetails.get('mobileNumber').value,
       gender: this.formCandidateDetails.get('gender').value,
       address: this.formCandidateDetails.get('address').value,
       nationality: this.formCandidateDetails.get('nationality').value,
@@ -249,35 +269,19 @@ export class CandidateAddProfilePage implements OnInit {
       currentLevel: this.formCandidateDetails.get('currentLevel').value,
       jobType: this.formCandidateDetails.get('jobType').value,
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
-      experienceDtos: [{
-        companyName: this.formCandidateDetails.get('companyName').value,
-        position: this.formCandidateDetails.get('position').value,
-        duration: this.formCandidateDetails.get('duration').value,
-      }],
-      qualificationDtos: [{
-        title: this.formCandidateDetails.get('title').value,
-        division: this.formCandidateDetails.get('division').value,
-        institution: this.formCandidateDetails.get('institution').value,
-        graduationDate: this.formCandidateDetails.get('graduationDate').value,
-      }],
-      candidateSkillDtos: [{
-        skillId: filteredCandidateSkills
-      }],
-      candidateVenueJobSaveDto: [{
-        venueId: window.localStorage.getItem('venue_id'),
-        jobId: window.localStorage.getItem('First_JobId'),
-        jobPriority: window.localStorage.getItem('priority')
-      }]
+      experienceDtos: this.arrayExperience,
+      qualificationDtos: this.arrayQualification,
+      candidateSkillDtos: this.CandidateSkills,
+      candidateVenueJobSaveDto: this.arrayVenue
     };
-    // console.log(candidateDetails);
 
-    // this.apiService.saveCandidate(candidateDetails).subscribe(data => {
-    //   // this.router.navigate(['home']);
-    // },
-    //   error => {
-    //     // alert("Data not saved!");
-    //   }
-    // );
+    this.apiService.saveCandidate(candidateDetails).subscribe(data => {
+      // this.router.navigate(['home']);
+    },
+      error => {
+        // alert("Data not saved!");
+      }
+    );
   }
 
   ionViewWillLoad() {
@@ -310,10 +314,11 @@ export class CandidateAddProfilePage implements OnInit {
     this.apiService.getAllSkills().subscribe(data => {
       data.forEach((element, index) => {
         let data = {
-          skills: element,
+          skill: element,
           checked: null,
         }
         if (element !== null && this) {
+          // console.log(this.CandidateSkills)
           this.CandidateSkills.push(data);
         }
       });
