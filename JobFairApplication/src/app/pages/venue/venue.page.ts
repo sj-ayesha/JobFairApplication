@@ -13,11 +13,12 @@ import { ToastController } from '@ionic/angular';
 export class VenuePage implements OnInit {
   formVenue: FormGroup;
   venues: Venue[];
-  public select = "";
+  public select = '';
   submitted = false;
   venue: Array<string>;
 
 
+  // tslint:disable-next-line: variable-name
   error_messages = {
     venues: [
       { type: 'required', message: '⚠ Venue is required.' },
@@ -36,12 +37,6 @@ export class VenuePage implements OnInit {
 
   ngOnInit() {
     this.getVenueByActive();
-
-    this.venue = [
-      'UTM',
-      'UOM'
-    ];
-
   }
 
   selected(id) {
@@ -52,7 +47,6 @@ export class VenuePage implements OnInit {
   getVenueByActive() {
     this.apiService.getVenueByActive(true).subscribe(data => {
       this.venues = data;
-      // console.log(this.venues);
     });
   }
 
@@ -61,7 +55,6 @@ export class VenuePage implements OnInit {
       this.submitted = false;
       this.UnsuccessMsg();
     } else {
-      // this.submitCandidate();
       this.submitted = true;
       this.router.navigate(['home']);
     }

@@ -35,7 +35,7 @@ export class NavComponent implements OnInit, OnDestroy {
     localStorage.removeItem('user');
     localStorage.removeItem('venue_id');
     localStorage.removeItem('priority');
-    localStorage.removeItem('job_id');
+    localStorage.removeItem('jobId');
     this.loginLogoutService.logoutUser();
   }
 
@@ -50,6 +50,8 @@ export class NavComponent implements OnInit, OnDestroy {
     // }
     if (localStorage.user !== undefined && localStorage.venue_id !== undefined) {
       this.router.navigate(['/home']);
+      localStorage.removeItem('priority');
+      localStorage.removeItem('jobId');
     } else {
       this.dissabled = true;
     }

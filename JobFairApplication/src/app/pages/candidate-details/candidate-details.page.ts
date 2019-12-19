@@ -80,7 +80,8 @@ export class CandidateDetailsPage implements OnInit {
     this.seconds = this.today.getSeconds();
 
 
-    this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
+    // this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
+    this.date = (this.day + '-' + this.month + '-' + this.year);
     console.log(this.date);
   }
 

@@ -89,6 +89,14 @@
                         <ion-label position="floating" color="medium">Tel Number: XXXXXXX</ion-label>
                         <ion-input formControlName="telNumber" type="tel"></ion-input>
                     </ion-item>
+                    <div class="error-messages">
+                        <ng-container *ngFor='let error of error_messages.telNumber'>
+                            <div class="error-message"
+                                *ngIf="formCandidateDetails.get('telNumber').hasError(error.type) && (formCandidateDetails.get('telNumber').dirty || formCandidateDetails.get('telNumber').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
                 </ion-col>
             </ion-row>
             <ion-row>
