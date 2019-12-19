@@ -32,6 +32,7 @@ export class CandidateDetailsPage implements OnInit {
   month: any;
   year: any;
   status: any;
+  const candiateId: any = this.route.snapshot.paramMap.get('candidateId');
 
   // tslint:disable-next-line: variable-name
   error_messages = {
@@ -61,8 +62,8 @@ export class CandidateDetailsPage implements OnInit {
 
   ngOnInit() {
     this.items = this.dataService.getJobs();
-    const candiateId: any = this.route.snapshot.paramMap.get('candidateId');
-    this.getCandidateById(candiateId);
+    
+    this.getCandidateById(this.candiateId);
     this.today = new Date();
 
     this.venueName = localStorage.getItem('venue_name');
@@ -82,6 +83,7 @@ export class CandidateDetailsPage implements OnInit {
       this.qualifications = this.candidate.qualificationDtos;
       this.experiences = this.candidate.experienceDtos;
       this.skills = this.candidate.candidateSkillDtos;
+      console.log(this.candidate);
     }
     );
   }
@@ -93,12 +95,16 @@ export class CandidateDetailsPage implements OnInit {
   submitInterviewDetails() {
     const interviewDetails = {
       interviewDate: this.formCandidateScreening.get('interviewDate').value,
-      interviewVenue: this.formCandidateScreening.get('interviewVenue').value,
+      // interviewVenue: this.formCandidateScreening.get('interviewVenue').value,
       interviewerName: this.formCandidateScreening.get('interviewerName').value,
-      feedback: this.formCandidateScreening.get('feedback').value,
-      status: this.status
+      interviewerFeedback: this.formCandidateScreening.get('feedback').value,
+      screeningStatus: this.status,
+      candidateId: parseInt(this.candiateId)
     }
-    console.log(interviewDetails);
+    // console.log(interviewDetails);
+    // this.apiService.saveCandidateScreening(interviewDetails).subscribe(data=>{
+    //   console.log("wawa");
+    // });
   }
 
   async successMsg() {

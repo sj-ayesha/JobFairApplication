@@ -11,6 +11,7 @@ import { CandidateVenueJob } from '../model/candidateVenueJob';
 import { CountCandidates } from '../model/countCandidates';
 import { CandidateVenueJobPriority } from '../model/candidateVenueJobPriority';
 import { Skills } from '../model/skills';
+import { CandidateScreening } from '../model/candidateScreening';
 
 
 @Injectable({
@@ -41,8 +42,8 @@ export class ApiService {
 
   // candidate venue job
 
-  getCandidatesByVenueId(venueId: number): Observable<CandidateVenueJob[] | any> {
-    return this.http.get<CandidateVenueJob[] | any>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId);
+  getCandidatesByVenueId(venueId: number,limit: boolean): Observable<CandidateVenueJob[] | any> {
+    return this.http.get<CandidateVenueJob[] | any>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId + '/' + limit);
   }
 
   getCountByVenueId(venueId: number): Observable<CountCandidates> {
@@ -131,6 +132,10 @@ export class ApiService {
     return this.http.get<Skills[] | any>(this.baseUrl + 'candidate-skill/candidate/' + candidateId);
   }
 
+  // candidate screening
 
+  saveCandidateScreening(candidateScreening: CandidateScreening): Observable<CandidateScreening[]>{
+    return this.http.post<CandidateScreening[]>(this.baseUrl + 'candidate-screening', candidateScreening);
+  }
 
 }

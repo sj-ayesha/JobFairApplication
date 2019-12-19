@@ -40,7 +40,7 @@ export class CandidateListPage implements OnInit {
 
   populateCandidate() {
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')),false).subscribe(data => {
       if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
         this.noCandidatesAvailable = true;
       } else {
