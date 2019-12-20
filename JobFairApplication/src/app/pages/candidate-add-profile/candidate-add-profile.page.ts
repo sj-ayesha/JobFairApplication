@@ -6,6 +6,7 @@ import { Router, ChildActivationStart } from '@angular/router';
 import { element } from 'protractor';
 import { ToastController } from '@ionic/angular';
 import { Skills } from 'src/app/model/skills';
+import { DropdownsService } from 'src/app/services/dropdowns.service';
 
 @Component({
   selector: 'app-candidate-add-profile',
@@ -107,7 +108,8 @@ export class CandidateAddProfilePage implements OnInit {
     private formBuilder: FormBuilder,
     private apiService: ApiService,
     private router: Router,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private dropdowns: DropdownsService
   ) {
     this.formCandidateDetails = this.formBuilder.group({
       firstName: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
@@ -171,66 +173,16 @@ export class CandidateAddProfilePage implements OnInit {
     this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
     console.log(this.date);
 
-    this.genders = [
-      'Male',
-      'Female'
-    ];
 
-    this.jobTypes = [
-      'Full-Time',
-      'Part-Time',
-      'Intern-ship'
-    ];
-
-    this.currentLevels = [
-      'Fresher',
-      'Senior'
-    ];
-
-
-    this.academyYears = [
-      '1st Year 1st Semester',
-      '1st Year 2nd Semester',
-      '2nd Year 1st Semester',
-      '2nd Year 2nd Semester',
-      '3rd Year 1st Semester',
-      '3rd Year 2nd Semester',
-      'Graduated'
-    ];
-
-    this.titles = [
-      'HSC',
-      'Diploma',
-      'Degree',
-      'Masters',
-      'PHD'
-    ];
-    this.divisions = [
-      '1st Class Honours',
-      '2nd Class 1st Division Honours',
-      '2nd Class 2nd Division Honours',
-      '3rd Class Honours',
-      'Pass Degree',
-      'MSc with Distinction',
-      'MSc with Merit',
-      'MSc',
-      'No Award'
-    ];
-    this.durations = [
-      '< 1 year',
-      '1 year',
-      '2 years',
-      '3 years',
-      '4 years',
-      '5 years',
-      '6 years',
-      '7 years',
-      '8 years',
-      '9 years',
-      '10 years',
-      '> 10 years',
-    ];
     this.populateSkills();
+
+    this.genders = this.dropdowns.genders;
+    this.jobTypes = this.dropdowns.jobTypes;
+    this.titles = this.dropdowns.titles;
+    this.divisions = this.dropdowns.divisions;
+    this.durations = this.dropdowns.durations;
+    this.academyYears = this.dropdowns.academyYears;
+    this.currentLevels = this.dropdowns.currentLevels;
   }
 
 

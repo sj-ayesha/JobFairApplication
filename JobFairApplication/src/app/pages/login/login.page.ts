@@ -49,9 +49,7 @@ export class LoginPage implements OnInit {
     this.authService.isLoggedIn().subscribe(data => {
       if (data){
         this.router.navigateByUrl('/venue');
-      } else {
-        this.router.navigateByUrl('/login');
-      }
+      } 
     });
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
   }
