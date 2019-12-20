@@ -1,6 +1,10 @@
+import { Venue } from './venue';
+import { Job } from './job';
+
 export class VenueJob{
     venueJobId: number;
-    venue: number;
-    job: number;
-    message: string;
+    venue: Venue;
+    job: Job;
+    // message: string;
+    venueJobDate: Date;
 }

@@ -7,7 +7,8 @@
     <ion-row>
       <ion-col col-md-2 size="2" col-sm-3 size="3">
         <ion-card padding>
-          <ion-card-title><b>Jobs Applied:</b> </ion-card-title>
+          <ion-card-title><h5><b>Jobs Applied:</b></h5></ion-card-title>
+          <div class="separation"></div>
           <div class="jobs-selected" *ngFor="let item of items; let i = index">
             <div class="jobs-selected--title">
               <span>{{i + 1}}. </span>
@@ -23,7 +24,7 @@
               <div class="interviewer-detail">
                 <ion-item>
                   <ion-label position="floating" color="medium" class="label-info">*Interview Date</ion-label>
-                  <ion-datetime formControlName="interviewDate" display-format="DD MMM YYYY" value="{{ date }}" [disabled]='true'>
+                  <ion-datetime formControlName="interviewDate" display-format="DD MMM YYYY" value="{{ today }}" [disabled]='true'>
                   </ion-datetime>
                 </ion-item>
               </div>
@@ -121,13 +122,16 @@
                   <!-- <ion-card-subtitle class="feedbacks-subtitle">Interviewer Name</ion-card-subtitle>
                   <ion-card-subtitle class="feedbacks-subtitle">Date</ion-card-subtitle> -->
                   <p class="feedbacks-subtitle"><b>Interviewer Name: </b>Kathleen</p>
-                  <p class="feedbacks-subtitle"><b>Date: </b></p>
+                  <p class="feedbacks-subtitle"><b>Date: {{ date }}</b></p>
+                  
                 </div>
 
               </ion-card-header>
 
               <ion-card-content>
-                Very Good
+                <p>Very good Candidate and has high potential</p>
+                <br>
+                <p><b>Status:</b> Proceed to next Interview</p>
               </ion-card-content>
             </ion-card>
           </ion-col>

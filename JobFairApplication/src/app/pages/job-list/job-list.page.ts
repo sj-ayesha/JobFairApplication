@@ -38,7 +38,7 @@ export class JobListPage implements OnInit {
   }
 
   ngOnInit() {
-
+    
   }
 
   // ngAfterViewInit() {
@@ -65,7 +65,7 @@ export class JobListPage implements OnInit {
     const coll = document.getElementsByClassName('collapsible');
 
     for (let i = 0; i < coll.length; i++) {
-      coll[i].addEventListener('click', function () {
+      coll[i].addEventListener('click', function() {
 
         this.classList.toggle('active');
         const content = this.nextElementSibling;
@@ -146,14 +146,16 @@ export class JobListPage implements OnInit {
 
   back(){
     this.router.navigate(['/home']);
-    window.localStorage.removeItem('priority');
+    localStorage.removeItem('priority');
+    localStorage.removeItem('jobId');
   }
 
-  searchByTitle(title: string){
+  searchByTitle(title: string) {
     // tslint:disable-next-line: radix
     const venueId = parseInt(window.localStorage.getItem('venue_id'));
     this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
       this.venueJobs = data;
+      console.log(this.venueJobs[0].job);
       setTimeout(() => {
         this.styleAccordion();
       }, 0);
