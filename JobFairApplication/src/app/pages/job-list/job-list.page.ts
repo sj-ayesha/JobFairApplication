@@ -15,7 +15,7 @@ export class JobListPage implements OnInit {
 
   // jobs: any;
   jobs: Job[];
-  public venueJobs: VenueJob[] = [];
+  public venueJobs: VenueJob[];
   public searchTerm: string = "";
   public items: any;
   noJobsAvailable = false;
@@ -150,7 +150,7 @@ export class JobListPage implements OnInit {
     localStorage.removeItem('jobId');
   }
 
-  searchByTitle(title: string){
+  searchByTitle(title: string) {
     // tslint:disable-next-line: radix
     const venueId = parseInt(window.localStorage.getItem('venue_id'));
     this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
