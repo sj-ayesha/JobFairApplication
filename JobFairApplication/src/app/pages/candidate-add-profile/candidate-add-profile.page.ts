@@ -265,7 +265,7 @@ export class CandidateAddProfilePage implements OnInit {
       }],
       candidateVenueJobSaveDto: [{
         venueId: window.localStorage.getItem('venue_id'),
-        jobId: window.localStorage.getItem('First_JobId'),
+        jobId: window.localStorage.getItem('jobId'),
         jobPriority: window.localStorage.getItem('priority')
       }]
     };
