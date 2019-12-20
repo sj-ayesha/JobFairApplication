@@ -54,12 +54,12 @@
                 <ion-col size="6" size-md size="12" size-sm>
                     <ion-item>
                         <ion-label position="floating" color="medium">*Mobile Number: 5XXXXXXX</ion-label>
-                        <ion-input formControlName="mobileNumber" type="tel"></ion-input>
+                        <ion-input formControlName="phoneNumber" type="tel"></ion-input>
                     </ion-item>
                     <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.mobileNumber'>
+                        <ng-container *ngFor='let error of error_messages.phoneNumber'>
                             <div class="error-message"
-                                *ngIf="formCandidateDetails.get('mobileNumber').hasError(error.type) && (formCandidateDetails.get('mobileNumber').dirty || formCandidateDetails.get('mobileNumber').touched)">
+                                *ngIf="formCandidateDetails.get('phoneNumber').hasError(error.type) && (formCandidateDetails.get('phoneNumber').dirty || formCandidateDetails.get('phoneNumber').touched)">
                                 {{ error.message }}
                             </div>
                         </ng-container>
@@ -89,14 +89,6 @@
                         <ion-label position="floating" color="medium">Tel Number: XXXXXXX</ion-label>
                         <ion-input formControlName="telNumber" type="tel"></ion-input>
                     </ion-item>
-                    <div class="error-messages">
-                        <ng-container *ngFor='let error of error_messages.telNumber'>
-                            <div class="error-message"
-                                *ngIf="formCandidateDetails.get('telNumber').hasError(error.type) && (formCandidateDetails.get('telNumber').dirty || formCandidateDetails.get('telNumber').touched)">
-                                {{ error.message }}
-                            </div>
-                        </ng-container>
-                    </div>
                 </ion-col>
             </ion-row>
             <ion-row>
@@ -307,9 +299,9 @@
                 <ion-col>
                     <ion-list>
                         <ion-item *ngFor="let skill of CandidateSkills; let i = index;">
-                            <ion-label>{{ skill.skill.skillName }}</ion-label>
+                            <ion-label>{{ skill.skills.skillName }}</ion-label>
                             <ion-checkbox color="danger" class="messageCheckbox" slot="end"
-                            [checked]="false" formControlName="skillId" value="{{skill.skill.skillId}}"
+                            [checked]="false" formControlName="skillId" value="{{skill.skills.skillId}}"
                                 (ionChange)="checkCheckBoxvalue($event,skill)">
                             </ion-checkbox>
                         </ion-item>
@@ -327,7 +319,7 @@
             </div>
             <div class="submit-button ion-text-right">
                 <!-- <ion-button class='btn' color="dark" (click)="submitCandidate()">Submit</ion-button> -->
-                <ion-button class='btn' type="submit" color="dark">Submit</ion-button>
+                <ion-button class='btn' (click)="onSubmit()" type="submit" color="dark">Submit</ion-button>
             </div>
         </div>
         </form>

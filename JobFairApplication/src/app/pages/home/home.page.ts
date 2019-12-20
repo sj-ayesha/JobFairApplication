@@ -36,6 +36,7 @@ export class HomePage {
         this.noCandidatesAvailable = true;
       } else {
       this.candidateVenueJobs = data;
+      console.log( this.candidateVenueJobs);
       }
     });
   }

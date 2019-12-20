@@ -65,6 +65,7 @@ export class CandidateDetailsPage implements OnInit {
 
   ngOnInit() {
     this.items = this.dataService.getJobs();
+    
     this.getCandidateById(this.candiateId);
     this.today = new Date();
 
@@ -75,13 +76,12 @@ export class CandidateDetailsPage implements OnInit {
     this.day = String(this.today.getDate());
     this.month = this.today.getMonth() + 1;
     this.year = this.today.getFullYear();
-    this.hours = this.today.getHours() + 4;
+    this.hours = this.today.getHours();
     this.minutes = this.today.getMinutes();
     this.seconds = this.today.getSeconds();
 
 
-    // this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
-    this.date = (this.day + '-' + this.month + '-' + this.year);
+    this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
     console.log(this.date);
   }
 
@@ -110,7 +110,7 @@ export class CandidateDetailsPage implements OnInit {
       candidateId: parseInt(this.candiateId)
     }
     // console.log(interviewDetails);
-    this.apiService.saveCandidateScreening(interviewDetails).subscribe(data => {
+    this.apiService.saveCandidateScreening(interviewDetails).subscribe(data=>{
       console.log("wawa");
     });
   }
