@@ -152,7 +152,6 @@ export class CandidateDetailsPage implements OnInit {
       //   this.formCandidateDetails.reset();
       //   this.router.navigate(['home']);
       // }, 2000);
-
     }
   }
 }

@@ -66,9 +66,11 @@
                       <p><b>Name:</b> {{ candidate?.firstName}} {{ candidate?.lastName}}</p>
                       <p><b>Gender:</b> {{candidate?.gender}}</p>
                       <p><b>Phone Number:</b> {{candidate?.mobileNumber}}</p>
+                      <p><b>Telephone Number:</b> {{candidate?.telNumber}}</p>
                       <p><b>Email:</b> {{candidate?.email}}</p>
                       <p><b>Address:</b> {{candidate?.address}}</p>
                       <p><b>Nationality:</b> {{candidate?.nationality}}</p>
+                      <p><b>Current Level:</b> {{candidate?.currentLevel}}</p>
                     </div>
                   </div>
                 </ion-col>
@@ -119,29 +121,23 @@
         <ion-row class="previous-feedback">
           <ion-col col-md-12 size="12">
             <ion-card>
-<ion-card-header>
-              <ion-card-title><b>Feedbacks</b></ion-card-title>
-            </ion-card-header>
-              <div class="feedback-container" *ngFor="let candidateScreening of candidateScreenings">
-                <ion-card-content>
-                <div class="separation"></div>
-                <div class="feedbacks">
-                
-                  <!-- <ion-card-subtitle class="feedbacks-subtitle">Interviewer Name</ion-card-subtitle>
+              <ion-card-content>
+                <ion-card-title><b>Feedbacks</b></ion-card-title>
+                <br>
+                <div class="feedback-container" *ngFor="let candidateScreening of candidateScreenings">
+                  <div class="separation"></div>
+                  <div class="feedbacks">
+                    <!-- <ion-card-subtitle class="feedbacks-subtitle">Interviewer Name</ion-card-subtitle>
                   <ion-card-subtitle class="feedbacks-subtitle">Date</ion-card-subtitle> -->
-                  <p class="feedbacks-subtitle"><b>Interviewer Name: </b> {{ candidateScreening.interviewerName }}</p>
-                  <p class="feedbacks-subtitle"><b>Date:</b> {{ candidateScreening.interviewDate }}</p>
-
-                </div>
-
-                <ion-card-content>
+                    <p class="feedbacks-subtitle"><b>Interviewer Name: </b> {{ candidateScreening.interviewerName }}</p>
+                    <p class="feedbacks-subtitle"><b>Date:</b> {{ candidateScreening.interviewDate }}</p>
+                  </div>
                   <p><b>Comments:</b></p>
                   <p>{{ candidateScreening.interviewerFeedback }}</p>
                   <br>
                   <p><b>Status:</b> {{ candidateScreening.screeningStatus }}</p>
-                </ion-card-content>
+                </div>
               </ion-card-content>
-              </div>
             </ion-card>
           </ion-col>
         </ion-row>
