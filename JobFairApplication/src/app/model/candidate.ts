@@ -1,3 +1,9 @@
+import { CandidateSkill } from './CandidateSkill';
+import { Experience } from './experience';
+import { Qualification } from './qualification';
+import { CandidateVenueJob } from './candidateVenueJob';
+import { CandidateScreening } from './candidateScreening';
+
 export class Candidate {
     firstName: string;
     lastName: string;
@@ -12,24 +18,9 @@ export class Candidate {
     currentLevel: string;
     jobType: string;
     currentAcademicYear: string;
-    experienceDtos: [{
-      companyName: string;
-      position: string;
-      duration: string;
-    }];
-    qualificationDtos: [{
-      title: string;
-      division: string;
-      institution: string;
-      graduationDate: Date;
-    }];
-    candidateSkillDtos: [{
-      skillId: number;
-      checked: boolean;
-    }];
-    candidateVenueJobSaveDto: [{
-      venueId: number;
-      jobId: number;
-      jobPriority: string;
-    }];
+    experienceDtos: Experience[];
+    qualificationDtos: Qualification[];
+    candidateSkillDtos: CandidateSkill[];
+    candidateVenueJobSaveDto: CandidateVenueJob[];
+    candidateScreeningDtos: CandidateScreening[];
 }

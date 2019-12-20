@@ -24,6 +24,7 @@ export class CandidateDetailsPage implements OnInit {
   qualifications;
   experiences;
   skills;
+  candidateScreenings;
   public today: any;
   public venueName: string;
   submitted = false;
@@ -91,6 +92,7 @@ export class CandidateDetailsPage implements OnInit {
       this.qualifications = this.candidate.qualificationDtos;
       this.experiences = this.candidate.experienceDtos;
       this.skills = this.candidate.candidateSkillDtos;
+      this.candidateScreenings = this.candidate.candidateScreeningDtos;
       console.log(this.candidate);
     }
     );

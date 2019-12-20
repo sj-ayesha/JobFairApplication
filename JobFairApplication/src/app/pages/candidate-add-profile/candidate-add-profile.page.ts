@@ -38,6 +38,10 @@ export class CandidateAddProfilePage implements OnInit {
   hours: any;
   minutes: any;
   seconds: any;
+  arrayExperience: any[];
+  arrayQualification: any[];
+  arrayVenue: any[];
+  arrayScreening: any[];
 
   // skills: Array<string>;
   // tslint:disable-next-line: variable-name
@@ -249,25 +253,11 @@ export class CandidateAddProfilePage implements OnInit {
       currentLevel: this.formCandidateDetails.get('currentLevel').value,
       jobType: this.formCandidateDetails.get('jobType').value,
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
-      experienceDtos: [{
-        companyName: this.formCandidateDetails.get('companyName').value,
-        position: this.formCandidateDetails.get('position').value,
-        duration: this.formCandidateDetails.get('duration').value,
-      }],
-      qualificationDtos: [{
-        title: this.formCandidateDetails.get('title').value,
-        division: this.formCandidateDetails.get('division').value,
-        institution: this.formCandidateDetails.get('institution').value,
-        graduationDate: this.formCandidateDetails.get('graduationDate').value,
-      }],
-      candidateSkillDtos: [{
-        skillId: filteredCandidateSkills
-      }],
-      candidateVenueJobSaveDto: [{
-        venueId: window.localStorage.getItem('venue_id'),
-        jobId: window.localStorage.getItem('jobId'),
-        jobPriority: window.localStorage.getItem('priority')
-      }]
+      experienceDtos: this.arrayExperience,
+      qualificationDtos: this.arrayQualification,
+      candidateSkillDtos: filteredCandidateSkills,
+      candidateVenueJobSaveDto: this.arrayVenue,
+      candidateScreeningDtos: this.arrayScreening
     };
     // console.log(candidateDetails);
 

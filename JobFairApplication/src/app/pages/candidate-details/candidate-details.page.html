@@ -7,7 +7,10 @@
     <ion-row>
       <ion-col col-md-2 size="2" col-sm-3 size="3">
         <ion-card padding>
-          <ion-card-title><b>Jobs Applied:</b> </ion-card-title>
+          <ion-card-title>
+            <h5><b>Jobs Applied:</b></h5>
+          </ion-card-title>
+          <div class="separation"></div>
           <div class="jobs-selected" *ngFor="let item of items; let i = index">
             <div class="jobs-selected--title">
               <span>{{i + 1}}. </span>
@@ -23,14 +26,16 @@
               <div class="interviewer-detail">
                 <ion-item>
                   <ion-label position="floating" color="medium" class="label-info">*Interview Date</ion-label>
-                  <ion-datetime formControlName="interviewDate" display-format="DD MMM YYYY" value="{{ date }}" [disabled]='true'>
+                  <ion-datetime formControlName="interviewDate" display-format="DD MMM YYYY" value="{{ today }}"
+                    [disabled]='true'>
                   </ion-datetime>
                 </ion-item>
               </div>
               <div class="interviewer-detail">
                 <ion-item>
                   <ion-label position="floating" color="medium">*Venue</ion-label>
-                  <ion-input formControlName="interviewVenue" type="text" value="{{ venueName }}" [disabled]='true'></ion-input>
+                  <ion-input formControlName="interviewVenue" type="text" value="{{ venueName }}" [disabled]='true'>
+                  </ion-input>
                 </ion-item>
               </div>
 
@@ -41,12 +46,12 @@
                 </ion-item>
                 <div class="error-messages">
                   <ng-container *ngFor='let error of error_messages.interviewerName'>
-                      <div class="error-message"
-                          *ngIf="formCandidateScreening.get('interviewerName').hasError(error.type) && (formCandidateScreening.get('interviewerName').dirty || formCandidateScreening.get('interviewerName').touched)">
-                          {{ error.message }}
-                      </div>
+                    <div class="error-message"
+                      *ngIf="formCandidateScreening.get('interviewerName').hasError(error.type) && (formCandidateScreening.get('interviewerName').dirty || formCandidateScreening.get('interviewerName').touched)">
+                      {{ error.message }}
+                    </div>
                   </ng-container>
-              </div>
+                </div>
               </div>
             </div>
           </form>
@@ -114,21 +119,29 @@
         <ion-row class="previous-feedback">
           <ion-col col-md-12 size="12">
             <ion-card>
-              <ion-card-header>
-
-                <ion-card-title><b>Feedbacks</b></ion-card-title>
+<ion-card-header>
+              <ion-card-title><b>Feedbacks</b></ion-card-title>
+            </ion-card-header>
+              <div class="feedback-container" *ngFor="let candidateScreening of candidateScreenings">
+                <ion-card-content>
+                <div class="separation"></div>
                 <div class="feedbacks">
+                
                   <!-- <ion-card-subtitle class="feedbacks-subtitle">Interviewer Name</ion-card-subtitle>
                   <ion-card-subtitle class="feedbacks-subtitle">Date</ion-card-subtitle> -->
-                  <p class="feedbacks-subtitle"><b>Interviewer Name: </b>Kathleen</p>
-                  <p class="feedbacks-subtitle"><b>Date: </b></p>
+                  <p class="feedbacks-subtitle"><b>Interviewer Name: </b> {{ candidateScreening.interviewerName }}</p>
+                  <p class="feedbacks-subtitle"><b>Date:</b> {{ candidateScreening.interviewDate }}</p>
+
                 </div>
 
-              </ion-card-header>
-
-              <ion-card-content>
-                Very Good
+                <ion-card-content>
+                  <p><b>Comments:</b></p>
+                  <p>{{ candidateScreening.interviewerFeedback }}</p>
+                  <br>
+                  <p><b>Status:</b> {{ candidateScreening.screeningStatus }}</p>
+                </ion-card-content>
               </ion-card-content>
+              </div>
             </ion-card>
           </ion-col>
         </ion-row>
@@ -136,25 +149,27 @@
           <ion-col col-md-12 size="12">
             <ion-card padding>
               <form [formGroup]="formCandidateScreening" (ngSubmit)="onSubmit()">
-              <ion-item class="add-feedback">
-                <!-- <ion-label>Comments: </ion-label> -->
-                <ion-textarea formControlName="feedback" rows="6" cols="20" placeholder="Enter your feedback here...">
-                </ion-textarea>
-              </ion-item>
-              <div class="status">
-                <ion-radio-group class="btn-radio-group">
+                <ion-item class="add-feedback">
+                  <!-- <ion-label>Comments: </ion-label> -->
+                  <ion-textarea formControlName="feedback" rows="6" cols="20" placeholder="Enter your feedback here...">
+                  </ion-textarea>
+                </ion-item>
+                <div class="status">
+                  <ion-radio-group class="btn-radio-group">
 
-                  <ion-item>
-                    <ion-label>Rejected</ion-label>
-                    <ion-radio color="danger" slot="start" value="Rejected" (ionSelect)="radioButtonValue($event)"></ion-radio>
-                  </ion-item>
+                    <ion-item>
+                      <ion-label>Rejected</ion-label>
+                      <ion-radio color="danger" slot="start" value="Rejected" (ionSelect)="radioButtonValue($event)">
+                      </ion-radio>
+                    </ion-item>
 
-                  <ion-item>
-                    <ion-label>Proceed to next interview</ion-label>
-                    <ion-radio color="success" slot="start" value="Proceed to next interview" (ionSelect)="radioButtonValue($event)"></ion-radio>
-                  </ion-item>
-                </ion-radio-group>
-                <!-- <div id="ck-button-rejected">
+                    <ion-item>
+                      <ion-label>Proceed to next interview</ion-label>
+                      <ion-radio color="success" slot="start" value="Proceed to next interview"
+                        (ionSelect)="radioButtonValue($event)"></ion-radio>
+                    </ion-item>
+                  </ion-radio-group>
+                  <!-- <div id="ck-button-rejected">
                   <label>
                     <input type="radio" value="1" /><span>Rejected</span>
                   </label>
@@ -171,8 +186,8 @@
                     >
                   </label>
                 </div> -->
-              </div>
-            </form>
+                </div>
+              </form>
             </ion-card>
           </ion-col>
         </ion-row>

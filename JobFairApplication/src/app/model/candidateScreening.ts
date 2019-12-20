@@ -1,7 +1,7 @@
 export class CandidateScreening {
     interviewDate: Date;
-    interviewerName: String;
-    interviewerFeedback: String;
-    screeningStatus: String;
-    candidateId: Number;
+    interviewerName: string;
+    interviewerFeedback: string;
+    screeningStatus: string;
+    candidateId: number;
 }

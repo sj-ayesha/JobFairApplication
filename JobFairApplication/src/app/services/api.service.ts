@@ -78,6 +78,10 @@ export class ApiService {
     return this.http.get<Job[]>(this.baseUrl + 'job/category/' + category);
   }
 
+  getJobsById(jobId: number): Observable<Job[]> {
+    return this.http.get<Job[]>(this.baseUrl + 'job/' + jobId);
+  }
+
   getAllJobs(): Observable<Job[]> {
     return this.http.get<Job[]>(this.baseUrl + 'job/all');
   }
@@ -134,7 +138,7 @@ export class ApiService {
 
   // candidate screening
 
-  saveCandidateScreening(candidateScreening: CandidateScreening): Observable<CandidateScreening[]>{
+  saveCandidateScreening(candidateScreening: CandidateScreening): Observable<CandidateScreening[]> {
     return this.http.post<CandidateScreening[]>(this.baseUrl + 'candidate-screening', candidateScreening);
   }
 

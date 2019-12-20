@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private loginLogoutService: LoginLogoutService,
     private router: Router,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController, 
+    private authService: AuthService
   ) {
     this.formLogin = this.formBuilder.group({
       username: new FormControl('', Validators.compose([
@@ -44,6 +46,13 @@ export class LoginPage implements OnInit {
     });
   }
   ngOnInit() {
+    this.authService.isLoggedIn().subscribe(data => {
+      if (data){
+        this.router.navigateByUrl('/venue');
+      } else {
+        this.router.navigateByUrl('/login');
+      }
+    });
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
   }
 
