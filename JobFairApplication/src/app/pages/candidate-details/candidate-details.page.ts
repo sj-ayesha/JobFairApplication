@@ -99,6 +99,11 @@ export class CandidateDetailsPage implements OnInit {
       } else {
         this.ScreeningDisplay = false;
       }
+
+      // To be used later on
+      var d = this.candidateScreenings[0].interviewDate;
+      d = d.split('T')[0];
+      console.log(d);
     }
     );
   }

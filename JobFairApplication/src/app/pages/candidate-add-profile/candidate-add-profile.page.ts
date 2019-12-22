@@ -74,7 +74,7 @@ export class CandidateAddProfilePage implements OnInit {
     telNumber: [
       { type: 'pattern', message: '⚠ Telephone number is invalid' }
     ],
-    phoneNumber: [
+    mobileNumber: [
       { type: 'required', message: '⚠ Mobile number is required.' },
       { type: 'pattern', message: '⚠ Mobile number is invalid' }
     ],
@@ -118,7 +118,7 @@ export class CandidateAddProfilePage implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      phoneNumber: new FormControl('', Validators.compose([
+      mobileNumber: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('[0-9]{8}$')
       ])),
@@ -135,7 +135,7 @@ export class CandidateAddProfilePage implements OnInit {
       currentAcademicYear: new FormControl(''),
       jobType: new FormControl('', Validators.required),
 
-      registrationDate: new FormControl(this.date),
+      registrationDate: new FormControl(new Date()),
 
       currentLevel: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
@@ -170,7 +170,8 @@ export class CandidateAddProfilePage implements OnInit {
     this.seconds = this.today.getSeconds();
 
 
-    this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
+    // this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
+    this.date = (this.year + '-' + this.month + '-' + this.day);
 
     this.populateSkills();
 
@@ -193,7 +194,7 @@ export class CandidateAddProfilePage implements OnInit {
       lastName: this.formCandidateDetails.get('lastName').value,
       email: this.formCandidateDetails.get('email').value,
       telNumber: this.formCandidateDetails.get('telNumber').value,
-      phoneNumber: this.formCandidateDetails.get('phoneNumber').value,
+      mobileNumber: this.formCandidateDetails.get('mobileNumber').value,
       gender: this.formCandidateDetails.get('gender').value,
       address: this.formCandidateDetails.get('address').value,
       nationality: this.formCandidateDetails.get('nationality').value,
@@ -208,15 +209,15 @@ export class CandidateAddProfilePage implements OnInit {
       candidateVenueJobSaveDto: this.arrayVenue,
       candidateScreeningDtos: this.arrayScreening
     };
-    // console.log(candidateDetails);
+    console.log(candidateDetails);
 
-    // this.apiService.saveCandidate(candidateDetails).subscribe(data => {
-    //   // this.router.navigate(['home']);
-    // },
-    //   error => {
-    //     // alert("Data not saved!");
-    //   }
-    // );
+    this.apiService.saveCandidate(candidateDetails).subscribe(data => {
+      // this.router.navigate(['home']);
+    },
+      error => {
+        // alert("Data not saved!");
+      }
+    );
   }
 
   ionViewWillLoad() {
@@ -264,7 +265,7 @@ export class CandidateAddProfilePage implements OnInit {
     skill.checked = event.detail.checked;
   }
 
-  routeToJob(jobQueryParam: String) {
+  routeToJob(jobQueryParam: string) {
     this.router.navigate(['/job-list', jobQueryParam]);
   }
 
@@ -277,10 +278,10 @@ export class CandidateAddProfilePage implements OnInit {
       this.submitCandidate();
       this.successMsg();
 
-      // setTimeout(() => {
-      //   this.formCandidateDetails.reset();
-      //   this.router.navigate(['home']);
-      // }, 2000);
+      setTimeout(() => {
+        this.formCandidateDetails.reset();
+        this.router.navigate(['home']);
+      }, 2000);
 
     }
   }
