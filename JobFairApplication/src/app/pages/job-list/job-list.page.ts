@@ -115,7 +115,6 @@ export class JobListPage implements OnInit {
   }
 
   addPriority(event: CustomEvent, jobId: number) {
-    console.log(event.detail.checked);
     if (event.detail.checked) {
       this.priority.push(jobId);
       console.log(this.priority);
@@ -154,7 +153,6 @@ export class JobListPage implements OnInit {
     const venueId = parseInt(window.localStorage.getItem('venue_id'));
     this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
       this.venueJobs = data;
-      console.log(this.venueJobs);
       setTimeout(() => {
         this.styleAccordion();
       }, 0);

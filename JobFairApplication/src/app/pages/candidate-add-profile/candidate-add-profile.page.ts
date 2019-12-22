@@ -171,8 +171,6 @@ export class CandidateAddProfilePage implements OnInit {
 
 
     this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
-    console.log(this.date);
-
 
     this.populateSkills();
 
@@ -184,7 +182,6 @@ export class CandidateAddProfilePage implements OnInit {
     this.academyYears = this.dropdowns.academyYears;
     this.currentLevels = this.dropdowns.currentLevels;
   }
-
 
   submitCandidate() {
     var filteredCandidateSkills = this.CandidateSkills.filter(data => {
@@ -259,7 +256,7 @@ export class CandidateAddProfilePage implements OnInit {
           this.CandidateSkills.push(data);
         }
       });
-      console.log(this.CandidateSkills);
+      // console.log(this.CandidateSkills);
     });
   }
 
@@ -289,7 +286,6 @@ export class CandidateAddProfilePage implements OnInit {
   }
 
   duplicate() {
-    console.log('Hi');
     const div = document.createElement('div');
 
     div.className = 'row';

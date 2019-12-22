@@ -9,6 +9,7 @@ import { Experience } from 'src/app/model/experience';
 import { Skills } from 'src/app/model/skills';
 import { FormGroup, FormBuilder, Validators, FormControl, Form, FormArray } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-candidate-details',
@@ -24,7 +25,7 @@ export class CandidateDetailsPage implements OnInit {
   qualifications;
   experiences;
   skills;
-  candidateScreenings;
+  public candidateScreenings;
   public today: any;
   public venueName: string;
   submitted = false;
@@ -36,6 +37,7 @@ export class CandidateDetailsPage implements OnInit {
   minutes: any;
   seconds: any;
   status: any;
+  ScreeningDisplay = false;
   candiateId: any = this.route.snapshot.paramMap.get('candidateId');
 
   // tslint:disable-next-line: variable-name
@@ -66,13 +68,12 @@ export class CandidateDetailsPage implements OnInit {
 
   ngOnInit() {
     this.items = this.dataService.getJobs();
-    
     this.getCandidateById(this.candiateId);
     this.today = new Date();
 
     this.venueName = localStorage.getItem('venue_name');
 
-    //Date Format
+    // Date Format
     this.today = new Date();
     this.day = String(this.today.getDate());
     this.month = this.today.getMonth() + 1;
@@ -83,7 +84,7 @@ export class CandidateDetailsPage implements OnInit {
 
 
     this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
-    console.log(this.date);
+    // console.log(this.date);
   }
 
   getCandidateById(candidateId: number) {
@@ -93,7 +94,11 @@ export class CandidateDetailsPage implements OnInit {
       this.experiences = this.candidate.experienceDtos;
       this.skills = this.candidate.candidateSkillDtos;
       this.candidateScreenings = this.candidate.candidateScreeningDtos;
-      console.log(this.candidate);
+      if(this.candidateScreenings.length > 0) {
+        this.ScreeningDisplay = true;
+      } else {
+        this.ScreeningDisplay = false;
+      }
     }
     );
   }
@@ -102,6 +107,7 @@ export class CandidateDetailsPage implements OnInit {
     this.status = getValue.target.value;
   }
 
+
   submitInterviewDetails() {
     const interviewDetails = {
       interviewDate: this.formCandidateScreening.get('interviewDate').value,
@@ -109,11 +115,11 @@ export class CandidateDetailsPage implements OnInit {
       interviewerName: this.formCandidateScreening.get('interviewerName').value,
       interviewerFeedback: this.formCandidateScreening.get('feedback').value,
       screeningStatus: this.status,
+      // tslint:disable-next-line: radix
       candidateId: parseInt(this.candiateId)
     }
     // console.log(interviewDetails);
-    this.apiService.saveCandidateScreening(interviewDetails).subscribe(data=>{
-      console.log("wawa");
+    this.apiService.saveCandidateScreening(interviewDetails).subscribe(data => {
     });
   }
 

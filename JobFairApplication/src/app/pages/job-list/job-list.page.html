@@ -22,7 +22,7 @@
           <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" class="ion-float-right">
           </ion-searchbar> -->
           <ion-item class="search-input">
-              <ion-input placeholder="Search by job title..." type="text" #title></ion-input>
+              <ion-input placeholder="Search by job title..." type="text" #title (keyup.enter)="searchByTitle(title.value)"></ion-input>
           </ion-item>
           <ion-button
             class="btn btn--search"

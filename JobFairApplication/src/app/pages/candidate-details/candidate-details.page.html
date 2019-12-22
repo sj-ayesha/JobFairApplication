@@ -1,4 +1,4 @@
-<ion-content padding>
+<ion-content class="ion-padding">
   <div class="wrapper-content">
     <div class="title">
       <ion-icon class="icon-user" ios="ios-person" md="md-person"></ion-icon>
@@ -6,7 +6,7 @@
     </div>
     <ion-row>
       <ion-col col-md-2 size="2" col-sm-3 size="3">
-        <ion-card padding>
+        <ion-card class="ion-padding">
           <ion-card-title>
             <h5><b>Jobs Applied:</b></h5>
           </ion-card-title>
@@ -26,8 +26,7 @@
               <div class="interviewer-detail">
                 <ion-item>
                   <ion-label position="floating" color="medium" class="label-info">*Interview Date</ion-label>
-                  <ion-datetime formControlName="interviewDate" display-format="DD MMM YYYY" value="{{ today }}"
-                    [disabled]='true'>
+                  <ion-datetime formControlName="interviewDate" display-format="DD MMM YYYY" value="{{ today }}" [disabled]='true'>
                   </ion-datetime>
                 </ion-item>
               </div>
@@ -118,12 +117,12 @@
           </ion-col>
 
         </ion-row>
-        <ion-row class="previous-feedback">
+        <ion-row class="previous-feedback" *ngIf="ScreeningDisplay">
           <ion-col col-md-12 size="12">
             <ion-card>
               <ion-card-content>
-                <ion-card-title><b>Feedbacks</b></ion-card-title>
                 <br>
+                <ion-card-title class="feedbacks"><b>Feedbacks</b></ion-card-title>
                 <div class="feedback-container" *ngFor="let candidateScreening of candidateScreenings">
                   <div class="separation"></div>
                   <div class="feedbacks">
@@ -143,7 +142,7 @@
         </ion-row>
         <ion-row>
           <ion-col col-md-12 size="12">
-            <ion-card padding>
+            <ion-card class="ion-padding">
               <form [formGroup]="formCandidateScreening" (ngSubmit)="onSubmit()">
                 <ion-item class="add-feedback">
                   <!-- <ion-label>Comments: </ion-label> -->
