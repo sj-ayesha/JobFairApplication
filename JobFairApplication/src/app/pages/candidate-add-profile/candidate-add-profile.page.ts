@@ -146,7 +146,7 @@ export class CandidateAddProfilePage implements OnInit {
       position: new FormControl(''),
       companyName: new FormControl(''),
       duration: new FormControl(''),
-      skillId: new FormControl(''),
+      skillId: new FormControl('')
     });
   }
 
@@ -157,9 +157,9 @@ export class CandidateAddProfilePage implements OnInit {
     // window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
     // window.localStorage.setItem('venue_id', JSON.stringify(3));
 
-    // const getJobIdLS = window.localStorage.getItem('priority');
-    // const jobId = getJobIdLS[1];
-    // const FirstJobIdLS = window.localStorage.setItem('jobId', jobId);
+    const getJobIdLS = window.localStorage.getItem('priority');
+    const jobId = getJobIdLS[1];
+    window.localStorage.setItem('jobId', jobId);
 
     this.today = new Date();
     this.day = String(this.today.getDate());
@@ -189,6 +189,17 @@ export class CandidateAddProfilePage implements OnInit {
       return data.checked === true;
     });
 
+    this.arrayExperience = [{
+      companyName: this.formCandidateDetails.get('companyName').value,
+      position: this.formCandidateDetails.get('position').value,
+      duration: this.formCandidateDetails.get('duration').value
+    }];
+    this.arrayQualification = [{
+      title: this.formCandidateDetails.get('title').value,
+      division: this.formCandidateDetails.get('division').value,
+      institution: this.formCandidateDetails.get('institution').value,
+      graduationDate: this.formCandidateDetails.get('graduationDate').value,
+    }];
     const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
