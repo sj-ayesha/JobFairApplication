@@ -341,7 +341,7 @@
                 <ion-icon class="icon-upload" ios="ios-cloud-upload" md="md-cloud-upload"></ion-icon>
                 <h3>Upload CV</h3>
             </div>
-            <form>
+            <form (ngSubmit)="onSubmitCV()">
                 <ion-row>
                     <ion-col col-md-6 size="12" size-sm>
                         <ion-item>
@@ -389,7 +389,7 @@
                     </ion-col>
                     <ion-col size="6" size-md size="12" size-sm>
                         <ion-item>
-                            <input type="file" (change)="onFileSelected($event)">
+                            <input type="file">
                         </ion-item>
                     </ion-col>
                 </ion-row>
