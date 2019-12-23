@@ -13,7 +13,7 @@ import { ToastController } from '@ionic/angular';
 export class VenuePage implements OnInit {
   formVenue: FormGroup;
   venues: Venue[];
-  public select = "";
+  public select = '';
   submitted = false;
   venue: Array<string>;
 
@@ -22,7 +22,7 @@ export class VenuePage implements OnInit {
     venues: [
       { type: 'required', message: '⚠ Venue is required.' },
     ],
-  }
+  };
 
   constructor(
     private apiService: ApiService,
@@ -31,7 +31,7 @@ export class VenuePage implements OnInit {
     private toastCtrl: ToastController) {
     this.formVenue = this.formBuilder.group({
       venues: new FormControl('', Validators.required)
-    })
+    });
   }
 
   ngOnInit() {

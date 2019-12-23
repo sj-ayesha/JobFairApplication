@@ -12,7 +12,7 @@ import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 })
 export class CandidateListPage implements OnInit {
   candidateDetails: any[];
-  candidateVenueJobs: CandidateVenueJob[]=[];
+  candidateVenueJobs: CandidateVenueJob[] = [];
   // candidateVenueJobsSort: CandidateVenueJob[];
   public countCandidates: any;
   noCandidatesAvailable = false;
@@ -40,7 +40,7 @@ export class CandidateListPage implements OnInit {
 
   populateCandidate() {
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')),false).subscribe(data => {
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), false).subscribe(data => {
       if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
         this.noCandidatesAvailable = true;
       } else {
@@ -64,14 +64,14 @@ export class CandidateListPage implements OnInit {
     // tslint:disable-next-line: radix
     this.apiService.getCandidateByASC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.candidateVenueJobs = data;
-    })
+    });
   }
 
   getCandidateByDesc() {
     // tslint:disable-next-line: radix
     this.apiService.getCandidateByDESC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.candidateVenueJobs = data;
-    })
+    });
   }
 
   searchByLastName(lastName: any) {
