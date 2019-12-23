@@ -200,6 +200,10 @@ export class CandidateAddProfilePage implements OnInit {
       institution: this.formCandidateDetails.get('institution').value,
       graduationDate: this.formCandidateDetails.get('graduationDate').value,
     }];
+    this.arrayVenue = [{
+      jobId: window.localStorage.getItem('jobId'),
+      jobPriority: window.localStorage.getItem('priority')
+    }]
     const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
