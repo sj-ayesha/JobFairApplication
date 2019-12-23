@@ -1,7 +1,7 @@
 //success: #10dc60
 //pending: #ffce00
 //rejected: #f04141
-
+@import '../../styles/custom.scss';
 .title{
     display: flex;
 }
@@ -14,9 +14,20 @@
     display: flex;
     justify-content: space-between;
 
+    &--title {
+        display: flex;
+        align-items: center;
+
+        span {
+            font-size: 17px;
+            color: $color-light-black;
+        }
+    }
+
     p {
         font-size: 17px;
-        color: black;
+        color: $color-light-black;
+        padding: 0 10px;
         @media only screen and (max-width: 768px) {
             max-width: 100px;
         }
@@ -61,6 +72,10 @@ ion-card.candidate-details{
     padding:5px 0px;
     display:block;
     font-size: 16px;
+}
+
+ion-textarea{
+    font-size: 17px;
 }
 
 #ck-button-rejected label input {
@@ -168,7 +183,7 @@ ion-card.candidate-details{
 }
 
 ion-button{
-    font-family: "Poppins", sans-serif;
+    // font-family: "Poppins", sans-serif;
     font-size: 20px;
 }
 
@@ -176,8 +191,12 @@ ion-button{
     margin-right: 13px;
 }
 
-.interviewer-detail {
+.formCandidateScreening{
+    width: 100%;
+    display: -webkit-box;
     display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
 }
 
 .label-info {
@@ -197,8 +216,51 @@ ion-button{
         margin: 0 10px;
     }
 }
-
-.candidate-details {
-    display: flex;
-    justify-content: space-between;
+.separation{
+    border-top: 1px solid #f04141;
+    width: 90%;
 }
+.candidate-details {
+    // display: flex;
+    // justify-content: space-between;
+}
+
+.feedbacks {
+    display: flex;
+    padding: 10px 0;
+
+    &-subtitle {
+        padding-right: 25px;
+    }
+}
+.information {
+    h5{
+        font-size: 20px;
+    }
+}
+.qualifications {
+    h5 {
+        font-size: 20px;
+    }
+}
+
+.experience {
+    h5 {
+        font-size: 20px;
+    }
+}
+.skill {
+    h5 {
+        font-size: 20px;
+    }
+}
+
+ion-card-title .feedbacks{
+    padding-bottom: 10px
+}
+
+// .btn-checkbox__item:disabled, .btn-checkbox__ite[disabled] {
+//     color: #f04141;
+//       opacity: 1;
+//       background: #f04141;
+// }

@@ -1,6 +1,8 @@
+@import '../../styles/custom.scss';
+
 .error-messages {
     font-size : 0.9em;
-    color: red;
+    color: $color-light-red;
 }
 .title{
     display: flex;
@@ -13,7 +15,7 @@
 }
 
 ion-button{
-    font-family: "Poppins", sans-serif;
+    // font-family: "Poppins", sans-serif;
     font-size: 20px;
 }
 
@@ -29,3 +31,10 @@ ion-datetime{
       margin: 0 10px;
     }
   }
+
+  .toast-custom{
+    --color:$color-light-red;
+    --border-style:solid;
+    --border-width :5px;
+    --border-color:$color-light-red;
+}

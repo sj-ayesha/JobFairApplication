@@ -1,8 +1,8 @@
 export class Venue{
-    venueId: Number;
-    venueName: String;
+    venueId: number;
+    venueName: string;
     startDate: Date;
     endDate: Date;
-    address: String;
+    address: string;
     active: boolean;
 }

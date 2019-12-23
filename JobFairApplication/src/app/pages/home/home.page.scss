@@ -11,12 +11,12 @@
 
 .main{
     color: white;
-    font-family: "Poppins", sans-serif;
+    // font-family: "Poppins", sans-serif;
     max-width: 630px;
     margin: 4% auto;
 }
 .main h1{
-    font-weight: 600;
+    // font-weight: 600;
     color:white;
 }
 .main h3{
@@ -35,19 +35,23 @@
 .venue-button{
     margin: 30px auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 ion-button{
-    font-family: "Poppins", sans-serif;
+    // font-family: "Proxima Nova Bold";
     font-size: 20px;
 }
 ion-label, ion-select-option{
-    font-family: "Poppins", sans-serif;
+    // font-family: "Poppins", sans-serif;
     font-size: 20px;
 }
 // .candidate-item{
 //     max-width: 155px;
 // }
+
+ion-list{
+    background: transparent;
+}
 .candidate-item:hover{
     cursor: pointer;
 }
@@ -66,11 +70,12 @@ ion-label, ion-select-option{
 .btn-view-more{
     margin-bottom: 25px;
 }
+
 @media only screen and (max-width: 1024px) {
     .ion-text-center{
         background-image: none;
         background-color: $color-light-red;
-        height: 33%;
+        height: 50%;
         // max-height:350px;
     }
     .lists h3{
@@ -81,7 +86,7 @@ ion-label, ion-select-option{
     .ion-text-center{
         background-image: none;
         background-color: $color-light-red;
-        height: 40%;
+        height: 45%;
         max-height:350px;
     }
     .venue-input{
@@ -96,6 +101,22 @@ ion-label, ion-select-option{
     ion-button{
         font-size: 15px;
     }
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .ion-text-center {
+        height: 60%;
+    }
+}
+
+.not-available{
+    width: 122px;
+    margin: 0 auto;
+    margin-bottom: 18px;
 }
 // @media only screen and (max-width: 415px) {
 //     .ion-text-center{

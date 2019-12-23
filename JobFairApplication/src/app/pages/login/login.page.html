@@ -11,7 +11,7 @@
           <ion-card-header text-center class="ion-no-padding">
             <h3>Sign in</h3>
           </ion-card-header>
-          <form [formGroup]="login">
+          <form [formGroup]="formLogin" (submit)="LogInEnter()">
             <ion-card-content>
               <div class="login-content__field">
                 <ion-item class="login-content__input">
@@ -22,7 +22,7 @@
                 <div class="error-messages">
                   <ng-container *ngFor="let error of error_messages.username">
                     <div class="error-message"
-                      *ngIf="login.get('username').hasError(error.type) && (login.get('username').dirty || login.get('username').touched)">
+                      *ngIf="formLogin.get('username').hasError(error.type) && (formLogin.get('username').dirty || formLogin.get('username').touched)">
                       {{ error.message }}
                     </div>
                   </ng-container>
@@ -30,13 +30,13 @@
 
                 <ion-item class="login-content__input">
                   <ion-label position="floating">Password</ion-label>
-                  <ion-input formControlName="password" type="password"></ion-input>
+                  <ion-input formControlName="password" type="password" (keyup.enter)="LogInEnter()"></ion-input>
                 </ion-item>
 
                 <div class="error-messages">
                     <ng-container *ngFor="let error of error_messages.password">
                       <div class="error-message"
-                        *ngIf="login.get('password').hasError(error.type) && (login.get('password').dirty || login.get('password').touched)">
+                        *ngIf="formLogin.get('password').hasError(error.type) && (formLogin.get('password').dirty || formLogin.get('password').touched)">
                         {{ error.message }}
                       </div>
                     </ng-container>
@@ -44,7 +44,7 @@
 
                 <ion-row center>
                   <ion-col text-center class="ion-padding">
-                    <ion-button color="dark" [routerLink]="['/home']" routerLinkActive="router-link-active" >Log In</ion-button>
+                    <ion-button type="submit" color="dark">Log In</ion-button>
                   </ion-col>
                 </ion-row>
               </div>

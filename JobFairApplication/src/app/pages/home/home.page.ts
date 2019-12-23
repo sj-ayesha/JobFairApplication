@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
 import { CategoryService } from '../../services/category.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Venue } from 'src/app/model/venue';
+import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
+import { CountCandidates } from 'src/app/model/countCandidates';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -15,32 +17,43 @@ export class HomePage {
 
   candidates: Candidate[];
   venues: Venue[];
-  constructor(private router: Router, private apiService: ApiService) {}
+  candidateVenueJobs: CandidateVenueJob;
+  public countCandidates: any;
+  public percentagCountCandidates: number;
+  noCandidatesAvailable = false;
+
+  constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
     this.populateCandidate();
-    this.populateVenue();
+    this.countCandidatesByVenue();
   }
 
-  populateCandidate(){
-    this.apiService.getAllCandidates().subscribe(data => {
-      this.candidates = data;
-      console.log( this.candidates);
+  populateCandidate() {
+    // tslint:disable-next-line: radix
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')),true).subscribe(data => {
+      if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE'){
+        this.noCandidatesAvailable = true;
+      } else {
+      this.candidateVenueJobs = data;
+      // console.log( this.candidateVenueJobs);
+      }
     });
   }
 
-  routeTo(candidateId: number) {
-        this.router.navigate(['/candidate-details', candidateId]);
-  } 
-
-  routeCategoryTo(category:String) {
-        this.router.navigate(['/job-list',category]);
-  } 
-
-  populateVenue(active:boolean = true){
-    this.apiService.getVenueByActive(active).subscribe(data=>{
-      this.venues = data;
-    });
+  routeTo(candidateId: number) {
+    this.router.navigate(['/candidate-details', candidateId]);
   }
 
+  routeToJob(jobQueryParam: string) {
+    this.router.navigate(['/job-list', jobQueryParam]);
+  }
+
+  countCandidatesByVenue() {
+    // tslint:disable-next-line: radix
+    this.apiService.getCountByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
+      this.countCandidates = data.countCandidates;
+      this.percentagCountCandidates = (this.countCandidates / 100);
+    });
+  }
 }

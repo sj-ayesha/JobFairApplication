@@ -1,7 +1,7 @@
 export class Experience {
-    experienceId:Number;
-    companyName:String;
-    position:String;
-    duration:String;
-    candidateId:Number;
+    experienceId: number;
+    companyName: string;
+    position: string;
+    duration: string;
+    candidateId: number;
 }

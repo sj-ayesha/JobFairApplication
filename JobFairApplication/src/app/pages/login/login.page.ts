@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { LoginLogoutService } from 'src/app/services/login-logout.service';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,8 +11,11 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  login: FormGroup;
+  formLogin: FormGroup;
+  loggedIn: boolean;
+  submitted = false;
 
+  // tslint:disable-next-line: variable-name
   error_messages = {
     username: [
       { type: 'required', message: '⚠ Username is required.' },
@@ -22,9 +29,13 @@ export class LoginPage implements OnInit {
     ]
   };
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loginLogoutService: LoginLogoutService,
+    private router: Router,
+    private toastCtrl: ToastController, 
+    private authService: AuthService
   ) {
-    this.login = this.formBuilder.group({
+    this.formLogin = this.formBuilder.group({
       username: new FormControl('', Validators.compose([
         Validators.maxLength(3),
         Validators.minLength(3),
@@ -35,6 +46,37 @@ export class LoginPage implements OnInit {
     });
   }
   ngOnInit() {
+    this.authService.isLoggedIn().subscribe(data => {
+      if (data){
+        this.router.navigateByUrl('/venue');
+      } 
+    });
+    // this.loggedIn = this.loginLogoutService.isLoggedIn;
   }
 
+  async unsuccessMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Invalid Username or Password',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+
+  }
+
+  LogInEnter() {
+    this.submitted = true;
+    // tslint:disable-next-line: max-line-length
+    if (this.formLogin.invalid) {
+      console.log(this.submitted, 'not sucessful');
+      this.unsuccessMsg();
+    } else {
+      this.loggedIn = true;
+      localStorage.setItem('user', 'userId');
+      this.loginLogoutService.loginUser();
+      // console.log(this.loggedIn);
+    }
+  }
 }

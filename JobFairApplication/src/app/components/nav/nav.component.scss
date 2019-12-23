@@ -5,9 +5,25 @@
     margin-bottom: 14px;
     display: flex;
     justify-content: space-between;
+
+    &--right {
+        display: flex;
+        align-items: center;
+
+        .venue-name {
+            font-size: 20px;
+            padding: 0 45px;
+            color: $color-light-red !important;
+            font-weight: 900;
+            margin-top:0;
+            margin-bottom: 0;
+        }
+    }
 }
 img{
-    max-width: 142px;
+    // max-width: 142px;
+    max-width: 178px;
+    max-height: 24px;
     &:hover,&:focus{
         cursor: pointer;
         outline: none;
@@ -17,8 +33,13 @@ a{
 
     color: $color-light-black;
     text-decoration: none;
-    font-family: "Poppins", sans-serif;
+    // font-family: "Poppins", sans-serif;
     &:hover{
         color: $color-light-red;
+        cursor: pointer;
     }
+}
+
+.dissableRediretion:hover{
+    cursor: not-allowed;
 }

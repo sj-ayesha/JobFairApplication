@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { JobListPage } from './pages/job-list/job-list.page';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
   {
     path: 'login',
@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/job-list/job-list.module').then( m => m.JobListPageModule)
   },
   {
-    path: 'job-list/:category',
+    path: 'job-list/:jobQueryParam',
     loadChildren: () => import('./pages/job-list/job-list.module').then( m => m.JobListPageModule)
   },
   {
@@ -33,6 +33,11 @@ const routes: Routes = [
     path: 'candidate-add-profile',
     loadChildren: () => import('./pages/candidate-add-profile/candidate-add-profile.module').then( m => m.CandidateAddProfilePageModule)
   },
+  {
+    path: 'venue',
+    loadChildren: () => import('./pages/venue/venue.module').then( m => m.VenuePageModule)
+  },
+
 ];
 
 @NgModule({
