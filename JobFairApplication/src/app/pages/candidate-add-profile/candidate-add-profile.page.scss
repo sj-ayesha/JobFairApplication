@@ -8,7 +8,7 @@
     display: flex;
 }
 
-.icon-add{
+.icon-add, .icon-upload{
     font-size: 35px;
     padding-top: 19px;
     padding-right: 10px;
@@ -37,4 +37,14 @@ ion-datetime{
     --border-style:solid;
     --border-width :5px;
     --border-color:$color-light-red;
+}
+
+.tablinks {
+    --background: #414344;
+    --background-hover: #E23615;
+
+    &.active {
+        --background-hover: #E23615;
+        --background:#E23615;
+    }
 }
