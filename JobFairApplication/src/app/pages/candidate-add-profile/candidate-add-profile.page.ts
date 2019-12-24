@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-  Form,
-  FormArray
-} from '@angular/forms';
+import {  FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CandidateSkill } from 'src/app/model/CandidateSkill';
 import { ApiService } from 'src/app/services/api.service';
-import { Router, ChildActivationStart } from '@angular/router';
+import { Router } from '@angular/router';
 import { element } from 'protractor';
 import { ToastController } from '@ionic/angular';
 import { Skills } from 'src/app/model/skills';
@@ -23,6 +16,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 })
 export class CandidateAddProfilePage implements OnInit {
   formCandidateDetails: FormGroup;
+  formCandidateUploadCV: FormGroup;
 
   genders: Array<string>;
   currentLevels: Array<string>;
@@ -53,17 +47,6 @@ export class CandidateAddProfilePage implements OnInit {
   arrayScreening: any[];
 
   fileData: File = null; // File Upload
-
-  // skills: Array<string>;
-  // tslint:disable-next-line: variable-name
-  // public skills = [
-  //   { val: 'Angular', isChecked: true },
-  //   { val: 'C#', isChecked: false },
-  //   { val: 'Java', isChecked: false },
-  //   { val: 'React', isChecked: false },
-  //   { val: 'Vue', isChecked: false },
-  //   { val: 'SQL', isChecked: false },
-  // ];
 
   // tslint:disable-next-line: variable-name
   error_messages = {
@@ -103,7 +86,27 @@ export class CandidateAddProfilePage implements OnInit {
     jobType: [{ type: 'required', message: '⚠ Job Type is required.' }],
     currentLevel: [
       { type: 'required', message: '⚠ Current Level is required.' }
-    ]
+    ],
+    firstNameCV: [
+      { type: 'required', message: '⚠ First Name is required' },
+      {
+        type: 'maxLength',
+        message: '⚠ First Name must be less than 30 letters'
+      },
+      { type: 'pattern', message: '⚠ First Name is invalid' }
+    ],
+    lastNameCV: [
+      { type: 'required', message: '⚠ Last Name is required' },
+      {
+        type: 'maxLength',
+        message: '⚠ Last Name must be less than 30 letters'
+      },
+      { type: 'pattern', message: '⚠ Last Name is invalid' }
+    ],
+    emailCV: [
+      { type: 'required', message: '⚠ Email is required.' },
+      { type: 'pattern', message: '⚠ Email is invalid.' }
+    ],
   };
 
   constructor(
@@ -153,7 +156,7 @@ export class CandidateAddProfilePage implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")
+          Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')
         ])
       ),
       gender: new FormControl('', Validators.required),
@@ -174,6 +177,32 @@ export class CandidateAddProfilePage implements OnInit {
       companyName: new FormControl(''),
       duration: new FormControl(''),
       skillId: new FormControl('')
+    });
+
+    this.formCandidateUploadCV = this.formBuilder.group({
+      firstNameCV: new FormControl(
+        '',
+        Validators.compose([
+          Validators.maxLength(30),
+          Validators.pattern('[a-zA-Z ]*'),
+          Validators.required
+        ])
+      ),
+      lastNameCV: new FormControl(
+        '',
+        Validators.compose([
+          Validators.maxLength(30),
+          Validators.pattern('[a-zA-Z ]*'),
+          Validators.required
+        ])
+      ),
+      emailCV: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        ])
+      ),
     });
   }
 
@@ -260,7 +289,7 @@ export class CandidateAddProfilePage implements OnInit {
     );
   }
 
-  ionViewWillLoad() {}
+  ionViewWillLoad() { }
 
   async successMsg() {
     const toast = await this.toastCtrl.create({
