@@ -21,8 +21,7 @@ export class NavComponent implements OnInit, OnDestroy {
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
     // console.log("veryy good", this.loginLogoutService.isLoggedIn);
     this.loggedIn = !!localStorage.getItem('user');
-    window.localStorage.setItem('venue_name', 'UOM');
-    this.venueName = window.localStorage.getItem('venue_name');
+    this.venueName = window.localStorage.getItem('venueName');
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
   }
 
@@ -36,6 +35,7 @@ export class NavComponent implements OnInit, OnDestroy {
     localStorage.removeItem('venue_id');
     localStorage.removeItem('priority');
     localStorage.removeItem('jobId');
+    localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
   }
 

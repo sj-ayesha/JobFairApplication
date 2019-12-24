@@ -60,7 +60,7 @@ export class CandidateDetailsPage implements OnInit {
     this.formCandidateScreening = this.formBuilder.group({
       // tslint:disable-next-line: max-line-length
       interviewerName: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
-      interviewVenue: new FormControl(localStorage.getItem('venue_name')),
+      interviewVenue: new FormControl(localStorage.getItem('venueName')),
       interviewDate: new FormControl(new Date()),
       feedback: new FormControl('')
     });
@@ -71,7 +71,7 @@ export class CandidateDetailsPage implements OnInit {
     this.getCandidateById(this.candiateId);
     this.today = new Date();
 
-    this.venueName = localStorage.getItem('venue_name');
+    this.venueName = localStorage.getItem('venueName');
 
     // Date Format
     this.today = new Date();

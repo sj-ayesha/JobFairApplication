@@ -41,12 +41,10 @@ export class VenuePage implements OnInit {
     localStorage.setItem('venue_id', id.target.value);
     const LSid = JSON.parse(localStorage.getItem('venue_id'));
 
-    for (let i = 0; i <= this.venues.length; i++) {
+    for (let i = 0; i < this.venues.length; i++) {
       if (LSid === this.venues[i].venueId){
-        console.log(this.venues[i].venueName);
-      }
-      else {
-        console.log("not found");
+        // console.log(this.venues[i].venueName);
+        window.localStorage.setItem('venueName', this.venues[i].venueName);
       }
     }
 
