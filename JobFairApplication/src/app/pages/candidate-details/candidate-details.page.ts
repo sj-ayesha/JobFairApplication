@@ -101,9 +101,9 @@ export class CandidateDetailsPage implements OnInit {
       }
 
       // To be used later on
-      let d = this.candidateScreenings[0].interviewDate;
-      d = d.split('T')[0];
-      console.log(d);
+      // let d = this.candidateScreenings[0].interviewDate;
+      // d = d.split('T')[0];
+      // console.log(d);
     }
     );
   }
@@ -125,6 +125,7 @@ export class CandidateDetailsPage implements OnInit {
     };
     // console.log(interviewDetails);
     this.apiService.saveCandidateScreening(interviewDetails).subscribe(data => {
+      this.getCandidateById(this.candiateId);
     });
   }
 

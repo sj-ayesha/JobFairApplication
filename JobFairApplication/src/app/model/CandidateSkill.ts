@@ -1,7 +1,7 @@
 import { Skills } from './skills';
 
 export class CandidateSkill {
-    skills: Skills;
+    skill: Skills;
     checked = false;
     // candidateId: Number;
     // message:String;

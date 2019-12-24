@@ -26,7 +26,7 @@ export class CandidateAddProfilePage implements OnInit {
   divisions: Array<string>;
   durations: Array<string>;
   CandidateSkills: CandidateSkill[] = [];
-  skills: Skills[];
+  skill: Skills[];
   candidateId: number;
   selectedDay = '';
   public today: any;
@@ -256,6 +256,11 @@ export class CandidateAddProfilePage implements OnInit {
         graduationDate: this.formCandidateDetails.get('graduationDate').value
       }
     ];
+    this.arrayVenue = [{
+      venueId: window.localStorage.getItem('venue_id'),
+      jobId: window.localStorage.getItem('jobId'),
+      jobPriority: window.localStorage.getItem('priority')
+    }];
     const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
@@ -269,8 +274,7 @@ export class CandidateAddProfilePage implements OnInit {
       availabilityDate: this.formCandidateDetails.get('availabilityDate').value,
       currentLevel: this.formCandidateDetails.get('currentLevel').value,
       jobType: this.formCandidateDetails.get('jobType').value,
-      currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear')
-        .value,
+      currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
       experienceDtos: this.arrayExperience,
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
@@ -317,7 +321,7 @@ export class CandidateAddProfilePage implements OnInit {
     this.apiService.getAllSkills().subscribe(data => {
       data.forEach((element, index) => {
         let data = {
-          skills: element,
+          skill: element,
           checked: null
         };
         if (element !== null && this) {
