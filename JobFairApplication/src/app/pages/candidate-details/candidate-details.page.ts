@@ -47,7 +47,7 @@ export class CandidateDetailsPage implements OnInit {
       { type: 'maxLength', message: '⚠ interviewer Name must be less than 30 letters' },
       { type: 'pattern', message: '⚠ interviewer Name is invalid' }
     ],
-  }
+  };
 
   constructor(
     private dataService: DataService,
@@ -94,21 +94,21 @@ export class CandidateDetailsPage implements OnInit {
       this.experiences = this.candidate.experienceDtos;
       this.skills = this.candidate.candidateSkillDtos;
       this.candidateScreenings = this.candidate.candidateScreeningDtos;
-      if(this.candidateScreenings.length > 0) {
+      if (this.candidateScreenings.length > 0) {
         this.ScreeningDisplay = true;
       } else {
         this.ScreeningDisplay = false;
       }
 
       // To be used later on
-      var d = this.candidateScreenings[0].interviewDate;
-      d = d.split('T')[0];
-      console.log(d);
+      // let d = this.candidateScreenings[0].interviewDate;
+      // d = d.split('T')[0];
+      // console.log(d);
     }
     );
   }
 
-  radioButtonValue(getValue){
+  radioButtonValue(getValue) {
     this.status = getValue.target.value;
   }
 
@@ -122,9 +122,10 @@ export class CandidateDetailsPage implements OnInit {
       screeningStatus: this.status,
       // tslint:disable-next-line: radix
       candidateId: parseInt(this.candiateId)
-    }
+    };
     // console.log(interviewDetails);
     this.apiService.saveCandidateScreening(interviewDetails).subscribe(data => {
+      this.getCandidateById(this.candiateId);
     });
   }
 

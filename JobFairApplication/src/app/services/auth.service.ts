@@ -12,7 +12,7 @@ export class AuthService {
   isLoggedIn(): Observable<boolean> {
     const loggedin =  new BehaviorSubject<boolean>(false);
 
-    if(localStorage.getItem('user')) {
+    if (localStorage.getItem('user')) {
       loggedin.next(true);
     } else {
       loggedin.next(false);

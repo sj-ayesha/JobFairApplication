@@ -42,7 +42,7 @@ export class ApiService {
 
   // candidate venue job
 
-  getCandidatesByVenueId(venueId: number,limit: boolean): Observable<CandidateVenueJob[] | any> {
+  getCandidatesByVenueId(venueId: number, limit: boolean): Observable<CandidateVenueJob[] | any> {
     return this.http.get<CandidateVenueJob[] | any>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId + '/' + limit);
   }
 

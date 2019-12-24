@@ -65,7 +65,7 @@ export class JobListPage implements OnInit {
     const coll = document.getElementsByClassName('collapsible');
 
     for (let i = 0; i < coll.length; i++) {
-      coll[i].addEventListener('click', function () {
+      coll[i].addEventListener('click', function() {
 
         this.classList.toggle('active');
         const content = this.nextElementSibling;
@@ -81,7 +81,7 @@ export class JobListPage implements OnInit {
   getAllJobsByVenueId() {
     // tslint:disable-next-line: radix
     this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
-      if (data.message == 'NO_VENUE_JOB_AVAILABLE') {
+      if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
         this.noJobsAvailable = true;
       } else {
         this.venueJobs = data;
@@ -99,7 +99,7 @@ export class JobListPage implements OnInit {
   getAllJobsByVenueIdAndCategory() {
     const category: any = this.route.snapshot.paramMap.get('jobQueryParam');
     this.apiService.getJobsByVenueIdAndCategory(parseInt(window.localStorage.getItem('venue_id')), category).subscribe(data => {
-      if (data.message == "NO_VENUE_JOB_AVAILABLE") {
+      if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
         this.noJobsAvailable = true;
       } else {
         this.venueJobs = data;
@@ -120,7 +120,7 @@ export class JobListPage implements OnInit {
       console.log(this.priority);
       localStorage.setItem('priority', JSON.stringify(this.priority));
     } else {
-      var index = this.priority.indexOf(jobId);
+      let index = this.priority.indexOf(jobId);
       if (index > -1) {
         this.priority.splice(index, 1);
       }
@@ -143,12 +143,12 @@ export class JobListPage implements OnInit {
     }
   }
 
-  back(){
+  back() {
     this.router.navigate(['/home']);
     window.localStorage.removeItem('priority');
   }
 
-  searchByTitle(title: string){
+  searchByTitle(title: string) {
     // tslint:disable-next-line: radix
     const venueId = parseInt(window.localStorage.getItem('venue_id'));
     this.apiService.searchJobByTitle(venueId, title).subscribe(data => {

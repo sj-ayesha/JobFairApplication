@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private loginLogoutService: LoginLogoutService,
     private router: Router,
-    private toastCtrl: ToastController, 
+    private toastCtrl: ToastController,
     private authService: AuthService
   ) {
     this.formLogin = this.formBuilder.group({
@@ -45,11 +45,12 @@ export class LoginPage implements OnInit {
       password: new FormControl('', Validators.required)
     });
   }
+
   ngOnInit() {
     this.authService.isLoggedIn().subscribe(data => {
-      if (data){
+      if (data) {
         this.router.navigateByUrl('/venue');
-      } 
+      }
     });
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
   }
