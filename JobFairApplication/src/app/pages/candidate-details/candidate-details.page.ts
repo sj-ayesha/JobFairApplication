@@ -62,7 +62,8 @@ export class CandidateDetailsPage implements OnInit {
       interviewerName: new FormControl('', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])),
       interviewVenue: new FormControl(localStorage.getItem('venueName')),
       interviewDate: new FormControl(new Date()),
-      feedback: new FormControl('')
+      feedback: new FormControl(''),
+      option: new FormControl('')
     });
   }
 
@@ -101,9 +102,11 @@ export class CandidateDetailsPage implements OnInit {
       }
 
       // To be used later on
-      // let d = this.candidateScreenings[0].interviewDate;
-      // d = d.split('T')[0];
-      // console.log(d);
+      // for(let i = 0; i < this.candidateScreenings.length; i++) {
+      //   let d = this.candidateScreenings[i].interviewDate;
+      //   d = d.split('T')[i];
+      //   console.log(d);
+      // }
     }
     );
   }
@@ -123,6 +126,7 @@ export class CandidateDetailsPage implements OnInit {
       // tslint:disable-next-line: radix
       candidateId: parseInt(this.candiateId)
     };
+    console.log(this.formCandidateScreening.get('interviewDate').value);
     // console.log(interviewDetails);
     this.apiService.saveCandidateScreening(interviewDetails).subscribe(data => {
       this.getCandidateById(this.candiateId);
@@ -159,11 +163,8 @@ export class CandidateDetailsPage implements OnInit {
     } else {
       this.submitInterviewDetails();
       this.successMsg();
-
-      // setTimeout(() => {
-      //   this.formCandidateDetails.reset();
-      //   this.router.navigate(['home']);
-      // }, 2000);
+      this.formCandidateScreening.reset();
+      this.formCandidateScreening.controls.option.reset();
     }
   }
 }
