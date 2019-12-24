@@ -55,7 +55,7 @@
             </div>
           </form>
           <ion-col col-md-12 size="12">
-            <ion-card class="candidate-details" padding>
+            <!-- <ion-card class="candidate-details" padding>
               <ion-row>
                 <ion-col col-md-4 size="4">
                   <div class="information">
@@ -109,6 +109,30 @@
                     <div *ngFor="let skill of skills">
                       <div class="separation"></div>
                       <p>{{ skill?.skill.skillName }}</p>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-card> -->
+            <ion-card class="candidate-cv-details" padding>
+              <ion-row>
+                <ion-col col-md-6 size="6">
+                  <div class="information">
+                    <h5><b>Information</b></h5>
+                    <div>
+                      <div class="separation"></div>
+                      <p><b>First Name:</b> John</p>
+                      <p><b>Last Name: </b> Smith</p>
+                      <p><b>Email:</b> john@gmail.com</p>
+                    </div>
+                  </div>
+                </ion-col>
+                <ion-col col-md-6 size="6">
+                  <div class="uploaded-file">
+                    <h5><b>CV Uploaded</b></h5>
+                    <div>
+                      <div class="separation"></div>
+                      <p>john_cv.pdf</p>
                     </div>
                   </div>
                 </ion-col>
