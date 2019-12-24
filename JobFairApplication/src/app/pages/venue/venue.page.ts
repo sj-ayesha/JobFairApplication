@@ -17,7 +17,6 @@ export class VenuePage implements OnInit {
   submitted = false;
   venue: Array<string>;
 
-
   error_messages = {
     venues: [
       { type: 'required', message: '⚠ Venue is required.' },
@@ -36,17 +35,23 @@ export class VenuePage implements OnInit {
 
   ngOnInit() {
     this.getVenueByActive();
-
-    this.venue = [
-      'UTM',
-      'UOM'
-    ];
-
   }
 
   selected(id) {
     localStorage.setItem('venue_id', id.target.value);
-    const count = JSON.parse(localStorage.venue_id).length;
+    const LSid = JSON.parse(localStorage.getItem('venue_id'));
+
+    for (let i = 0; i <= this.venues.length; i++) {
+      if (LSid === this.venues[i].venueId){
+        console.log(this.venues[i].venueName);
+      }
+      else {
+        console.log("not found");
+      }
+    }
+
+    console.log(this.venues[0].venueId);
+    // console.log(LSid);
   }
 
   getVenueByActive() {
