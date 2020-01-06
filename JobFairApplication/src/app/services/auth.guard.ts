@@ -11,7 +11,6 @@ export class AuthGuard implements CanActivate {
 
         canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
                 // return undefined;
-
                 const user = localStorage.getItem('user');
                 const venue = localStorage.getItem('venue_id');
                 let isloggedIn;
@@ -29,7 +28,6 @@ export class AuthGuard implements CanActivate {
                         isloggedIn = false;
                         this.router.navigateByUrl('/login');
                 }
-
                 return isloggedIn;
         }
 

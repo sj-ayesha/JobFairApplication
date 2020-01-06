@@ -20,6 +20,7 @@ export class CandidateDetailsPage implements OnInit {
   formCandidateScreening: FormGroup;
 
   jobs: any;
+  jobLists: any[];
   public items: any;
   candidate: Candidate;
   qualifications;
@@ -91,6 +92,10 @@ export class CandidateDetailsPage implements OnInit {
   getCandidateById(candidateId: number) {
     this.apiService.getCandidateById(candidateId).subscribe(data => {
       this.candidate = data;
+
+      this.jobLists = this.candidate.candidateVenueJobSaveDto[0].jobList;
+
+      console.log(this.candidate.candidateVenueJobSaveDto[0].jobList);
       this.qualifications = this.candidate.qualificationDtos;
       this.experiences = this.candidate.experienceDtos;
       this.skills = this.candidate.candidateSkillDtos;

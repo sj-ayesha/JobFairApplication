@@ -8,13 +8,13 @@
       <ion-col col-md-2 size="2" col-sm-3 size="3">
         <ion-card class="ion-padding">
           <ion-card-title>
-            <h5><b>Jobs Applied:</b></h5>
+            <h5><b>Job(s) Applied:</b></h5>
           </ion-card-title>
           <div class="separation"></div>
-          <div class="jobs-selected" *ngFor="let item of items; let i = index">
+          <div class="jobs-selected" *ngFor="let jobList of jobLists; let i = index">
             <div class="jobs-selected--title">
               <span>{{i + 1}}. </span>
-              <p>{{ item.title }}</p>
+              <p>{{ jobList.title }}</p>
             </div>
           </div>
         </ion-card>
