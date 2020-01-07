@@ -7,7 +7,7 @@ export class CandidateVenueJob {
 
     candidateVenueJob: number;
     venueJob: VenueJob;
-    candidate:{
+    candidate: {
         candidateId: number;
         firstName: string;
         lastName: string;
@@ -25,4 +25,5 @@ export class CandidateVenueJob {
     }
     jobPriority: string;
     jobList: Job[];
+    message: string;
 }
