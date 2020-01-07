@@ -15,6 +15,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
   styleUrls: ['./candidate-add-profile.page.scss']
 })
 export class CandidateAddProfilePage implements OnInit {
+  
   formCandidateDetails: FormGroup;
   formCandidateUploadCV: FormGroup;
 
@@ -47,6 +48,7 @@ export class CandidateAddProfilePage implements OnInit {
   arrayScreening: any[];
 
   fileData: File = null; // File Upload
+
 
   // tslint:disable-next-line: variable-name
   error_messages = {
@@ -108,6 +110,7 @@ export class CandidateAddProfilePage implements OnInit {
       { type: 'pattern', message: '⚠ Email is invalid.' }
     ],
   };
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -117,6 +120,7 @@ export class CandidateAddProfilePage implements OnInit {
     private dropdowns: DropdownsService,
     private http: HttpClient
   ) {
+    
     this.formCandidateDetails = this.formBuilder.group({
       firstName: new FormControl(
         '',
@@ -152,12 +156,12 @@ export class CandidateAddProfilePage implements OnInit {
         Validators.compose([Validators.pattern('[0-9]{7}$')])
       ),
       nationality: new FormControl(
-        '',
+        'Mauritian',
         Validators.compose([
           Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')
         ])
       ),
-      gender: new FormControl('', Validators.required),
+      gender: new FormControl(''),
       address: new FormControl(''),
       availabilityDate: new FormControl('', Validators.required),
       currentAcademicYear: new FormControl(''),
@@ -166,7 +170,7 @@ export class CandidateAddProfilePage implements OnInit {
       registrationDate: new FormControl(new Date()),
 
       currentLevel: new FormControl('', Validators.required),
-      title: new FormControl('', Validators.required),
+      title: new FormControl('Degree'),
       division: new FormControl(''),
       institution: new FormControl(''),
       graduationDate: new FormControl(''),
@@ -204,9 +208,11 @@ export class CandidateAddProfilePage implements OnInit {
     });
   }
 
+
   ngOnInit() {
     // window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
     // window.localStorage.setItem('venue_id', JSON.stringify(3));
+    
 
     const getJobIdLS = window.localStorage.getItem('priority');
     const jobId = getJobIdLS[1];
@@ -233,6 +239,7 @@ export class CandidateAddProfilePage implements OnInit {
     this.academyYears = this.dropdowns.academyYears;
     this.currentLevels = this.dropdowns.currentLevels;
   }
+
 
   submitCandidate() {
     const filteredCandidateSkills = this.CandidateSkills.filter(data => {
@@ -352,68 +359,6 @@ export class CandidateAddProfilePage implements OnInit {
         this.router.navigate(['home']);
       }, 2000);
     }
-  }
-
-  duplicate() {
-    const div = document.createElement('div');
-
-    div.className = 'row';
-
-    div.innerHTML = `
-    <ion-row id="duplicater">
-    <ion-col col-md-6 size="12" size-sm>
-        <ion-item>
-            <ion-input formControlName="position" type="text" placeholder="Position"></ion-input>
-        </ion-item>
-        <div class="error-messages">
-            <ng-container *ngFor='let error of error_messages.position'>
-                <div class="error-message"
-                    *ngIf="addCandidate.get('position').hasError(error.type) &&
-                     (addCandidate.get('position').dirty || addCandidate.get('position').touched)">
-                    {{ error.message }}
-                </div>
-            </ng-container>
-        </div>
-    </ion-col>
-    <ion-col col-md-6 size="12" size-sm>
-        <ion-item>
-            <ion-input formControlName="company" type="text" placeholder="Company"></ion-input>
-        </ion-item>
-        <div class="error-messages">
-            <ng-container *ngFor='let error of error_messages.company'>
-                <div class="error-message"
-                    *ngIf="addCandidate.get('company').hasError(error.type) &&
-                    (addCandidate.get('company').dirty || addCandidate.get('company').touched)">
-                    {{ error.message }}
-                </div>
-            </ng-container>
-        </div>
-    </ion-col>
-</ion-row>
-<ion-row>
-    <ion-col size="6" size-md size="12" size-sm>
-        <ion-item>
-            <ion-label floating color="medium">*Duration</ion-label>
-            <ion-select interface="popover" formControlName="duration" cancelText="Cancel" okText="OK">
-                <ion-select-option *ngFor="let duration of durations" [value]="duration">
-                    {{ duration }}
-                </ion-select-option>
-            </ion-select>
-        </ion-item>
-        <div class="error-messages">
-            <ng-container *ngFor='let error of error_messages.duration'>
-                <div class="error-message"
-                    *ngIf="addCandidate.get('duration').hasError(error.type) && 
-                    (addCandidate.get('duration').dirty || addCandidate.get('duration').touched)">
-                    {{ error.message }}
-                </div>
-            </ng-container>
-        </div>
-    </ion-col>
-</ion-row>
-  `;
-
-    document.getElementById('content').appendChild(div);
   }
 
   // Tab Button Function

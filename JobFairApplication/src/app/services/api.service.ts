@@ -100,6 +100,10 @@ export class ApiService {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/title' + '?venueId=' + venueId + '&title=' + title);
   }
 
+  searchJobByLevel(venueId: number, level: string): Observable<VenueJob[]> {
+    return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/level' + '?venueId=' + venueId + '&level=' + level);
+  }
+
   // venue
 
   getVenueByActive(active: boolean): Observable<Venue[]> {
@@ -141,5 +145,7 @@ export class ApiService {
   saveCandidateScreening(candidateScreening: CandidateScreening): Observable<CandidateScreening[]> {
     return this.http.post<CandidateScreening[]>(this.baseUrl + 'candidate-screening', candidateScreening);
   }
+
+  
 
 }
