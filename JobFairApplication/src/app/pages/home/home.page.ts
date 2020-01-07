@@ -27,6 +27,8 @@ export class HomePage {
   ngOnInit() {
     this.populateCandidate();
     this.countCandidatesByVenue();
+
+    console.log('login', localStorage)
   }
 
   populateCandidate() {

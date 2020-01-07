@@ -16,7 +16,7 @@ export class JobListPage implements OnInit {
   // jobs: any;
   jobs: Job[];
   public venueJobs: VenueJob[];
-  public searchTerm: string = "";
+  public searchTerm: string = '';
   public items: any;
   noJobsAvailable = false;
   public splitJobDescriptions;
@@ -128,7 +128,7 @@ export class JobListPage implements OnInit {
       localStorage.setItem('priority', JSON.stringify(this.priority));
     }
   }
-
+  
   routeToJob(jobQueryParam: string) {
     this.router.navigate(['/job-list', jobQueryParam]);
   }

@@ -8,13 +8,13 @@
       <ion-col col-md-2 size="2" col-sm-3 size="3">
         <ion-card class="ion-padding">
           <ion-card-title>
-            <h5><b>Jobs Applied:</b></h5>
+            <h5><b>Job(s) Applied:</b></h5>
           </ion-card-title>
           <div class="separation"></div>
-          <div class="jobs-selected" *ngFor="let item of items; let i = index">
+          <div class="jobs-selected" *ngFor="let jobList of jobLists; let i = index">
             <div class="jobs-selected--title">
               <span>{{i + 1}}. </span>
-              <p>{{ item.title }}</p>
+              <p>{{ jobList.title }}</p>
             </div>
           </div>
         </ion-card>
@@ -70,6 +70,7 @@
                       <p><b>Address:</b> {{candidate?.address}}</p>
                       <p><b>Nationality:</b> {{candidate?.nationality}}</p>
                       <p><b>Current Level:</b> {{candidate?.currentLevel}}</p>
+                      <p><b>Available From:</b> {{candidate?.availabilityDate}}</p>
                     </div>
                   </div>
                 </ion-col>
@@ -83,7 +84,6 @@
                       <p><b>Division:</b> {{ qualification.division }}</p>
                       <p><b>Institution:</b> {{ qualification.institution }}</p>
                       <p><b>Graduation Date:</b> {{ qualification.graduationDate }}</p>
-
                     </div>
                   </div>
                 </ion-col>
@@ -114,6 +114,30 @@
                 </ion-col>
               </ion-row>
             </ion-card>
+            <!-- <ion-card class="candidate-cv-details" padding>
+              <ion-row>
+                <ion-col col-md-6 size="6">
+                  <div class="information">
+                    <h5><b>Information</b></h5>
+                    <div>
+                      <div class="separation"></div>
+                      <p><b>First Name:</b> John</p>
+                      <p><b>Last Name: </b> Smith</p>
+                      <p><b>Email:</b> john@gmail.com</p>
+                    </div>
+                  </div>
+                </ion-col>
+                <ion-col col-md-6 size="6">
+                  <div class="uploaded-file">
+                    <h5><b>CV Uploaded</b></h5>
+                    <div>
+                      <div class="separation"></div>
+                      <p>john_cv.pdf</p>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-card> -->
           </ion-col>
 
         </ion-row>
@@ -150,7 +174,7 @@
                   </ion-textarea>
                 </ion-item>
                 <div class="status">
-                  <ion-radio-group class="btn-radio-group">
+                  <ion-radio-group formControlName="option" class="btn-radio-group">
 
                     <ion-item>
                       <ion-label>Rejected</ion-label>
