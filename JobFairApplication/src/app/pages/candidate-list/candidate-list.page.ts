@@ -75,8 +75,12 @@ export class CandidateListPage implements OnInit {
   }
 
   searchByLastName(lastName: any) {
+    if (lastName === '') {
+      this.populateCandidate();
+    } else {
     this.apiService.getCandidateByLastName(lastName).subscribe(data => {
       this.candidateVenueJobs = data;
     });
   }
+}
 }

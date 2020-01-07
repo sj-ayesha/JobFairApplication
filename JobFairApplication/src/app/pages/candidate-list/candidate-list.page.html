@@ -16,9 +16,9 @@
             <div class="search-container">
               <!-- <ion-input #test class="no-padding"></ion-input> -->
               <ion-item class="search-input">
-                <ion-input placeholder="Search by last name..." type="text" #test (keyup.enter)="searchByLastName(test.value)"></ion-input>
+                <ion-input placeholder="Search by last name..." type="text" #name (keyup.enter)="searchByLastName(name.value)" ></ion-input>
               </ion-item>
-              <ion-button (click)="searchByLastName(test.value)" class="btn btn--search" color="dark" size="small">
+              <ion-button (click)="searchByLastName(name.value)" class="btn btn--search" color="dark" size="small">
                 <ion-icon name="search"></ion-icon>
               </ion-button>
             </div>
@@ -57,8 +57,8 @@
           </p>
         </ion-label>
         <ion-label slot="end">
-          <p><b>Venue:</b> {{candidateVenueJob.VenueJobDto.venue.venueName}}</p>
-          <p><b>Job Applied:</b> {{candidateVenueJob.jobList[0].title}}</p>
+          <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
+          <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
           <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
         </ion-label>
       </ion-item>
