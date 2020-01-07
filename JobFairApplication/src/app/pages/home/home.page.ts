@@ -28,7 +28,7 @@ export class HomePage {
     this.populateCandidate();
     this.countCandidatesByVenue();
 
-    console.log('login', localStorage)
+    console.log('login', localStorage);
   }
 
   populateCandidate() {
@@ -38,7 +38,7 @@ export class HomePage {
         this.noCandidatesAvailable = true;
       } else {
       this.candidateVenueJobs = data;
-      // console.log( this.candidateVenueJobs);
+      //  console.log( this.candidateVenueJobs);
       }
     });
   }
