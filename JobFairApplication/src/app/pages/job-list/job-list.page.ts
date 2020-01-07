@@ -153,7 +153,7 @@ export class JobListPage implements OnInit {
     this.router.navigate(['/job-list', jobQueryParam]);
   }
 
-  applyOnlyFive() {
+  applyOnlyFive(e) {
     const count = JSON.parse(localStorage.priority).length;
     // console.log(count);
     if (count <= 5) {

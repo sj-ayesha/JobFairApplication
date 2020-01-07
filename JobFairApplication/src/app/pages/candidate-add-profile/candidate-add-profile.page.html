@@ -80,7 +80,7 @@
                 <ion-row>
                     <ion-col size="6" size-md size="12" size-sm>
                         <ion-item>
-                            <ion-label position="floating" color="medium">*Gender</ion-label>
+                            <ion-label position="floating" color="medium">Gender</ion-label>
                             <ion-select interface="popover" formControlName="gender" cancelText="Cancel" okText="OK">
                                 <ion-select-option *ngFor="let gender of genders" [value]="gender">{{ gender }}
                                 </ion-select-option>
@@ -341,17 +341,17 @@
                 <ion-icon class="icon-upload" ios="ios-cloud-upload" md="md-cloud-upload"></ion-icon>
                 <h3>Upload CV</h3>
             </div>
-            <form [formGroup]="formCandidateUploadCV" (ngSubmit)="onSubmitCV()">
+            <form [formGroup]="formCandidateDetails" (ngSubmit)="onSubmit()">
                 <ion-row>
                     <ion-col col-md-6 size="12" size-sm>
                         <ion-item>
                             <ion-label position="floating" color="medium">*First Name</ion-label>
-                            <ion-input formControlName="firstNameCV" type="text"></ion-input>
+                            <ion-input formControlName="firstName" type="text"></ion-input>
                         </ion-item>
                         <div class="error-messages">
-                            <ng-container *ngFor="let error of error_messages.firstNameCV">
+                            <ng-container *ngFor="let error of error_messages.firstName">
                                 <div class="error-message"
-                                    *ngIf="formCandidateUploadCV.get('firstNameCV').hasError(error.type) && (formCandidateUploadCV.get('firstNameCV').dirty || formCandidateUploadCV.get('firstNameCV').touched)">
+                                    *ngIf="formCandidateDetails.get('firstName').hasError(error.type) && (formCandidateDetails.get('firstName').dirty || formCandidateDetails.get('firstName').touched)">
                                     {{ error.message }}
                                 </div>
                             </ng-container>
@@ -360,12 +360,12 @@
                     <ion-col col-md-6 size="12" size-sm>
                         <ion-item>
                             <ion-label position="floating" color="medium">*Last Name</ion-label>
-                            <ion-input formControlName="lastNameCV" type="text"></ion-input>
+                            <ion-input formControlName="lastName" type="text"></ion-input>
                         </ion-item>
                         <div class="error-messages">
-                            <ng-container *ngFor="let error of error_messages.lastNameCV">
+                            <ng-container *ngFor="let error of error_messages.lastName">
                                 <div class="error-message"
-                                    *ngIf="formCandidateUploadCV.get('lastNameCV').hasError(error.type) && (formCandidateUploadCV.get('lastNameCV').dirty || formCandidateUploadCV.get('lastNameCV').touched)">
+                                    *ngIf="formCandidateDetails.get('lastName').hasError(error.type) && (formCandidateDetails.get('lastName').dirty || formCandidateDetails.get('lastName').touched)">
                                     {{ error.message }}
                                 </div>
                             </ng-container>
@@ -376,16 +376,34 @@
                     <ion-col size="6" size-md size="12" size-sm>
                         <ion-item>
                             <ion-label position="floating" color="medium">*Email</ion-label>
-                            <ion-input formControlName="emailCV" type="email"></ion-input>
+                            <ion-input formControlName="email" type="email"></ion-input>
                         </ion-item>
                         <div class="error-messages">
-                            <ng-container *ngFor="let error of error_messages.emailCV">
+                            <ng-container *ngFor="let error of error_messages.email">
                                 <div class="error-message"
-                                    *ngIf="formCandidateUploadCV.get('emailCV').hasError(error.type) && (formCandidateUploadCV.get('emailCV').dirty || formCandidateUploadCV.get('emailCV').touched)">
+                                    *ngIf="formCandidateDetails.get('email').hasError(error.type) && (formCandidateDetails.get('email').dirty || formCandidateDetails.get('email').touched)">
                                     {{ error.message }}
                                 </div>
                             </ng-container>
                         </div>
+                    </ion-col>
+                    <ion-col size="6" size-md size="12" size-sm>
+                        <ion-item>
+                            <ion-label position="floating" color="medium">*Job Type</ion-label>
+                            <ion-select interface="popover" formControlName="jobType" cancelText="Cancel" okText="OK">
+                                <ion-select-option *ngFor="let jobtype of jobTypes" [value]="jobtype">{{ jobtype }}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6" size-md size="12" size-sm>
+                        <ion-item>
+                            <ion-label position="floating" color="medium">*Availability Date</ion-label>
+                            <ion-datetime formControlName="availabilityDate">
+                            </ion-datetime>
+                        </ion-item>
                     </ion-col>
                     <ion-col size="6" size-md size="12" size-sm>
                         <ion-item class="upload-file">

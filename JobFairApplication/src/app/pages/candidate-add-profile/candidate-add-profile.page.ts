@@ -161,7 +161,7 @@ export class CandidateAddProfilePage implements OnInit {
           Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')
         ])
       ),
-      gender: new FormControl(''),
+      gender: new FormControl('Male'),
       address: new FormControl(''),
       availabilityDate: new FormControl('', Validators.required),
       currentAcademicYear: new FormControl(''),
@@ -205,14 +205,13 @@ export class CandidateAddProfilePage implements OnInit {
           Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
         ])
       ),
+      availabilityDateCV: new FormControl('', Validators.required),
+      jobTypeCV: new FormControl('', Validators.required),
     });
   }
 
 
   ngOnInit() {
-    // window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
-    // window.localStorage.setItem('venue_id', JSON.stringify(3));
-    
 
     const getJobIdLS = window.localStorage.getItem('priority');
     const jobId = getJobIdLS[1];

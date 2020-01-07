@@ -62,7 +62,7 @@ export class ApiService {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-asc/' + venueId);
   }
 
-  getCandidateByLastName(lastName: string): Observable<CandidateVenueJob[]> {
+  getCandidateByLastName(lastName: string): Observable<CandidateVenueJob[] | any> {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/lastname/' + lastName);
   }
 
