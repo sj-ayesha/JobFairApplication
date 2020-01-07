@@ -22,6 +22,7 @@ export class JobListPage implements OnInit {
   public splitJobDescriptions;
   checked = true;
   priority = [];
+  filterText: string;
 
   constructor(
     private router: Router,
@@ -38,7 +39,26 @@ export class JobListPage implements OnInit {
   }
 
   ngOnInit() {
+    
+  }
 
+  filter(event) {
+    this.filterText = event.target.value;
+    if(this.filterText == 'all'){
+      this.getAllJobsByVenueId();
+    } else {
+      this.getJobByLevel();
+    }
+  }
+
+  getJobByLevel() {
+    // tslint:disable-next-line: radix
+    this.apiService.searchJobByLevel(parseInt(window.localStorage.getItem('venue_id')), this.filterText).subscribe(data => {
+      this.venueJobs = data;
+      setTimeout(() => {
+        this.styleAccordion();
+      }, 0);
+    });
   }
 
   // ngAfterViewInit() {

@@ -41,9 +41,9 @@ export class DropdownsService {
     ];
 
     this.titles = [
+      'Degree',
       'HSC',
       'Diploma',
-      'Degree',
       'Masters',
       'PHD'
     ];

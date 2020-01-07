@@ -16,10 +16,9 @@
             <div class="search-container">
               <!-- <ion-input #test class="no-padding"></ion-input> -->
               <ion-item class="search-input">
-                <ion-input placeholder="Search by last name..." type="text" #test
-                  (keyup.enter)="searchByLastName(test.value)"></ion-input>
+                <ion-input placeholder="Search by last name..." type="text" #name (keyup.enter)="searchByLastName(name.value)" ></ion-input>
               </ion-item>
-              <ion-button (click)="searchByLastName(test.value)" class="btn btn--search" color="dark" size="small">
+              <ion-button (click)="searchByLastName(name.value)" class="btn btn--search" color="dark" size="small">
                 <ion-icon name="search"></ion-icon>
               </ion-button>
             </div>

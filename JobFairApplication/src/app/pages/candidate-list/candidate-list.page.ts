@@ -76,6 +76,9 @@ export class CandidateListPage implements OnInit {
   }
 
   searchByLastName(lastName: any) {
+    if (lastName === '') {
+      this.populateCandidate();
+    } else {
     this.apiService.getCandidateByLastName(lastName).subscribe(data => {
       console.log(data);
       if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
@@ -86,4 +89,5 @@ export class CandidateListPage implements OnInit {
       }
     });
   }
+}
 }
