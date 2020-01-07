@@ -53,6 +53,8 @@ export class LoginPage implements OnInit {
       }
     });
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
+
+    console.log('login', localStorage)
   }
 
   async unsuccessMsg() {

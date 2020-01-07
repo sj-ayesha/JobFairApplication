@@ -1,41 +1,47 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { JobListPage } from './pages/job-list/job-list.page';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
+  {
+    path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
+    canActivate: [AuthGuard]
+  },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'job-list',
-    loadChildren: () => import('./pages/job-list/job-list.module').then( m => m.JobListPageModule)
+    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'job-list/:jobQueryParam',
-    loadChildren: () => import('./pages/job-list/job-list.module').then( m => m.JobListPageModule)
+    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'candidate-list',
-    loadChildren: () => import('./pages/candidate-list/candidate-list.module').then( m => m.CandidateListPageModule)
+    loadChildren: () => import('./pages/candidate-list/candidate-list.module').then(m => m.CandidateListPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'candidate-details',
-    loadChildren: () => import('./pages/candidate-details/candidate-details.module').then( m => m.CandidateDetailsPageModule)
+    loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule)
   },
   {
     path: 'candidate-details/:candidateId',
-    loadChildren: () => import('./pages/candidate-details/candidate-details.module').then( m => m.CandidateDetailsPageModule)
+    loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule)
   },
   {
     path: 'candidate-add-profile',
-    loadChildren: () => import('./pages/candidate-add-profile/candidate-add-profile.module').then( m => m.CandidateAddProfilePageModule)
+    loadChildren: () => import('./pages/candidate-add-profile/candidate-add-profile.module').then(m => m.CandidateAddProfilePageModule)
   },
   {
     path: 'venue',
-    loadChildren: () => import('./pages/venue/venue.module').then( m => m.VenuePageModule)
+    loadChildren: () => import('./pages/venue/venue.module').then(m => m.VenuePageModule)
   },
 
 ];

@@ -72,10 +72,10 @@ export class CandidateAddProfilePage implements OnInit {
     ],
     telNumber: [{ type: 'pattern', message: '⚠ Telephone number is invalid' }],
     mobileNumber: [
-      { type: 'required', message: '⚠ Mobile number is required.' },
+      // { type: 'required', message: '⚠ Mobile number is required.' },
       { type: 'pattern', message: '⚠ Mobile number is invalid' }
     ],
-    nationality: [{ type: 'required', message: '⚠ Nationality is required.' }],
+    // nationality: [{ type: 'required', message: '⚠ Nationality is required.' }],
     gender: [{ type: 'required', message: '⚠ Gender is required.' }],
     title: [{ type: 'required', message: '⚠ Qualification is required.' }],
     academyYear: [{ type: 'required', message: '⚠ Academy Year is required.' }],
@@ -144,7 +144,6 @@ export class CandidateAddProfilePage implements OnInit {
       mobileNumber: new FormControl(
         '',
         Validators.compose([
-          Validators.required,
           Validators.pattern('[0-9]{8}$')
         ])
       ),
@@ -155,7 +154,6 @@ export class CandidateAddProfilePage implements OnInit {
       nationality: new FormControl(
         '',
         Validators.compose([
-          Validators.required,
           Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')
         ])
       ),

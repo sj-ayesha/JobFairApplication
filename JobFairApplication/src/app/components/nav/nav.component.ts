@@ -17,9 +17,6 @@ export class NavComponent implements OnInit, OnDestroy {
   constructor(private loginLogoutService: LoginLogoutService, private router: Router) { }
 
   ngOnInit() {
-    // this.loginLogoutService.navigateToVenue();
-    // this.loggedIn = this.loginLogoutService.isLoggedIn;
-    // console.log("veryy good", this.loginLogoutService.isLoggedIn);
     this.loggedIn = !!localStorage.getItem('user');
     this.venueName = window.localStorage.getItem('venueName');
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
@@ -40,14 +37,6 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   navigateToHome() {
-    // this.count = JSON.parse(localStorage.priority).length;
-    // console.log(this.count);
-    // if (this.count >= 1){
-    //   this.router.navigate(['/home']);
-    // }
-    // else {
-    //   console.log("cannott");
-    // }
     if (localStorage.user !== undefined && localStorage.venue_id !== undefined) {
       this.router.navigate(['/home']);
     } else {
