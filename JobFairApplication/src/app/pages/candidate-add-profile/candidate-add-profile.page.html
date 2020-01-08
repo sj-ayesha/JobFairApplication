@@ -298,12 +298,6 @@
                     <ion-input formControlName="candidateId" type="text" hidden></ion-input>
                 </ion-row>
 
-                <!-- <div class="add-experience-button ion-text-right">
-                    <ion-button class='btn' id="button" (click)="duplicate()" color="danger">
-                        <ion-icon ios="ios-add" md="md-add"></ion-icon>Add Experience
-                    </ion-button>
-                </div> -->
-
                 <div id="content"></div>
                 <h4>Skills</h4>
 
@@ -400,8 +394,40 @@
                 <ion-row>
                     <ion-col size="6" size-md size="12" size-sm>
                         <ion-item>
+                            <ion-label position="floating" color="medium">*Current Level</ion-label>
+                            <ion-select interface="popover" formControlName="currentLevel" cancelText="Cancel"
+                                okText="OK">
+                                <ion-select-option *ngFor="let currentLevel of currentLevels" [value]="currentLevel">
+                                    {{ currentLevel }}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <div class="error-messages">
+                            <ng-container *ngFor="let error of error_messages.currentLevel">
+                                <div class="error-message"
+                                    *ngIf="formCandidateDetails.get('currentLevel').hasError(error.type) && (formCandidateDetails.get('currentLevel').dirty || formCandidateDetails.get('currentLevel').touched)">
+                                    {{ error.message }}
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ion-col>
+  
+                    <ion-col size="6" size-md size="12" size-sm>
+                        <ion-item>
                             <ion-label position="floating" color="medium">*Availability Date</ion-label>
                             <ion-datetime formControlName="availabilityDate">
+                            </ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                    
+                    
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6" size-md size="12" size-sm>
+                        <ion-item>
+                            <ion-label position="floating" color="medium">Registration Date</ion-label>
+                            <ion-datetime formControlName="registrationDate" value="{{ date }}"
+                                placeholder="Select Date" [disabled]="true">
                             </ion-datetime>
                         </ion-item>
                     </ion-col>
