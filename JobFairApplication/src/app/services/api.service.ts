@@ -100,7 +100,7 @@ export class ApiService {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/title' + '?venueId=' + venueId + '&title=' + title);
   }
 
-  searchJobByLevel(venueId: number, level: string): Observable<VenueJob[]> {
+  searchJobByLevel(venueId: number, level: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/level' + '?venueId=' + venueId + '&level=' + level);
   }
 

@@ -54,11 +54,17 @@ export class JobListPage implements OnInit {
 
   getJobByLevel() {
     // tslint:disable-next-line: radix
+    // this.jobNotFound = false;
     this.apiService.searchJobByLevel(parseInt(window.localStorage.getItem('venue_id')), this.filterText).subscribe(data => {
-      this.venueJobs = data;
-      setTimeout(() => {
-        this.styleAccordion();
-      }, 0);
+      this.jobNotFound = false;
+      if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+        this.jobNotFound = true;
+      } else {
+        this.venueJobs = data;
+        setTimeout(() => {
+          this.styleAccordion();
+        }, 0);
+      }
     });
   }
 
@@ -101,6 +107,7 @@ export class JobListPage implements OnInit {
 
   getAllJobsByVenueId() {
     // tslint:disable-next-line: radix
+    this.jobNotFound = false;
     this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
         this.noJobsAvailable = true;
