@@ -96,7 +96,7 @@ export class ApiService {
     return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/category?venueId=' + venueId + '&category=' + category);
   }
 
-  searchJobByTitle(venueId: number, title: string): Observable<VenueJob[]> {
+  searchJobByTitle(venueId: number, title: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/title' + '?venueId=' + venueId + '&title=' + title);
   }
 

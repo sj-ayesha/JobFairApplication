@@ -24,13 +24,10 @@
           <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" class="ion-float-right">
           </ion-searchbar> -->
           <ion-item class="search-input">
-              <ion-input placeholder="Search by job title..." type="text" #title (keyup.enter)="searchByTitle(title.value)"></ion-input>
+            <ion-input placeholder="Search by job title..." type="text" #title
+              (keyup.enter)="searchByTitle(title.value)"></ion-input>
           </ion-item>
-          <ion-button
-            class="btn btn--search"
-            color="dark"
-            size="small" (click)="searchByTitle(title.value)"
-          >
+          <ion-button class="btn btn--search" color="dark" size="small" (click)="searchByTitle(title.value)">
             <ion-icon name="search"></ion-icon>
           </ion-button>
         </ion-col>
@@ -42,60 +39,68 @@
         </ion-col>
       </ion-row>
 
-      <div class="job-list-container" *ngIf="!noJobsAvailable">
-        <ion-row class="job-box" *ngFor="let venueJob of venueJobs">
-          <ion-col size="11">
-            <button class="collapsible">{{ venueJob.job.title }}</button>
+      <div class="job-not-found" *ngIf="!jobNotFound">
+        <div class="job-list-container" *ngIf="!noJobsAvailable ">
+          <ion-row class="job-box" *ngFor="let venueJob of venueJobs">
+            <ion-col size="11">
+              <button class="collapsible">{{ venueJob.job.title }}</button>
 
-            <div class="content">
-              <ion-row>
-                <ion-col size="8" class="ion-padding-top">
-                  <ion-card class="ion-no-margin job-description-box">
-                    <ion-card-content>
-                      <div class="job-description">
-                        <h6>Job Description</h6>
-                       
-                        <ul>
-                        <li *ngFor = "let splitJobDescription of venueJob.job.description.split(';')">
-                          {{ splitJobDescription }}
-                        </li> 
-                        </ul>
-                      
-                      </div>
+              <div class="content">
+                <ion-row>
+                  <ion-col size="8" class="ion-padding-top">
+                    <ion-card class="ion-no-margin job-description-box">
+                      <ion-card-content>
+                        <div class="job-description">
+                          <h6>Job Description</h6>
 
-                      <div class="job-qualification">
-                        <h6>Job Qualification</h6>
-                        <ul>
-                          <li>
-                            <ion-label>{{ venueJob.job.qualificationNeeded }}</ion-label>
-                          </li>
-                        </ul>
-                      </div>
+                          <ul>
+                            <li *ngFor="let splitJobDescription of venueJob.job.description.split(';')">
+                              {{ splitJobDescription }}
+                            </li>
+                          </ul>
 
-                      <div class="job-experience">
-                        <h6>Job Experience</h6>
-                        <ul>
-                          <li>
-                            <ion-label>{{ venueJob.job.minimumExperience }}</ion-label>
-                          </li>
-                        </ul>
-                      </div>
-                    </ion-card-content>
-                  </ion-card>
-                </ion-col>
-              </ion-row>
-            </div>
-          </ion-col>
-          <ion-col size="1" text-right>
-            <div class="btn-checkbox">
-              <ion-checkbox color="danger" class="btn-checkbox__item" (ionChange)="addPriority($event,venueJob.job.jobId)"></ion-checkbox>
-            </div>
-          </ion-col>
-        </ion-row>
+                        </div>
+
+                        <div class="job-qualification">
+                          <h6>Job Qualification</h6>
+                          <ul>
+                            <li>
+                              <ion-label>{{ venueJob.job.qualificationNeeded }}</ion-label>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div class="job-experience">
+                          <h6>Job Experience</h6>
+                          <ul>
+                            <li>
+                              <ion-label>{{ venueJob.job.minimumExperience }}</ion-label>
+                            </li>
+                          </ul>
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+            <ion-col size="1" text-right>
+              <div class="btn-checkbox">
+                <ion-checkbox color="danger" class="btn-checkbox__item"
+                  (ionChange)="addPriority($event,venueJob.job.jobId)"></ion-checkbox>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
       </div>
       <ion-card *ngIf="noJobsAvailable">
-          <img class="noJobsImg" src="../../../assets/img/Not Available/no-entry.png">
+        <img class="noJobsImg" src="../../../assets/img/Not Available/no-entry.png">
       </ion-card>
+      <ion-row *ngIf="jobNotFound">
+        <ion-col size="12" class="ion-padding">
+          <img class="not-found" src="../../../assets/img/Not Available/job-not-found.png">
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col size="12" class="ion-padding btn-actions">
           <div class="btn-back ion-text-left">
