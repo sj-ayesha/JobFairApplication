@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CandidateSkill } from 'src/app/model/CandidateSkill';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { ToastController } from '@ionic/angular';
 import { Skills } from 'src/app/model/skills';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Candidate } from 'src/app/model/candidate';
 
 @Component({
   selector: 'app-candidate-add-profile',
@@ -15,7 +16,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
   styleUrls: ['./candidate-add-profile.page.scss']
 })
 export class CandidateAddProfilePage implements OnInit {
-  
+
   formCandidateDetails: FormGroup;
   formCandidateUploadCV: FormGroup;
 
@@ -48,6 +49,7 @@ export class CandidateAddProfilePage implements OnInit {
   arrayScreening: any[];
 
   fileData: File = null; // File Upload
+  selectedFiles: FileList;
 
 
   // tslint:disable-next-line: variable-name
@@ -110,7 +112,7 @@ export class CandidateAddProfilePage implements OnInit {
       { type: 'pattern', message: '⚠ Email is invalid.' }
     ],
   };
-  
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -120,7 +122,7 @@ export class CandidateAddProfilePage implements OnInit {
     private dropdowns: DropdownsService,
     private http: HttpClient
   ) {
-    
+
     this.formCandidateDetails = this.formBuilder.group({
       firstName: new FormControl(
         '',
@@ -169,7 +171,7 @@ export class CandidateAddProfilePage implements OnInit {
 
       registrationDate: new FormControl(new Date()),
 
-      currentLevel: new FormControl('', Validators.required),
+      currentLevel: new FormControl('Fresher', Validators.required),
       title: new FormControl('Degree'),
       division: new FormControl(''),
       institution: new FormControl(''),
@@ -178,7 +180,8 @@ export class CandidateAddProfilePage implements OnInit {
       position: new FormControl(''),
       companyName: new FormControl(''),
       duration: new FormControl(''),
-      skillId: new FormControl('')
+      skillId: new FormControl(''),
+      cvUpload: new FormControl()
     });
 
     this.formCandidateUploadCV = this.formBuilder.group({
@@ -286,7 +289,7 @@ export class CandidateAddProfilePage implements OnInit {
       candidateScreeningDtos: this.arrayScreening
     };
     console.log(candidateDetails);
-
+    this.uploadCV(candidateDetails, this.fileData);
     this.apiService.saveCandidate(candidateDetails).subscribe(
       data => {
         // this.router.navigate(['home']);
@@ -295,6 +298,40 @@ export class CandidateAddProfilePage implements OnInit {
         // alert("Data not saved!");
       }
     );
+  }
+
+  selectFile(event) {
+    const file = event.target.files.item(0);
+
+    if (file.type.match('image.*')) {
+      const size = event.target.files[0].size;
+      if (size > 5266467) {
+        alert('size must not exceeds 5 MB');
+        this.formCandidateDetails.get('cvUpload').setValue('');
+      } else {
+        this.selectedFiles = event.target.files;
+      }
+    } else {
+      alert('invalid format!');
+    }
+
+  } 
+
+
+  uploadCV(candidateDto: Candidate, fileData: File) {
+    const formData: FormData = new FormData();
+    const json = JSON.stringify(candidateDto);
+    const blob = new Blob([json], {
+      type: 'application/json'
+    });
+    formData.append('candidateDto', blob);
+    formData.append('file', fileData)
+    // attachments.forEach(attachment => formData.append('attachments', attachment, attachment.name));
+    console.log('formdata', formData)
+
+    return this.http.post('http://localhost:8081/candidate', formData, {
+      responseType: 'json'
+    });
   }
 
   ionViewWillLoad() { }
@@ -384,23 +421,22 @@ export class CandidateAddProfilePage implements OnInit {
     this.fileData = fileInput.target.files[0] as File;
   }
 
-  onSubmitCV() {
-    const formData = new FormData();
-    formData.append('file', this.fileData);
-    this.http
-      .post('url/to/your/api', formData, {
-        reportProgress: true,
-        observe: 'events'
-      })
-      .subscribe(events => {
-        if (events.type === HttpEventType.UploadProgress) {
-          console.log(
-            'Upload progress: ',
-            Math.round((events.loaded / events.total) * 100) + '%'
-          );
-        } else if (events.type === HttpEventType.Response) {
-          console.log(events);
-        }
-      });
-  }
+  
+  // const formData = new FormData();
+  // formData.append('file', this.fileData);
+  // this.http
+  //   .post('url/to/your/api', formData, {
+  //     reportProgress: true,
+  //     observe: 'events'
+  //   })
+  //   .subscribe(events => {
+  //     if (events.type === HttpEventType.UploadProgress) {
+  //       console.log(
+  //         'Upload progress: ',
+  //         Math.round((events.loaded / events.total) * 100) + '%'
+  //       );
+  //     } else if (events.type === HttpEventType.Response) {
+  //       console.log(events);
+  //     }
+  //   });
 }
