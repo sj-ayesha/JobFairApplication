@@ -19,6 +19,7 @@ export class JobListPage implements OnInit {
   public searchTerm: string = '';
   public items: any;
   noJobsAvailable = false;
+  jobNotFound = false;
   public splitJobDescriptions;
   checked = true;
   priority = [];
@@ -39,12 +40,12 @@ export class JobListPage implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   filter(event) {
     this.filterText = event.target.value;
-    if(this.filterText == 'all'){
+    if (this.filterText == 'all') {
       this.getAllJobsByVenueId();
     } else {
       this.getJobByLevel();
@@ -53,11 +54,17 @@ export class JobListPage implements OnInit {
 
   getJobByLevel() {
     // tslint:disable-next-line: radix
+    // this.jobNotFound = false;
     this.apiService.searchJobByLevel(parseInt(window.localStorage.getItem('venue_id')), this.filterText).subscribe(data => {
-      this.venueJobs = data;
-      setTimeout(() => {
-        this.styleAccordion();
-      }, 0);
+      this.jobNotFound = false;
+      if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+        this.jobNotFound = true;
+      } else {
+        this.venueJobs = data;
+        setTimeout(() => {
+          this.styleAccordion();
+        }, 0);
+      }
     });
   }
 
@@ -85,7 +92,7 @@ export class JobListPage implements OnInit {
     const coll = document.getElementsByClassName('collapsible');
 
     for (let i = 0; i < coll.length; i++) {
-      coll[i].addEventListener('click', function() {
+      coll[i].addEventListener('click', function () {
 
         this.classList.toggle('active');
         const content = this.nextElementSibling;
@@ -100,6 +107,7 @@ export class JobListPage implements OnInit {
 
   getAllJobsByVenueId() {
     // tslint:disable-next-line: radix
+    this.jobNotFound = false;
     this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
         this.noJobsAvailable = true;
@@ -148,7 +156,7 @@ export class JobListPage implements OnInit {
       localStorage.setItem('priority', JSON.stringify(this.priority));
     }
   }
-  
+
   routeToJob(jobQueryParam: string) {
     this.router.navigate(['/job-list', jobQueryParam]);
   }
@@ -169,13 +177,18 @@ export class JobListPage implements OnInit {
   }
 
   searchByTitle(title: string) {
-    // tslint:disable-next-line: radix
+    this.jobNotFound = false;
     const venueId = parseInt(window.localStorage.getItem('venue_id'));
     this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
-      this.venueJobs = data;
-      setTimeout(() => {
-        this.styleAccordion();
-      }, 0);
+      console.log(data);
+      if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+        this.jobNotFound = true;
+      } else {
+        this.venueJobs = data;
+        setTimeout(() => {
+          this.styleAccordion();
+        }, 0);
+      }
     });
   }
 }
