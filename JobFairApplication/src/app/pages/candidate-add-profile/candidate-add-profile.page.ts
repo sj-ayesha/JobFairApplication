@@ -228,7 +228,7 @@ export class CandidateAddProfilePage implements OnInit {
     this.minutes = this.today.getMinutes();
     this.seconds = this.today.getSeconds();
 
-    // this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
+    this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
     this.date = this.year + '-' + this.month + '-' + this.day;
 
     this.populateSkills();

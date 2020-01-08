@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ChangeVenueService } from 'src/app/services/change-venue.service';
 
 @Component({
   selector: 'app-nav',
@@ -14,12 +15,24 @@ export class NavComponent implements OnInit, OnDestroy {
   dissabled = true;
   private sessionStateSubscription: Subscription;
   loggedIn: boolean;
-  constructor(private loginLogoutService: LoginLogoutService, private router: Router) { }
+
+  venue: string;
+  changeVenue: string;
+
+  constructor(
+    private loginLogoutService: LoginLogoutService,
+    private router: Router,
+    private changeVenueService: ChangeVenueService
+    ) { }
 
   ngOnInit() {
     this.loggedIn = !!localStorage.getItem('user');
     this.venueName = window.localStorage.getItem('venueName');
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
+
+    this.changeVenueService.cast.subscribe(data => this.venue = data);
+
+    this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
   }
 
   ngOnDestroy() {
@@ -34,6 +47,11 @@ export class NavComponent implements OnInit, OnDestroy {
     localStorage.removeItem('jobId');
     localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
+    this.venue = '';
+  }
+
+  goToVenue(){
+    this.router.navigateByUrl('/venue');
   }
 
   navigateToHome() {

@@ -40,7 +40,7 @@ export class JobListPage implements OnInit {
   }
 
   ngOnInit() {
-
+    console.log('Joblist')
   }
 
   filter(event) {
@@ -161,9 +161,8 @@ export class JobListPage implements OnInit {
     this.router.navigate(['/job-list', jobQueryParam]);
   }
 
-  applyOnlyFive(e) {
+  applyOnlyFive() {
     const count = JSON.parse(localStorage.priority).length;
-    // console.log(count);
     if (count <= 5) {
       this.router.navigate(['candidate-add-profile']);
     } else {

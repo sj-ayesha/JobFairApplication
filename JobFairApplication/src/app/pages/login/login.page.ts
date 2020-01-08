@@ -80,6 +80,10 @@ export class LoginPage implements OnInit {
       localStorage.setItem('user', 'userId');
       this.loginLogoutService.loginUser();
       // console.log(this.loggedIn);
+      setTimeout(() => {
+        this.formLogin.reset();
+        this.router.navigate(['home']);
+      }, 2000);
     }
   }
 }
