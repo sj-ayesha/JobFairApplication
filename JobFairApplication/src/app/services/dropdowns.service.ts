@@ -26,6 +26,7 @@ export class DropdownsService {
 
     this.currentLevels = [
       'Fresher',
+      'Junior',
       'Senior'
     ];
 
