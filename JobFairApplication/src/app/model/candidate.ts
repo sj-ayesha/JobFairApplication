@@ -17,6 +17,7 @@ export class Candidate {
     availabilityDate: Date;
     currentLevel: string;
     jobType: string;
+    fileName: string;
     currentAcademicYear: string;
     experienceDtos: Experience[];
     qualificationDtos: Qualification[];

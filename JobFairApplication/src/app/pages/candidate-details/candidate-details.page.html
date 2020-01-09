@@ -114,16 +114,18 @@
                 </ion-col>
               </ion-row>
             </ion-card>
-            <!-- <ion-card class="candidate-cv-details" padding>
+            <ion-card class="candidate-cv-details" padding>
               <ion-row>
                 <ion-col col-md-6 size="6">
                   <div class="information">
                     <h5><b>Information</b></h5>
                     <div>
                       <div class="separation"></div>
-                      <p><b>First Name:</b> John</p>
-                      <p><b>Last Name: </b> Smith</p>
-                      <p><b>Email:</b> john@gmail.com</p>
+                      <p><b>Name:</b> {{ candidate?.firstName}} {{ candidate?.lastName}}</p>
+                      <p><b>Email:</b> {{candidate?.email}}</p>
+                      <p><b>Current Level:</b> {{candidate?.currentLevel}}</p>
+                      <p><b>Job Type:</b> {{candidate?.jobType}}</p>
+                      <p><b>Availability Date:</b> {{candidate?.availabilityDate}}</p>
                     </div>
                   </div>
                 </ion-col>
@@ -132,12 +134,12 @@
                     <h5><b>CV Uploaded</b></h5>
                     <div>
                       <div class="separation"></div>
-                      <p>john_cv.pdf</p>
+                      <p>{{candidate?.fileName}}</p>
                     </div>
                   </div>
                 </ion-col>
               </ion-row>
-            </ion-card> -->
+            </ion-card>
           </ion-col>
 
         </ion-row>
@@ -188,23 +190,6 @@
                         (ionSelect)="radioButtonValue($event)"></ion-radio>
                     </ion-item>
                   </ion-radio-group>
-                  <!-- <div id="ck-button-rejected">
-                  <label>
-                    <input type="radio" value="1" /><span>Rejected</span>
-                  </label>
-                </div>
-                <div id="ck-button-pending">
-                  <label>
-                    <input type="radio" value="1" /><span>Pending</span>
-                  </label>
-                </div>
-                <div id="ck-button-next">
-                  <label>
-                    <input type="radio" value="1" /><span
-                      >Proceed to next interview</span
-                    >
-                  </label>
-                </div> -->
                 </div>
               </form>
             </ion-card>
