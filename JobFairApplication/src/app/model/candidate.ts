@@ -24,4 +24,5 @@ export class Candidate {
     candidateSkillDtos: CandidateSkill[];
     candidateVenueJobSaveDto: CandidateVenueJob[];
     candidateScreeningDtos: CandidateScreening[];
+    
 }

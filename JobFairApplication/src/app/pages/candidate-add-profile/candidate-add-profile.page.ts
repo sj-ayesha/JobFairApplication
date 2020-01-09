@@ -216,7 +216,6 @@ export class CandidateAddProfilePage implements OnInit {
 
 
   ngOnInit() {
-
     const getJobIdLS = window.localStorage.getItem('priority');
     const jobId = getJobIdLS[1];
     window.localStorage.setItem('jobId', jobId);
@@ -273,10 +272,6 @@ export class CandidateAddProfilePage implements OnInit {
       jobId: window.localStorage.getItem('jobId'),
       jobPriority: window.localStorage.getItem('priority')
     }];
-    this.arrayVenue = [{
-      jobId: window.localStorage.getItem('jobId'),
-      jobPriority: window.localStorage.getItem('priority')
-    }]
     const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
