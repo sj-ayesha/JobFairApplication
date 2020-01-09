@@ -41,6 +41,7 @@ export class JobListPage implements OnInit {
 
   ngOnInit() {
     window.localStorage.setItem('priority', '[]');
+    window.localStorage.setItem('jobId', '');
   }
 
   filter(event) {
@@ -145,7 +146,7 @@ export class JobListPage implements OnInit {
   addPriority(event: CustomEvent, jobId: number) {
     if (event.detail.checked) {
       this.priority.push(jobId);
-      console.log(this.priority);
+      // console.log(this.priority);
       localStorage.setItem('priority', JSON.stringify(this.priority));
     } else {
       let index = this.priority.indexOf(jobId);
@@ -163,7 +164,6 @@ export class JobListPage implements OnInit {
 
   applyOnlyFive() {
     const count = JSON.parse(localStorage.priority).length;
-    console.log(count);
     if (count <= 5) {
       this.router.navigate(['candidate-add-profile']);
     } else {
@@ -174,13 +174,13 @@ export class JobListPage implements OnInit {
   back() {
     this.router.navigate(['/home']);
     window.localStorage.removeItem('priority');
+    window.localStorage.setItem('jobId', '');
   }
 
   searchByTitle(title: string) {
     this.jobNotFound = false;
     const venueId = parseInt(window.localStorage.getItem('venue_id'));
     this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
-      console.log(data);
       if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
         this.jobNotFound = true;
       } else {

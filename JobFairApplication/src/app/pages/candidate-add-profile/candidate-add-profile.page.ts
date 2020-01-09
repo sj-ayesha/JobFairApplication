@@ -165,23 +165,23 @@ export class CandidateAddProfilePage implements OnInit {
         ])
       ),
       gender: new FormControl('Male'),
-      address: new FormControl(''),
-      availabilityDate: new FormControl('', Validators.required),
-      currentAcademicYear: new FormControl(''),
-      jobType: new FormControl('', Validators.required),
+      address: new FormControl(),
+      availabilityDate: new FormControl(Validators.required),
+      currentAcademicYear: new FormControl(),
+      jobType: new FormControl(Validators.required),
 
       registrationDate: new FormControl(new Date()),
 
       currentLevel: new FormControl('Fresher', Validators.required),
       title: new FormControl('Degree'),
-      division: new FormControl(''),
-      institution: new FormControl(''),
-      graduationDate: new FormControl(''),
-      candidateId: new FormControl(''),
-      position: new FormControl(''),
-      companyName: new FormControl(''),
-      duration: new FormControl(''),
-      skillId: new FormControl(''),
+      division: new FormControl(),
+      institution: new FormControl(),
+      graduationDate: new FormControl(),
+      candidateId: new FormControl(),
+      position: new FormControl(),
+      companyName: new FormControl(),
+      duration: new FormControl(),
+      skillId: new FormControl(),
       cvUpload: new FormControl()
     });
 
@@ -264,6 +264,10 @@ export class CandidateAddProfilePage implements OnInit {
         graduationDate: this.formCandidateDetails.get('graduationDate').value
       }
     ];
+    // tslint:disable-next-line: max-line-length
+    if (this.arrayExperience[0].companyName == null && this.arrayExperience[0].position == null && this.arrayExperience[0].duration == null) {
+      this.arrayExperience = [];
+    }
     this.arrayVenue = [{
       venueId: window.localStorage.getItem('venue_id'),
       jobId: window.localStorage.getItem('jobId'),
