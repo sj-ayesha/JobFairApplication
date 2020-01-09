@@ -5,7 +5,7 @@
       <h3>Candidate Profile</h3>
     </div>
     <ion-row>
-      <ion-col col-md-2 size="2" col-sm-3 size="3">
+      <!-- <ion-col col-md-2 size="2" col-sm-3 size="3">
         <ion-card class="ion-padding">
           <ion-card-title>
             <h5><b>Job(s) Applied:</b></h5>
@@ -18,8 +18,8 @@
             </div>
           </div>
         </ion-card>
-      </ion-col>
-      <ion-col col-md-10 size="10" col-sm-9 size="9">
+      </ion-col> -->
+      <ion-col col-md-10 size="12" col-sm-9 size="12">
         <ion-row>
           <form class="formCandidateScreening" [formGroup]="formCandidateScreening" (ngSubmit)="onSubmit()">
             <div class="info">
@@ -76,6 +76,16 @@
                 </ion-col>
 
                 <ion-col col-md-4 size="4">
+                  <div class="jobs-applied">
+                    <h5><b>Job(s) Applied</b></h5>
+                    <div *ngFor="let jobList of jobLists; let i = index">
+                      <div class="separation"></div>
+                        <p>{{ jobList.title }}</p>
+                    </div>
+                  </div>
+                </ion-col>
+
+                <ion-col col-md-4 size="4">
                   <div class="qualifications">
                     <h5><b>Qualification(s)</b></h5>
                     <div *ngFor="let qualification of qualifications">
@@ -87,7 +97,9 @@
                     </div>
                   </div>
                 </ion-col>
+              </ion-row>
 
+              <ion-row>
                 <ion-col col-md-4 size="4">
                   <div class="experience">
                     <h5><b>Experience(s)</b></h5>
@@ -100,9 +112,7 @@
                     </div>
                   </div>
                 </ion-col>
-              </ion-row>
-
-              <ion-row>
+                
                 <ion-col col-md-4 size="4">
                   <div class="skill">
                     <h5><b>Skill(s)</b></h5>
