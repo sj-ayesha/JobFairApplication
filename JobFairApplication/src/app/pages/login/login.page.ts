@@ -53,8 +53,6 @@ export class LoginPage implements OnInit {
       }
     });
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
-
-    console.log('login', localStorage)
   }
 
   async unsuccessMsg() {
@@ -73,7 +71,6 @@ export class LoginPage implements OnInit {
     this.submitted = true;
     // tslint:disable-next-line: max-line-length
     if (this.formLogin.invalid) {
-      console.log(this.submitted, 'not sucessful');
       this.unsuccessMsg();
     } else {
       this.loggedIn = true;

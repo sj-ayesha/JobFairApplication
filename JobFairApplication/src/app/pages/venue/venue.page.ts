@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ChangeVenueService } from 'src/app/services/change-venue.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-venue',
@@ -39,6 +40,7 @@ export class VenuePage implements OnInit {
   }
 
   ngOnInit() {
+    this.formVenue.reset();
     this.getVenueByActive();
     this.changeVenueService.cast.subscribe(data => this.oldVenue = data);
   }
@@ -65,7 +67,14 @@ export class VenuePage implements OnInit {
       this.submitted = false;
       this.UnsuccessMsg();
     } else {
-      
+      window.localStorage.setItem('venue_id', this.formVenue.get('venues').value);
+      const LSid = JSON.parse(localStorage.getItem('venue_id'));
+
+      for (let i = 0; i < this.venues.length; i++) {
+      if (LSid === this.venues[i].venueId) {
+        window.localStorage.setItem('venueName', this.venues[i].venueName);
+      }
+    }
       this.router.navigateByUrl('/home');
     }
   }

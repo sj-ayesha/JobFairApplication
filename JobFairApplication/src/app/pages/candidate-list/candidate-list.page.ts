@@ -82,8 +82,7 @@ export class CandidateListPage implements OnInit {
       this.populateCandidate();
     } else {
       this.apiService.getCandidateByLastName(lastName).subscribe(data => {
-        console.log(this.message = data.message);
-        if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
+        if (data.message === 'NO_CANDIDATE_AVAILABLE') {
           this.candidateNotFound = true;
         } else {
           this.candidateVenueJobs = data;

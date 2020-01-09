@@ -27,8 +27,6 @@ export class HomePage implements OnInit, DoCheck {
   ngOnInit() {
     this.populateCandidate();
     this.countCandidatesByVenue();
-
-    console.log('login', localStorage);
   }
 
   ngDoCheck() {
