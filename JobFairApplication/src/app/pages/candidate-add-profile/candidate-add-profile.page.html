@@ -333,7 +333,7 @@
         <ion-icon class="icon-upload" ios="ios-cloud-upload" md="md-cloud-upload"></ion-icon>
         <h3>Upload CV</h3>
       </div>
-      <form [formGroup]="formCandidateDetails" (ngSubmit)="onSubmit()">
+      <form [formGroup]="formCandidateDetails">
         <ion-row>
           <ion-col col-md-6 size="12" size-sm>
             <ion-item>
@@ -411,7 +411,7 @@
           </div>
           <div class="submit-button ion-text-right">
             <!-- <ion-button class='btn' color="dark" (click)="submitCandidate()">Submit</ion-button> -->
-            <ion-button class="btn" type="submit" color="dark">Submit</ion-button>
+            <ion-button class="btn" (click)="submitCandidateCV()" type="submit" color="dark">Submit</ion-button>
           </div>
         </div>
       </form>

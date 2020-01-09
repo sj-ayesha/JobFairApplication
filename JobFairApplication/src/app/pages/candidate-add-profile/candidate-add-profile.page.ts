@@ -7,7 +7,7 @@ import { element } from 'protractor';
 import { ToastController } from '@ionic/angular';
 import { Skills } from 'src/app/model/skills';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Candidate } from 'src/app/model/candidate';
 
 @Component({
@@ -290,11 +290,10 @@ export class CandidateAddProfilePage implements OnInit {
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
       candidateVenueJobSaveDto: this.arrayVenue,
-      candidateScreeningDtos: this.arrayScreening
+      candidateScreeningDtos: this.arrayScreening,
     };
     console.log(candidateDetails);
-    
-    this.uploadCV(candidateDetails, this.fileData);
+
     this.apiService.saveCandidate(candidateDetails).subscribe(
       data => {
         // this.router.navigate(['home']);
@@ -305,10 +304,68 @@ export class CandidateAddProfilePage implements OnInit {
     );
   }
 
-  selectFile(event) {
-    const file = event.target.files.item(0);
+  submitCandidateCV() {
+    const filteredCandidateSkills = this.CandidateSkills.filter(data => {
+      return data.checked === true;
+    });
+    this.arrayExperience = [
+      {
+        companyName: this.formCandidateDetails.get('companyName').value,
+        position: this.formCandidateDetails.get('position').value,
+        duration: this.formCandidateDetails.get('duration').value
+      }
+    ];
+    this.arrayQualification = [
+      {
+        title: this.formCandidateDetails.get('title').value,
+        division: this.formCandidateDetails.get('division').value,
+        institution: this.formCandidateDetails.get('institution').value,
+        graduationDate: this.formCandidateDetails.get('graduationDate').value
+      }
+    ];
+    this.arrayVenue = [{
+      venueId: window.localStorage.getItem('venue_id'),
+      jobId: window.localStorage.getItem('jobId'),
+      jobPriority: window.localStorage.getItem('priority')
+    }];
+    const candidateDetails = {
+      firstName: this.formCandidateDetails.get('firstName').value,
+      lastName: this.formCandidateDetails.get('lastName').value,
+      email: this.formCandidateDetails.get('email').value,
+      telNumber: this.formCandidateDetails.get('telNumber').value,
+      mobileNumber: this.formCandidateDetails.get('mobileNumber').value,
+      gender: this.formCandidateDetails.get('gender').value,
+      address: this.formCandidateDetails.get('address').value,
+      nationality: this.formCandidateDetails.get('nationality').value,
+      registrationDate: this.formCandidateDetails.get('registrationDate').value,
+      availabilityDate: this.formCandidateDetails.get('availabilityDate').value,
+      currentLevel: this.formCandidateDetails.get('currentLevel').value,
+      jobType: this.formCandidateDetails.get('jobType').value,
+      currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
+      experienceDtos: this.arrayExperience,
+      qualificationDtos: this.arrayQualification,
+      candidateSkillDtos: filteredCandidateSkills,
+      candidateVenueJobSaveDto: this.arrayVenue,
+      candidateScreeningDtos: this.arrayScreening,
+    };
 
-    if (file.type.match('image.*')) {
+    if (this.formCandidateDetails.invalid) {
+      this.unsuccessMsg();
+    } else {
+      this.uploadCV(candidateDetails, this.fileData);
+      this.successMsg();
+
+      setTimeout(() => {
+        this.formCandidateDetails.reset();
+        this.router.navigate(['home']);
+      }, 2000);
+    }
+  }
+
+  selectFile(event) {
+    this.fileData =  event.target.files.item(0);
+
+    if (this.fileData.type.match('image.*')) {
       const size = event.target.files[0].size;
       if (size > 5266467) {
         alert('size must not exceeds 5 MB');
@@ -319,7 +376,7 @@ export class CandidateAddProfilePage implements OnInit {
     } else {
       alert('invalid format!');
     }
-
+    console.log(this.fileData)
   } 
 
 
@@ -330,12 +387,17 @@ export class CandidateAddProfilePage implements OnInit {
       type: 'application/json'
     });
     formData.append('candidateDto', blob);
-    formData.append('file', fileData)
-    // attachments.forEach(attachment => formData.append('attachments', attachment, attachment.name));
-    console.log('formdata', formData)
-
-    return this.http.post('http://localhost:8081/candidate', formData, {
-      responseType: 'json'
+    formData.append('file', fileData, fileData.name);
+    console.log(formData)
+    let httpOptions = {
+      headers: new HttpHeaders().set('Accept', 'application/json')
+    };
+    console.log(formData)
+    this.apiService.uploadCV(formData, httpOptions).subscribe(data => {
+      console.log('uploading..')
+      if (data) {
+        console.log('uploaded')
+      }
     });
   }
 
@@ -420,28 +482,4 @@ export class CandidateAddProfilePage implements OnInit {
     document.getElementById(tabName).style.display = 'block';
     event.currentTarget.className += ' active';
   }
-
-  // File Upload Section
-  fileProgress(fileInput: any) {
-    this.fileData = fileInput.target.files[0] as File;
-  }
-
-  
-  // const formData = new FormData();
-  // formData.append('file', this.fileData);
-  // this.http
-  //   .post('url/to/your/api', formData, {
-  //     reportProgress: true,
-  //     observe: 'events'
-  //   })
-  //   .subscribe(events => {
-  //     if (events.type === HttpEventType.UploadProgress) {
-  //       console.log(
-  //         'Upload progress: ',
-  //         Math.round((events.loaded / events.total) * 100) + '%'
-  //       );
-  //     } else if (events.type === HttpEventType.Response) {
-  //       console.log(events);
-  //     }
-  //   });
 }
