@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CandidateSkill } from 'src/app/model/CandidateSkill';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
@@ -7,7 +7,8 @@ import { element } from 'protractor';
 import { ToastController } from '@ionic/angular';
 import { Skills } from 'src/app/model/skills';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { Candidate } from 'src/app/model/candidate';
 
 @Component({
   selector: 'app-candidate-add-profile',
@@ -15,6 +16,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
   styleUrls: ['./candidate-add-profile.page.scss']
 })
 export class CandidateAddProfilePage implements OnInit {
+
   formCandidateDetails: FormGroup;
   formCandidateUploadCV: FormGroup;
 
@@ -47,6 +49,8 @@ export class CandidateAddProfilePage implements OnInit {
   arrayScreening: any[];
 
   fileData: File = null; // File Upload
+  selectedFiles: FileList;
+
 
   // tslint:disable-next-line: variable-name
   error_messages = {
@@ -72,10 +76,10 @@ export class CandidateAddProfilePage implements OnInit {
     ],
     telNumber: [{ type: 'pattern', message: '⚠ Telephone number is invalid' }],
     mobileNumber: [
-      { type: 'required', message: '⚠ Mobile number is required.' },
+      // { type: 'required', message: '⚠ Mobile number is required.' },
       { type: 'pattern', message: '⚠ Mobile number is invalid' }
     ],
-    nationality: [{ type: 'required', message: '⚠ Nationality is required.' }],
+    // nationality: [{ type: 'required', message: '⚠ Nationality is required.' }],
     gender: [{ type: 'required', message: '⚠ Gender is required.' }],
     title: [{ type: 'required', message: '⚠ Qualification is required.' }],
     academyYear: [{ type: 'required', message: '⚠ Academy Year is required.' }],
@@ -109,6 +113,7 @@ export class CandidateAddProfilePage implements OnInit {
     ],
   };
 
+
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
@@ -117,6 +122,7 @@ export class CandidateAddProfilePage implements OnInit {
     private dropdowns: DropdownsService,
     private http: HttpClient
   ) {
+
     this.formCandidateDetails = this.formBuilder.group({
       firstName: new FormControl(
         '',
@@ -144,7 +150,6 @@ export class CandidateAddProfilePage implements OnInit {
       mobileNumber: new FormControl(
         '',
         Validators.compose([
-          Validators.required,
           Validators.pattern('[0-9]{8}$')
         ])
       ),
@@ -153,30 +158,30 @@ export class CandidateAddProfilePage implements OnInit {
         Validators.compose([Validators.pattern('[0-9]{7}$')])
       ),
       nationality: new FormControl(
-        '',
+        'Mauritian',
         Validators.compose([
-          Validators.required,
           Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')
         ])
       ),
-      gender: new FormControl('', Validators.required),
-      address: new FormControl(''),
-      availabilityDate: new FormControl('', Validators.required),
-      currentAcademicYear: new FormControl(''),
-      jobType: new FormControl('', Validators.required),
+      gender: new FormControl('Male'),
+      address: new FormControl(),
+      availabilityDate: new FormControl(Validators.required),
+      currentAcademicYear: new FormControl(),
+      jobType: new FormControl(Validators.required),
 
       registrationDate: new FormControl(new Date()),
 
-      currentLevel: new FormControl('', Validators.required),
-      title: new FormControl('', Validators.required),
-      division: new FormControl(''),
-      institution: new FormControl(''),
-      graduationDate: new FormControl(''),
-      candidateId: new FormControl(''),
-      position: new FormControl(''),
-      companyName: new FormControl(''),
-      duration: new FormControl(''),
-      skillId: new FormControl('')
+      currentLevel: new FormControl('Fresher', Validators.required),
+      title: new FormControl('Degree'),
+      division: new FormControl(),
+      institution: new FormControl(),
+      graduationDate: new FormControl(),
+      candidateId: new FormControl(),
+      position: new FormControl(),
+      companyName: new FormControl(),
+      duration: new FormControl(),
+      skillId: new FormControl(),
+      cvUpload: new FormControl()
     });
 
     this.formCandidateUploadCV = this.formBuilder.group({
@@ -203,12 +208,13 @@ export class CandidateAddProfilePage implements OnInit {
           Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
         ])
       ),
+      availabilityDateCV: new FormControl('', Validators.required),
+      jobTypeCV: new FormControl('', Validators.required),
     });
   }
 
+
   ngOnInit() {
-    // window.localStorage.setItem('priority', JSON.stringify([1, 2, 3]));
-    // window.localStorage.setItem('venue_id', JSON.stringify(3));
 
     const getJobIdLS = window.localStorage.getItem('priority');
     const jobId = getJobIdLS[1];
@@ -236,6 +242,7 @@ export class CandidateAddProfilePage implements OnInit {
     this.currentLevels = this.dropdowns.currentLevels;
   }
 
+
   submitCandidate() {
     const filteredCandidateSkills = this.CandidateSkills.filter(data => {
       return data.checked === true;
@@ -256,6 +263,10 @@ export class CandidateAddProfilePage implements OnInit {
         graduationDate: this.formCandidateDetails.get('graduationDate').value
       }
     ];
+    // tslint:disable-next-line: max-line-length
+    if (this.arrayExperience[0].companyName == null && this.arrayExperience[0].position == null && this.arrayExperience[0].duration == null) {
+      this.arrayExperience = [];
+    }
     this.arrayVenue = [{
       venueId: window.localStorage.getItem('venue_id'),
       jobId: window.localStorage.getItem('jobId'),
@@ -283,7 +294,7 @@ export class CandidateAddProfilePage implements OnInit {
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
       candidateVenueJobSaveDto: this.arrayVenue,
-      candidateScreeningDtos: this.arrayScreening
+      candidateScreeningDtos: this.arrayScreening,
     };
     console.log(candidateDetails);
 
@@ -295,6 +306,103 @@ export class CandidateAddProfilePage implements OnInit {
         // alert("Data not saved!");
       }
     );
+  }
+
+  submitCandidateCV() {
+    const filteredCandidateSkills = this.CandidateSkills.filter(data => {
+      return data.checked === true;
+    });
+    this.arrayExperience = [
+      {
+        companyName: this.formCandidateDetails.get('companyName').value,
+        position: this.formCandidateDetails.get('position').value,
+        duration: this.formCandidateDetails.get('duration').value
+      }
+    ];
+    this.arrayQualification = [
+      {
+        title: this.formCandidateDetails.get('title').value,
+        division: this.formCandidateDetails.get('division').value,
+        institution: this.formCandidateDetails.get('institution').value,
+        graduationDate: this.formCandidateDetails.get('graduationDate').value
+      }
+    ];
+    this.arrayVenue = [{
+      venueId: window.localStorage.getItem('venue_id'),
+      jobId: window.localStorage.getItem('jobId'),
+      jobPriority: window.localStorage.getItem('priority')
+    }];
+    const candidateDetails = {
+      firstName: this.formCandidateDetails.get('firstName').value,
+      lastName: this.formCandidateDetails.get('lastName').value,
+      email: this.formCandidateDetails.get('email').value,
+      telNumber: this.formCandidateDetails.get('telNumber').value,
+      mobileNumber: this.formCandidateDetails.get('mobileNumber').value,
+      gender: this.formCandidateDetails.get('gender').value,
+      address: this.formCandidateDetails.get('address').value,
+      nationality: this.formCandidateDetails.get('nationality').value,
+      registrationDate: this.formCandidateDetails.get('registrationDate').value,
+      availabilityDate: this.formCandidateDetails.get('availabilityDate').value,
+      currentLevel: this.formCandidateDetails.get('currentLevel').value,
+      jobType: this.formCandidateDetails.get('jobType').value,
+      currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
+      experienceDtos: this.arrayExperience,
+      qualificationDtos: this.arrayQualification,
+      candidateSkillDtos: filteredCandidateSkills,
+      candidateVenueJobSaveDto: this.arrayVenue,
+      candidateScreeningDtos: this.arrayScreening,
+    };
+
+    if (this.formCandidateDetails.invalid) {
+      this.unsuccessMsg();
+    } else {
+      this.uploadCV(candidateDetails, this.fileData);
+      this.successMsg();
+
+      setTimeout(() => {
+        this.formCandidateDetails.reset();
+        this.router.navigate(['home']);
+      }, 2000);
+    }
+  }
+
+  selectFile(event) {
+    this.fileData =  event.target.files.item(0);
+
+    if (this.fileData.type.match('image.*')) {
+      const size = event.target.files[0].size;
+      if (size > 5266467) {
+        alert('size must not exceeds 5 MB');
+        this.formCandidateDetails.get('cvUpload').setValue('');
+      } else {
+        this.selectedFiles = event.target.files;
+      }
+    } else {
+      alert('invalid format!');
+    }
+    console.log(this.fileData)
+  } 
+
+
+  uploadCV(candidateDto: Candidate, fileData: File) {
+    const formData: FormData = new FormData();
+    const json = JSON.stringify(candidateDto);
+    const blob = new Blob([json], {
+      type: 'application/json'
+    });
+    formData.append('candidateDto', blob);
+    formData.append('file', fileData, fileData.name);
+    console.log(formData)
+    let httpOptions = {
+      headers: new HttpHeaders().set('Accept', 'application/json')
+    };
+    console.log(formData)
+    this.apiService.uploadCV(formData, httpOptions).subscribe(data => {
+      console.log('uploading..')
+      if (data) {
+        console.log('uploaded')
+      }
+    });
   }
 
   ionViewWillLoad() { }
@@ -360,68 +468,6 @@ export class CandidateAddProfilePage implements OnInit {
     }
   }
 
-  duplicate() {
-    const div = document.createElement('div');
-
-    div.className = 'row';
-
-    div.innerHTML = `
-    <ion-row id="duplicater">
-    <ion-col col-md-6 size="12" size-sm>
-        <ion-item>
-            <ion-input formControlName="position" type="text" placeholder="Position"></ion-input>
-        </ion-item>
-        <div class="error-messages">
-            <ng-container *ngFor='let error of error_messages.position'>
-                <div class="error-message"
-                    *ngIf="addCandidate.get('position').hasError(error.type) &&
-                     (addCandidate.get('position').dirty || addCandidate.get('position').touched)">
-                    {{ error.message }}
-                </div>
-            </ng-container>
-        </div>
-    </ion-col>
-    <ion-col col-md-6 size="12" size-sm>
-        <ion-item>
-            <ion-input formControlName="company" type="text" placeholder="Company"></ion-input>
-        </ion-item>
-        <div class="error-messages">
-            <ng-container *ngFor='let error of error_messages.company'>
-                <div class="error-message"
-                    *ngIf="addCandidate.get('company').hasError(error.type) &&
-                    (addCandidate.get('company').dirty || addCandidate.get('company').touched)">
-                    {{ error.message }}
-                </div>
-            </ng-container>
-        </div>
-    </ion-col>
-</ion-row>
-<ion-row>
-    <ion-col size="6" size-md size="12" size-sm>
-        <ion-item>
-            <ion-label floating color="medium">*Duration</ion-label>
-            <ion-select interface="popover" formControlName="duration" cancelText="Cancel" okText="OK">
-                <ion-select-option *ngFor="let duration of durations" [value]="duration">
-                    {{ duration }}
-                </ion-select-option>
-            </ion-select>
-        </ion-item>
-        <div class="error-messages">
-            <ng-container *ngFor='let error of error_messages.duration'>
-                <div class="error-message"
-                    *ngIf="addCandidate.get('duration').hasError(error.type) && 
-                    (addCandidate.get('duration').dirty || addCandidate.get('duration').touched)">
-                    {{ error.message }}
-                </div>
-            </ng-container>
-        </div>
-    </ion-col>
-</ion-row>
-  `;
-
-    document.getElementById('content').appendChild(div);
-  }
-
   // Tab Button Function
   openTab(event, tabName) {
     let i, tabcontent, tablinks;
@@ -439,30 +485,5 @@ export class CandidateAddProfilePage implements OnInit {
 
     document.getElementById(tabName).style.display = 'block';
     event.currentTarget.className += ' active';
-  }
-
-  // File Upload Section
-  fileProgress(fileInput: any) {
-    this.fileData = fileInput.target.files[0] as File;
-  }
-
-  onSubmitCV() {
-    const formData = new FormData();
-    formData.append('file', this.fileData);
-    this.http
-      .post('url/to/your/api', formData, {
-        reportProgress: true,
-        observe: 'events'
-      })
-      .subscribe(events => {
-        if (events.type === HttpEventType.UploadProgress) {
-          console.log(
-            'Upload progress: ',
-            Math.round((events.loaded / events.total) * 100) + '%'
-          );
-        } else if (events.type === HttpEventType.Response) {
-          console.log(events);
-        }
-      });
   }
 }

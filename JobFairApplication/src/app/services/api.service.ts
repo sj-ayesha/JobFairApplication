@@ -20,7 +20,7 @@ import { CandidateScreening } from '../model/candidateScreening';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://localhost:8081/'; // url to access backend
+  baseUrl = 'http://10.9.0.24:8081/'; // url to access backend
 
   // candidates
 
@@ -62,7 +62,7 @@ export class ApiService {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-asc/' + venueId);
   }
 
-  getCandidateByLastName(lastName: string): Observable<CandidateVenueJob[]> {
+  getCandidateByLastName(lastName: string): Observable<CandidateVenueJob[] | any> {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/lastname/' + lastName);
   }
 
@@ -96,8 +96,12 @@ export class ApiService {
     return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/category?venueId=' + venueId + '&category=' + category);
   }
 
-  searchJobByTitle(venueId: number, title: string): Observable<VenueJob[]> {
+  searchJobByTitle(venueId: number, title: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/title' + '?venueId=' + venueId + '&title=' + title);
+  }
+
+  searchJobByLevel(venueId: number, level: string): Observable<VenueJob[] | any> {
+    return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/level' + '?venueId=' + venueId + '&level=' + level);
   }
 
   // venue
@@ -140,6 +144,10 @@ export class ApiService {
 
   saveCandidateScreening(candidateScreening: CandidateScreening): Observable<CandidateScreening[]> {
     return this.http.post<CandidateScreening[]>(this.baseUrl + 'candidate-screening', candidateScreening);
+  }
+
+  uploadCV(formData, httpOptions): Observable<any> {
+    return this.http.post<any>( this.baseUrl + 'candidate/candidate-cv', formData, httpOptions);
   }
 
 }

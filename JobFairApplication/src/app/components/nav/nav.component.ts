@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ChangeVenueService } from 'src/app/services/change-venue.service';
 
 @Component({
   selector: 'app-nav',
@@ -14,16 +15,24 @@ export class NavComponent implements OnInit, OnDestroy {
   dissabled = true;
   private sessionStateSubscription: Subscription;
   loggedIn: boolean;
-  constructor(private loginLogoutService: LoginLogoutService, private router: Router) { }
+
+  venue: string;
+  changeVenue: string;
+
+  constructor(
+    private loginLogoutService: LoginLogoutService,
+    private router: Router,
+    private changeVenueService: ChangeVenueService
+    ) { }
 
   ngOnInit() {
-    // this.loginLogoutService.navigateToVenue();
-    // this.loggedIn = this.loginLogoutService.isLoggedIn;
-    // console.log("veryy good", this.loginLogoutService.isLoggedIn);
     this.loggedIn = !!localStorage.getItem('user');
-    window.localStorage.setItem('venue_name', 'UOM');
-    this.venueName = window.localStorage.getItem('venue_name');
+    this.venueName = window.localStorage.getItem('venueName');
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
+
+    this.changeVenueService.cast.subscribe(data => this.venue = data);
+
+    this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
   }
 
   ngOnDestroy() {
@@ -36,18 +45,16 @@ export class NavComponent implements OnInit, OnDestroy {
     localStorage.removeItem('venue_id');
     localStorage.removeItem('priority');
     localStorage.removeItem('jobId');
+    localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
+    this.venue = '';
+  }
+
+  goToVenue(){
+    this.router.navigateByUrl('/venue');
   }
 
   navigateToHome() {
-    // this.count = JSON.parse(localStorage.priority).length;
-    // console.log(this.count);
-    // if (this.count >= 1){
-    //   this.router.navigate(['/home']);
-    // }
-    // else {
-    //   console.log("cannott");
-    // }
     if (localStorage.user !== undefined && localStorage.venue_id !== undefined) {
       this.router.navigate(['/home']);
     } else {

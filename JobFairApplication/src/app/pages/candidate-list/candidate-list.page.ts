@@ -16,6 +16,8 @@ export class CandidateListPage implements OnInit {
   // candidateVenueJobsSort: CandidateVenueJob[];
   public countCandidates: any;
   noCandidatesAvailable = false;
+  candidateNotFound = false;
+  message: any;
 
   constructor(
     private router: Router,
@@ -75,8 +77,17 @@ export class CandidateListPage implements OnInit {
   }
 
   searchByLastName(lastName: any) {
-    this.apiService.getCandidateByLastName(lastName).subscribe(data => {
-      this.candidateVenueJobs = data;
-    });
+    this.candidateNotFound = false;
+    if (lastName === '') {
+      this.populateCandidate();
+    } else {
+      this.apiService.getCandidateByLastName(lastName).subscribe(data => {
+        if (data.message === 'NO_CANDIDATE_AVAILABLE') {
+          this.candidateNotFound = true;
+        } else {
+          this.candidateVenueJobs = data;
+        }
+      });
+    }
   }
 }

@@ -1,26 +1,12 @@
-export class CandidateVenueJob {
+import { VenueJob } from './venueJob';
+import { Candidate } from './candidate';
+import { Job } from './job';
+import { NumberSymbol } from '@angular/common';
 
+export class CandidateVenueJob {
+    message: string;
     candidateVenueJob: number;
-    venueJob: {
-        venueJobId: number;
-        venue: {
-            venueId: number;
-            venueName: string;
-            startDate: Date;
-            endDate: Date;
-            address: string;
-            active: boolean;
-        },
-        job: {
-            jobId: number;
-            title: string;
-            level: string;
-            category: string;
-            description: string;
-            minimumExperience: string;
-            qualificationNeeded: string;
-        }
-    };
+    venueJob: VenueJob;
     candidate: {
         candidateId: number;
         firstName: string;
@@ -36,7 +22,8 @@ export class CandidateVenueJob {
         currentLevel: string;
         jobType: string;
         currentAcademicYear: string;
-    };
+    }
     jobPriority: string;
-    message: string;
+    jobList: Job[];
+
 }

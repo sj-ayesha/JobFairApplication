@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
 import { CategoryService } from '../../services/category.service';
@@ -11,7 +11,7 @@ import { CountCandidates } from 'src/app/model/countCandidates';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit, DoCheck {
 
   categoryTitle: [];
 
@@ -29,14 +29,15 @@ export class HomePage {
     this.countCandidatesByVenue();
   }
 
-  populateCandidate() {
-    // tslint:disable-next-line: radix
+  ngDoCheck() {
+  }
+
+  private populateCandidate(): void {
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), true).subscribe(data => {
       if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
         this.noCandidatesAvailable = true;
       } else {
       this.candidateVenueJobs = data;
-      // console.log( this.candidateVenueJobs);
       }
     });
   }
@@ -49,7 +50,7 @@ export class HomePage {
     this.router.navigate(['/job-list', jobQueryParam]);
   }
 
-  countCandidatesByVenue() {
+  private countCandidatesByVenue(): void {
     // tslint:disable-next-line: radix
     this.apiService.getCountByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
       this.countCandidates = data.countCandidates;

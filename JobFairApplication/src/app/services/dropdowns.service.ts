@@ -26,6 +26,7 @@ export class DropdownsService {
 
     this.currentLevels = [
       'Fresher',
+      'Junior',
       'Senior'
     ];
 
@@ -41,9 +42,9 @@ export class DropdownsService {
     ];
 
     this.titles = [
+      'Degree',
       'HSC',
       'Diploma',
-      'Degree',
       'Masters',
       'PHD'
     ];

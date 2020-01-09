@@ -44,11 +44,15 @@ ion-datetime{
 }
 
 .tablinks {
-    --background: #414344;
+    --background: #222428;
     --background-hover: #E23615;
 
     &.active {
         --background-hover: #E23615;
         --background:#E23615;
     }
+}
+
+.candidate-cv {
+    display: none;
 }
