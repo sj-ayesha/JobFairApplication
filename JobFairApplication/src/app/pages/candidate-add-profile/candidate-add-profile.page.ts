@@ -36,6 +36,7 @@ export class CandidateAddProfilePage implements OnInit {
   position: string;
   company: string;
   duration: string;
+  fileName: string;
   day: any;
   month: any;
   year: any;
@@ -290,6 +291,7 @@ export class CandidateAddProfilePage implements OnInit {
       currentLevel: this.formCandidateDetails.get('currentLevel').value,
       jobType: this.formCandidateDetails.get('jobType').value,
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
+      fileName: this.formCandidateDetails.get('cvUpload').value,
       experienceDtos: this.arrayExperience,
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
@@ -346,12 +348,15 @@ export class CandidateAddProfilePage implements OnInit {
       currentLevel: this.formCandidateDetails.get('currentLevel').value,
       jobType: this.formCandidateDetails.get('jobType').value,
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
+      fileName: this.formCandidateDetails.get('cvUpload').value,
       experienceDtos: this.arrayExperience,
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
       candidateVenueJobSaveDto: this.arrayVenue,
       candidateScreeningDtos: this.arrayScreening,
     };
+
+    console.log(candidateDetails);
 
     if (this.formCandidateDetails.invalid) {
       this.unsuccessMsg();

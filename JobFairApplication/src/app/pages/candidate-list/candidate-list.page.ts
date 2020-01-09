@@ -26,11 +26,6 @@ export class CandidateListPage implements OnInit {
     private apiService: ApiService) { }
 
   ngOnInit() {
-    // this.route.paramMap.subscribe((params: ParamMap) => {
-    //   let id = parseInt(params.get('id'));
-    //   this.candidateDetails = this.candidateService.getcandidateDetail();
-    //   this.candidateDetails = this.candidateDetails.filter(data => data.id === id);
-    // });
     this.populateCandidate();
     this.countCandidatesByVenue();
   }
