@@ -363,7 +363,7 @@ export class CandidateAddProfilePage implements OnInit {
       setTimeout(() => {
         this.formCandidateDetails.reset();
         // this.router.navigate(['home']);
-        this.ngZone.run(() => this.router.navigateByUrl('/home'));
+        this.router.navigateByUrl('/home');
       }, 2000);
     }
   }
@@ -466,7 +466,7 @@ export class CandidateAddProfilePage implements OnInit {
       setTimeout(() => {
         this.formCandidateDetails.reset();
         // this.router.navigate(['home']);
-        this.ngZone.run(() => this.router.navigateByUrl('/home'));
+        this.router.navigateByUrl('/home');
       }, 2000);
     }
   }

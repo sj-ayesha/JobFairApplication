@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { HomePageRoutingModule } from './home.page-routing.module';
 
 // import { NavComponent } from '../../components/nav/nav.component';
 // import { FooterComponent } from '../../components/footer/footer.component';
@@ -15,12 +16,7 @@ import { ListCandidateJobComponent } from '../../components/list-candidate-job/l
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HomePage
-      }
-    ])
+    HomePageRoutingModule
   ],
   declarations: [
     HomePage,

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, DoCheck, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck, SimpleChanges, OnChanges } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
 import { CategoryService } from '../../services/category.service';
@@ -11,7 +11,7 @@ import { CountCandidates } from 'src/app/model/countCandidates';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, DoCheck {
+export class HomePage implements OnInit{
 
   categoryTitle: [];
 
@@ -22,18 +22,14 @@ export class HomePage implements OnInit, DoCheck {
   public percentagCountCandidates: number;
   noCandidatesAvailable = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private apiService: ApiService) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private apiService: ApiService) { 
+
+  }
 
   ngOnInit() {
     this.populateCandidate();
     this.countCandidatesByVenue();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    this.populateCandidate();
-    this.countCandidatesByVenue();
+    console.log('HOME')
   }
 
   private populateCandidate(): void {
