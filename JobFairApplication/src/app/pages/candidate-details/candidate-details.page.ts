@@ -39,7 +39,9 @@ export class CandidateDetailsPage implements OnInit {
   seconds: any;
   status: any;
   ScreeningDisplay = false;
-  candiateId: any = this.route.snapshot.paramMap.get('candidateId');
+  candidateId: any = this.route.snapshot.paramMap.get('candidateId');
+  showCV = false;
+  baseUrl = this.apiService.baseUrl;
 
   // tslint:disable-next-line: variable-name
   error_messages = {
@@ -70,7 +72,7 @@ export class CandidateDetailsPage implements OnInit {
 
   ngOnInit() {
     this.items = this.dataService.getJobs();
-    this.getCandidateById(this.candiateId);
+    this.getCandidateById(this.candidateId);
     this.today = new Date();
 
     this.venueName = localStorage.getItem('venueName');
@@ -84,6 +86,11 @@ export class CandidateDetailsPage implements OnInit {
     this.minutes = this.today.getMinutes();
     this.seconds = this.today.getSeconds();
 
+    // if (this.candidate.fileName == '') {
+    //   this.showCV = false;
+    // } else {
+    //   this.showCV = true;
+    // }
 
     this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
     // console.log(this.date);
@@ -93,9 +100,16 @@ export class CandidateDetailsPage implements OnInit {
     this.apiService.getCandidateById(candidateId).subscribe(data => {
       this.candidate = data;
 
+      if (this.candidate.fileName == null) {
+        this.showCV = false;
+      } else {
+        this.showCV = true;
+      }
+
+      console.log(this.showCV)
+
       this.jobLists = this.candidate.candidateVenueJobSaveDto[0].jobList;
 
-      console.log(this.candidate.candidateVenueJobSaveDto[0].jobList);
       this.qualifications = this.candidate.qualificationDtos;
       this.experiences = this.candidate.experienceDtos;
       this.skills = this.candidate.candidateSkillDtos;
@@ -105,6 +119,7 @@ export class CandidateDetailsPage implements OnInit {
       } else {
         this.ScreeningDisplay = false;
       }
+
 
       // To be used later on
       // for(let i = 0; i < this.candidateScreenings.length; i++) {
@@ -129,12 +144,12 @@ export class CandidateDetailsPage implements OnInit {
       interviewerFeedback: this.formCandidateScreening.get('feedback').value,
       screeningStatus: this.status,
       // tslint:disable-next-line: radix
-      candidateId: parseInt(this.candiateId)
+      candidateId: parseInt(this.candidateId)
     };
     console.log(this.formCandidateScreening.get('interviewDate').value);
     // console.log(interviewDetails);
     this.apiService.saveCandidateScreening(interviewDetails).subscribe(data => {
-      this.getCandidateById(this.candiateId);
+      this.getCandidateById(this.candidateId);
     });
   }
 

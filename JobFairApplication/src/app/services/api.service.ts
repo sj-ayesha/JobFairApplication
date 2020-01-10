@@ -146,8 +146,14 @@ export class ApiService {
     return this.http.post<CandidateScreening[]>(this.baseUrl + 'candidate-screening', candidateScreening);
   }
 
+  // candidate cv
+
   uploadCV(formData, httpOptions): Observable<any> {
     return this.http.post<any>( this.baseUrl + 'candidate/candidate-cv', formData, httpOptions);
+  }
+
+  getCandidateCV(candidateId: number): Observable<any> {
+    return this.http.get<Candidate[]>(this.baseUrl + 'candidate/candidate-cv/' + candidateId);
   }
 
 }
