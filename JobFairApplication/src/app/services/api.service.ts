@@ -20,7 +20,7 @@ import { CandidateScreening } from '../model/candidateScreening';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://localhost:8081/'; // url to access backend
+  baseUrl = 'https://fe5da0f1.ngrok.io/'; // url to access backend
 
   // candidates
 

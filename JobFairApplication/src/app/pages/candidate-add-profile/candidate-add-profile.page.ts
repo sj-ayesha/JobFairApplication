@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CandidateSkill } from 'src/app/model/CandidateSkill';
 import { ApiService } from 'src/app/services/api.service';
@@ -121,7 +121,8 @@ export class CandidateAddProfilePage implements OnInit {
     private router: Router,
     private toastCtrl: ToastController,
     private dropdowns: DropdownsService,
-    private http: HttpClient
+    private http: HttpClient,
+    private ngZone: NgZone
   ) {
 
     this.formCandidateDetails = this.formBuilder.group({
@@ -361,7 +362,8 @@ export class CandidateAddProfilePage implements OnInit {
 
       setTimeout(() => {
         this.formCandidateDetails.reset();
-        this.router.navigate(['home']);
+        // this.router.navigate(['home']);
+        this.ngZone.run(() => this.router.navigateByUrl('/home'));
       }, 2000);
     }
   }
@@ -463,7 +465,8 @@ export class CandidateAddProfilePage implements OnInit {
 
       setTimeout(() => {
         this.formCandidateDetails.reset();
-        this.router.navigate(['home']);
+        // this.router.navigate(['home']);
+        this.ngZone.run(() => this.router.navigateByUrl('/home'));
       }, 2000);
     }
   }
