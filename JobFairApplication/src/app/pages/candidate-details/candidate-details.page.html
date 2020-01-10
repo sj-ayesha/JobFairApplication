@@ -55,24 +55,25 @@
             </div>
           </form>
           <ion-col col-md-12 size="12">
-            <ion-card class="candidate-details" padding>
-              <ion-row>
-                <ion-col col-md-4 size="4">
-                  <div class="information">
-                    <h5><b>Information</b></h5>
-                    <div>
-                      <div class="separation"></div>
-                      <p><b>Name:</b> {{ candidate?.firstName}} {{ candidate?.lastName}}</p>
-                      <p><b>Gender:</b> {{candidate?.gender}}</p>
-                      <p><b>Phone Number:</b> {{candidate?.mobileNumber}}</p>
-                      <p><b>Telephone Number:</b> {{candidate?.telNumber}}</p>
-                      <p><b>Email:</b> {{candidate?.email}}</p>
-                      <p><b>Address:</b> {{candidate?.address}}</p>
-                      <p><b>Nationality:</b> {{candidate?.nationality}}</p>
-                      <p><b>Current Level:</b> {{candidate?.currentLevel}}</p>
-                      <p><b>Available From:</b> {{candidate?.availabilityDate}}</p>
+            <div *ngIf="!showCV">
+              <ion-card class="candidate-details" padding>
+                <ion-row>
+                  <ion-col col-md-4 size="4">
+                    <div class="information">
+                      <h5><b>Information</b></h5>
+                      <div>
+                        <div class="separation"></div>
+                        <p><b>Name:</b> {{ candidate?.firstName}} {{ candidate?.lastName}}</p>
+                        <p><b>Gender:</b> {{candidate?.gender}}</p>
+                        <p><b>Phone Number:</b> {{candidate?.mobileNumber}}</p>
+                        <p><b>Telephone Number:</b> {{candidate?.telNumber}}</p>
+                        <p><b>Email:</b> {{candidate?.email}}</p>
+                        <p><b>Address:</b> {{candidate?.address}}</p>
+                        <p><b>Nationality:</b> {{candidate?.nationality}}</p>
+                        <p><b>Current Level:</b> {{candidate?.currentLevel}}</p>
+                        <p><b>Available From:</b> {{candidate?.availabilityDate}}</p>
+                      </div>
                     </div>
-                  </div>
                 </ion-col>
 
                 <ion-col col-md-4 size="4">
@@ -120,36 +121,79 @@
                       <div class="separation"></div>
                       <p>{{ skill?.skill.skillName }}</p>
                     </div>
-                  </div>
-                </ion-col>
-              </ion-row>
-            </ion-card>
-            <ion-card class="candidate-cv-details" padding>
-              <ion-row>
-                <ion-col col-md-6 size="6">
-                  <div class="information">
-                    <h5><b>Information</b></h5>
-                    <div>
-                      <div class="separation"></div>
-                      <p><b>Name:</b> {{ candidate?.firstName}} {{ candidate?.lastName}}</p>
-                      <p><b>Email:</b> {{candidate?.email}}</p>
-                      <p><b>Current Level:</b> {{candidate?.currentLevel}}</p>
-                      <p><b>Job Type:</b> {{candidate?.jobType}}</p>
-                      <p><b>Availability Date:</b> {{candidate?.availabilityDate}}</p>
                     </div>
-                  </div>
                 </ion-col>
-                <ion-col col-md-6 size="6">
-                  <div class="uploaded-file">
-                    <h5><b>CV Uploaded</b></h5>
-                    <div>
-                      <div class="separation"></div>
-                      <p>{{candidate?.fileName}}</p>
+  
+                  <ion-col col-md-4 size="4">
+                    <div class="qualifications">
+                      <h5><b>Qualification(s)</b></h5>
+                      <div *ngFor="let qualification of qualifications">
+                        <div class="separation"></div>
+                        <p><b>Qualification Level:</b> {{ qualification.title }}</p>
+                        <p><b>Division:</b> {{ qualification.division }}</p>
+                        <p><b>Institution:</b> {{ qualification.institution }}</p>
+                        <p><b>Graduation Date:</b> {{ qualification.graduationDate }}</p>
+                      </div>
                     </div>
-                  </div>
-                </ion-col>
-              </ion-row>
-            </ion-card>
+                  </ion-col>
+  
+                  <ion-col col-md-4 size="4">
+                    <div class="experience">
+                      <h5><b>Experience(s)</b></h5>
+                      <div *ngFor="let experience of experiences">
+                        <div class="separation"></div>
+                        <p><b>Company:</b> {{ experience.companyName}}</p>
+                        <p><b>Job Title:</b> {{ experience.position}}</p>
+                        <p><b>Duration:</b> {{ experience.duration}}</p>
+  
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+  
+                <ion-row>
+                  <ion-col col-md-4 size="4">
+                    <div class="skill">
+                      <h5><b>Skill(s)</b></h5>
+                      <div *ngFor="let skill of skills">
+                        <div class="separation"></div>
+                        <p>{{ skill?.skill.skillName }}</p>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-card>
+            </div>
+
+            <div *ngIf="showCV">
+              <ion-card class="candidate-cv-details" padding>
+                <ion-row>
+                  <ion-col col-md-6 size="6">
+                    <div class="information">
+                      <h5><b>Information</b></h5>
+                      <div>
+                        <div class="separation"></div>
+                        <p><b>Name:</b> {{ candidate?.firstName}} {{ candidate?.lastName}}</p>
+                        <p><b>Email:</b> {{candidate?.email}}</p>
+                        <p><b>Current Level:</b> {{candidate?.currentLevel}}</p>
+                        <p><b>Job Type:</b> {{candidate?.jobType}}</p>
+                        <p><b>Availability Date:</b> {{candidate?.availabilityDate}}</p>
+                      </div>
+                    </div>
+                  </ion-col>
+                  <ion-col col-md-6 size="6">
+                    <div class="uploaded-file">
+                      <h5><b>CV Uploaded</b></h5>
+                      <div>
+                        <div class="separation"></div>
+                        <a href='{{baseUrl}}candidate/candidate-cv/{{candidateId}}'>{{candidate?.fileName}}</a>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-card>
+            </div>
+
           </ion-col>
 
         </ion-row>
