@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { ChangeVenueService } from 'src/app/services/change-venue.service';
+
 
 @Component({
   selector: 'app-nav',
@@ -22,7 +23,8 @@ export class NavComponent implements OnInit, OnDestroy {
   constructor(
     private loginLogoutService: LoginLogoutService,
     private router: Router,
-    private changeVenueService: ChangeVenueService
+    private changeVenueService: ChangeVenueService,
+    private ngZone: NgZone
     ) { }
 
   ngOnInit() {
@@ -51,7 +53,8 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   goToVenue(){
-    this.router.navigateByUrl('/venue');
+    this.ngZone.run(() => this.router.navigateByUrl('/venue'));
+    // this.router.navigateByUrl('/venue');
   }
 
   navigateToHome() {
