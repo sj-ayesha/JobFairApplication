@@ -264,6 +264,24 @@ ion-card-title .feedbacks{
     padding-bottom: 10px
 }
 
+.download-section {
+    display: flex;
+    .btn-download {
+        --background-hover: #E23615;
+        --background:#E23615;
+        margin: 10px 20px;
+    
+        a {
+            color: white;
+            text-decoration: none;
+            text-transform: none;
+        }
+    
+    }
+}
+
+
+
 
 
 // .btn-checkbox__item:disabled, .btn-checkbox__ite[disabled] {
