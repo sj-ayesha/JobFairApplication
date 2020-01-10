@@ -88,6 +88,17 @@ export class JobListPage implements OnInit {
     toast.present();
   }
 
+  async unsuccessMsgEmpty() {
+    const toast = await this.toastCtrl.create({
+      message: 'Please select atleast a job',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
 
   styleAccordion() {
     const coll = document.getElementsByClassName('collapsible');
@@ -164,10 +175,14 @@ export class JobListPage implements OnInit {
 
   applyOnlyFive() {
     const count = JSON.parse(localStorage.priority).length;
-    if (count <= 5) {
-      this.router.navigate(['candidate-add-profile']);
-    } else {
+
+    console.log(count)
+    if (count > 5) {
       this.unsuccessMsg();
+    } else if (count <= 0) {
+      this.unsuccessMsgEmpty();
+    } else {
+      this.router.navigate(['candidate-add-profile']);
     }
   }
 
