@@ -371,7 +371,7 @@ export class CandidateAddProfilePage implements OnInit {
   selectFile(event) {
     this.fileData =  event.target.files.item(0);
 
-    if (this.fileData.type.match('image.*')) {
+    if (this.fileData.type.match('image.*|application.*')) {
       const size = event.target.files[0].size;
       if (size > 5266467) {
         alert('size must not exceeds 5 MB');
@@ -382,7 +382,6 @@ export class CandidateAddProfilePage implements OnInit {
     } else {
       alert('invalid format!');
     }
-    console.log(this.fileData)
   } 
 
 

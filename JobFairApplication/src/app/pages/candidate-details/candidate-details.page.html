@@ -186,7 +186,13 @@
                       <h5><b>CV Uploaded</b></h5>
                       <div>
                         <div class="separation"></div>
-                        <a href='{{baseUrl}}candidate/candidate-cv/{{candidateId}}'>{{candidate?.fileName}}</a>
+                        <div class="download-section">
+                          <p><b>Download {{ candidate?.firstName}} CV:</b></p>
+                          <ion-button class="btn-download">
+                            <a href='{{baseUrl}}candidate/candidate-cv/{{candidateId}}'>{{candidate?.fileName}}</a>
+                          </ion-button>
+                        </div>
+
                       </div>
                     </div>
                   </ion-col>
