@@ -123,44 +123,6 @@
                     </div>
                     </div>
                 </ion-col>
-  
-                  <ion-col col-md-4 size="4">
-                    <div class="qualifications">
-                      <h5><b>Qualification(s)</b></h5>
-                      <div *ngFor="let qualification of qualifications">
-                        <div class="separation"></div>
-                        <p><b>Qualification Level:</b> {{ qualification.title }}</p>
-                        <p><b>Division:</b> {{ qualification.division }}</p>
-                        <p><b>Institution:</b> {{ qualification.institution }}</p>
-                        <p><b>Graduation Date:</b> {{ qualification.graduationDate }}</p>
-                      </div>
-                    </div>
-                  </ion-col>
-  
-                  <ion-col col-md-4 size="4">
-                    <div class="experience">
-                      <h5><b>Experience(s)</b></h5>
-                      <div *ngFor="let experience of experiences">
-                        <div class="separation"></div>
-                        <p><b>Company:</b> {{ experience.companyName}}</p>
-                        <p><b>Job Title:</b> {{ experience.position}}</p>
-                        <p><b>Duration:</b> {{ experience.duration}}</p>
-  
-                      </div>
-                    </div>
-                  </ion-col>
-                </ion-row>
-  
-                <ion-row>
-                  <ion-col col-md-4 size="4">
-                    <div class="skill">
-                      <h5><b>Skill(s)</b></h5>
-                      <div *ngFor="let skill of skills">
-                        <div class="separation"></div>
-                        <p>{{ skill?.skill.skillName }}</p>
-                      </div>
-                    </div>
-                  </ion-col>
                 </ion-row>
               </ion-card>
             </div>
