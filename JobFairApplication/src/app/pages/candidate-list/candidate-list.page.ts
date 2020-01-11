@@ -30,6 +30,10 @@ export class CandidateListPage implements OnInit {
     this.countCandidatesByVenue();
   }
 
+  ionViewWillEnter() {
+  }
+
+
   onSelect(id: number) {
     this.router.navigate(['/candidate-list', id]);
     this.populateCandidate();

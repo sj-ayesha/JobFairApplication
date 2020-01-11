@@ -25,9 +25,19 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit() {
+    // this.populateCandidate();
+    this.countCandidatesByVenue();
+    console.log('onInit Triggered');
+  }
+
+  ionViewWillEnter(){
     this.populateCandidate();
     this.countCandidatesByVenue();
-    console.log('HOME');
+    console.log('ionViewWillEnter Triggered');
+  }
+  ionViewWillLeave(){
+    console.log('Left');
+    this.populateCandidate();
   }
 
   private populateCandidate(): void {

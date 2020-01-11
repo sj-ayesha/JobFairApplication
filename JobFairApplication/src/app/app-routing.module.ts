@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'venue',
     loadChildren: () => import('./pages/venue/venue.module').then(m => m.VenuePageModule)
+  },  {
+    path: 'home-page',
+    loadChildren: () => import('./pages/home-page/home-page.module').then( m => m.HomePagePageModule)
   },
+
 
 ];
 
