@@ -69,10 +69,18 @@ ion-list{
 .category-item:focus{
     outline:none;
 }
+.category-item img{
+    width:100px;
+}
 .btn-view-more{
     margin-bottom: 25px;
 }
-
+.category-col{
+    width: 125px;
+}
+// .refresh{
+//     background-color: #FF483A;
+// }
 @media only screen and (max-width: 1024px) {
     .ion-text-center{
         // background-image: none;
@@ -83,6 +91,12 @@ ion-list{
     .lists h3{
         font-size:30px;
     }
+    .category-item h5{
+        font-size:17px;
+    }
+    // .refresh{
+    //     background-color: #E23615;
+    // }
 }
 @media only screen and (max-width: 768px) {
     .ion-text-center{

@@ -30,7 +30,7 @@ export class HomePage implements OnInit{
     console.log('onInit Triggered');
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.populateCandidate();
     this.countCandidatesByVenue();
     console.log('ionViewWillEnter Triggered');
@@ -40,6 +40,15 @@ export class HomePage implements OnInit{
     this.populateCandidate();
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.ionViewWillEnter();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
   private populateCandidate(): void {
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), true).subscribe(data => {
