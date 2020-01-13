@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CandidatesService } from '../../services/candidates.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
 import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-candidate-list',
@@ -11,6 +12,8 @@ import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
   styleUrls: ['./candidate-list.page.scss'],
 })
 export class CandidateListPage implements OnInit {
+  @ViewChild(IonInfiniteScroll, {static: true}) infiniteScroll: IonInfiniteScroll;
+
   candidateDetails: any[];
   candidateVenueJobs: CandidateVenueJob[] = [];
   // candidateVenueJobsSort: CandidateVenueJob[];
@@ -37,6 +40,18 @@ export class CandidateListPage implements OnInit {
   onSelect(id: number) {
     this.router.navigate(['/candidate-list', id]);
     this.populateCandidate();
+  }
+
+  loadData(event) {
+    setTimeout(() => {
+      console.log('Done');
+      this.populateCandidate();
+      event.target.complete();
+    }, 500);
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
   populateCandidate() {
