@@ -1,7 +1,7 @@
 @import '../../styles/custom.scss';
 // welcome
 .ion-text-center{
-    background-image: url('../../../assets/img/banner_4.png');
+    // background-image: url('../../../assets/img/banner_4.png');
     width: 100%;
     height: 100%;
     position: absolute;
@@ -12,12 +12,14 @@
 .main{
     color: white;
     // font-family: "Poppins", sans-serif;
-    max-width: 630px;
-    margin: 4% auto;
+    // max-width: 630px;
+    // margin: 4% auto;
+    background-color: $color-light-red;
 }
 .main h1{
     // font-weight: 600;
     color:white;
+    margin-top: 0;
 }
 .main h3{
     font-weight: 400;
@@ -81,9 +83,9 @@ ion-list{
 // }
 @media only screen and (max-width: 1024px) {
     .ion-text-center{
-        background-image: none;
-        background-color: $color-light-red;
-        height: 35%;
+        // background-image: none;
+        // background-color: $color-light-red;
+        // height: 35%;
         // max-height:350px;
     }
     .lists h3{
@@ -98,10 +100,10 @@ ion-list{
 }
 @media only screen and (max-width: 768px) {
     .ion-text-center{
-        background-image: none;
-        background-color: $color-light-red;
-        height: 45%;
-        max-height:350px;
+        // background-image: none;
+        // background-color: $color-light-red;
+        // height: 45%;
+        // max-height:350px;
     }
     .venue-input{
         margin-top:20px;
