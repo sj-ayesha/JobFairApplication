@@ -14,12 +14,13 @@
     // font-family: "Poppins", sans-serif;
     // max-width: 630px;
     // margin: 4% auto;
-    background-color: $color-light-red;
+    background-color: #FF483A;
 }
 .main h1{
     // font-weight: 600;
     color:white;
     margin-top: 0;
+    padding-top: 45px;
 }
 .main h3{
     font-weight: 400;
@@ -134,6 +135,48 @@ ion-list{
     margin: 0 auto;
     margin-bottom: 18px;
 }
+
+.banner {
+    &-section {
+        position: relative;
+
+        .venue {
+            max-width: 575px;
+
+            .list-md {
+                width: 75%;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &-img {
+        position: absolute;
+
+        @media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
+            display: none;
+        }
+
+        img {
+            @media only screen and (min-device-width: 1400px)and (max-device-width: 1600px) {
+                width: 95%;
+            }
+
+            @media only screen and (min-device-width: 1601px) {
+                width: 75%;
+            }
+            
+
+        }
+
+    }
+}
+
+.lists {
+    // margin: 20px 0;
+}
+
+
 // @media only screen and (max-width: 415px) {
 //     .ion-text-center{
 //         height: 45%;

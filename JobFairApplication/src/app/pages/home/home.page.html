@@ -8,24 +8,31 @@
   </ion-refresher>
   <ion-row>
     <div class="ion-text-center">
-      <div class="main">
-        <h1>WELCOME TO ELCA</h1>
-        <h3>The inde­pendent Swiss IT company</h3>
-        <ion-row class="venue">
-          <ion-col size="12" size-md>
-            <ion-list>
-              <ion-list-header>
-                <ion-label color="light">Total number of candidates: {{countCandidates}}</ion-label>
-              </ion-list-header>
-              <ion-progress-bar color="dark" value="{{percentagCountCandidates}}"></ion-progress-bar>
-            </ion-list>
-            <div class="venue-button">
-              <ion-button class="btn" color="light" (click)="routeToJob('by-venue')">
-                Apply Jobs</ion-button>
-            </div>
-          </ion-col>
-        </ion-row>
+      <div class="banner-section">
+        <div class="banner-img">
+          <img src="../../../assets/img/banner_4.png" alt="">
+        </div>
+        <div class="main">
+
+          <ion-row class="venue">
+            <ion-col size="12" size-md>
+              <h1>WELCOME TO ELCA</h1>
+              <h3>The inde­pendent Swiss IT company</h3>
+              <ion-list>
+                <ion-list-header>
+                  <ion-label color="light">Total number of candidates: {{countCandidates}}</ion-label>
+                </ion-list-header>
+                <ion-progress-bar color="dark" value="{{percentagCountCandidates}}"></ion-progress-bar>
+              </ion-list>
+              <div class="venue-button">
+                <ion-button class="btn" color="light" (click)="routeToJob('by-venue')">
+                  Apply Jobs</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
       </div>
+
       <ion-row class="lists">
         <ion-col size="6" size-md size="12" size-sm>
           <ion-card>
