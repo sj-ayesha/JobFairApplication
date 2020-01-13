@@ -243,6 +243,14 @@ export class CandidateAddProfilePage implements OnInit {
     this.currentLevels = this.dropdowns.currentLevels;
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.ngOnInit();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
 
   submitCandidate() {
     const filteredCandidateSkills = this.CandidateSkills.filter(data => {

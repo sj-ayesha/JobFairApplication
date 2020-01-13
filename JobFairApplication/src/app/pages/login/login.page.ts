@@ -55,6 +55,15 @@ export class LoginPage implements OnInit {
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.ngOnInit();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
   async unsuccessMsg() {
     const toast = await this.toastCtrl.create({
       message: 'Invalid Username or Password',

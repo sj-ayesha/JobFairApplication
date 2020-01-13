@@ -37,6 +37,14 @@ export class CandidateListPage implements OnInit {
   }
 
 
+  doRefresh(event) {
+    this.ngOnInit();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
   onSelect(id: number) {
     this.router.navigate(['/candidate-list', id]);
     this.populateCandidate();

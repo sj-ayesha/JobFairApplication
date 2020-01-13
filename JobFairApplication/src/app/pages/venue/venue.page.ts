@@ -45,6 +45,16 @@ export class VenuePage implements OnInit {
     this.changeVenueService.cast.subscribe(data => this.oldVenue = data);
   }
 
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.ngOnInit();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
   selected(id) {
     localStorage.setItem('venue_id', id.target.value);
     const LSid = JSON.parse(localStorage.getItem('venue_id'));

@@ -96,6 +96,14 @@ export class CandidateDetailsPage implements OnInit {
     // console.log(this.date);
   }
 
+  doRefresh(event) {
+    this.ngOnInit();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
   getCandidateById(candidateId: number) {
     this.apiService.getCandidateById(candidateId).subscribe(data => {
       this.candidate = data;

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Job } from 'src/app/model/job';
@@ -13,6 +13,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class JobListPage implements OnInit {
 
+  @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
+  
   // jobs: any;
   jobs: Job[];
   public venueJobs: VenueJob[];
@@ -24,6 +26,7 @@ export class JobListPage implements OnInit {
   checked = true;
   priority = [];
   filterText: string;
+  refreshCheck = false;
 
   constructor(
     private router: Router,
@@ -42,6 +45,15 @@ export class JobListPage implements OnInit {
   ngOnInit() {
     window.localStorage.setItem('priority', '[]');
     window.localStorage.setItem('jobId', '');
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.ngOnInit();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
 
   filter(event) {
