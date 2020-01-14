@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { Venue } from 'src/app/model/venue';
 import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 import { JobCategoryDto } from 'src/app/model/jobCategoryDto';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { File } from '@ionic-native/file/ngx';
+// import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+// import { File } from '@ionic-native/file/ngx';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -35,8 +35,8 @@ export class HomePage implements OnInit{
   constructor(
     private router: Router,
     private apiService: ApiService,
-    public camera: Camera,
-    public file: File
+    // public camera: Camera,
+    // public file: File
     ) {
   }
 
