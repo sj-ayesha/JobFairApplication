@@ -16,8 +16,8 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { AuthGuard } from './services/auth.guard';
 
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { File } from '@ionic-native/file/ngx';
+// import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+// import { File } from '@ionic-native/file/ngx';
 
 
 @NgModule({
@@ -33,8 +33,8 @@ import { File } from '@ionic-native/file/ngx';
     SplashScreen,
     AuthGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Camera,
-    File
+    // Camera,
+    // File
   ],
   bootstrap: [AppComponent]
 })
