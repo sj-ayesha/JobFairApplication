@@ -20,6 +20,7 @@ export class CandidateAddProfilePage implements OnInit {
   formCandidateDetails: FormGroup;
   formCandidateUploadCV: FormGroup;
 
+  photos: any[];
   genders: Array<string>;
   currentLevels: Array<string>;
   academyYears: Array<string>;
@@ -122,7 +123,7 @@ export class CandidateAddProfilePage implements OnInit {
     private toastCtrl: ToastController,
     private dropdowns: DropdownsService,
     private http: HttpClient,
-    private ngZone: NgZone
+    private ngZone: NgZone,
   ) {
 
     this.formCandidateDetails = this.formBuilder.group({
@@ -401,15 +402,15 @@ export class CandidateAddProfilePage implements OnInit {
     });
     formData.append('candidateDto', blob);
     formData.append('file', fileData, fileData.name);
-    console.log(formData)
+    console.log(formData);
     let httpOptions = {
       headers: new HttpHeaders().set('Accept', 'application/json')
     };
-    console.log(formData)
+    console.log(formData);
     this.apiService.uploadCV(formData, httpOptions).subscribe(data => {
-      console.log('uploading..')
+      console.log('uploading..');
       if (data) {
-        console.log('uploaded')
+        console.log('uploaded');
       }
     });
   }

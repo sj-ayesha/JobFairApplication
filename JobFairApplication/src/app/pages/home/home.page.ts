@@ -4,6 +4,9 @@ import { Candidate } from 'src/app/model/candidate';
 import { Router } from '@angular/router';
 import { Venue } from 'src/app/model/venue';
 import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
+import { JobCategoryDto } from 'src/app/model/jobCategoryDto';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,6 +15,15 @@ import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 export class HomePage implements OnInit{
 
   categoryTitle: [];
+  categoryCount: JobCategoryDto;
+  noCategory = false;
+  softwareEngineer = false;
+  manager = false;
+  humanResource = false;
+  qualityAssurance = false;
+  businessAnalyst = false;
+  architect = false;
+  photos: any[];
 
   candidates: Candidate[];
   venues: Venue[];
@@ -20,8 +32,12 @@ export class HomePage implements OnInit{
   public percentagCountCandidates: number;
   noCandidatesAvailable = false;
 
-  constructor(private router: Router, private apiService: ApiService) {
-
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    public camera: Camera,
+    public file: File
+    ) {
   }
 
   ngOnInit() {
@@ -30,10 +46,28 @@ export class HomePage implements OnInit{
     console.log('onInit Triggered');
   }
 
+  // takePhotos() {
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     destinationType: this.camera.DestinationType.FILE_URI,
+  //     encodingType: this.camera.EncodingType.JPEG
+  //   }
+  //   this.camera.getPicture().then((imagedata)=>{
+  //     const filename = imagedata.substring(imagedata.lastIndexOf('/') + 1 );
+  //     const path = imagedata.substring(0, imagedata.lastIndexOf('/') + 1 );
+  //     this.file.readAsDataURL(path,filename).then((base64data) => {
+  //       this.photos.push(base64data);
+  //     })
+  //   });
+  // }
+
   ionViewWillEnter() {
     this.populateCandidate();
     this.countCandidatesByVenue();
     console.log('ionViewWillEnter Triggered');
+    this.getCategory();
+  
   }
   ionViewWillLeave(){
     console.log('Left');
@@ -56,6 +90,40 @@ export class HomePage implements OnInit{
         this.noCandidatesAvailable = true;
       } else {
       this.candidateVenueJobs = data;
+      }
+    });
+  }
+
+  private getCategory(): void {
+    this.apiService.getCategoryCount().subscribe(data => {
+      if (data.message === 'JOB_NOT_FOUND') {
+        this.noCategory = true;
+      } else {
+        this.categoryCount = data;
+        if (this.categoryCount.architect == 1){
+          this.architect = true;
+          console.log(this.architect);
+        }
+        if (this.categoryCount.softwareEngineer == 1) {
+          this.softwareEngineer = true;
+          console.log(this.softwareEngineer)
+        }
+        if (this.categoryCount.humanResource == 1){
+          this.humanResource = true;
+          console.log(this.humanResource);
+        }
+        if (this.categoryCount.qualityAssurance == 1) {
+          this.qualityAssurance = true;
+          console.log(this.qualityAssurance)
+        }
+        if (this.categoryCount.businessAnalyst == 1){
+          this.businessAnalyst = true;
+          console.log(this.businessAnalyst);
+        }
+        if (this.categoryCount.manager == 1) {
+          this.manager = true;
+          console.log(this.manager)
+        }
       }
     });
   }

@@ -12,6 +12,7 @@ import { CountCandidates } from '../model/countCandidates';
 import { CandidateVenueJobPriority } from '../model/candidateVenueJobPriority';
 import { Skills } from '../model/skills';
 import { CandidateScreening } from '../model/candidateScreening';
+import { JobCategoryDto } from '../model/jobCategoryDto';
 
 
 @Injectable({
@@ -20,7 +21,7 @@ import { CandidateScreening } from '../model/candidateScreening';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'https://f5bb8c8c.ngrok.io/'; // url to access backend
+  baseUrl = 'https://25f6ed67.ngrok.io/'; // url to access backend
 
   // candidates
 
@@ -156,4 +157,9 @@ export class ApiService {
     return this.http.get<Candidate[]>(this.baseUrl + 'candidate/candidate-cv/' + candidateId);
   }
 
+  // categoryCount
+
+  getCategoryCount(): Observable<JobCategoryDto | any> {
+    return this.http.get<JobCategoryDto>(this.baseUrl + 'job/category/count');
+  }
 }
