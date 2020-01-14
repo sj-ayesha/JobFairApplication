@@ -24,7 +24,8 @@ export class CandidateListPage implements OnInit {
   message: any;
   public responseData: any;
   public dataSet: any;
-  increment = 5;
+  limit = 5;
+  page = 0;
 
   constructor(
     private router: Router,
@@ -59,7 +60,7 @@ export class CandidateListPage implements OnInit {
 
   populateCandidate(event?) {
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, this.increment).subscribe(data => {
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(data => {
       if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
         this.noCandidatesAvailable = true;
       } else {
@@ -77,11 +78,11 @@ export class CandidateListPage implements OnInit {
   loadData(event) {
     setTimeout(() => {
       console.log(event);
-      this.increment = this.increment + 5;
+      this.page++;
       this.populateCandidate(event);
     }, 500);
 
-    if (this.increment === this.countCandidates) {
+    if (this.page === 1) {
       event.target.disabled = true;
     }
   }

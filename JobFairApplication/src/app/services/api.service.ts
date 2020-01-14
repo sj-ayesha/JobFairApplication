@@ -21,7 +21,7 @@ import { JobCategoryDto } from '../model/jobCategoryDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://localhost:8081/'; // url to access backend
+  baseUrl = 'https://7523cb1b.ngrok.io/'; // url to access backend
 
   // candidates
 
