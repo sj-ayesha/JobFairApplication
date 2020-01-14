@@ -41,7 +41,7 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit() {
-    // this.populateCandidate();
+    this.populateCandidate();
     this.countCandidatesByVenue();
     console.log('onInit Triggered');
   }
