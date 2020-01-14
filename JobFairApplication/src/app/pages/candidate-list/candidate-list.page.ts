@@ -21,6 +21,8 @@ export class CandidateListPage implements OnInit {
   noCandidatesAvailable = false;
   candidateNotFound = false;
   message: any;
+  public responseData: any;
+  public dataSet: any;
 
   constructor(
     private router: Router,
@@ -50,14 +52,16 @@ export class CandidateListPage implements OnInit {
     this.populateCandidate();
   }
 
-  loadData(event) {
-    this.populateCandidate(event);
-    // setTimeout(() => {
-    //   console.log('Done');
-    //   this.populateCandidate(event);
-    //   event.target.complete();
-    // }, 500);
-  }
+
+
+  // loadData(event) {
+  //   this.populateCandidate(event);
+  //   // setTimeout(() => {
+  //   //   console.log('Done');
+  //   //   this.populateCandidate(event);
+  //   //   event.target.complete();
+  //   // }, 500);
+  // }
 
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
@@ -70,12 +74,30 @@ export class CandidateListPage implements OnInit {
         this.noCandidatesAvailable = true;
       } else {
         this.candidateVenueJobs = data;
-      }
-
-      if (event) {
-        event.target.complete();
+        console.log(this.candidateVenueJobs);
       }
      });
+  }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(data => {
+        if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
+          this.noCandidatesAvailable = true;
+        } else {
+          this.candidateVenueJobs = data;
+          console.log(this.candidateVenueJobs);
+        }
+      });
+      for (let i = 0; i < this.candidateVenueJobs.length; i++) {
+        this.dataSet.push( this.candidateVenueJobs.length[i] );
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
   }
 
   routeTo(candidateId: number) {
