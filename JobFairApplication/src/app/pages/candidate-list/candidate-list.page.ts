@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
 import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-candidate-list',
@@ -23,19 +24,18 @@ export class CandidateListPage implements OnInit {
   message: any;
   public responseData: any;
   public dataSet: any;
+  increment = 5;
 
   constructor(
     private router: Router,
     private candidateService: CandidatesService,
     private route: ActivatedRoute,
-    private apiService: ApiService) { }
+    private apiService: ApiService) {
+    }
 
   ngOnInit() {
     this.populateCandidate();
     this.countCandidatesByVenue();
-  }
-
-  ionViewWillEnter() {
   }
 
 
@@ -53,51 +53,37 @@ export class CandidateListPage implements OnInit {
   }
 
 
-
-  // loadData(event) {
-  //   this.populateCandidate(event);
-  //   // setTimeout(() => {
-  //   //   console.log('Done');
-  //   //   this.populateCandidate(event);
-  //   //   event.target.complete();
-  //   // }, 500);
-  // }
-
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
   populateCandidate(event?) {
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(data => {
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, this.increment).subscribe(data => {
       if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
         this.noCandidatesAvailable = true;
       } else {
         this.candidateVenueJobs = data;
         console.log(this.candidateVenueJobs);
       }
+      if (event) {
+        event.target.complete();
+      }
      });
+
   }
 
-  doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
 
+  loadData(event) {
     setTimeout(() => {
-      this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(data => {
-        if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
-          this.noCandidatesAvailable = true;
-        } else {
-          this.candidateVenueJobs = data;
-          console.log(this.candidateVenueJobs);
-        }
-      });
-      for (let i = 0; i < this.candidateVenueJobs.length; i++) {
-        this.dataSet.push( this.candidateVenueJobs.length[i] );
-      }
-
-      console.log('Async operation has ended');
-      infiniteScroll.complete();
+      console.log(event);
+      this.increment = this.increment + 5;
+      this.populateCandidate(event);
     }, 500);
+
+    if (this.increment === this.countCandidates) {
+      event.target.disabled = true;
+    }
   }
 
   routeTo(candidateId: number) {
