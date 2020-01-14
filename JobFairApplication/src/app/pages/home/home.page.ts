@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Venue } from 'src/app/model/venue';
 import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 import { JobCategoryDto } from 'src/app/model/jobCategoryDto';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -21,6 +23,7 @@ export class HomePage implements OnInit{
   qualityAssurance = false;
   businessAnalyst = false;
   architect = false;
+  photos: any[];
 
   candidates: Candidate[];
   venues: Venue[];
@@ -29,8 +32,12 @@ export class HomePage implements OnInit{
   public percentagCountCandidates: number;
   noCandidatesAvailable = false;
 
-  constructor(private router: Router, private apiService: ApiService) {
-
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    public camera: Camera,
+    public file: File
+    ) {
   }
 
   ngOnInit() {
@@ -38,6 +45,22 @@ export class HomePage implements OnInit{
     this.countCandidatesByVenue();
     console.log('onInit Triggered');
   }
+
+  // takePhotos() {
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     destinationType: this.camera.DestinationType.FILE_URI,
+  //     encodingType: this.camera.EncodingType.JPEG
+  //   }
+  //   this.camera.getPicture().then((imagedata)=>{
+  //     const filename = imagedata.substring(imagedata.lastIndexOf('/') + 1 );
+  //     const path = imagedata.substring(0, imagedata.lastIndexOf('/') + 1 );
+  //     this.file.readAsDataURL(path,filename).then((base64data) => {
+  //       this.photos.push(base64data);
+  //     })
+  //   });
+  // }
 
   ionViewWillEnter() {
     this.populateCandidate();
