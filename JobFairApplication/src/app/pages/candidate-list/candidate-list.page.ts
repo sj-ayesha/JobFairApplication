@@ -51,26 +51,31 @@ export class CandidateListPage implements OnInit {
   }
 
   loadData(event) {
-    setTimeout(() => {
-      console.log('Done');
-      this.populateCandidate();
-      event.target.complete();
-    }, 500);
+    this.populateCandidate(event);
+    // setTimeout(() => {
+    //   console.log('Done');
+    //   this.populateCandidate(event);
+    //   event.target.complete();
+    // }, 500);
   }
 
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
-  populateCandidate() {
+  populateCandidate(event?) {
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), false).subscribe(data => {
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(data => {
       if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
         this.noCandidatesAvailable = true;
       } else {
         this.candidateVenueJobs = data;
       }
-    });
+
+      if (event) {
+        event.target.complete();
+      }
+     });
   }
 
   routeTo(candidateId: number) {
