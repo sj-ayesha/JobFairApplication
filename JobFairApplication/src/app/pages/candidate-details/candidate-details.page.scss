@@ -266,10 +266,19 @@ ion-card-title .feedbacks{
 
 .download-section {
     display: flex;
+
+    @media (min-device-width: 768px) and (max-device-width: 1280px) {
+        display: block;
+    }
     .btn-download {
         --background-hover: #E23615;
         --background:#E23615;
         margin: 10px 20px;
+
+        @media (min-device-width: 768px) and (max-device-width: 1280px) {
+            margin: 10px 0;
+        }
+
     
         a {
             color: white;
