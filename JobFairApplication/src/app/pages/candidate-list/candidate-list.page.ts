@@ -13,7 +13,7 @@ import { EventEmitter } from 'protractor';
   styleUrls: ['./candidate-list.page.scss'],
 })
 export class CandidateListPage implements OnInit {
-  @ViewChild(IonInfiniteScroll, {static: true}) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
 
   candidateDetails: any[];
   candidateVenueJobs: CandidateVenueJob[] = [];
@@ -24,7 +24,7 @@ export class CandidateListPage implements OnInit {
   message: any;
   public responseData: any;
   public dataSet: [];
-  limit = 5;
+  limit = 10;
   page = 0;
   data: any;
 
@@ -33,7 +33,7 @@ export class CandidateListPage implements OnInit {
     private candidateService: CandidatesService,
     private route: ActivatedRoute,
     private apiService: ApiService) {
-    }
+  }
 
   ngOnInit() {
     this.populateCandidate();
@@ -63,7 +63,6 @@ export class CandidateListPage implements OnInit {
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(data => {
       this.candidateVenueJobs = data;
-      console.log('dataAvant', this.candidateVenueJobs);
 
       if (this.candidateVenueJobs.length === 0) {
         this.noCandidatesAvailable = true;
@@ -71,50 +70,25 @@ export class CandidateListPage implements OnInit {
         this.noCandidatesAvailable = false;
       }
 
-        // const newArray = [];
-        // this.candidateVenueJobs.push(...newArray);
-        // console.log('candidate', this.candidateVenueJobs);
-      // }
       if (event) {
         event.target.complete();
       }
-     });
+    });
 
   }
 
 
-  loadData(infiniteScroll) {
-    this.page = this.page + 1;
+  loadData(event) {
     setTimeout(() => {
-      this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit)
-        .subscribe(
-          res => {
-            this.candidateVenueJobs = res;
-            for(let i=0; i< this.countCandidates.length; i++) {
-              const newArray = [];
-              newArray.push(this.candidateVenueJobs);
-              console.log(newArray);
-            }
+      console.log(event);
+      this.limit = this.limit + 10;
+      this.populateCandidate(event);
+    }, 500);
 
+    if (this.limit === this.countCandidates) {
+      event.target.disabled = true;
+    }
 
-
-            // for(let i=0; i< this.candidateVenueJobs.length; i++) {
-            //   this.candidateVenueJobs.push(...newArray);
-            // }
-          },
-          error =>  console.log('error'));
-
-      console.log('Async operation has ended');
-    }, 1000);
-    // setTimeout(() => {
-    //   console.log(event);
-    //   this.page++;
-    //   this.populateCandidate(event);
-    // }, 500);
-
-    // if (this.page === 1) {
-    //   event.target.disabled = true;
-    // }
   }
 
   routeTo(candidateId: number) {
