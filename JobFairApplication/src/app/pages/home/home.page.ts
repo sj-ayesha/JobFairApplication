@@ -27,7 +27,7 @@ export class HomePage implements OnInit{
 
   candidates: Candidate[];
   venues: Venue[];
-  candidateVenueJobs: CandidateVenueJob;
+  candidateVenueJobs: CandidateVenueJob[] = [];
   public countCandidates: any;
   public percentagCountCandidates: number;
   noCandidatesAvailable = false;
@@ -65,32 +65,31 @@ export class HomePage implements OnInit{
   ionViewWillEnter() {
     this.populateCandidate();
     this.countCandidatesByVenue();
-    console.log('ionViewWillEnter Triggered');
     this.getCategory();
-  
   }
   ionViewWillLeave(){
-    console.log('Left');
     this.populateCandidate();
   }
 
   doRefresh(event) {
-    console.log('Begin async operation');
     this.ionViewWillEnter();
 
     setTimeout(() => {
-      console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
   }
   private populateCandidate(): void {
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(data => {
-      if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
+      this.candidateVenueJobs = data;
+      console.log('dataAvant', this.candidateVenueJobs);
+
+      if (this.candidateVenueJobs.length === 0) {
         this.noCandidatesAvailable = true;
       } else {
-      this.candidateVenueJobs = data;
+        this.noCandidatesAvailable = false;
       }
+
     });
   }
 
@@ -100,29 +99,23 @@ export class HomePage implements OnInit{
         this.noCategory = true;
       } else {
         this.categoryCount = data;
-        if (this.categoryCount.architect == 1){
+        if (this.categoryCount.architect === 1) {
           this.architect = true;
-          console.log(this.architect);
         }
-        if (this.categoryCount.softwareEngineer == 1) {
+        if (this.categoryCount.softwareEngineer === 1) {
           this.softwareEngineer = true;
-          console.log(this.softwareEngineer)
         }
-        if (this.categoryCount.humanResource == 1){
+        if (this.categoryCount.humanResource === 1) {
           this.humanResource = true;
-          console.log(this.humanResource);
         }
-        if (this.categoryCount.qualityAssurance == 1) {
+        if (this.categoryCount.qualityAssurance === 1) {
           this.qualityAssurance = true;
-          console.log(this.qualityAssurance)
         }
-        if (this.categoryCount.businessAnalyst == 1){
+        if (this.categoryCount.businessAnalyst === 1) {
           this.businessAnalyst = true;
-          console.log(this.businessAnalyst);
         }
-        if (this.categoryCount.manager == 1) {
+        if (this.categoryCount.manager === 1) {
           this.manager = true;
-          console.log(this.manager)
         }
       }
     });
