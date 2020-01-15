@@ -1,0 +1,37 @@
+<ion-content>
+  <div class="wrapper-content">
+    <div class="header-wrap">
+      <div class="title">
+        <img class="icon-map" src='../../../assets/icon/pin (1).png'>
+        <h3>Venue List</h3>
+      </div>
+      <div class="add-button">
+        <ion-button color='danger'>
+          <ion-icon ios="ios-add" md="md-add"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+    <table class="rwd-table">
+      <tr>
+        <th>Id</th>
+        <th>Venue</th>
+        <th>Address</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Active</th>
+        <th>Edit</th>
+      </tr>
+      <tr *ngFor="let venue of venues">
+        <td data-th="Id">{{venue.venueId}}</td>
+        <td data-th="Venue">{{venue.venueName}}</td>
+        <td data-th="Address">{{venue.address}}</td>
+        <td data-th="Start Date">{{venue.startDate}}</td>
+        <td data-th="End Date">{{venue.endDate}}</td>
+        <td data-th="Active">{{venue.active}}</td>
+        <td data-th="Active">
+          <ion-icon ios="ios-create" md="md-create"></ion-icon>
+        </td>
+      </tr>
+    </table>
+  </div>
+</ion-content>

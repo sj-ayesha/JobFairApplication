@@ -20,6 +20,8 @@ export class NavComponent implements OnInit, OnDestroy {
   venue: string;
   changeVenue: string;
 
+  dashboard = true;
+
   constructor(
     private loginLogoutService: LoginLogoutService,
     private router: Router,
@@ -50,6 +52,7 @@ export class NavComponent implements OnInit, OnDestroy {
     localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
     this.venue = '';
+    this.dashboard = false;
   }
 
   goToVenue(){
@@ -63,5 +66,10 @@ export class NavComponent implements OnInit, OnDestroy {
     } else {
       this.dissabled = true;
     }
+  }
+
+  navigateToDashboard(){
+    this.router.navigate(['/dashboard']);
+    this.dashboard = true;
   }
 }
