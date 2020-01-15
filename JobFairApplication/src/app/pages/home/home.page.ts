@@ -68,7 +68,7 @@ export class HomePage implements OnInit{
     this.getCategory();
   }
   ionViewWillLeave(){
-    this.populateCandidate();
+    // this.populateCandidate();
   }
 
   doRefresh(event) {
@@ -82,7 +82,6 @@ export class HomePage implements OnInit{
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(data => {
       this.candidateVenueJobs = data;
-      console.log('dataAvant', this.candidateVenueJobs);
 
       if (this.candidateVenueJobs.length === 0) {
         this.noCandidatesAvailable = true;

@@ -43,6 +43,22 @@ const routes: Routes = [
     path: 'venue',
     loadChildren: () => import('./pages/venue/venue.module').then(m => m.VenuePageModule)
   },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./back-office/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },  {
+    path: 'venue-bo',
+    loadChildren: () => import('./back-office/venue-bo/venue-bo.module').then( m => m.VenueBoPageModule)
+  },
+  {
+    path: 'jobs-bo',
+    loadChildren: () => import('./back-office/jobs-bo/jobs-bo.module').then( m => m.JobsBoPageModule)
+  },
+  {
+    path: 'skills-bo',
+    loadChildren: () => import('./back-office/skills-bo/skills-bo.module').then( m => m.SkillsBoPageModule)
+  },
+
 ];
 
 @NgModule({
