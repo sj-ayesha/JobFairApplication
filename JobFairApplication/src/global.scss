@@ -35,3 +35,7 @@
 // @import '~@swimlane/ngx-datatable/release/themes/dark.css';
 // @import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
 // @import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+.popover-content.sc-ion-popover-md{
+    position: unset!important;
+}

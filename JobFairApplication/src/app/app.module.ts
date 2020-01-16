@@ -16,8 +16,6 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { AuthGuard } from './services/auth.guard';
 
-
-
 // import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 // import { File } from '@ionic-native/file/ngx';
 

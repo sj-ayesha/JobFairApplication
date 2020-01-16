@@ -1,3 +1,5 @@
+@import '../../styles/custom.scss';
+
 .title{
     display: flex;
     width: 100%;
@@ -25,11 +27,14 @@ $breakpoint-alpha: 480px; // adjust to your needs
   margin: 1em 0;
   min-width: 300px; // adjust to your needs
   width: 100%;
+  text-align: center;
   tr {
       font-size: 20px;
+      text-align: center!important;
   }
   td {
       font-size: 17px;
+      text-align: center!important;
   }
   
   tr {
@@ -39,6 +44,7 @@ $breakpoint-alpha: 480px; // adjust to your needs
   
   th {
     display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
+    text-align: center!important;
   }
   
   td {
@@ -111,3 +117,4 @@ body {
 
   }
 }
+
