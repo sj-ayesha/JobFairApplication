@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AddVenuePopupComponent } from './add-venue-popup.component';
+import { VenuePopupPage } from './venue-popup.page';
 
-describe('AddVenuePopupComponent', () => {
-  let component: AddVenuePopupComponent;
-  let fixture: ComponentFixture<AddVenuePopupComponent>;
+describe('VenuePopupPage', () => {
+  let component: VenuePopupPage;
+  let fixture: ComponentFixture<VenuePopupPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddVenuePopupComponent ],
+      declarations: [ VenuePopupPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AddVenuePopupComponent);
+    fixture = TestBed.createComponent(VenuePopupPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -13,12 +13,12 @@ import { AppRoutingModule } from './app-routing.module';
 // import { ComponentsModule } from './components/components.module';
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
-
 import { AuthGuard } from './services/auth.guard';
 
 // import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 // import { File } from '@ionic-native/file/ngx';
 
+import { VenuePopupPageModule } from './back-office/venue-popup/venue-popup.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { AuthGuard } from './services/auth.guard';
     FooterComponent,
   ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, VenuePopupPageModule],
   providers: [
     StatusBar,
     SplashScreen,

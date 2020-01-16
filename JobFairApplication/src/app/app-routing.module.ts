@@ -58,6 +58,10 @@ const routes: Routes = [
     path: 'skills-bo',
     loadChildren: () => import('./back-office/skills-bo/skills-bo.module').then( m => m.SkillsBoPageModule)
   },
+  {
+    path: 'venue-popup',
+    loadChildren: () => import('./back-office/venue-popup/venue-popup.module').then( m => m.VenuePopupPageModule)
+  },
 
 ];
 

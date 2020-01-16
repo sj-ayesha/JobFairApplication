@@ -1,4 +1,8 @@
 <ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
   <div class="wrapper-content" padding="20px">
     <div class="header-wrap">
       <div class="title">
@@ -6,7 +10,7 @@
         <h3>Venue List</h3>
       </div>
       <div class="add-button">
-        <ion-button color='danger' (click)="presentPopover($event)">
+        <ion-button color='danger' (click)="openModal()">
           <ion-icon ios="ios-add" md="md-add"></ion-icon>
         </ion-button>
       </div>

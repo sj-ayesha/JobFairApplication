@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { VenueBoPageRoutingModule } from './venue-bo-routing.module';
+import { VenuePopupPageRoutingModule } from './venue-popup-routing.module';
 
-import { VenueBoPage } from './venue-bo.page';
+import { VenuePopupPage } from './venue-popup.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VenueBoPageRoutingModule,
-    ReactiveFormsModule,
+    VenuePopupPageRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [VenueBoPage]
+  declarations: [VenuePopupPage]
 })
-export class VenueBoPageModule {}
+export class VenuePopupPageModule {}

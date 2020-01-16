@@ -21,7 +21,7 @@ import { JobCategoryDto } from '../model/jobCategoryDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://localhost:8081/'; // url to access backend
+  baseUrl = 'http://10.9.0.85:8081/'; // url to access backend
 
   // candidates
 
@@ -107,10 +107,17 @@ export class ApiService {
 
   // venue
 
+  getAllVenue(): Observable<Venue[]> {
+    return this.http.get<Venue[]>(this.baseUrl + 'venue/all');
+  }
+
   getVenueByActive(active: boolean): Observable<Venue[]> {
     return this.http.get<Venue[]>(this.baseUrl + 'venue/active/' + active);
   }
 
+  saveVenue(venue: Venue): Observable<Venue> {
+    return this.http.post<Venue>(this.baseUrl + 'venue', venue);
+  }
   // qualifications
 
   getQualificationByCandidateId(candidateId: number): Observable<Qualification[]> {

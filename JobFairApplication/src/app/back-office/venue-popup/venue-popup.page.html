@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Venue</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="addVenue" class="addVenue">
+    <!-- <div class="title">
+        <h5>Add Venue</h5>
+      </div> -->
+    <form [formGroup]="formAddVenue">
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Venue Name</ion-label>
+            <ion-input formControlName="venueName" type="text"></ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.venueName">
+              <div class="error-message"
+                *ngIf="formAddVenue.get('venueName').hasError(error.type) && (formAddVenue.get('venueName').dirty || formAddVenue.get('venueName').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Address</ion-label>
+            <ion-input formControlName="address" type="text"></ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.address">
+              <div class="error-message"
+                *ngIf="formAddVenue.get('address').hasError(error.type) && (formAddVenue.get('address').dirty || formAddVenue.get('address').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" size-md size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Start Date</ion-label>
+            <ion-datetime formControlName="startDate" default="today" max="2021-12-31">
+            </ion-datetime>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.startDate">
+              <div class="error-message"
+                *ngIf="formAddVenue.get('startDate').hasError(error.type) && (formAddVenue.get('startDate').dirty || formAddVenue.get('startDate').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+        <ion-col size="6" size-md size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*End Date</ion-label>
+            <ion-datetime formControlName="endDate" default="today" max="2021-12-31">
+            </ion-datetime>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.endDate">
+              <div class="error-message"
+                *ngIf="formAddVenue.get('endDate').hasError(error.type) && (formAddVenue.get('endDate').dirty || formAddVenue.get('endDate').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-md size="12" size-sm>
+          <div class="status">
+            <ion-radio-group formControlName="active" class="btn-radio-group">
+
+              <ion-item>
+                <ion-label>Active</ion-label>
+                <ion-radio color="danger" slot="start" value="true" (ionSelect)="radioButtonValue($event)">
+                </ion-radio>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Inactive</ion-label>
+                <ion-radio color="success" slot="start" value="false"
+                  (ionSelect)="radioButtonValue($event)"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <div class="option-button ion-text-right">
+        <ion-button class="btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
+        <ion-button class='btn' color="success" (click)="onSubmit()">Add</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

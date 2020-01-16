@@ -114,8 +114,6 @@ export class CandidateDetailsPage implements OnInit {
         this.showCV = true;
       }
 
-      
-
       this.jobLists = this.candidate.candidateVenueJobSaveDto[0].jobList;
 
       this.qualifications = this.candidate.qualificationDtos;
