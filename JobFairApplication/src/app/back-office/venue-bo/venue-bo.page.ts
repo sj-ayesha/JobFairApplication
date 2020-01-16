@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Venue } from 'src/app/model/venue';
 import { AlertController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+import { AddVenuePopupComponent } from '../../components/add-venue-popup/add-venue-popup.component';
 
 @Component({
   selector: 'app-venue-bo',
@@ -14,7 +16,8 @@ export class VenueBoPage implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -26,5 +29,16 @@ export class VenueBoPage implements OnInit {
       this.venues = data;
       console.log(this.venues);
     });
+  }
+
+  async presentPopover(event) {
+    const popover = await this.popoverController.create({
+      component: AddVenuePopupComponent,
+      event
+    });
+    return await popover.present();
+  }
+  closePopover(){
+    this.popoverController.dismiss();
   }
 }

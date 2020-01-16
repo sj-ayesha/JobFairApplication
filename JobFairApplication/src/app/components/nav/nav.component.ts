@@ -52,7 +52,7 @@ export class NavComponent implements OnInit, OnDestroy {
     localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
     this.venue = '';
-    this.dashboard = false;
+    // this.dashboard = false;
   }
 
   goToVenue(){
@@ -70,6 +70,6 @@ export class NavComponent implements OnInit, OnDestroy {
 
   navigateToDashboard(){
     this.router.navigate(['/dashboard']);
-    this.dashboard = true;
+    // this.dashboard = true;
   }
 }
