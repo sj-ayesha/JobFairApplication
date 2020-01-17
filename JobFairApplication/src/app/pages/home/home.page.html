@@ -39,7 +39,7 @@
             <ion-card-header>
               <h3>List of Candidates</h3>
             </ion-card-header>
-            <ion-card-content *ngFor="let candidateVenueJob of candidateVenueJobs; let i = index">
+            <ion-card-content *ngFor="let candidateVenueJob of candidateVenueJobsLists; let i = index">
 
               <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)" *ngIf="i < 5">
 

@@ -102,7 +102,7 @@ body {
 }
 
 .rwd-table {
-  border-radius: .4em;
+  // border-radius: .4em;
   overflow: hidden;
   tr {
     // border-color: lighten(#34495E, 10%);
@@ -118,5 +118,16 @@ body {
   }
 }
 
+.rwd-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.rwd-table tr:hover {background-color: #ddd;}
+
+.rwd-tables th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
 
 

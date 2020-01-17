@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
 import { Router } from '@angular/router';
 import { Venue } from 'src/app/model/venue';
-import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
+import { CandidateVenueJob, CandidateVenueJobDtoResponseList } from 'src/app/model/candidateVenueJob';
 import { JobCategoryDto } from 'src/app/model/jobCategoryDto';
 // import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 // import { File } from '@ionic-native/file/ngx';
@@ -27,7 +27,8 @@ export class HomePage implements OnInit{
 
   candidates: Candidate[];
   venues: Venue[];
-  candidateVenueJobs: CandidateVenueJob[] = [];
+  candidateVenueJobsLists: CandidateVenueJob[];
+  candidateVenueJob: CandidateVenueJob;
   public countCandidates: any;
   public percentagCountCandidates: number;
   noCandidatesAvailable = false;
@@ -80,10 +81,12 @@ export class HomePage implements OnInit{
   }
   private populateCandidate(): void {
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(data => {
-      this.candidateVenueJobs = data;
-
-      if (this.candidateVenueJobs.length === 0) {
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(
+      (data: CandidateVenueJobDtoResponseList) => {
+      console.log('data', data);
+      this.candidateVenueJobsLists = data.candidateVenueJobDtoList;
+      
+      if (this.candidateVenueJobsLists.length === 0) {
         this.noCandidatesAvailable = true;
       } else {
         this.noCandidatesAvailable = false;

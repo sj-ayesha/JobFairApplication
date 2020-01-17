@@ -25,5 +25,10 @@ export class CandidateVenueJob {
     }
     jobPriority: string;
     jobList: Job[];
+}
 
+export class CandidateVenueJobDtoResponseList {
+    candidateVenueJobDtoList: CandidateVenueJob[];
+    totalElements: number;
+    totalPages: number;
 }
