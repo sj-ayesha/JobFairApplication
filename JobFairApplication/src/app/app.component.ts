@@ -3,6 +3,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { LoginLogoutService } from './services/login-logout.service';
+import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +16,14 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private loginlogoutService: LoginLogoutService
+    private loginlogoutService: LoginLogoutService,
+    private router: Router,
+    private menu: MenuController
   ) {
     this.initializeApp();
   }
+
+  dashboard: false;
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -28,10 +34,15 @@ export class AppComponent implements OnInit {
     // }
   }
 
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  goToDashboard(){
+    this.router.navigate(['/dashboard']);
   }
 }

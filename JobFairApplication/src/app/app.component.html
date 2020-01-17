@@ -1,12 +1,7 @@
 <ion-app>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>
-        <app-nav></app-nav>
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
+
+  <app-nav></app-nav>
+  <ion-content *ngIf="dashboard">
     <ion-router-outlet></ion-router-outlet>
   </ion-content>
   <div class="footer-container">

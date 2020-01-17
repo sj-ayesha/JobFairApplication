@@ -16,6 +16,7 @@ export class NavComponent implements OnInit, OnDestroy {
   dissabled = true;
   private sessionStateSubscription: Subscription;
   loggedIn: boolean;
+  clickDashboard: false;
 
   venue: string;
   changeVenue: string;
@@ -69,6 +70,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   navigateToDashboard(){
+    // this.dashboard = true;
     this.router.navigate(['/dashboard']);
     this.dashboard = true;
   }
