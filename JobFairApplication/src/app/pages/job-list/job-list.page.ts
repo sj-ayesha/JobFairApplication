@@ -132,7 +132,7 @@ export class JobListPage implements OnInit {
   getAllJobsByVenueId() {
     // tslint:disable-next-line: radix
     this.jobNotFound = false;
-    this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
+    this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 1).subscribe(data => {
       if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
         this.noJobsAvailable = true;
       } else {
