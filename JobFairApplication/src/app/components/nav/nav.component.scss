@@ -1,48 +1,99 @@
-@import '../../styles/custom.scss';
+@import "../../styles/custom.scss";
 
-.router-links{
-    margin-top: 20px;
-    margin-bottom: 14px;
+.router-links {
+  margin-top: 20px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+
+  &--right {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 
-    &--right {
-        display: flex;
-        align-items: center;
-
-        .venue-name {
-            font-size: 20px;
-            padding: 0 45px;
-            color: $color-light-red !important;
-            font-weight: 900;
-            margin-top:0;
-            margin-bottom: 0;
-        }
+    .venue-name {
+      font-size: 20px;
+      padding: 0 45px;
+      color: $color-light-red !important;
+      font-weight: 900;
+      margin-top: 0;
+      margin-bottom: 0;
     }
+  }
 }
-img{
-    // max-width: 142px;
-    max-width: 178px;
-    max-height: 24px;
-    &:hover,&:focus{
-        cursor: pointer;
-        outline: none;
-    }
+img {
+  // max-width: 142px;
+  max-width: 178px;
+  max-height: 24px;
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    outline: none;
+  }
 }
-a{
+a {
+  color: $color-light-black;
+  text-decoration: none;
+  // font-family: "Poppins", sans-serif;
+  &:hover {
+    color: $color-light-red;
+    cursor: pointer;
+  }
+}
 
+a.venue-name {
+  font-weight: 100 !important;
+}
+.dissableRediretion:hover {
+  cursor: not-allowed;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    padding: 0 20px;
     color: $color-light-black;
-    text-decoration: none;
-    // font-family: "Poppins", sans-serif;
-    &:hover{
+
+    &:hover {
         color: $color-light-red;
-        cursor: pointer;
     }
+  }
 }
 
-a.venue-name{
-    font-weight: 100!important;
+.item-hover {
+  a {
+    width: 100%;
+    padding: 15px 0;
+
+    &:hover {
+      background-color: $color-light-red;
+      color: $color-white;
+    }
+  }
+  // .item-native {
+  //     &:hover {
+  //         background-color: $color-light-red;
+  //     }
+  // }
 }
-.dissableRediretion:hover{
-    cursor: not-allowed;
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    padding: 20px 18px;
+    font-size: 18px;
+
+    &:hover {
+      background-color: $color-light-red;
+      color: $color-white;
+    }
+  }
+}
+
+.split-pane-md.split-pane-visible > .split-pane-side {
+  max-width: 20%;
 }
