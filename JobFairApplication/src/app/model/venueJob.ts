@@ -7,3 +7,8 @@ export class VenueJob{
     job: Job;
     message: string;
 }
+export class VenueJobResponseList {
+    venueJobDtoList: VenueJob[];
+    totalElements: number;
+    totalPages: number;
+}

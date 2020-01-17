@@ -3,8 +3,9 @@ import { DataService } from '../../services/data.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Job } from 'src/app/model/job';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VenueJob } from 'src/app/model/venueJob';
+import { VenueJob, VenueJobResponseList } from 'src/app/model/venueJob';
 import { ToastController } from '@ionic/angular';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-job-list',
@@ -17,7 +18,7 @@ export class JobListPage implements OnInit {
   
   // jobs: any;
   jobs: Job[];
-  public venueJobs: VenueJob[];
+  public venueJobs: VenueJob[] = [];
   public searchTerm: string = '';
   public items: any;
   noJobsAvailable = false;
@@ -132,15 +133,19 @@ export class JobListPage implements OnInit {
   getAllJobsByVenueId() {
     // tslint:disable-next-line: radix
     this.jobNotFound = false;
-    this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 1).subscribe(data => {
-      if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
-        this.noJobsAvailable = true;
-      } else {
-        this.venueJobs = data;
-        setTimeout(() => {
-          this.styleAccordion();
-        }, 0);
-      }
+    this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 2).subscribe((data:VenueJobResponseList) => {
+      this.venueJobs = [...this.venueJobs, ...this.venueJobs];
+      console.log(this.venueJobs)
+      // if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+      //   this.noJobsAvailable = true;
+      // } else {
+      //   this.venueJobs = data;
+      //   setTimeout(() => {
+      //     this.styleAccordion();
+      //   }, 0);
+      // }
+
+      console.log(data);
     },
       error => {
         this.noJobsAvailable = true;
