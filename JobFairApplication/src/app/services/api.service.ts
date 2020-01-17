@@ -149,6 +149,10 @@ export class ApiService {
     return this.http.get<Skills[] | any>(this.baseUrl + 'candidate-skill/candidate/' + candidateId);
   }
 
+  saveSkill(skills: Skills): Observable<Skills[]> {
+    return this.http.post<Skills[]>(this.baseUrl + 'skill', skills);
+  }
+
   // candidate screening
 
   saveCandidateScreening(candidateScreening: CandidateScreening): Observable<CandidateScreening[]> {

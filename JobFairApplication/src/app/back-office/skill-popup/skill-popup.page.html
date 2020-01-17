@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Venue</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="addVenue" class="addVenue">
+    <!-- <div class="title">
+        <h5>Add Venue</h5>
+      </div> -->
+    <form [formGroup]="formAddSkill">
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Skill</ion-label>
+            <ion-input formControlName="skillName" type="text"></ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.skillName">
+              <div class="error-message"
+                *ngIf="formAddSkill.get('skillName').hasError(error.type) && (formAddSkill.get('skillName').dirty || formAddSkill.get('skillName').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <div class="option-button ion-text-right">
+        <ion-button class="btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
+        <ion-button class='btn' color="success" (click)="onSubmit()">Add</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

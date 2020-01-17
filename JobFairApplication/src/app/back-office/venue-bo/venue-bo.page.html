@@ -19,6 +19,7 @@
       <tr>
         <th>Id</th>
         <th>Venue</th>
+        <th>Venue Display Name</th>
         <th>Address</th>
         <th>Start Date</th>
         <th>End Date</th>
@@ -28,6 +29,7 @@
       <tr *ngFor="let venue of venues">
         <td data-th="Id">{{venue.venueId}}</td>
         <td data-th="Venue">{{venue.venueName}}</td>
+        <td data-th="Venue">{{venue.venueName}} | {{venue.startDate}}</td>
         <td data-th="Address">{{venue.address}}</td>
         <td data-th="Start Date">{{venue.startDate}}</td>
         <td data-th="End Date">{{venue.endDate}}</td>
