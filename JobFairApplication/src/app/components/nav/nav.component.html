@@ -28,7 +28,7 @@
           <ion-menu-button autoHide='false'></ion-menu-button>
         </ion-buttons>
         <div class="header-section">
-          <img src='../../../assets/img/recruitix_logo.png' width="175px">
+          <img src='../../../assets/img/recruitix_logo.png' width="175px" (click)="navigateToHome()">
           <a *ngIf="!loggedIn" routerLink="/login">Login</a>
           <a *ngIf="loggedIn" (click)="logout()">Logout</a>
         </div>
