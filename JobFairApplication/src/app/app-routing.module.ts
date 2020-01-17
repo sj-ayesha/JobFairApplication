@@ -66,7 +66,11 @@ const routes: Routes = [
     path: 'venue-popup',
     loadChildren: () => import('./back-office/venue-popup/venue-popup.module').then( m => m.VenuePopupPageModule),
     canActivate: [AuthGuard]
+  },  {
+    path: 'skill-popup',
+    loadChildren: () => import('./back-office/skill-popup/skill-popup.module').then( m => m.SkillPopupPageModule)
   },
+
 
 ];
 

@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SkillsBoPageRoutingModule } from './skills-bo-routing.module';
+import { SkillPopupPageRoutingModule } from './skill-popup-routing.module';
 
-import { SkillsBoPage } from './skills-bo.page';
+import { SkillPopupPage } from './skill-popup.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SkillsBoPageRoutingModule,
-    ReactiveFormsModule,
+    SkillPopupPageRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [SkillsBoPage]
+  declarations: [SkillPopupPage]
 })
-export class SkillsBoPageModule {}
+export class SkillPopupPageModule {}

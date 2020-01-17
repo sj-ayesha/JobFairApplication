@@ -65,9 +65,7 @@ export class CandidateListPage implements OnInit {
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
-      // this.candidateVenueJobs = this.candidateVenueJobs.concat(data);
       this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
-      // this.candidateVenueJobsLists = this.candidateVenueJobsLists.concat(this.candidateVenueJobsList);
       this.totalPages = data.totalPages;
 
       if (this.candidateVenueJobsLists.length === 0) {

@@ -19,6 +19,7 @@ import { AuthGuard } from './services/auth.guard';
 // import { File } from '@ionic-native/file/ngx';
 
 import { VenuePopupPageModule } from './back-office/venue-popup/venue-popup.module';
+import { SkillPopupPageModule } from './back-office/skill-popup/skill-popup.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { VenuePopupPageModule } from './back-office/venue-popup/venue-popup.modu
     FooterComponent,
   ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, VenuePopupPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, VenuePopupPageModule, SkillPopupPageModule],
   providers: [
     StatusBar,
     SplashScreen,

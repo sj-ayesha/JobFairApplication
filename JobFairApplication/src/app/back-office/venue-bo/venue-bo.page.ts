@@ -3,7 +3,6 @@ import { ApiService } from 'src/app/services/api.service';
 import { Venue } from 'src/app/model/venue';
 import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { VenuePopupPage } from '../../back-office/venue-popup/venue-popup.page';
 

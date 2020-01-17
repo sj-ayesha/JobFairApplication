@@ -35,16 +35,19 @@ $breakpoint-alpha: 480px; // adjust to your needs
   td {
       font-size: 17px;
       text-align: center!important;
+      border-bottom: 1px solid $color-light-red;
   }
   
   tr {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    // border-top: 1px solid $color-light-red;
+    // border-bottom: 1px solid $color-light-red;
   }
   
   th {
     display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
     text-align: center!important;
+    background-color: $color-light-black;
+    color: white;
   }
   
   td {
@@ -118,16 +121,8 @@ body {
   }
 }
 
-.rwd-table tr:nth-child(even){background-color: #f2f2f2;}
+// .rwd-table tr:nth-child(even){background-color: #f2f2f2;}
 
-.rwd-table tr:hover {background-color: #ddd;}
-
-.rwd-tables th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;
-}
+// .rwd-table tr:hover {background-color: #ddd;}
 
 

@@ -83,9 +83,9 @@ export class HomePage implements OnInit{
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
-      console.log('data', data);
+
       this.candidateVenueJobsLists = data.candidateVenueJobDtoList;
-      
+
       if (this.candidateVenueJobsLists.length === 0) {
         this.noCandidatesAvailable = true;
       } else {
