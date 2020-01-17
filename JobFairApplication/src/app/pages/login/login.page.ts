@@ -49,7 +49,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.authService.isLoggedIn().subscribe(data => {
       if (data) {
-        this.router.navigateByUrl('/venue');
+        this.router.navigateByUrl('/dashboard');
       }
     });
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
@@ -88,7 +88,7 @@ export class LoginPage implements OnInit {
       // console.log(this.loggedIn);
       setTimeout(() => {
         this.formLogin.reset();
-        this.router.navigate(['home']);
+        this.router.navigate(['dashboard']);
       }, 2000);
     }
   }

@@ -4,9 +4,9 @@
   <img src='../../../assets/img/recruitix_logo.png' (click)="navigateToHome()">
   <!-- <img class="dissableRediretion" src='../../../assets/img/ELCA.png' (click)="navigateToHome()"> -->
   <div class="router-links--right">
-    <a (click)="navigateToDashboard()">Dashboard</a>
+    <!-- <a (click)="navigateToDashboard()">Dashboard</a> -->
     <a class="venue-name" (click)="goToVenue()">Venue: {{venue}} </a>
-    <a *ngIf="!loggedIn"routerLink="/login">Login</a>
+    <a *ngIf="!loggedIn "routerLink="/login">Login</a>
     <a *ngIf="loggedIn" (click)="logout()">Logout</a>
     <!-- <a routerLink="/job-list">Job-List</a>
     <a routerLink="/candidate-list">Candidate-List</a>

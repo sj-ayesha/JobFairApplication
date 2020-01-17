@@ -3,10 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'venue', pathMatch: 'full' },
   {
-    path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
-    canActivate: [AuthGuard]
+    path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'login',
@@ -14,13 +13,11 @@ const routes: Routes = [
   },
   {
     path: 'job-list',
-    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule)
   },
   {
     path: 'job-list/:jobQueryParam',
-    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule)
   },
   {
     path: 'candidate-list',
@@ -29,11 +26,13 @@ const routes: Routes = [
   },
   {
     path: 'candidate-details',
-    loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule)
+    loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'candidate-details/:candidateId',
-    loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule)
+    loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'candidate-add-profile',
@@ -45,22 +44,28 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./back-office/dashboard/dashboard.module').then( m => m.DashboardPageModule)
-  },  {
+    loadChildren: () => import('./back-office/dashboard/dashboard.module').then( m => m.DashboardPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'venue-bo',
-    loadChildren: () => import('./back-office/venue-bo/venue-bo.module').then( m => m.VenueBoPageModule)
+    loadChildren: () => import('./back-office/venue-bo/venue-bo.module').then( m => m.VenueBoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'jobs-bo',
-    loadChildren: () => import('./back-office/jobs-bo/jobs-bo.module').then( m => m.JobsBoPageModule)
+    loadChildren: () => import('./back-office/jobs-bo/jobs-bo.module').then( m => m.JobsBoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'skills-bo',
-    loadChildren: () => import('./back-office/skills-bo/skills-bo.module').then( m => m.SkillsBoPageModule)
+    loadChildren: () => import('./back-office/skills-bo/skills-bo.module').then( m => m.SkillsBoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'venue-popup',
-    loadChildren: () => import('./back-office/venue-popup/venue-popup.module').then( m => m.VenuePopupPageModule)
+    loadChildren: () => import('./back-office/venue-popup/venue-popup.module').then( m => m.VenuePopupPageModule),
+    canActivate: [AuthGuard]
   },
 
 ];

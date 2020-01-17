@@ -62,7 +62,7 @@ export class CandidateListPage implements OnInit {
   populateCandidate(event?) {
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(data => {
-      this.candidateVenueJobs = data;
+      this.candidateVenueJobs = this.candidateVenueJobs.concat(data) ;
 
       if (this.candidateVenueJobs.length === 0) {
         this.noCandidatesAvailable = true;
@@ -81,11 +81,11 @@ export class CandidateListPage implements OnInit {
   loadData(event) {
     setTimeout(() => {
       console.log(event);
-      this.limit = this.limit + 10;
+      this.page++;
       this.populateCandidate(event);
     }, 500);
 
-    if (this.limit === this.countCandidates) {
+    if (this.page === 1) {
       event.target.disabled = true;
     }
 

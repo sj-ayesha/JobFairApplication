@@ -93,8 +93,10 @@
       </ion-col>
     </ion-row>
 
-    <ion-infinite-scroll (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="Loading more candidates...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
