@@ -5,7 +5,6 @@ import { AccordionComponent } from '../components/accordion/accordion.component'
 
 @NgModule({
     declarations: [
-
         AccordionComponent
     ],
     imports: [CommonModule, IonicModule],

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CandidatesService } from '../../services/candidates.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Candidate } from 'src/app/model/candidate';
-import { CandidateVenueJob } from 'src/app/model/candidateVenueJob';
+import { CandidateVenueJob, CandidateVenueJobDtoResponseList } from 'src/app/model/candidateVenueJob';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { EventEmitter } from 'protractor';
 
@@ -16,7 +16,8 @@ export class CandidateListPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
 
   candidateDetails: any[];
-  candidateVenueJobs: CandidateVenueJob[] = [];
+  candidateVenueJobsLists: CandidateVenueJob[] = [];
+  candidateVenueJob: CandidateVenueJob;
   // candidateVenueJobsSort: CandidateVenueJob[];
   public countCandidates: any;
   noCandidatesAvailable = false;
@@ -27,6 +28,7 @@ export class CandidateListPage implements OnInit {
   limit = 10;
   page = 0;
   data: any;
+  totalPages = 0;
 
   constructor(
     private router: Router,
@@ -61,10 +63,14 @@ export class CandidateListPage implements OnInit {
 
   populateCandidate(event?) {
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(data => {
-      this.candidateVenueJobs = data;
+    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
+      (data: CandidateVenueJobDtoResponseList) => {
+      // this.candidateVenueJobs = this.candidateVenueJobs.concat(data);
+      this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
+      // this.candidateVenueJobsLists = this.candidateVenueJobsLists.concat(this.candidateVenueJobsList);
+      this.totalPages = data.totalPages;
 
-      if (this.candidateVenueJobs.length === 0) {
+      if (this.candidateVenueJobsLists.length === 0) {
         this.noCandidatesAvailable = true;
       } else {
         this.noCandidatesAvailable = false;
@@ -80,12 +86,11 @@ export class CandidateListPage implements OnInit {
 
   loadData(event) {
     setTimeout(() => {
-      console.log(event);
-      this.limit = this.limit + 10;
+      this.page++;
       this.populateCandidate(event);
     }, 500);
 
-    if (this.limit === this.countCandidates) {
+    if (this.page === this.totalPages) {
       event.target.disabled = true;
     }
 
@@ -105,14 +110,14 @@ export class CandidateListPage implements OnInit {
   getCandidateByAsc() {
     // tslint:disable-next-line: radix
     this.apiService.getCandidateByASC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
-      this.candidateVenueJobs = data;
+      this.candidateVenueJobsLists = data;
     });
   }
 
   getCandidateByDesc() {
     // tslint:disable-next-line: radix
     this.apiService.getCandidateByDESC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
-      this.candidateVenueJobs = data;
+      this.candidateVenueJobsLists = data;
     });
   }
 
@@ -125,7 +130,7 @@ export class CandidateListPage implements OnInit {
         if (data.message === 'NO_CANDIDATE_AVAILABLE') {
           this.candidateNotFound = true;
         } else {
-          this.candidateVenueJobs = data;
+          this.candidateVenueJobsLists = data;
         }
       });
     }

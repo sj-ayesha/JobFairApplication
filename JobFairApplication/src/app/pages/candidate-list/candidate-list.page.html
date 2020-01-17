@@ -47,7 +47,7 @@
     <div class="candidateNotFound" *ngIf="!candidateNotFound">
       <ion-card-content *ngIf="!noCandidatesAvailable">
         <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
-          *ngFor="let candidateVenueJob of candidateVenueJobs">
+          *ngFor="let candidateVenueJob of candidateVenueJobsLists">
           <ion-avatar *ngIf="candidateVenueJob.candidate.gender == 'Male'" slot="start">
             <img src="../../../assets/img/avatar_male.jpg" />
           </ion-avatar>
@@ -93,8 +93,10 @@
       </ion-col>
     </ion-row>
 
-    <ion-infinite-scroll (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="Loading more candidates...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 

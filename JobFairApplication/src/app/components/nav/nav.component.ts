@@ -16,6 +16,7 @@ export class NavComponent implements OnInit, OnDestroy {
   dissabled = true;
   private sessionStateSubscription: Subscription;
   loggedIn: boolean;
+  clickDashboard: false;
 
   venue: string;
   changeVenue: string;
@@ -52,7 +53,7 @@ export class NavComponent implements OnInit, OnDestroy {
     localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
     this.venue = '';
-    // this.dashboard = false;
+    this.dashboard = false;
   }
 
   goToVenue(){
@@ -69,7 +70,8 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   navigateToDashboard(){
-    this.router.navigate(['/dashboard']);
     // this.dashboard = true;
+    this.router.navigate(['/dashboard']);
+    this.dashboard = true;
   }
 }

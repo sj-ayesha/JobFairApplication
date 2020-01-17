@@ -3,7 +3,9 @@ import { ApiService } from 'src/app/services/api.service';
 import { Venue } from 'src/app/model/venue';
 import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
-import { AddVenuePopupComponent } from '../../components/add-venue-popup/add-venue-popup.component';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { VenuePopupPage } from '../../back-office/venue-popup/venue-popup.page';
 
 @Component({
   selector: 'app-venue-bo',
@@ -11,34 +13,54 @@ import { AddVenuePopupComponent } from '../../components/add-venue-popup/add-ven
   styleUrls: ['./venue-bo.page.scss'],
 })
 export class VenueBoPage implements OnInit {
+
   venues: Venue[];
-  public columns: any;
+  public columns: any;
 
   constructor(
     private apiService: ApiService,
     public alertCtrl: AlertController,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
-    this.getVenueByActive();
   }
 
-  getVenueByActive() {
-    this.apiService.getVenueByActive(true).subscribe(data => {
+  ionViewWillEnter() {
+    this.getAllVenue();
+  }
+  ionViewWillLeave(){
+  }
+
+  getAllVenue() {
+    this.apiService.getAllVenue().subscribe(data => {
       this.venues = data;
-      console.log(this.venues);
     });
   }
 
-  async presentPopover(event) {
-    const popover = await this.popoverController.create({
-      component: AddVenuePopupComponent,
-      event
-    });
-    return await popover.present();
+  doRefresh(event) {
+    this.ionViewWillEnter();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
-  closePopover(){
-    this.popoverController.dismiss();
+
+  // async presentPopover(event) {
+  //   const popover = await this.popoverController.create({
+  //     component: AddVenuePopupComponent,
+  //     event
+  //   });
+  //   return await popover.present();
+  // }
+  // closePopover(){
+  //   this.popoverController.dismiss();
+  // }
+
+  openModal() {
+    this.modalController.create({component: VenuePopupPage}).then((modalElement) => {
+      modalElement.present();
+    });
   }
 }

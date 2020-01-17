@@ -7,7 +7,7 @@ import { Venue } from '../model/venue';
 import { Qualification } from '../model/qualification';
 import { Experience } from '../model/experience';
 import { VenueJob } from '../model/venueJob';
-import { CandidateVenueJob } from '../model/candidateVenueJob';
+import { CandidateVenueJob, CandidateVenueJobDtoResponseList } from '../model/candidateVenueJob';
 import { CountCandidates } from '../model/countCandidates';
 import { CandidateVenueJobPriority } from '../model/candidateVenueJobPriority';
 import { Skills } from '../model/skills';
@@ -22,6 +22,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   baseUrl = 'http://localhost:8081/'; // url to access backend
+  // baseUrl = 'http://10.9.0.85:8081/';
 
   // candidates
 
@@ -43,8 +44,8 @@ export class ApiService {
 
   // candidate venue job
 
-  getCandidatesByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<CandidateVenueJob[] | any> {
-    return this.http.get<CandidateVenueJob[] | any>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId + '/' + pageNumber + '/' + pageSize);
+  getCandidatesByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId + '/' + pageNumber + '/' + pageSize);
   }
 
   getCountByVenueId(venueId: number): Observable<CountCandidates> {
@@ -107,10 +108,17 @@ export class ApiService {
 
   // venue
 
+  getAllVenue(): Observable<Venue[]> {
+    return this.http.get<Venue[]>(this.baseUrl + 'venue/all');
+  }
+
   getVenueByActive(active: boolean): Observable<Venue[]> {
     return this.http.get<Venue[]>(this.baseUrl + 'venue/active/' + active);
   }
 
+  saveVenue(venue: Venue): Observable<Venue> {
+    return this.http.post<Venue>(this.baseUrl + 'venue', venue);
+  }
   // qualifications
 
   getQualificationByCandidateId(candidateId: number): Observable<Qualification[]> {
