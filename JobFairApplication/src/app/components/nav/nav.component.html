@@ -1,4 +1,4 @@
-<ion-header *ngIf="!dashboard">
+<ion-header >
   <ion-toolbar>
     <ion-title>
       <div class="router-links">
@@ -7,7 +7,7 @@
         <!-- <img class="dissableRediretion" src='../../../assets/img/ELCA.png' (click)="navigateToHome()"> -->
         <div class="router-links--right">
           <a (click)="navigateToDashboard()">Dashboard</a>
-          <a class="venue-name" (click)="goToVenue()">Venue: {{venue}} </a>
+          <a class="venue-name" (click)="navigateToVenue()">Venue: {{venue}} </a>
           <a *ngIf="!loggedIn" routerLink="/login">Login</a>
           <a *ngIf="loggedIn" (click)="logout()">Logout</a>
           <!-- <a routerLink="/job-list">Job-List</a>
@@ -20,7 +20,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-split-pane contentId="menu-content" *ngIf="dashboard">
+<ion-split-pane contentId="menu-content" >
   <ion-menu contentId="menu-content">
     <ion-header>
       <ion-toolbar>

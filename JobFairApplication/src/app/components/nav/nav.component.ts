@@ -56,9 +56,13 @@ export class NavComponent implements OnInit, OnDestroy {
     this.dashboard = false;
   }
 
-  goToVenue(){
-    this.ngZone.run(() => this.router.navigateByUrl('/venue'));
-    // this.router.navigateByUrl('/venue');
+  navigateToVenue(){
+    // this.ngZone.run(() => this.router.navigateByUrl('/venue'));
+    this.router.navigateByUrl('/venue');
+    localStorage.removeItem('venue_id');
+    localStorage.removeItem('priority');
+    localStorage.removeItem('jobId');
+    localStorage.removeItem('venueName');
   }
 
   navigateToHome() {

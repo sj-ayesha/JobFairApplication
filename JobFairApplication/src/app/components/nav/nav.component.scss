@@ -70,6 +70,7 @@ a.venue-name {
     &:hover {
       background-color: $color-light-red;
       color: $color-white;
+      // color: $color-light-black;
     }
   }
   // .item-native {
@@ -88,8 +89,10 @@ a.venue-name {
     font-size: 18px;
 
     &:hover {
-      background-color: $color-light-red;
-      color: $color-white;
+      // background-color: $color-light-red;
+      border-bottom: 1px solid $color-light-red;
+      // color: $color-white;
+      color: $color-light-black;
     }
   }
 }

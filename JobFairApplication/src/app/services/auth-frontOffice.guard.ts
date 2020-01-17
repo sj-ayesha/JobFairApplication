@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthFrontOfficeGuard implements CanActivate {
 
         constructor(private router: Router) {
 
@@ -11,13 +11,13 @@ export class AuthGuard implements CanActivate {
 
         canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
                 // return undefined;
-                const user = localStorage.getItem('user');
+                // const user = localStorage.getItem('user');
                 const venue = localStorage.getItem('venue_id');
-                let isloggedIn;
+                // let isloggedIn;
                 let hasVenue;
 
-                if (user) {
-                        isloggedIn = true;
+                if (venue) {
+                        hasVenue = true;
                         // if (venue) {
                         //         hasVenue = true;
                         // } else {
@@ -25,10 +25,10 @@ export class AuthGuard implements CanActivate {
                         //         this.router.navigateByUrl('/venue');
                         // }
                 } else {
-                        isloggedIn = false;
-                        this.router.navigateByUrl('/login');
+                        hasVenue = false;
+                        this.router.navigateByUrl('/venue');
                 }
-                return isloggedIn;
+                return hasVenue;
         }
 
         canActivate2(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {

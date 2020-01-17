@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChildren, QueryList, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Job } from 'src/app/model/job';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenueJob, VenueJobResponseList } from 'src/app/model/venueJob';
-import { ToastController } from '@ionic/angular';
+import { ToastController, IonInfiniteScroll } from '@ionic/angular';
 import { ThrowStmt } from '@angular/compiler';
 
 @Component({
@@ -15,7 +15,8 @@ import { ThrowStmt } from '@angular/compiler';
 export class JobListPage implements OnInit {
 
   @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
-  
+  @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
+
   // jobs: any;
   jobs: Job[];
   public venueJobs: VenueJob[] = [];
@@ -28,6 +29,10 @@ export class JobListPage implements OnInit {
   priority = [];
   filterText: string;
   refreshCheck = false;
+  limit = 5;
+  page = 0;
+  data: any;
+  totalPages = 0;
 
   constructor(
     private router: Router,
@@ -64,6 +69,10 @@ export class JobListPage implements OnInit {
     } else {
       this.getJobByLevel();
     }
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
   getJobByLevel() {
@@ -117,7 +126,7 @@ export class JobListPage implements OnInit {
     const coll = document.getElementsByClassName('collapsible');
 
     for (let i = 0; i < coll.length; i++) {
-      coll[i].addEventListener('click', function () {
+      coll[i].addEventListener('click', function() {
 
         this.classList.toggle('active');
         const content = this.nextElementSibling;
@@ -130,27 +139,40 @@ export class JobListPage implements OnInit {
     }
   }
 
-  getAllJobsByVenueId() {
+  getAllJobsByVenueId(event?) {
     // tslint:disable-next-line: radix
     this.jobNotFound = false;
-    this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 2).subscribe((data:VenueJobResponseList) => {
-      this.venueJobs = [...this.venueJobs, ...this.venueJobs];
-      console.log(this.venueJobs)
-      // if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
-      //   this.noJobsAvailable = true;
-      // } else {
-      //   this.venueJobs = data;
-      //   setTimeout(() => {
-      //     this.styleAccordion();
-      //   }, 0);
-      // }
+    this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
+      (data: VenueJobResponseList) => {
+        this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList]
+        setTimeout(() => {
+          this.styleAccordion();
+        }, 0);
 
-      console.log(data);
-    },
-      error => {
-        this.noJobsAvailable = true;
+        this.totalPages = data.totalPages;
+
+        if (this.venueJobs.length === 0) {
+          this.noJobsAvailable = true;
+        } else {
+          this.noJobsAvailable = false;
+        }
+        if (event) {
+          event.target.complete();
+        }
       }
     );
+  }
+
+  loadData(event) {
+    setTimeout(() => {
+      this.page++;
+      this.getAllJobsByVenueId(event);
+    }, 500);
+
+    if (this.page === this.totalPages) {
+      event.target.disabled = true;
+    }
+
   }
 
   getAllJobsByVenueIdAndCategory() {
