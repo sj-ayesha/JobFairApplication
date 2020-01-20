@@ -21,7 +21,7 @@ import { JobCategoryDto } from '../model/jobCategoryDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  // baseUrl = 'https://fe1d672a.ngrok.io/'; // url to access backend
+  // baseUrl = 'https://a5247506.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
   baseUrl = 'http://localhost:8081/';
 
@@ -127,6 +127,9 @@ export class ApiService {
     return this.http.post<Venue>(this.baseUrl + 'venue', venue);
   }
 
+  editVenue(venue: Venue): Observable<Venue> {
+    return this.http.put<Venue>(this.baseUrl + 'venue/' + venue.venueId, venue);
+  }
   // qualifications
 
   getQualificationByCandidateId(candidateId: number): Observable<Qualification[]> {

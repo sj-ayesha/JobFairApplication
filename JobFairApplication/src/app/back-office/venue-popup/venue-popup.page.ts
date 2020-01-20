@@ -136,14 +136,14 @@ export class VenuePopupPage implements OnInit {
       active: this.status
     };
     console.log(editVenue);
-    // this.apiService.saveVenue(addVenue).subscribe(
-    //   data => {
-    //     // this.router.navigate(['home']);
-    //   },
-    //   error => {
-    //     // alert("Data not saved!");
-    //   }
-    // );
+    this.apiService.saveVenue(editVenue).subscribe(
+      data => {
+        // this.router.navigate(['home']);
+      },
+      error => {
+        // alert("Data not saved!");
+      }
+    );
   }
   async successMsg() {
     const toast = await this.toastCtrl.create({
