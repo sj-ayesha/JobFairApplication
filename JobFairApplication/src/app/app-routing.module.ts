@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
+import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'venue', pathMatch: 'full' },
   {
-    path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+    path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
+    canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'login',
@@ -13,16 +15,18 @@ const routes: Routes = [
   },
   {
     path: 'job-list',
-    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule)
+    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule),
+    canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'job-list/:jobQueryParam',
-    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule)
+    loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule),
+    canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'candidate-list',
     loadChildren: () => import('./pages/candidate-list/candidate-list.module').then(m => m.CandidateListPageModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'candidate-details',
@@ -36,7 +40,8 @@ const routes: Routes = [
   },
   {
     path: 'candidate-add-profile',
-    loadChildren: () => import('./pages/candidate-add-profile/candidate-add-profile.module').then(m => m.CandidateAddProfilePageModule)
+    loadChildren: () => import('./pages/candidate-add-profile/candidate-add-profile.module').then(m => m.CandidateAddProfilePageModule),
+    canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'venue',
@@ -66,7 +71,8 @@ const routes: Routes = [
     path: 'venue-popup',
     loadChildren: () => import('./back-office/venue-popup/venue-popup.module').then( m => m.VenuePopupPageModule),
     canActivate: [AuthGuard]
-  },  {
+  },
+  {
     path: 'skill-popup',
     loadChildren: () => import('./back-office/skill-popup/skill-popup.module').then( m => m.SkillPopupPageModule)
   },

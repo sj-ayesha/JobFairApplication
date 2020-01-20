@@ -20,6 +20,7 @@ import { AuthGuard } from './services/auth.guard';
 
 import { VenuePopupPageModule } from './back-office/venue-popup/venue-popup.module';
 import { SkillPopupPageModule } from './back-office/skill-popup/skill-popup.module';
+import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SkillPopupPageModule } from './back-office/skill-popup/skill-popup.modu
     StatusBar,
     SplashScreen,
     AuthGuard,
+    AuthFrontOfficeGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     // Camera,
     // File

@@ -107,7 +107,7 @@ export class CandidateDetailsPage implements OnInit {
   getCandidateById(candidateId: number) {
     this.apiService.getCandidateById(candidateId).subscribe(data => {
       this.candidate = data;
-
+      console.log(this.candidate)
       if (this.candidate.fileName == null) {
         this.showCV = false;
       } else {

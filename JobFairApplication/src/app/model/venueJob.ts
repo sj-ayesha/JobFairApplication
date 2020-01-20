@@ -5,5 +5,10 @@ export class VenueJob{
     venueJobId: number;
     venue: Venue;
     job: Job;
-    message: string;
+    // message: string;
+}
+export class VenueJobResponseList {
+    venueJobDtoList: VenueJob[];
+    totalElements: number;
+    totalPages: number;
 }

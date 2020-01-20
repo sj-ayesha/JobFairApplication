@@ -17,7 +17,7 @@ export class CandidateListPage implements OnInit {
 
   candidateDetails: any[];
   candidateVenueJobsLists: CandidateVenueJob[] = [];
-  candidateVenueJob: CandidateVenueJob;
+  // candidateVenueJob: CandidateVenueJob;
   // candidateVenueJobsSort: CandidateVenueJob[];
   public countCandidates: any;
   noCandidatesAvailable = false;
@@ -66,6 +66,8 @@ export class CandidateListPage implements OnInit {
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
       this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
+      console.log(this.candidateVenueJobsLists);
+      console.log('x',data.candidateVenueJobDtoList);
       this.totalPages = data.totalPages;
 
       if (this.candidateVenueJobsLists.length === 0) {
