@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   dashboard: false;
+  loggedInBO: false;
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.

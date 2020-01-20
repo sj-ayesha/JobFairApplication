@@ -80,6 +80,11 @@ const routes: Routes = [
     path: 'skill-popup/:skillId',
     loadChildren: () => import('./back-office/skill-popup/skill-popup.module').then( m => m.SkillPopupPageModule)
   },
+  {
+    path: 'jobs-popup',
+    loadChildren: () => import('./back-office/jobs-popup/jobs-popup.module').then( m => m.JobsPopupPageModule)
+  },
+
 
 
 ];

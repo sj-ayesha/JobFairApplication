@@ -42,7 +42,7 @@ export class CandidateListPage implements OnInit {
   ngOnInit() {
     this.populateCandidate();
     this.countCandidatesByVenue();
-    // this.populateAllCandidates();
+    this.populateAllCandidates();
   }
 
 

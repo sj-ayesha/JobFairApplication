@@ -1,9 +1,116 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>jobs-bo</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="wrapper-content">
+    <div class="header-wrap">
+      <div class="title">
+        <ion-icon class="list-icon" ios="ios-list" md="md-list"></ion-icon>
+        <h3>Venue List</h3>
+      </div>
+      <div class="add-button">
+        <ion-button color='danger' (click)="openAddModal()">
+          <ion-icon ios="ios-add" md="md-add"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" class="ion-padding">
+          <ion-item class="venue-input">
+            <ion-label position="floating" color="medium">Please select position..</ion-label>
+            <ion-select (ionChange)="filter($event)" interface="popover" class="ion-float-left">
+              <ion-select-option value="all" selected="selected">All</ion-select-option>
+              <ion-select-option value="fresher">Fresher</ion-select-option>
+              <ion-select-option value="junior">Junior</ion-select-option>
+              <ion-select-option value="senior">Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
 
+        <ion-col size="6" class="filter-search ion-padding">
+          <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" class="ion-float-right">
+          </ion-searchbar> -->
+          <ion-item class="search-input">
+            <ion-input placeholder="Search by job title..." type="text" #title
+              (keyup.enter)="searchByTitle(title.value)"></ion-input>
+          </ion-item>
+          <ion-button class="btn btn--search" color="dark" size="small" (click)="searchByTitle(title.value)">
+            <ion-icon name="search"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="!noJobsAvailable">
+        <ion-col size="12">
+          <p class="ion-float-right ion-margin-end">Select Job</p>
+        </ion-col>
+      </ion-row>
+
+      <div class="job-not-found" *ngIf="!jobNotFound">
+        <div class="job-list-container" *ngIf="!noJobsAvailable ">
+          <ion-row class="job-box" *ngFor="let job of jobs">
+            <ion-col size="11">
+              <button class="collapsible">{{ job.title }}</button>
+
+              <div class="content">
+                <ion-row>
+                  <ion-col size="12" class="ion-padding-top">
+                    <div class="ion-no-margin job-description-box">
+                      <!-- <ion-card-content> -->
+                      <div class="job-description">
+                        <h6>Job Description</h6>
+
+                        <ul>
+                          <li *ngFor="let splitJobDescription of job.description.split(';')">
+                            {{ splitJobDescription }}
+                          </li>
+                        </ul>
+
+                      </div>
+
+                      <div class="job-qualification">
+                        <h6>Job Qualification</h6>
+                        <ul>
+                          <li>
+                            <ion-label>{{ job.qualificationNeeded }}</ion-label>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="job-experience">
+                        <h6>Job Experience</h6>
+                        <ul>
+                          <li>
+                            <ion-label>{{ job.minimumExperience }}</ion-label>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- </ion-card-content> -->
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+            <ion-col size="1" text-right>
+              <div class="btn-checkbox" (click)="openEditModal()">
+                <!-- <ion-checkbox color="danger" class="btn-checkbox__item" #checkboxes
+                  (ionChange)="addPriority($event,job.jobId)"></ion-checkbox> -->
+                  <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+      <ion-card *ngIf="noJobsAvailable">
+        <img class="noJobsImg" src="../../../assets/img/Not Available/no-entry.png">
+      </ion-card>
+      <ion-row *ngIf="jobNotFound">
+        <ion-col size="12" class="ion-padding">
+          <img class="not-found" src="../../../assets/img/Not Available/job-not-found.png">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

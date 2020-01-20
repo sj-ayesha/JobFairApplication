@@ -21,6 +21,8 @@ import { AuthGuard } from './services/auth.guard';
 import { VenuePopupPageModule } from './back-office/venue-popup/venue-popup.module';
 import { SkillPopupPageModule } from './back-office/skill-popup/skill-popup.module';
 import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
+import { JobsPopupPageModule } from './back-office/jobs-popup/jobs-popup.module';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,15 @@ import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
     FooterComponent,
   ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, VenuePopupPageModule, SkillPopupPageModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    VenuePopupPageModule,
+    SkillPopupPageModule,
+    JobsPopupPageModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

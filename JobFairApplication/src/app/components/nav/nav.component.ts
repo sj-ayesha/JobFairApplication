@@ -18,6 +18,7 @@ export class NavComponent implements OnInit, OnDestroy {
   loggedIn: boolean;
   clickDashboard: false;
 
+
   venue: string;
   changeVenue: string;
 
