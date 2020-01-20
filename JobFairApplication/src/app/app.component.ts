@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
     // });
     // console.log(this.loggedIn);
 
-    this.loginLogoutService.cast.subscribe(loggedIn => this.loggedIn = loggedIn);
+    this.loginLogoutService.cast.subscribe(data => this.loggedIn = data);
     console.log(this.loggedIn);
   }
 

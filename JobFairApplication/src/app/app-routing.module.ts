@@ -26,17 +26,20 @@ const routes: Routes = [
   {
     path: 'candidate-list',
     loadChildren: () => import('./pages/candidate-list/candidate-list.module').then(m => m.CandidateListPageModule),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
+    canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'candidate-details',
     loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
+    canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'candidate-details/:candidateId',
     loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
+    canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'candidate-add-profile',
