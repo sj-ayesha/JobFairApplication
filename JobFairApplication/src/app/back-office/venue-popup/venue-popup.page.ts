@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 
 @Component({
   selector: 'app-venue-popup',
@@ -11,13 +12,18 @@ import { ApiService } from 'src/app/services/api.service';
 export class VenuePopupPage implements OnInit {
   formAddVenue: FormGroup;
   public today = new Date();
-  // venueName: string;
-  // address: string;
-  // startDate: Date;
-  // endDate: Date;
-  // active: boolean;
-  status = false;
+
+  venueId: string;
+  venueName: string;
+  address: string;
+  startDate: string;
+  endDate: string;
+  active: string;
+
+  status = true;
   submitted = false;
+  edit: boolean;
+  venues: string;
 
   error_messages = {
     venueName: [
@@ -43,22 +49,53 @@ export class VenuePopupPage implements OnInit {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController,
+    private addEditPopupService: AddEditPopupService
   ) {
-    this.formAddVenue = this.formBuilder.group({
-      venueName: new FormControl('',
-        Validators.compose([
-          Validators.maxLength(30),
-          Validators.required
-        ])
-      ),
-      address: new FormControl('', Validators.required),
-      startDate: new FormControl('', Validators.required),
-      endDate : new FormControl('', Validators.required),
-      active: new FormControl('', Validators.required)
-    })
-   }
+  }
 
   ngOnInit() {
+    this.addEditPopupService.cast.subscribe(edit => this.edit = edit);
+    if (this.edit === true) {
+      this.formAddVenue = this.formBuilder.group({
+        venueName: new FormControl('',
+          Validators.compose([
+            Validators.maxLength(30)
+          ])
+        ),
+        address: new FormControl(''),
+        startDate: new FormControl(''),
+        endDate: new FormControl(''),
+        active: new FormControl('')
+      });
+    } else {
+      this.formAddVenue = this.formBuilder.group({
+        venueName: new FormControl('',
+          Validators.compose([
+            Validators.maxLength(30),
+            Validators.required
+          ])
+        ),
+        address: new FormControl('', Validators.required),
+        startDate: new FormControl('', Validators.required),
+        endDate: new FormControl('', Validators.required),
+        active: new FormControl(Validators.required)
+      });
+    }
+  }
+
+  ionViewWillEnter() {
+    this.venues = JSON.parse(localStorage.getItem('editVenues'));
+    if (this.edit === true) {
+      this.venueId = this.venues[0];
+      this.venueName = this.venues[1];
+      this.address = this.venues[2];
+      this.startDate = this.venues[3];
+      this.endDate = this.venues[4];
+      this.active = this.venues[5];
+    }
+  }
+  ionViewWillLeave(){
+    localStorage.removeItem('editVenues');
   }
 
   closeModal() {
@@ -89,6 +126,25 @@ export class VenuePopupPage implements OnInit {
     );
   }
 
+  editVenue() {
+    const editVenue = {
+      venueId: JSON.parse(this.venueId),
+      venueName: this.formAddVenue.get('venueName').value,
+      startDate: this.formAddVenue.get('startDate').value,
+      endDate: this.formAddVenue.get('endDate').value,
+      address: this.formAddVenue.get('address').value,
+      active: this.status
+    };
+    console.log(editVenue);
+    // this.apiService.saveVenue(addVenue).subscribe(
+    //   data => {
+    //     // this.router.navigate(['home']);
+    //   },
+    //   error => {
+    //     // alert("Data not saved!");
+    //   }
+    // );
+  }
   async successMsg() {
     const toast = await this.toastCtrl.create({
       message: 'New venue has been succesfully saved',
@@ -117,10 +173,17 @@ export class VenuePopupPage implements OnInit {
     if (this.formAddVenue.invalid) {
       this.unsuccessMsg();
     } else {
-      this.addVenue();
-      this.successMsg();
-      this.formAddVenue.reset();
-      this.modalController.dismiss();
+      if (this.edit === true) {
+        this.editVenue();
+        this.successMsg();
+        this.formAddVenue.reset();
+        this.modalController.dismiss();
+      } else {
+        this.addVenue();
+        this.successMsg();
+        this.formAddVenue.reset();
+        this.modalController.dismiss();
+      }
     }
   }
 }

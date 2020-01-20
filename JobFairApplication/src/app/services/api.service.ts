@@ -21,13 +21,19 @@ import { JobCategoryDto } from '../model/jobCategoryDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'https://a5247506.ngrok.io/'; // url to access backend
+  // baseUrl = 'https://fe1d672a.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
+  baseUrl = 'http://localhost:8081/';
+
 
   // candidates
 
   getAllCandidates(): Observable<Candidate[]> {
     return this.http.get<Candidate[]>(this.baseUrl + 'candidate/all');
+  }
+
+  getAllCandidateVenueJob(): Observable<CandidateVenueJob[]> {
+    return this.http.get<CandidateVenueJob[]>(this.baseUrl + '/candidate-venue-job/all');
   }
 
   getCandidateIdByEmail(email: string): Observable<Candidate> {
@@ -45,7 +51,8 @@ export class ApiService {
   // candidate venue job
 
   getCandidatesByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
-    return this.http.get<CandidateVenueJobDtoResponseList[] | any>(this.baseUrl + 'candidate-venue-job/candidates/' + venueId + '/' + pageNumber + '/' + pageSize);
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/candidates/' + venueId + '/' + pageNumber + '/' + pageSize);
   }
 
   getCountByVenueId(venueId: number): Observable<CountCandidates> {
@@ -119,6 +126,7 @@ export class ApiService {
   saveVenue(venue: Venue): Observable<Venue> {
     return this.http.post<Venue>(this.baseUrl + 'venue', venue);
   }
+
   // qualifications
 
   getQualificationByCandidateId(candidateId: number): Observable<Qualification[]> {
@@ -151,6 +159,10 @@ export class ApiService {
 
   saveSkill(skills: Skills): Observable<Skills[]> {
     return this.http.post<Skills[]>(this.baseUrl + 'skill', skills);
+  }
+
+  editSkill(skills: Skills): Observable<Skills> {
+    return this.http.put<Skills>(this.baseUrl + 'skill/' + skills.skillId, skills);
   }
 
   // candidate screening

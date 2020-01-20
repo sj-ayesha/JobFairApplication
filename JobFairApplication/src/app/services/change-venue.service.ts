@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ChangeVenueService {
-  public venueName: string = '';
+  public venueName = '';
   private venue = new BehaviorSubject<string>(this.venueName);
   cast = this.venue.asObservable();
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 
 @Component({
   selector: 'app-skill-popup',
@@ -18,6 +19,11 @@ export class SkillPopupPage implements OnInit {
   // active: boolean;
   status = false;
   submitted = false;
+  edit: boolean;
+  skills: string;
+  skillId: string;
+  skillName: string;
+  apiSkillId: number;
 
   error_messages = {
     skillName: [
@@ -31,18 +37,43 @@ export class SkillPopupPage implements OnInit {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController,
+    private addEditPopupService: AddEditPopupService
   ) {
-    this.formAddSkill = this.formBuilder.group({
-      skillName: new FormControl('',
-        Validators.compose([
-          Validators.maxLength(30),
-          Validators.required
-        ])
-      )
-    });
-   }
+  }
 
   ngOnInit() {
+    this.addEditPopupService.cast.subscribe(edit => this.edit = edit);
+    console.log('Ha', this.edit);
+    if (this.edit === true) {
+      this.formAddSkill = this.formBuilder.group({
+        skillName: new FormControl('',
+          Validators.compose([
+            Validators.maxLength(30),
+          ])
+        )
+      });
+    } else {
+      this.formAddSkill = this.formBuilder.group({
+        skillName: new FormControl('',
+          Validators.compose([
+            Validators.maxLength(30),
+            Validators.required
+          ])
+        )
+      });
+    }
+  }
+
+  ionViewWillEnter() {
+    this.skills = JSON.parse(localStorage.getItem('editSkills'));
+    if (this.edit === true){
+      this.skillId = this.skills[0];
+      this.skillName = this.skills[1];
+    }
+  }
+
+  ionViewWillLeave(){
+    localStorage.removeItem('editSkills');
   }
 
   closeModal() {
@@ -53,6 +84,8 @@ export class SkillPopupPage implements OnInit {
     this.status = getValue.target.value;
   }
 
+
+
   addSkill() {
     const addSkill = {
       skillId: null,
@@ -60,6 +93,26 @@ export class SkillPopupPage implements OnInit {
     };
     console.log(addSkill);
     this.apiService.saveSkill(addSkill).subscribe(
+      data => {
+        // this.router.navigate(['home']);
+      },
+      error => {
+        // alert("Data not saved!");
+      }
+    );
+  }
+
+  editSkill() {
+    const editSkill = {
+      skillId: JSON.parse(this.skillId),
+      skillName: this.formAddSkill.get('skillName').value
+    };
+
+    console.log(editSkill);
+    this.apiSkillId = JSON.parse(this.skillId);
+    console.log(editSkill);
+
+    this.apiService.editSkill(editSkill).subscribe(
       data => {
         // this.router.navigate(['home']);
       },
@@ -97,10 +150,17 @@ export class SkillPopupPage implements OnInit {
     if (this.formAddSkill.invalid) {
       this.unsuccessMsg();
     } else {
-      this.addSkill();
-      this.successMsg();
-      this.formAddSkill.reset();
-      this.modalController.dismiss();
+      if (this.edit === true) {
+        this.editSkill();
+        this.successMsg();
+        this.formAddSkill.reset();
+        this.modalController.dismiss();
+      } else {
+        this.addSkill();
+        this.successMsg();
+        this.formAddSkill.reset();
+        this.modalController.dismiss();
+      }
     }
   }
 }
