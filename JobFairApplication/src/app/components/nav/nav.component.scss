@@ -90,13 +90,19 @@ a.venue-name {
 
     &:hover {
       // background-color: $color-light-red;
-      border-bottom: 1px solid $color-light-red;
+      border-bottom: 2px solid $color-light-red;
       // color: $color-white;
-      color: $color-light-black;
+      // color: $color-light-black;
+      width: 90%;
+      transition: 0.2s;
     }
   }
 }
 
 .split-pane-md.split-pane-visible > .split-pane-side {
   max-width: 20%;
+}
+
+.menu-logo{
+  max-width: 120px; 
 }

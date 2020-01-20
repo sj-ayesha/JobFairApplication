@@ -10,20 +10,22 @@
         <h3>Venue List</h3>
       </div>
       <div class="add-button">
-        <ion-button color='danger' (click)="openModal()">
+        <ion-button color='danger' (click)="openAddModal()">
           <ion-icon ios="ios-add" md="md-add"></ion-icon>
         </ion-button>
       </div>
     </div>
     <table class="rwd-table">
-      <tr>
+      <tr class="header">
+        <!-- <th>Id</th> -->
         <th>Skill</th>
         <th>Edit</th>
       </tr>
       <tr *ngFor="let skill of skills">
-        <td data-th="Id">{{skill.skillName}}</td>
-        <td data-th="Active">
-          <ion-icon ios="ios-create" md="md-create"></ion-icon>
+        <!-- <td data-th='Id' id="id" >{{skill.skillId}}</td> -->
+        <td data-th='Name'>{{skill.skillName}}</td>
+        <td class="Edit" data-th="Edit" (click)="edit(skill.skillId)">
+          <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
         </td>
       </tr>
     </table>

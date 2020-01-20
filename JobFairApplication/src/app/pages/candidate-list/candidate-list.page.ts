@@ -6,6 +6,7 @@ import { Candidate } from 'src/app/model/candidate';
 import { CandidateVenueJob, CandidateVenueJobDtoResponseList } from 'src/app/model/candidateVenueJob';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { EventEmitter } from 'protractor';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-candidate-list',
@@ -17,6 +18,7 @@ export class CandidateListPage implements OnInit {
 
   candidateDetails: any[];
   candidateVenueJobsLists: CandidateVenueJob[] = [];
+  allCandidates: Candidate[];
   // candidateVenueJob: CandidateVenueJob;
   // candidateVenueJobsSort: CandidateVenueJob[];
   public countCandidates: any;
@@ -40,6 +42,7 @@ export class CandidateListPage implements OnInit {
   ngOnInit() {
     this.populateCandidate();
     this.countCandidatesByVenue();
+    // this.populateAllCandidates();
   }
 
 
@@ -65,22 +68,27 @@ export class CandidateListPage implements OnInit {
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
-      this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
-      console.log(this.candidateVenueJobsLists);
-      console.log('x',data.candidateVenueJobDtoList);
-      this.totalPages = data.totalPages;
+        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
+        this.totalPages = data.totalPages;
 
-      if (this.candidateVenueJobsLists.length === 0) {
-        this.noCandidatesAvailable = true;
-      } else {
-        this.noCandidatesAvailable = false;
-      }
+        if (this.candidateVenueJobsLists.length === 0) {
+          this.noCandidatesAvailable = true;
+        } else {
+          this.noCandidatesAvailable = false;
+        }
 
-      if (event) {
-        event.target.complete();
-      }
+        if (event) {
+          event.target.complete();
+        }
+      });
+
+  }
+
+  populateAllCandidates() {
+    this.apiService.getAllCandidates().subscribe(data => {
+      this.allCandidates = data;
+      console.log('all', this.allCandidates);
     });
-
   }
 
 

@@ -46,8 +46,9 @@ $breakpoint-alpha: 480px; // adjust to your needs
   th {
     display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
     text-align: center!important;
-    background-color: $color-light-black;
-    color: white;
+    // background-color: $color-light-black;
+    // color: white;
+    border-bottom: 2px solid $color-light-black;
   }
   
   td {
@@ -126,3 +127,10 @@ body {
 // .rwd-table tr:hover {background-color: #ddd;}
 
 
+.Edit:hover{
+  cursor: pointer;
+  .edit-btn{
+    cursor: pointer;
+    color: $color-light-red;
+  }
+}

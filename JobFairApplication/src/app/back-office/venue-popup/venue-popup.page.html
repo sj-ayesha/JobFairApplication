@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Venue</ion-title>
+    <ion-title *ngIf="!edit">Add Venue</ion-title>
+    <ion-title *ngIf="edit">Edit Venue</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,9 +13,13 @@
     <form [formGroup]="formAddVenue">
       <ion-row>
         <ion-col col-md-6 size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Venue Name</ion-label>
             <ion-input formControlName="venueName" type="text"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Venue Name</ion-label>
+            <ion-input formControlName="venueName" type="text" value="{{venueName}}"></ion-input>
           </ion-item>
           <div class="error-messages">
             <ng-container *ngFor="let error of error_messages.venueName">
@@ -28,9 +33,13 @@
       </ion-row>
       <ion-row>
         <ion-col col-md-6 size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Address</ion-label>
             <ion-input formControlName="address" type="text"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Address</ion-label>
+            <ion-input formControlName="address" type="text" value="{{address}}"></ion-input>
           </ion-item>
           <div class="error-messages">
             <ng-container *ngFor="let error of error_messages.address">
@@ -44,9 +53,14 @@
       </ion-row>
       <ion-row>
         <ion-col size="6" size-md size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Start Date</ion-label>
             <ion-datetime formControlName="startDate" default="today" max="2021-12-31">
+            </ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Start Date</ion-label>
+            <ion-datetime formControlName="startDate" value="{{startDate}}" max="2021-12-31">
             </ion-datetime>
           </ion-item>
           <div class="error-messages">
@@ -59,9 +73,14 @@
           </div>
         </ion-col>
         <ion-col size="6" size-md size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*End Date</ion-label>
             <ion-datetime formControlName="endDate" default="today" max="2021-12-31">
+            </ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*End Date</ion-label>
+            <ion-datetime formControlName="endDate" value="{{endDate}}" max="2021-12-31">
             </ion-datetime>
           </ion-item>
           <div class="error-messages">
@@ -87,9 +106,10 @@
 
               <ion-item>
                 <ion-label>Inactive</ion-label>
-                <ion-radio color="success" slot="start" value="false"
-                  (ionSelect)="radioButtonValue($event)"></ion-radio>
+                <ion-radio color="success" slot="start" value="false" (ionSelect)="radioButtonValue($event)">
+                </ion-radio>
               </ion-item>
+
             </ion-radio-group>
           </div>
         </ion-col>
@@ -97,7 +117,8 @@
 
       <div class="option-button ion-text-right">
         <ion-button class="btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
-        <ion-button class='btn' color="success" (click)="onSubmit()">Add</ion-button>
+        <ion-button class='btn' *ngIf="!edit" color="success" (click)="onSubmit()">Add</ion-button>
+        <ion-button class='btn' *ngIf="edit" color="success" (click)="onSubmit()">Edit</ion-button>
       </div>
     </form>
   </div>

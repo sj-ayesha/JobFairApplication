@@ -12,7 +12,7 @@ export class LoginLogoutService {
 
   loginUser() {
     this.sessionStateEmitter.emit(true);
-    this.router.navigate(['/venue']);
+    this.router.navigate(['/dashboard']);
     /* if (this.isLoggedIn = true) {
       this.router.navigate(['/venue']);
     }
@@ -22,6 +22,6 @@ export class LoginLogoutService {
   }
   logoutUser() {
     this.sessionStateEmitter.emit(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/venue']);
   }
 }

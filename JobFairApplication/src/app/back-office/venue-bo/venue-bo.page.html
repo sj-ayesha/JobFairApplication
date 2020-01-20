@@ -10,7 +10,7 @@
         <h3>Venue List</h3>
       </div>
       <div class="add-button">
-        <ion-button color='danger' (click)="openModal()">
+        <ion-button color='danger' (click)="openAddModal()">
           <ion-icon ios="ios-add" md="md-add"></ion-icon>
         </ion-button>
       </div>
@@ -34,8 +34,8 @@
         <td data-th="Start Date">{{venue.startDate}}</td>
         <td data-th="End Date">{{venue.endDate}}</td>
         <td data-th="Active">{{venue.active}}</td>
-        <td data-th="Active">
-          <ion-icon ios="ios-create" md="md-create"></ion-icon>
+        <td class="Edit" data-th="Edit" (click)="edit(venue.venueId)">
+          <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
         </td>
       </tr>
     </table>
