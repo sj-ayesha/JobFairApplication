@@ -1,11 +1,16 @@
-<ion-app>
-
-  <app-nav></app-nav>
-  <ion-content *ngIf="dashboard">
-    <ion-router-outlet></ion-router-outlet>
-  </ion-content>
-  <div class="footer-container">
+<ng-container *ngIf="loggedIn; else elseTemplate">
+  <ion-app>
+    <app-nav-sidebar></app-nav-sidebar>
+  </ion-app>
+</ng-container>
+<ng-template #elseTemplate>
+  <ion-app>
+    <app-nav></app-nav>
+    <ion-content>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-content>
+    <div class="footer-container">
       <app-footer></app-footer>
-  </div>
-</ion-app>
-
+    </div>
+  </ion-app>
+</ng-template>

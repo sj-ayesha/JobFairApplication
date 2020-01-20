@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // import { ComponentsModule } from './components/components.module';
 import { NavComponent } from './components/nav/nav.component';
+import { NavSidebarComponent } from './components/nav-sidebar/nav-sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthGuard } from './services/auth.guard';
 
@@ -29,6 +30,7 @@ import { JobsPopupPageModule } from './back-office/jobs-popup/jobs-popup.module'
     AppComponent,
     NavComponent,
     FooterComponent,
+    NavSidebarComponent
   ],
   entryComponents: [],
   imports: [

@@ -127,6 +127,9 @@ export class ApiService {
     return this.http.post<Venue>(this.baseUrl + 'venue', venue);
   }
 
+  editVenue(venue: Venue): Observable<Venue> {
+    return this.http.put<Venue>(this.baseUrl + 'venue/' + venue.venueId, venue);
+  }
   // qualifications
 
   getQualificationByCandidateId(candidateId: number): Observable<Qualification[]> {

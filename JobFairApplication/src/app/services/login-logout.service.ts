@@ -1,13 +1,21 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginLogoutService {
 
+  isLoggedIn = false;
+  private logged = new BehaviorSubject<boolean>(this.isLoggedIn);
+  cast = this.logged.asObservable();
+
   @Output() sessionStateEmitter = new EventEmitter<boolean>();
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private http: HttpClient) {
   }
 
   loginUser() {
@@ -23,5 +31,9 @@ export class LoginLogoutService {
   logoutUser() {
     this.sessionStateEmitter.emit(false);
     this.router.navigate(['/venue']);
+  }
+
+  showDashboard(showDashboard){
+    this.logged.next(showDashboard);
   }
 }

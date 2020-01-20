@@ -70,6 +70,7 @@ export class CandidateListPage implements OnInit {
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
+        console.log(this.candidateVenueJobsLists)
 
         if (this.candidateVenueJobsLists.length === 0) {
           this.noCandidatesAvailable = true;

@@ -1,16 +1,15 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { ChangeVenueService } from 'src/app/services/change-venue.service';
-
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss'],
+  selector: 'app-nav-sidebar',
+  templateUrl: './nav-sidebar.component.html',
+  styleUrls: ['./nav-sidebar.component.scss'],
 })
-export class NavComponent implements OnInit, OnDestroy {
+export class NavSidebarComponent implements OnInit {
   public venueName: string;
   count: number;
   dissabled = true;
@@ -18,17 +17,14 @@ export class NavComponent implements OnInit, OnDestroy {
   loggedIn: boolean;
   clickDashboard: false;
 
-
   venue: string;
   changeVenue: string;
-
-  dashboard = true;
 
   constructor(
     private loginLogoutService: LoginLogoutService,
     private router: Router,
     private changeVenueService: ChangeVenueService,
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.loggedIn = !!localStorage.getItem('user');
@@ -39,13 +35,13 @@ export class NavComponent implements OnInit, OnDestroy {
 
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
   }
-
   ngOnDestroy() {
     this.sessionStateSubscription.unsubscribe();
   }
 
   logout() {
     this.loggedIn = false;
+    this.loginLogoutService.showDashboard(false);
     localStorage.removeItem('user');
     localStorage.removeItem('venue_id');
     localStorage.removeItem('priority');
@@ -53,7 +49,6 @@ export class NavComponent implements OnInit, OnDestroy {
     localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
     this.venue = '';
-    this.dashboard = false;
   }
 
   navigateToVenue(){
@@ -76,6 +71,5 @@ export class NavComponent implements OnInit, OnDestroy {
   navigateToDashboard(){
     // this.dashboard = true;
     this.router.navigate(['/dashboard']);
-    this.dashboard = true;
   }
 }
