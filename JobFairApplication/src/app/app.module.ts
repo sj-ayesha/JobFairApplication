@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // import { ComponentsModule } from './components/components.module';
 import { NavComponent } from './components/nav/nav.component';
+import { NavSidebarComponent } from './components/nav-sidebar/nav-sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthGuard } from './services/auth.guard';
 
@@ -27,6 +28,7 @@ import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
     AppComponent,
     NavComponent,
     FooterComponent,
+    NavSidebarComponent
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, VenuePopupPageModule, SkillPopupPageModule],

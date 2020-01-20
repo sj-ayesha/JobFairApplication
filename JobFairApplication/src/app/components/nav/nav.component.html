@@ -1,4 +1,4 @@
-<ion-header *ngIf="false">
+<ion-header>
   <ion-toolbar>
     <ion-title>
       <div class="router-links">
@@ -16,33 +16,3 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-split-pane contentId="menu-content">
-  <ion-menu contentId="menu-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button autoHide='false'></ion-menu-button>
-        </ion-buttons>
-        <div class="header-section">
-          <img class="menu-logo" src='../../../assets/img/recruitix_logo.png' width="175px" (click)="navigateToHome()">
-          <a *ngIf="!loggedIn" routerLink="/login">Login</a>
-          <a *ngIf="loggedIn" (click)="logout()">Logout</a>
-        </div>
-
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list no-padding>
-        <div class="side-nav">
-          <a routerLink="/dashboard">Dashboard</a>
-          <a routerLink="/venue-bo">Venue</a>
-          <a routerLink="jobs-bo">Job List</a>
-          <a routerLink="skills-bo">Skills</a>
-          <a routerLink="/candidate-list">Candidate List</a>
-        </div>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-
-  <ion-router-outlet id="menu-content"></ion-router-outlet>
-</ion-split-pane>

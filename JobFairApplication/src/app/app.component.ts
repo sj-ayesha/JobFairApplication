@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { LoginLogoutService } from './services/login-logout.service';
-import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+import { LoginLogoutService } from './services/login-logout.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,28 +13,37 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  loggedIn: boolean;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private loginlogoutService: LoginLogoutService,
     private router: Router,
-    private menu: MenuController
-  ) {
-    this.initializeApp();
-  }
+    private authService: AuthService,
+    private loginLogoutService: LoginLogoutService,
 
-  dashboard: false;
+  ) {
+    // this.initializeApp();
+    // this.loggedIn = false;
+  }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    // console.log('aass');
-    // if (localStorage.getItem('user')){
-    //   this.loginlogoutService.loginUser();
-    // }
-  }
+    // this.authService.isLoggedIn().subscribe(data => {
+    //   if (data) {
+    //     this.loggedIn = data;
+    //     this.changeDetectorRef.detectChanges();
+    //   }
+    //   else {
+    //     this.loggedIn = false;
+    //   }
+    // });
+    // console.log(this.loggedIn);
 
+    this.loginLogoutService.cast.subscribe(loggedIn => this.loggedIn = loggedIn);
+    console.log(this.loggedIn);
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {
