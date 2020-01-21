@@ -15,31 +15,34 @@ export class JobsPopupPage implements OnInit {
   formAddJob: FormGroup;
   submitted = false;
 
+  jobId: string;
   title: string;
   level: string;
   category: string;
   description: string;
   minimumExperience: string;
   qualificationNeeded: string;
+  apiJobId: number;
+  jobs: string;
 
   error_messages = {
     title: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Title is required' },
     ],
     level: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Level is required' },
     ],
     category: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Job Category is required' },
     ],
     description: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Job Description is required' },
     ],
     minimumExperience: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Minimum Experience is required' },
     ],
     qualificationNeeded: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Qualification is required' },
     ],
   };
 
@@ -115,6 +118,48 @@ export class JobsPopupPage implements OnInit {
     };
     console.log(addJob);
     this.apiService.saveJob(addJob).subscribe(
+      data => {
+        // this.router.navigate(['home']);
+      },
+      error => {
+        // alert("Data not saved!");
+      }
+    );
+  }
+
+  ionViewWillEnter() {
+    this.jobs = JSON.parse(localStorage.getItem('editJobs'));
+    if (this.edit === true) {
+      this.jobId = this.jobs[0];
+      this.title = this.jobs[1];
+      this.level = this.jobs[2];
+      this.category = this.jobs[3];
+      this.description = this.jobs[4];
+      this.minimumExperience = this.jobs[5];
+      this.qualificationNeeded = this.jobs[6];
+    }
+  }
+
+  ionViewWillLeave(){
+    localStorage.removeItem('editJobs');
+  }
+
+  editJob() {
+    const editJob = {
+      jobId: null,
+      title: this.formAddJob.get('title').value,
+      level: this.formAddJob.get('level').value,
+      category: this.formAddJob.get('category').value,
+      description: this.formAddJob.get('description').value,
+      minimumExperience: this.formAddJob.get('minimumExperience').value,
+      qualificationNeeded: this.formAddJob.get('qualificationNeeded').value
+    };
+
+    console.log(editJob);
+    this.apiJobId = JSON.parse(this.jobId);
+    console.log(editJob);
+
+    this.apiService.editJob(editJob).subscribe(
       data => {
         // this.router.navigate(['home']);
       },
