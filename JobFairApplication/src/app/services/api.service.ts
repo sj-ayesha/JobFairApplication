@@ -103,6 +103,10 @@ export class ApiService {
   saveJob(job: Job): Observable<Job> {
     return this.http.post<Job>(this.baseUrl + 'job', job);
   }
+
+  editJob(job: Job): Observable<Job> {
+    return this.http.put<Job>(this.baseUrl + 'job/' + job.jobId, job);
+  }
   // venue-job
 
   getJobsByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<VenueJob[] | any> {

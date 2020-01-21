@@ -31,6 +31,7 @@ export class JobsBoPage implements OnInit {
   page = 0;
   data: any;
   totalPages = 0;
+  editJobs: any[] = [];
   // allJobs = Job[];
 
   constructor(
@@ -233,6 +234,24 @@ export class JobsBoPage implements OnInit {
     this.modalController.create({component: JobsPopupPage}).then((modalElement) => {
       modalElement.present();
     });
+  }
+
+  edit(Id) {
+    this.openEditModal();
+    this.editJobs = [];
+    for (let i = 0; i < this.jobs.length; i++) {
+      if ( this.jobs[i].jobId === Id) {
+          this.editJobs.push(this.jobs[i].jobId);
+          this.editJobs.push(this.jobs[i].title);
+          this.editJobs.push(this.jobs[i].level);
+          this.editJobs.push(this.jobs[i].category);
+          this.editJobs.push(this.jobs[i].description);
+          this.editJobs.push(this.jobs[i].minimumExperience);
+          this.editJobs.push(this.jobs[i].qualificationNeeded);
+      }
+    }
+    const LSeditJobs = JSON.stringify(this.editJobs);
+    localStorage.setItem('editJobs', LSeditJobs);
   }
 
 }
