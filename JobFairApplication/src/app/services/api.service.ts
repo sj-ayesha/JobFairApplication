@@ -100,6 +100,9 @@ export class ApiService {
     return this.http.get<Job[]>(this.baseUrl + 'job/all');
   }
 
+  saveJob(job: Job): Observable<Job> {
+    return this.http.post<Job>(this.baseUrl + 'job', job);
+  }
   // venue-job
 
   getJobsByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<VenueJob[] | any> {

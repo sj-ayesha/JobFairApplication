@@ -83,8 +83,9 @@ export class LoginPage implements OnInit {
       this.unsuccessMsg();
     } else {
       this.loggedIn = true;
-      this.loginLogoutService.showDashboard(true);
       localStorage.setItem('user', 'userId');
+      this.loginLogoutService.showDashboard(true);
+      this.loginLogoutService.setItem('data', 'data');
       this.loginLogoutService.loginUser();
       // console.log(this.loggedIn);
       setTimeout(() => {

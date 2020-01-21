@@ -169,7 +169,7 @@ export class JobsBoPage implements OnInit {
     this.jobNotFound = false;
     this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
       (data: VenueJobResponseList) => {
-        this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList]
+        this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
         setTimeout(() => {
           this.styleAccordion();
         }, 0);
