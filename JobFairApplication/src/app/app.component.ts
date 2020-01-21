@@ -31,7 +31,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginLogoutService.cast.subscribe(data => this.loggedIn = data);
+    console.log('app')
+    this.loginLogoutService.cast.subscribe(data => {
+      console.log(data);
+      if (data !== null) {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+    });
   }
 
   initializeApp() {

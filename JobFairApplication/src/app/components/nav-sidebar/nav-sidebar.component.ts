@@ -68,7 +68,7 @@ export class NavSidebarComponent implements OnInit {
     }
   }
 
-  navigateToDashboard(){
+  navigateToDashboard() {
     // this.dashboard = true;
     this.router.navigate(['/dashboard']);
   }
