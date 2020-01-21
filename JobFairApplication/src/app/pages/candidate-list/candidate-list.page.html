@@ -13,11 +13,6 @@
           </div>
         </ion-col>
       </ion-row>
-<!-- 
-      <ion-label position="floating" color="medium">Please select position..</ion-label>
-      <ion-select interface="popover" class="ion-float-left" *ngFor="let venue of venues">
-        <ion-select-option value="venue.venueName">{{venue.venueName}}</ion-select-option>
-      </ion-select> -->
 
       <ion-row class="filter-row" *ngIf="!noCandidatesAvailable">
         <ion-col size="6">
@@ -48,29 +43,65 @@
           </div>
         </ion-col>
       </ion-row>
+
+      <ion-row>
+        <ion-col size="4" class="ion-padding">
+          <ion-item class="venue-input">
+            <ion-label position="floating" color="medium">Filter Candidates by venue..</ion-label>
+            <ion-select (ionChange)="filterByVenue($event)" interface="popover" class="ion-float-left">
+              <ion-select-option value='0' selected="selected">All</ion-select-option>
+              <ion-select-option value='1'>UOM</ion-select-option>
+              <ion-select-option value='2'>UTM</ion-select-option>
+              <ion-select-option value='3'>CTI</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4" class="ion-padding">
+          <ion-item class="venue-input">
+            <ion-label position="floating" color="medium">Filter Candidates by screening status..</ion-label>
+            <ion-select interface="popover" class="ion-float-left">
+              <ion-select-option value="all" selected="selected">All</ion-select-option>
+              <ion-select-option value="rejected">Rejected</ion-select-option>
+              <ion-select-option value="proceed to next interview">Proceed to next interview</ion-select-option>
+              <ion-select-option value="approved">Approved</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4" class="ion-padding">
+          <ion-item class="venue-input">
+            <ion-label position="floating" color="medium">Filter Candidates level..</ion-label>
+            <ion-select interface="popover" class="ion-float-left">
+              <ion-select-option value="all" selected="selected">All</ion-select-option>
+              <ion-select-option value="fresher">Fresher</ion-select-option>
+              <ion-select-option value="junior">Junior</ion-select-option>
+              <ion-select-option value="senior">Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
     </ion-card-header>
     <div class="candidateNotFound" *ngIf="!candidateNotFound">
       <ion-card-content *ngIf="!noCandidatesAvailable">
-        <ion-item class="candidate-item" (click)="routeTo(candidate.candidateId)"
-          *ngFor="let candidate of allCandidates">
-          <ion-avatar *ngIf="candidate.gender == 'Male'" slot="start">
+        <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
+          *ngFor="let candidateVenueJob of candidateVenueJobsLists">
+          <ion-avatar *ngIf="candidateVenueJob.candidate.gender == 'Male'" slot="start">
             <img src="../../../assets/img/avatar_male.jpg" />
           </ion-avatar>
-          <ion-avatar *ngIf="candidate.gender=='Female'" slot="start">
+          <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
             <img src="../../../assets/img/avatar_female.jpg" />
           </ion-avatar>
           <ion-label class="ion-text-wrap">
-            <h5><b>{{candidate.lastName}} {{candidate.firstName}}</b></h5>
-            <p><b>Level:</b> {{candidate.currentLevel}}</p>
+            <h5><b>{{candidateVenueJob.candidate.lastName}} {{candidateVenueJob.candidate.firstName}}</b></h5>
+            <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
             <p>
               <b>Available from:</b>
-              {{candidate.availabilityDate}}
+              {{candidateVenueJob.candidate.availabilityDate}}
             </p>
           </ion-label>
           <ion-label slot="end">
-            <!-- <p><b>Venue:</b> {{candidate.candidateVenueJobSaveDto}}</p> -->
-            <!-- <p><b>Job Applied:</b> {{candidate.venueJob.job.title}}</p> -->
-            <p><b>Job Type:</b> {{candidate.jobType}}</p>
+            <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
+            <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
+            <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
           </ion-label>
         </ion-item>
       </ion-card-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Router } from '@angular/router';
 import { ChangeVenueService } from 'src/app/services/change-venue.service';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './nav-sidebar.component.html',
   styleUrls: ['./nav-sidebar.component.scss'],
 })
-export class NavSidebarComponent implements OnInit {
+export class NavSidebarComponent implements OnInit, OnDestroy {
   public venueName: string;
   count: number;
   dissabled = true;
@@ -49,6 +49,7 @@ export class NavSidebarComponent implements OnInit {
     localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
     this.venue = '';
+    this.loginLogoutService.removeItem('data');
   }
 
   navigateToVenue(){

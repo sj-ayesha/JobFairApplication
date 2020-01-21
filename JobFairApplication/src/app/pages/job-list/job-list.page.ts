@@ -65,6 +65,7 @@ export class JobListPage implements OnInit {
   filter(event) {
     this.filterText = event.target.value;
     if (this.filterText == 'all') {
+      this.venueJobs = [];
       this.getAllJobsByVenueId();
     } else {
       this.getJobByLevel();
@@ -215,7 +216,7 @@ export class JobListPage implements OnInit {
   applyOnlyFive() {
     const count = JSON.parse(localStorage.priority).length;
 
-    console.log(count)
+    console.log(count);
     if (count > 5) {
       this.unsuccessMsg();
     } else if (count <= 0) {

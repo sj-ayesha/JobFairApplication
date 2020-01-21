@@ -32,12 +32,10 @@ export class VenueBoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getAllVenue();
   }
 
   ionViewWillEnter() {
-    this.getAllVenue();
-  }
-  ionViewWillLeave(){
   }
 
   toggleInfiniteScroll() {
@@ -48,8 +46,8 @@ export class VenueBoPage implements OnInit {
     this.apiService.getAllVenue(this.page, this.limit).subscribe(
       (data: VenueResponseList) => {
 
-        // this.venues = [...this.venues, ...data.venueDtoList];
-        this.venues = this.venues.concat(data.venueDtoList);
+        this.venues = [...this.venues, ...data.venueDtoList];
+        // this.venues = this.venues.concat(data.venueDtoList);
         console.log(data.venueDtoList);
         this.totalPages = data.totalPages;
       });

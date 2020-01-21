@@ -14,7 +14,7 @@ import { LoginLogoutService } from './services/login-logout.service';
 })
 export class AppComponent implements OnInit {
 
-  loggedIn: boolean;
+  loggedIn: string;
   logged: string;
 
   constructor(
@@ -31,15 +31,23 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('app')
-    this.loginLogoutService.cast.subscribe(data => {
-      console.log(data);
-      if (data !== null) {
-        this.loggedIn = true;
-      } else {
-        this.loggedIn = false;
-      }
-    });
+    // this.loginLogoutService.cast.subscribe(data => {
+    //   console.log(data);
+    //   if (!!data) {
+    //     this.loggedIn = true;
+    //     console.log('true', this.loggedIn);
+    //   } else {
+    //     this.loggedIn = false;
+    //     console.log('false', this.loggedIn);
+    //   }
+    // });
+
+    this.loginLogoutService.cast.subscribe(data => this.loggedIn = data);
+    console.log(this.loggedIn);
+  }
+
+  ionViewWillLeave(){
+    console.log('left');
   }
 
   initializeApp() {

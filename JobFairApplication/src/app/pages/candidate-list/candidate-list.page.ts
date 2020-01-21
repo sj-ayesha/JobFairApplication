@@ -31,6 +31,7 @@ export class CandidateListPage implements OnInit {
   page = 0;
   data: any;
   totalPages = 0;
+  filterText: number;
 
   constructor(
     private router: Router,
@@ -57,7 +58,7 @@ export class CandidateListPage implements OnInit {
 
   onSelect(id: number) {
     this.router.navigate(['/candidate-list', id]);
-    this.populateCandidate();
+    this.populateCandidateByVenue();
   }
 
   routeTo(candidateId: number) {
@@ -70,15 +71,12 @@ export class CandidateListPage implements OnInit {
 
   //FOR ALL CANDIDATES
   populateAllCandidates(event?) {
-    this.apiService.getAllCandidates(this.page, this.limit).subscribe(
-      (data: CandidateResponseList) => {
-        // this.allCandidates = [...this.allCandidates, ...data.candidateDtoList];
-        this.allCandidates = this.allCandidates.concat(data.candidateDtoList)
-        console.log('all', this.allCandidates);
+    this.apiService.getAllCandidatesVenueJob(this.page, this.limit).subscribe(
+      (data: CandidateVenueJobDtoResponseList) => {
+        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
-        // console.log(this.allCandidates[0].candidateVenueJobSaveDto[0].venueJob.venue.venueName)
 
-        if (this.allCandidates.length === 0) {
+        if (this.candidateVenueJobsLists.length === 0) {
           this.noCandidatesAvailable = true;
         } else {
           this.noCandidatesAvailable = false;
@@ -114,14 +112,24 @@ export class CandidateListPage implements OnInit {
 
 
 
-  // FOR CANDIDATES BASED ON VENUE 
-  populateCandidate(event?) {
+  // FOR CANDIDATES BASED ON VENUE
+  filterByVenue(event) {
+    this.filterText = event.target.value;
+    if (this.filterText == 0) {
+      this.populateAllCandidates();
+    } else {
+      this.candidateVenueJobsLists = [];
+      this.populateCandidateByVenue();
+    }
+  }
+
+
+  populateCandidateByVenue(event?) {
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
+    this.apiService.getCandidatesByVenueId(this.filterText, this.page, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
-        console.log(this.candidateVenueJobsLists);
 
         if (this.candidateVenueJobsLists.length === 0) {
           this.noCandidatesAvailable = true;
@@ -172,7 +180,7 @@ export class CandidateListPage implements OnInit {
   searchByLastName(lastName: any) {
     this.candidateNotFound = false;
     if (lastName === '') {
-      this.populateCandidate();
+      this.populateAllCandidates();
     } else {
       this.apiService.getCandidateByLastName(lastName).subscribe(data => {
         if (data.message === 'NO_CANDIDATE_AVAILABLE') {
