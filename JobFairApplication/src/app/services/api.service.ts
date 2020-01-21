@@ -96,8 +96,8 @@ export class ApiService {
     return this.http.get<Job[]>(this.baseUrl + 'job/' + jobId);
   }
 
-  getAllJobs(): Observable<Job[]> {
-    return this.http.get<Job[]>(this.baseUrl + 'job/all');
+  getAllJobs(pageNumber: number, pageSize: number): Observable<Job[] | any> {
+    return this.http.get<Job[] | any>(this.baseUrl + 'job/all?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   saveJob(job: Job): Observable<Job> {
