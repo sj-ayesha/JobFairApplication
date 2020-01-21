@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { Venue } from 'src/app/model/venue';
+import { Venue, VenueResponseList } from 'src/app/model/venue';
 import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { VenuePopupPage } from '../../back-office/venue-popup/venue-popup.page';
 import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-venue-bo',
@@ -13,17 +14,21 @@ import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
   styleUrls: ['./venue-bo.page.scss'],
 })
 export class VenueBoPage implements OnInit {
+  @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
 
-  venues: Venue[];
+  venues: Venue[] = [];
   public columns: any;
   editVenues: any[] = [];
+  limit = 20;
+  page = 0;
+  totalPages = 0;
 
   constructor(
     private apiService: ApiService,
     public alertCtrl: AlertController,
     private popoverController: PopoverController,
     private modalController: ModalController,
-    private addEditPopupService: AddEditPopupService
+    private addEditPopupService: AddEditPopupService,
   ) { }
 
   ngOnInit() {
@@ -35,10 +40,35 @@ export class VenueBoPage implements OnInit {
   ionViewWillLeave(){
   }
 
-  getAllVenue() {
-    this.apiService.getAllVenue().subscribe(data => {
-      this.venues = data;
-    });
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+
+  getAllVenue(event?) {
+    this.apiService.getAllVenue(this.page, this.limit).subscribe(
+      (data: VenueResponseList) => {
+
+        // this.venues = [...this.venues, ...data.venueDtoList];
+        this.venues = this.venues.concat(data.venueDtoList);
+        console.log(data.venueDtoList);
+        this.totalPages = data.totalPages;
+      });
+
+    if (event) {
+        event.target.complete();
+      }
+  }
+
+  loadData(event) {
+    setTimeout(() => {
+      this.page++;
+      this.getAllVenue(event);
+    }, 500);
+
+    if (this.page === this.totalPages) {
+      event.target.disabled = true;
+    }
+
   }
 
   doRefresh(event) {

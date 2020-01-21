@@ -13,6 +13,11 @@
           </div>
         </ion-col>
       </ion-row>
+<!-- 
+      <ion-label position="floating" color="medium">Please select position..</ion-label>
+      <ion-select interface="popover" class="ion-float-left" *ngFor="let venue of venues">
+        <ion-select-option value="venue.venueName">{{venue.venueName}}</ion-select-option>
+      </ion-select> -->
 
       <ion-row class="filter-row" *ngIf="!noCandidatesAvailable">
         <ion-col size="6">
@@ -46,39 +51,28 @@
     </ion-card-header>
     <div class="candidateNotFound" *ngIf="!candidateNotFound">
       <ion-card-content *ngIf="!noCandidatesAvailable">
-        <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
-          *ngFor="let candidateVenueJob of candidateVenueJobsLists">
-          <ion-avatar *ngIf="candidateVenueJob.candidate.gender == 'Male'" slot="start">
+        <ion-item class="candidate-item" (click)="routeTo(candidate.candidateId)"
+          *ngFor="let candidate of allCandidates">
+          <ion-avatar *ngIf="candidate.gender == 'Male'" slot="start">
             <img src="../../../assets/img/avatar_male.jpg" />
           </ion-avatar>
-          <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
+          <ion-avatar *ngIf="candidate.gender=='Female'" slot="start">
             <img src="../../../assets/img/avatar_female.jpg" />
           </ion-avatar>
           <ion-label class="ion-text-wrap">
-            <h5><b>{{candidateVenueJob.candidate.lastName}} {{candidateVenueJob.candidate.firstName}}</b></h5>
-            <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
+            <h5><b>{{candidate.lastName}} {{candidate.firstName}}</b></h5>
+            <p><b>Level:</b> {{candidate.currentLevel}}</p>
             <p>
               <b>Available from:</b>
-              {{candidateVenueJob.candidate.availabilityDate}}
+              {{candidate.availabilityDate}}
             </p>
           </ion-label>
           <ion-label slot="end">
-            <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
-            <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
-            <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
+            <!-- <p><b>Venue:</b> {{candidate.candidateVenueJobSaveDto}}</p> -->
+            <!-- <p><b>Job Applied:</b> {{candidate.venueJob.job.title}}</p> -->
+            <p><b>Job Type:</b> {{candidate.jobType}}</p>
           </ion-label>
         </ion-item>
-        <!-- <ion-item class="candidate-item" [routerLink]="['/candidate-details']" routerLinkActive="router-link-active">
-        <ion-avatar slot="start">
-          <img src="../../../assets/img/avatar_female.jpg" />
-        </ion-avatar>
-        <ion-label>
-          <h5>Maliyah Sheppard</h5>
-          <p>dolor sit amet</p>
-          <p>consectetur adipiscing elit. Duis ut urna neque.</p>
-        </ion-label>
-      </ion-item> -->
-
       </ion-card-content>
     </div>
     <ion-card>

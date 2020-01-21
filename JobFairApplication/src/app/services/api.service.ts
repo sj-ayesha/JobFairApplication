@@ -21,15 +21,15 @@ import { JobCategoryDto } from '../model/jobCategoryDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'https://ffcf13b1.ngrok.io/'; // url to access backend
+  // baseUrl = 'https://ffcf13b1.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
-  // baseUrl = 'http://localhost:8081/';
+  baseUrl = 'http://localhost:8081/';
 
 
   // candidates
 
-  getAllCandidates(): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(this.baseUrl + 'candidate/all');
+  getAllCandidates(pageNumber: number, pageSize: number): Observable<Candidate[] | any> {
+    return this.http.get<Candidate[] | any>(this.baseUrl + 'candidate/all' + '/' + pageNumber + '/' + pageSize);
   }
 
   getAllCandidateVenueJob(): Observable<CandidateVenueJob[]> {
@@ -115,8 +115,8 @@ export class ApiService {
 
   // venue
 
-  getAllVenue(): Observable<Venue[]> {
-    return this.http.get<Venue[]>(this.baseUrl + 'venue/all');
+  getAllVenue(pageNumber: number, pageSize: number): Observable<Venue[] | any> {
+    return this.http.get<Venue[] | any>(this.baseUrl + 'venue/all' + '/' + pageNumber + '/' + pageSize);
   }
 
   getVenueByActive(active: boolean): Observable<Venue[]> {

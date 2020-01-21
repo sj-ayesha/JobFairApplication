@@ -35,5 +35,6 @@ export class LoginLogoutService {
 
   showDashboard(showDashboard){
     this.logged.next(showDashboard);
+    // localStorage.setItem('dashboard', showDashboard);
   }
 }

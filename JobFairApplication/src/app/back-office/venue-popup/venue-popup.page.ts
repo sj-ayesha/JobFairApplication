@@ -136,7 +136,7 @@ export class VenuePopupPage implements OnInit {
       active: this.status
     };
     console.log(editVenue);
-    this.apiService.saveVenue(editVenue).subscribe(
+    this.apiService.editVenue(editVenue).subscribe(
       data => {
         // this.router.navigate(['home']);
       },

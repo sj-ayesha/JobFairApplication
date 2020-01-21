@@ -6,3 +6,9 @@ export class Venue{
     address: string;
     active: boolean;
 }
+
+export class VenueResponseList {
+    venueDtoList: Venue[];
+    totalElements: number;
+    totalPages: number;
+}

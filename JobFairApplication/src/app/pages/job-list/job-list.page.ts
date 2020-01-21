@@ -29,7 +29,7 @@ export class JobListPage implements OnInit {
   priority = [];
   filterText: string;
   refreshCheck = false;
-  limit = 5;
+  limit = 10;
   page = 0;
   data: any;
   totalPages = 0;
@@ -144,7 +144,7 @@ export class JobListPage implements OnInit {
     this.jobNotFound = false;
     this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
       (data: VenueJobResponseList) => {
-        this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList]
+        this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
         setTimeout(() => {
           this.styleAccordion();
         }, 0);

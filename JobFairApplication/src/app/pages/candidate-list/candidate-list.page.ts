@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CandidatesService } from '../../services/candidates.service';
 import { ApiService } from 'src/app/services/api.service';
-import { Candidate } from 'src/app/model/candidate';
+import { Candidate, CandidateResponseList } from 'src/app/model/candidate';
 import { CandidateVenueJob, CandidateVenueJobDtoResponseList } from 'src/app/model/candidateVenueJob';
 import { IonInfiniteScroll } from '@ionic/angular';
-import { EventEmitter } from 'protractor';
-import { timingSafeEqual } from 'crypto';
+import { Venue } from 'src/app/model/venue';
 
 @Component({
   selector: 'app-candidate-list',
@@ -18,7 +17,8 @@ export class CandidateListPage implements OnInit {
 
   candidateDetails: any[];
   candidateVenueJobsLists: CandidateVenueJob[] = [];
-  allCandidates: Candidate[];
+  allCandidates: Candidate[] = [];
+  venues: Venue[];
   // candidateVenueJob: CandidateVenueJob;
   // candidateVenueJobsSort: CandidateVenueJob[];
   public countCandidates: any;
@@ -40,9 +40,10 @@ export class CandidateListPage implements OnInit {
   }
 
   ngOnInit() {
-    this.populateCandidate();
-    this.countCandidatesByVenue();
+    // this.populateCandidate();
+    // this.countCandidatesByVenue();
     this.populateAllCandidates();
+    this.getVenueByActive();
   }
 
 
@@ -59,18 +60,68 @@ export class CandidateListPage implements OnInit {
     this.populateCandidate();
   }
 
+  routeTo(candidateId: number) {
+    this.router.navigate(['/candidate-details', candidateId]);
+  }
 
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
+  //FOR ALL CANDIDATES
+  populateAllCandidates(event?) {
+    this.apiService.getAllCandidates(this.page, this.limit).subscribe(
+      (data: CandidateResponseList) => {
+        // this.allCandidates = [...this.allCandidates, ...data.candidateDtoList];
+        this.allCandidates = this.allCandidates.concat(data.candidateDtoList)
+        console.log('all', this.allCandidates);
+        this.totalPages = data.totalPages;
+        // console.log(this.allCandidates[0].candidateVenueJobSaveDto[0].venueJob.venue.venueName)
+
+        if (this.allCandidates.length === 0) {
+          this.noCandidatesAvailable = true;
+        } else {
+          this.noCandidatesAvailable = false;
+        }
+
+        if (event) {
+          event.target.complete();
+        }
+      });
+  }
+
+  loadData(event) {
+    setTimeout(() => {
+      this.page++;
+      this.populateAllCandidates(event);
+    }, 500);
+
+    if (this.page === this.totalPages) {
+      event.target.disabled = true;
+    }
+
+  }
+
+
+
+
+  // VENUE 
+  getVenueByActive() {
+    this.apiService.getVenueByActive(true).subscribe(data => {
+      this.venues = data;
+    });
+  }
+
+
+
+  // FOR CANDIDATES BASED ON VENUE 
   populateCandidate(event?) {
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
-        console.log(this.candidateVenueJobsLists)
+        console.log(this.candidateVenueJobsLists);
 
         if (this.candidateVenueJobsLists.length === 0) {
           this.noCandidatesAvailable = true;
@@ -85,29 +136,17 @@ export class CandidateListPage implements OnInit {
 
   }
 
-  populateAllCandidates() {
-    this.apiService.getAllCandidates().subscribe(data => {
-      this.allCandidates = data;
-      console.log('all', this.allCandidates);
-    });
-  }
+  // loadData(event) {
+  //   setTimeout(() => {
+  //     this.page++;
+  //     this.populateCandidate(event);
+  //   }, 500);
 
+  //   if (this.page === this.totalPages) {
+  //     event.target.disabled = true;
+  //   }
 
-  loadData(event) {
-    setTimeout(() => {
-      this.page++;
-      this.populateCandidate(event);
-    }, 500);
-
-    if (this.page === this.totalPages) {
-      event.target.disabled = true;
-    }
-
-  }
-
-  routeTo(candidateId: number) {
-    this.router.navigate(['/candidate-details', candidateId]);
-  }
+  // }
 
   countCandidatesByVenue() {
     // tslint:disable-next-line: radix
@@ -144,4 +183,6 @@ export class CandidateListPage implements OnInit {
       });
     }
   }
+
+
 }
