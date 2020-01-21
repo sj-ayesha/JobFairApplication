@@ -59,6 +59,7 @@ ion-list{
     cursor: pointer;
 }
 .category-item {
+    // max-width: 155px;
     max-width: 155px;
     margin: 0 auto;
 }
@@ -72,7 +73,8 @@ ion-list{
     outline:none;
 }
 .category-item img{
-    width:100px;
+    // width:100px;
+    width:123px;
 }
 .btn-view-more{
     margin-bottom: 25px;

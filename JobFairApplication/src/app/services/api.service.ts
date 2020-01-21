@@ -52,7 +52,7 @@ export class ApiService {
 
   getCandidatesByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
     return this.http.get<CandidateVenueJobDtoResponseList[] | any>
-    (this.baseUrl + 'candidate-venue-job/candidates/' + venueId + '/' + pageNumber + '/' + pageSize);
+    (this.baseUrl + 'candidate-venue-job/candidates-by-venue/' + venueId + '?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   getAllCandidatesVenueJob(pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
@@ -125,7 +125,7 @@ export class ApiService {
   // venue
 
   getAllVenue(pageNumber: number, pageSize: number): Observable<Venue[] | any> {
-    return this.http.get<Venue[] | any>(this.baseUrl + 'venue/all' + '/' + pageNumber + '/' + pageSize);
+    return this.http.get<Venue[] | any>(this.baseUrl + 'venue/all?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   getVenueByActive(active: boolean): Observable<Venue[]> {
