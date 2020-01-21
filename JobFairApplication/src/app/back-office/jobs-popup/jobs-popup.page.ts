@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 import { ModalController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-jobs-popup',
@@ -9,7 +10,14 @@ import { ModalController } from '@ionic/angular';
 })
 export class JobsPopupPage implements OnInit {
 
-  constructor(private addEditPopupService: AddEditPopupService, private modalController: ModalController) { }
+  edit: boolean;
+  formAddJob: FormGroup;
+
+  constructor(
+    private addEditPopupService: AddEditPopupService,
+    private modalController: ModalController,
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
   }

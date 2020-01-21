@@ -1,9 +1,81 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Skill</ion-title>
-    <ion-title >Edit Skill</ion-title>
+    <ion-title *ngIf="!edit">Add Skill</ion-title>
+    <ion-title *ngIf="edit">Edit Skill</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="job-content">
+    <form>
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Category</ion-label>
+            <ion-select interface="popover" cancelText="Cancel" okText="OK"placeholder="Select a category">
+              <ion-select-option value="software-engineer">Software Engineer</ion-select-option>
+              <ion-select-option value="human-resource">Human Resource</ion-select-option>
+              <ion-select-option value="manager">Manager</ion-select-option>
+              <ion-select-option value="quality-assurance">Quality Assurance</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Job Title</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Job Description</ion-label>
+            <ion-textarea type="text"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Qualification required</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Years of Experience</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item>
+            <ion-label position="floating" color="medium">*Level</ion-label>
+            <ion-select interface="popover" cancelText="Cancel" okText="OK"placeholder="Select Level">
+              <ion-select-option value="Fresher">Fresher</ion-select-option>
+              <ion-select-option value="Junior">Junior</ion-select-option>
+              <ion-select-option value="Senior">Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+  
+      <div class="option-button ion-text-right">
+        <ion-button class="btn" type="submit" color="danger">Cancel</ion-button>
+        <ion-button class='btn' color="success">Add</ion-button>
+        <ion-button class='btn' color="success">Edit</ion-button>
+      </div>
+    </form>
+  </div>
 </ion-content>
