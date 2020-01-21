@@ -18,6 +18,7 @@ export class Candidate {
     currentLevel: string;
     jobType: string;
     fileName: string;
+    cvUpload: boolean;
     currentAcademicYear: string;
     experienceDtos: Experience[];
     qualificationDtos: Qualification[];

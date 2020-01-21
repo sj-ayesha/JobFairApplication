@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CandidateSkill } from 'src/app/model/CandidateSkill';
 import { ApiService } from 'src/app/services/api.service';
+import { CandidatesService } from 'src/app/services/candidates.service';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
 import { ToastController } from '@ionic/angular';
@@ -52,6 +53,9 @@ export class CandidateAddProfilePage implements OnInit {
 
   fileData: File = null; // File Upload
   selectedFiles: FileList;
+  myFiles:string [] = [];
+  uploading: boolean;
+  attachments = [];
 
 
   // tslint:disable-next-line: variable-name
@@ -124,6 +128,7 @@ export class CandidateAddProfilePage implements OnInit {
     private dropdowns: DropdownsService,
     private http: HttpClient,
     private ngZone: NgZone,
+    private candidateService: CandidatesService
   ) {
 
     this.formCandidateDetails = this.formBuilder.group({
@@ -297,6 +302,7 @@ export class CandidateAddProfilePage implements OnInit {
       jobType: this.formCandidateDetails.get('jobType').value,
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
       fileName: this.formCandidateDetails.get('cvUpload').value,
+      cvUpload: false,
       experienceDtos: this.arrayExperience,
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
@@ -354,6 +360,7 @@ export class CandidateAddProfilePage implements OnInit {
       jobType: this.formCandidateDetails.get('jobType').value,
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
       fileName: this.formCandidateDetails.get('cvUpload').value,
+      cvUpload: true,
       experienceDtos: this.arrayExperience,
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
@@ -366,7 +373,7 @@ export class CandidateAddProfilePage implements OnInit {
     if (this.formCandidateDetails.invalid) {
       this.unsuccessMsg();
     } else {
-      this.uploadCV(candidateDetails, this.fileData);
+      // this.uploadCV(candidateDetails, this.fileData);
       this.successMsg();
 
       setTimeout(() => {
@@ -378,41 +385,90 @@ export class CandidateAddProfilePage implements OnInit {
   }
 
   selectFile(event) {
-    this.fileData =  event.target.files.item(0);
+    this.attachFile(event.target.files)
+    event.target.value = null;
+    this.uploading = true;
 
-    if (this.fileData.type.match('image.*|application.*')) {
-      const size = event.target.files[0].size;
-      if (size > 5266467) {
-        alert('size must not exceeds 5 MB');
-        this.formCandidateDetails.get('cvUpload').setValue('');
-      } else {
-        this.selectedFiles = event.target.files;
-      }
-    } else {
-      alert('invalid format!');
-    }
-  } 
+    // if (event.target.files.length > 0) {
+    //   this.fileData = event.target.files[0];
+    //   // this.formCandidateDetails.get('cvUpload').setValue(file);
+    // }
+    // for (var i = 0; i < event.target.files.length; i++) { 
+    //   this.myFiles.push(event.target.files[i]);
+    // }
+    // this.fileData =  event.target.files.item(0);
 
+    // if (this.fileData.type.match('image.*|application.*')) {
+    //   const size = event.target.files[0].size;
+    //   if (size > 5266467) {
+    //     alert('size must not exceeds 5 MB');
+    //     this.formCandidateDetails.get('cvUpload').setValue('');
+    //   } else {
+    //     this.selectedFiles = event.target.files;
+    //   }
+    // } else {
+    //   alert('invalid format!');
+    // }
+  }
 
-  uploadCV(candidateDto: Candidate, fileData: File) {
-    const formData: FormData = new FormData();
-    const json = JSON.stringify(candidateDto);
-    const blob = new Blob([json], {
-      type: 'application/json'
+  attachFile(fileList: FileList) {
+    const filteredCandidateSkills = this.CandidateSkills.filter(data => {
+      return data.checked === true;
     });
-    formData.append('candidateDto', blob);
-    formData.append('file', fileData, fileData.name);
-    console.log(formData);
-    let httpOptions = {
-      headers: new HttpHeaders().set('Accept', 'application/json')
+    this.arrayExperience = [
+      {
+        companyName: this.formCandidateDetails.get('companyName').value,
+        position: this.formCandidateDetails.get('position').value,
+        duration: this.formCandidateDetails.get('duration').value
+      }
+    ];
+    this.arrayQualification = [
+      {
+        title: this.formCandidateDetails.get('title').value,
+        division: this.formCandidateDetails.get('division').value,
+        institution: this.formCandidateDetails.get('institution').value,
+        graduationDate: this.formCandidateDetails.get('graduationDate').value
+      }
+    ];
+    this.arrayVenue = [{
+      venueId: window.localStorage.getItem('venue_id'),
+      jobId: window.localStorage.getItem('jobId'),
+      jobPriority: window.localStorage.getItem('priority')
+    }];
+    const candidateDetails = {
+      firstName: this.formCandidateDetails.get('firstName').value,
+      lastName: this.formCandidateDetails.get('lastName').value,
+      email: this.formCandidateDetails.get('email').value,
+      telNumber: this.formCandidateDetails.get('telNumber').value,
+      mobileNumber: this.formCandidateDetails.get('mobileNumber').value,
+      gender: this.formCandidateDetails.get('gender').value,
+      address: this.formCandidateDetails.get('address').value,
+      nationality: this.formCandidateDetails.get('nationality').value,
+      registrationDate: this.formCandidateDetails.get('registrationDate').value,
+      availabilityDate: this.formCandidateDetails.get('availabilityDate').value,
+      currentLevel: this.formCandidateDetails.get('currentLevel').value,
+      jobType: this.formCandidateDetails.get('jobType').value,
+      currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
+      fileName: this.formCandidateDetails.get('cvUpload').value,
+      cvUpload: true,
+      experienceDtos: this.arrayExperience,
+      qualificationDtos: this.arrayQualification,
+      candidateSkillDtos: filteredCandidateSkills,
+      candidateVenueJobSaveDto: this.arrayVenue,
+      candidateScreeningDtos: this.arrayScreening,
     };
-    console.log(formData);
-    this.apiService.uploadCV(formData, httpOptions).subscribe(data => {
-      console.log('uploading..');
-      if (data) {
-        console.log('uploaded');
+
+    for (let i = 0; i < fileList.length; i++) {
+      let file = fileList.item(i);
+      this.attachments.push(file);
+    }
+
+    this.candidateService.uploadCVs(candidateDetails, this.attachments).toPromise().then(
+      (res) => {
+        console.log('res', res)
       }
-    });
+    )
+    .catch(err => console.log('err', err))
   }
 
   ionViewWillLoad() { }
