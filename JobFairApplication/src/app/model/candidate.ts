@@ -5,6 +5,7 @@ import { CandidateVenueJob } from './candidateVenueJob';
 import { CandidateScreening } from './candidateScreening';
 
 export class Candidate {
+    candidateId: number;
     firstName: string;
     lastName: string;
     email: string;
@@ -25,5 +26,10 @@ export class Candidate {
     candidateSkillDtos: CandidateSkill[];
     candidateVenueJobSaveDto: CandidateVenueJob[];
     candidateScreeningDtos: CandidateScreening[];
-    
+}
+
+export class CandidateResponseList {
+    candidateDtoList: Candidate[];
+    totalElements: number;
+    totalPages: number;
 }

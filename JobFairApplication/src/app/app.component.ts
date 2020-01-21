@@ -15,6 +15,7 @@ import { LoginLogoutService } from './services/login-logout.service';
 export class AppComponent implements OnInit {
 
   loggedIn: boolean;
+  logged: string;
 
   constructor(
     private platform: Platform,
@@ -30,19 +31,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.authService.isLoggedIn().subscribe(data => {
-    //   if (data) {
-    //     this.loggedIn = data;
-    //     this.changeDetectorRef.detectChanges();
-    //   }
-    //   else {
-    //     this.loggedIn = false;
-    //   }
-    // });
-    // console.log(this.loggedIn);
-
-    this.loginLogoutService.cast.subscribe(loggedIn => this.loggedIn = loggedIn);
-    console.log(this.loggedIn);
+    console.log('app')
+    this.loginLogoutService.cast.subscribe(data => {
+      console.log(data);
+      if (data !== null) {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+    });
   }
 
   initializeApp() {

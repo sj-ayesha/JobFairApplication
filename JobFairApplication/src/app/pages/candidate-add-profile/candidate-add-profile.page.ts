@@ -288,6 +288,7 @@ export class CandidateAddProfilePage implements OnInit {
       jobPriority: window.localStorage.getItem('priority')
     }];
     const candidateDetails = {
+      candidateId: null,
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
       email: this.formCandidateDetails.get('email').value,
@@ -346,6 +347,7 @@ export class CandidateAddProfilePage implements OnInit {
       jobPriority: window.localStorage.getItem('priority')
     }];
     const candidateDetails = {
+      candidateId: null,
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
       email: this.formCandidateDetails.get('email').value,

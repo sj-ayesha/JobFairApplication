@@ -1,15 +1,16 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginLogoutService {
 
-  isLoggedIn = false;
-  private logged = new BehaviorSubject<boolean>(this.isLoggedIn);
+  isLoggedIn: string;
+  private logged = new BehaviorSubject<string>(this.isLoggedIn);
+  private storage = new BehaviorSubject<string>(localStorage.getItem('dashboard'));
   cast = this.logged.asObservable();
 
   @Output() sessionStateEmitter = new EventEmitter<boolean>();
@@ -34,6 +35,15 @@ export class LoginLogoutService {
   }
 
   showDashboard(showDashboard){
-    this.logged.next(showDashboard);
+    if (showDashboard === true) {
+      this.logged.next(localStorage.getItem('dashboard'));
+    } else {
+      this.logged.next(null);
+    }
+    localStorage.setItem('dashboard', showDashboard);
+  }
+
+  getLoggedIn(): Observable<string> {
+    return this.storage.asObservable();
   }
 }

@@ -21,15 +21,15 @@ import { JobCategoryDto } from '../model/jobCategoryDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  // baseUrl = 'https://a5247506.ngrok.io/'; // url to access backend
+  // baseUrl = 'https://ffcf13b1.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
   baseUrl = 'http://localhost:8081/';
 
 
   // candidates
 
-  getAllCandidates(): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(this.baseUrl + 'candidate/all');
+  getAllCandidates(pageNumber: number, pageSize: number): Observable<Candidate[] | any> {
+    return this.http.get<Candidate[] | any>(this.baseUrl + 'candidate/all' + '/' + pageNumber + '/' + pageSize);
   }
 
   getAllCandidateVenueJob(): Observable<CandidateVenueJob[]> {
@@ -53,6 +53,11 @@ export class ApiService {
   getCandidatesByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
     return this.http.get<CandidateVenueJobDtoResponseList[] | any>
     (this.baseUrl + 'candidate-venue-job/candidates/' + venueId + '/' + pageNumber + '/' + pageSize);
+  }
+
+  getAllCandidatesVenueJob(pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/all?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   getCountByVenueId(venueId: number): Observable<CountCandidates> {
@@ -100,6 +105,7 @@ export class ApiService {
   getJobsByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/' + venueId + '/' + pageNumber + '/' + pageSize);
   }
+  
 
   getJobsByVenueIdAndCategory(venueId: number, category: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/category?venueId=' + venueId + '&category=' + category);
@@ -115,8 +121,8 @@ export class ApiService {
 
   // venue
 
-  getAllVenue(): Observable<Venue[]> {
-    return this.http.get<Venue[]>(this.baseUrl + 'venue/all');
+  getAllVenue(pageNumber: number, pageSize: number): Observable<Venue[] | any> {
+    return this.http.get<Venue[] | any>(this.baseUrl + 'venue/all' + '/' + pageNumber + '/' + pageSize);
   }
 
   getVenueByActive(active: boolean): Observable<Venue[]> {
