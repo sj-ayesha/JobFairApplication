@@ -26,6 +26,7 @@ export class CandidateDetailsPage implements OnInit {
   qualifications;
   experiences;
   skills;
+  candidateFiles;
   public candidateScreenings;
   public today: any;
   public venueName: string;
@@ -86,12 +87,6 @@ export class CandidateDetailsPage implements OnInit {
     this.minutes = this.today.getMinutes();
     this.seconds = this.today.getSeconds();
 
-    // if (this.candidate.fileName == '') {
-    //   this.showCV = false;
-    // } else {
-    //   this.showCV = true;
-    // }
-
     this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
     // console.log(this.date);
   }
@@ -108,7 +103,7 @@ export class CandidateDetailsPage implements OnInit {
     this.apiService.getCandidateById(candidateId).subscribe(data => {
       this.candidate = data;
       console.log(this.candidate)
-      if (this.candidate.fileName == null) {
+      if (this.candidate.cvUpload === false) {
         this.showCV = false;
       } else {
         this.showCV = true;
@@ -120,6 +115,7 @@ export class CandidateDetailsPage implements OnInit {
       this.experiences = this.candidate.experienceDtos;
       this.skills = this.candidate.candidateSkillDtos;
       this.candidateScreenings = this.candidate.candidateScreeningDtos;
+      this.candidateFiles = this.candidate.candidateFileDtos;
       if (this.candidateScreenings.length > 0) {
         this.ScreeningDisplay = true;
       } else {

@@ -30,19 +30,7 @@ export class CandidatesService {
       headers: new HttpHeaders().set('Accept', 'application/json')
     };
 
-    return this.apiService.uploadCV(formData, httpOptions)/* .subscribe(data => {
-      console.log('uploading..');
-      if (data) {
-        console.log('uploaded');
-      }
-    }) */;
-
-    // this.apiService.uploadCV(formData, httpOptions).subscribe(data => {
-    //   console.log('uploading..');
-    //   if (data) {
-    //     console.log('uploaded');
-    //   }
-    // });
+    return this.apiService.uploadCV(formData, httpOptions);
 
   }
 }
