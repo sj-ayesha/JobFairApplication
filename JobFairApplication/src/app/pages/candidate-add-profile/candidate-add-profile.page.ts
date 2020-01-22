@@ -282,6 +282,7 @@ export class CandidateAddProfilePage implements OnInit {
     if (this.arrayExperience[0].companyName == null && this.arrayExperience[0].position == null && this.arrayExperience[0].duration == null) {
       this.arrayExperience = [];
     }
+
     this.arrayVenue = [{
       venueId: window.localStorage.getItem('venue_id'),
       jobId: window.localStorage.getItem('jobId'),

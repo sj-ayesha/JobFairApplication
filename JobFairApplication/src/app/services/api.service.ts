@@ -90,6 +90,16 @@ export class ApiService {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/lastname/' + lastName);
   }
 
+  getAllCandidatesByScreeningStatus(screeningStatus: string, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/candidates-screening-status/' + screeningStatus + '?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+  }
+
+  getAllCandidatesByLevel(level: string, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/candidates-level/' + level + '?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+  }
+
   // candidate skills
 
   saveCandidateSkill(skill: Skills): Observable<Skills[]> {

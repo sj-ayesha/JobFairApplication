@@ -164,10 +164,7 @@ export class JobsPopupPage implements OnInit {
       minimumExperience: this.formAddJob.get('minimumExperience').value,
       qualificationNeeded: this.formAddJob.get('qualificationNeeded').value
     };
-
-    console.log(editJob);
     this.apiJobId = JSON.parse(this.jobId);
-    console.log(editJob);
 
     this.apiService.editJob(editJob).subscribe(
       data => {
