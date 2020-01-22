@@ -6,6 +6,7 @@ import { Candidate, CandidateResponseList } from 'src/app/model/candidate';
 import { CandidateVenueJob, CandidateVenueJobDtoResponseList } from 'src/app/model/candidateVenueJob';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Venue } from 'src/app/model/venue';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-candidate-list',
@@ -17,6 +18,9 @@ export class CandidateListPage implements OnInit {
 
   candidateDetails: any[];
   candidateVenueJobsLists: CandidateVenueJob[] = [];
+  candidateVenueJobsListVENUE: CandidateVenueJob[] = [];
+  candidateVenueJobsListsASC: CandidateVenueJob[] = [];
+  candidateVenueJobsListsSDESC: CandidateVenueJob[] = [];
   allCandidates: Candidate[] = [];
   venues: Venue[];
   // candidateVenueJob: CandidateVenueJob;
@@ -29,9 +33,21 @@ export class CandidateListPage implements OnInit {
   public dataSet: [];
   limit = 10;
   page = 0;
+  pageVenue = 0;
+  pageASC = 0;
+  pageDESC = 0;
   data: any;
   totalPages = 0;
   filterText: number;
+
+  resetASC = false;
+  resetDESC = false;
+  resetAll = true;
+  resetVenue = false;
+
+  subAll: Subscription;
+  subASC: Subscription;
+  subDESC: Subscription;
 
   constructor(
     private router: Router,
@@ -71,7 +87,11 @@ export class CandidateListPage implements OnInit {
 
   //FOR ALL CANDIDATES
   populateAllCandidates(event?) {
-    this.apiService.getAllCandidatesVenueJob(this.page, this.limit).subscribe(
+    this.resetAll = true;
+    this.resetASC = false;
+    this.resetDESC = false;
+    this.resetVenue = false;
+    this.subAll = this.apiService.getAllCandidatesVenueJob(this.page, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
@@ -96,12 +116,9 @@ export class CandidateListPage implements OnInit {
 
     if (this.page === this.totalPages) {
       event.target.disabled = true;
+
     }
-
   }
-
-
-
 
   // VENUE 
   getVenueByActive() {
@@ -116,6 +133,10 @@ export class CandidateListPage implements OnInit {
   filterByVenue(event) {
     this.filterText = event.target.value;
     if (this.filterText == 0) {
+      this.resetAll = true;
+      this.resetASC = false;
+      this.resetDESC = false;
+      this.resetVenue = false;
       this.populateAllCandidates();
     } else {
       this.candidateVenueJobsLists = [];
@@ -125,13 +146,17 @@ export class CandidateListPage implements OnInit {
 
 
   populateCandidateByVenue(event?) {
+    this.resetAll = false;
+    this.resetASC = false;
+    this.resetDESC = false;
+    this.resetVenue = true;
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(this.filterText, this.page, this.limit).subscribe(
+    this.apiService.getCandidatesByVenueId(this.filterText, this.pageVenue, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
-        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
+        this.candidateVenueJobsListVENUE = [...this.candidateVenueJobsListVENUE, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
 
-        if (this.candidateVenueJobsLists.length === 0) {
+        if (this.candidateVenueJobsListVENUE.length === 0) {
           this.noCandidatesAvailable = true;
         } else {
           this.noCandidatesAvailable = false;
@@ -144,17 +169,17 @@ export class CandidateListPage implements OnInit {
 
   }
 
-  // loadData(event) {
-  //   setTimeout(() => {
-  //     this.page++;
-  //     this.populateCandidate(event);
-  //   }, 500);
+  loadDataByVenue(event) {
+    setTimeout(() => {
+      this.pageVenue++;
+      this.populateCandidateByVenue(event);
+    }, 500);
 
-  //   if (this.page === this.totalPages) {
-  //     event.target.disabled = true;
-  //   }
+    if (this.pageVenue === this.totalPages) {
+      event.target.disabled = true;
 
-  // }
+    }
+  }
 
   countCandidatesByVenue() {
     // tslint:disable-next-line: radix
@@ -163,11 +188,43 @@ export class CandidateListPage implements OnInit {
     });
   }
 
-  getCandidateByAsc() {
-    // tslint:disable-next-line: radix
-    this.apiService.getCandidateByASC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
-      this.candidateVenueJobsLists = data;
-    });
+  // getCandidateByAsc() {
+  //   // tslint:disable-next-line: radix
+  //   this.apiService.getCandidateByASC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
+  //     this.candidateVenueJobsLists = data;
+  //   });
+  // }
+
+  getAllCandidatesByAsc(event?){
+    this.resetASC = true;
+    this.resetDESC = false;
+    this.resetAll = false;
+    this.resetVenue = false;
+    this.subASC = this.apiService.getAllCandidateByASC(this.pageASC, this.limit).subscribe(
+      (data: CandidateVenueJobDtoResponseList) => {
+        this.candidateVenueJobsListsASC = this.candidateVenueJobsListsASC.concat(data.candidateVenueJobDtoList);
+        this.totalPages = data.totalPages;
+        if (event) {
+          event.target.complete();
+        } else {
+          this.resetASC = true;
+          this.resetDESC = false;
+          this.resetAll = false;
+          this.resetVenue = false;
+        }
+      });
+  }
+
+  loadDataASC(event) {
+    setTimeout(() => {
+      this.pageASC++;
+      this.getAllCandidatesByAsc(event);
+    }, 500);
+
+    if (this.pageASC === this.totalPages) {
+      event.target.disabled = true;
+
+    }
   }
 
   getCandidateByDesc() {
@@ -177,13 +234,50 @@ export class CandidateListPage implements OnInit {
     });
   }
 
+  getAllCandidatesByDesc(event?){
+    this.resetASC = false;
+    this.resetDESC = true;
+    this.resetAll = false;
+    this.resetVenue = false;
+    this.subDESC = this.apiService.getAllCandidateByDESC(this.pageDESC, this.limit).subscribe(
+      (data: CandidateVenueJobDtoResponseList) => {
+        this.candidateVenueJobsListsSDESC = this.candidateVenueJobsListsSDESC.concat(data.candidateVenueJobDtoList);
+        this.totalPages = data.totalPages;
+
+        if (event) {
+          event.target.complete();
+        } else {
+          this.resetASC = false;
+          this.resetDESC = true;
+          this.resetAll = false;
+          this.resetVenue = false;
+        }
+      });
+  }
+
+  loadDataDESC(event) {
+    setTimeout(() => {
+      this.pageDESC++;
+      this.getAllCandidatesByDesc(event);
+    }, 500);
+
+    if (this.pageDESC === this.totalPages) {
+      event.target.disabled = true;
+
+    }
+  }
+
   searchByLastName(lastName: any) {
     this.candidateNotFound = false;
     if (lastName === '') {
+      this.resetAll = true;
+      this.resetASC = false;
+      this.resetDESC = false;
+      this.resetVenue = false;
       this.populateAllCandidates();
     } else {
       this.apiService.getCandidateByLastName(lastName).subscribe(data => {
-        if (data.message === 'NO_CANDIDATE_AVAILABLE') {
+        if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
           this.candidateNotFound = true;
         } else {
           this.candidateVenueJobsLists = data;

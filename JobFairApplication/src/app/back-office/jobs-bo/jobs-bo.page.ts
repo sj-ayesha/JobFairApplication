@@ -52,6 +52,7 @@ export class JobsBoPage implements OnInit {
 
   doRefresh(event) {
     console.log('Begin async operation');
+    this.jobs = [];
     this.ngOnInit();
 
     setTimeout(() => {

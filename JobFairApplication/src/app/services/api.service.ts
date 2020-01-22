@@ -72,8 +72,18 @@ export class ApiService {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-desc/' + venueId);
   }
 
+  getAllCandidateByDESC(pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/all-candidates-desc?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+  }
+
   getCandidateByASC(venueId: number): Observable<CandidateVenueJob[]> {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-asc/' + venueId);
+  }
+
+  getAllCandidateByASC(pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/all-candidates-asc?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   getCandidateByLastName(lastName: string): Observable<CandidateVenueJob[] | any> {

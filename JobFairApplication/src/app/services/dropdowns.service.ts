@@ -11,6 +11,7 @@ export class DropdownsService {
   public titles: any[];
   public divisions: any[];
   public durations: any[];
+  public categories: any[];
 
   constructor() {
     this.genders = [
@@ -73,5 +74,13 @@ export class DropdownsService {
       '10 years',
       '> 10 years',
     ];
+    this.categories = [
+      'Software Engineer',
+      'Human Resource',
+      'Manager',
+      'Business Analyst',
+      'Quality Assurance',
+      'Architect'
+    ]
    }
 }
