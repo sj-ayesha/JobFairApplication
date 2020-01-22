@@ -53,10 +53,10 @@ export class CandidateAddProfilePage implements OnInit {
   arrayFile: any[];
 
   fileData: File = null; // File Upload
-  selectedFiles: FileList;
+  selectedFiles: File[] = [];
   myFiles:string [] = [];
   uploading: boolean;
-  attachments = [];
+  attachments: File[] = [];
 
 
   // tslint:disable-next-line: variable-name
@@ -289,9 +289,7 @@ export class CandidateAddProfilePage implements OnInit {
       jobPriority: window.localStorage.getItem('priority')
     }];
 
-    this.arrayFile = [{
-      fileName: this.formCandidateDetails.get('cvUpload').value
-    }];
+    this.arrayFile = [];
 
     const candidateDetails = {
       candidateId: null,
@@ -353,9 +351,8 @@ export class CandidateAddProfilePage implements OnInit {
       jobPriority: window.localStorage.getItem('priority')
     }];
 
-    this.arrayFile = [{
-      fileName: this.formCandidateDetails.get('cvUpload').value
-    }];
+
+    this.arrayFile = [];
 
     const candidateDetails = {
       candidateId: null,
@@ -381,7 +378,7 @@ export class CandidateAddProfilePage implements OnInit {
       candidateFileDtos: this.arrayFile
     };
 
-    console.log(candidateDetails);
+    console.log('submit', candidateDetails);
 
     if (this.formCandidateDetails.invalid) {
       this.unsuccessMsg();
@@ -391,14 +388,13 @@ export class CandidateAddProfilePage implements OnInit {
 
       setTimeout(() => {
         this.formCandidateDetails.reset();
-        // this.router.navigate(['home']);
         this.router.navigateByUrl('/home');
       }, 2000);
     }
   }
 
   selectFile(event) {
-    this.attachFile(event.target.files)
+    this.attachFile(event.target.files);
     event.target.value = null;
     this.uploading = true;
 
@@ -449,9 +445,7 @@ export class CandidateAddProfilePage implements OnInit {
       jobPriority: window.localStorage.getItem('priority')
     }];
 
-    this.arrayFile = [{
-      fileName: this.formCandidateDetails.get('cvUpload').value
-    }];
+    this.arrayFile = [];
 
     const candidateDetails = {
       candidateId: null,

@@ -24,13 +24,14 @@ export class CandidatesService {
       type: 'application/json'
     });
     formData.append('candidateDto', blob);
-    attachments.forEach(attachment => formData.append('file', attachment, attachment.name));
-    console.log(formData);
-    let httpOptions = {
-      headers: new HttpHeaders().set('Accept', 'application/json')
-    };
 
-    return this.apiService.uploadCV(formData, httpOptions);
+    attachments.forEach(attachment => {
+      formData.append('file', attachment);
+    });
+
+    console.log(formData);
+
+    return this.apiService.uploadCV(formData);
 
   }
 }
