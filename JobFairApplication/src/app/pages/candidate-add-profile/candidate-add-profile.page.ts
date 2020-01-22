@@ -50,12 +50,13 @@ export class CandidateAddProfilePage implements OnInit {
   arrayQualification: any[];
   arrayVenue: any[];
   arrayScreening: any[];
+  arrayFile: any[];
 
   fileData: File = null; // File Upload
-  selectedFiles: FileList;
+  selectedFiles: File[] = [];
   myFiles:string [] = [];
   uploading: boolean;
-  attachments = [];
+  attachments: File[] = [];
 
 
   // tslint:disable-next-line: variable-name
@@ -287,6 +288,9 @@ export class CandidateAddProfilePage implements OnInit {
       jobId: window.localStorage.getItem('jobId'),
       jobPriority: window.localStorage.getItem('priority')
     }];
+
+    this.arrayFile = [];
+
     const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
@@ -301,13 +305,13 @@ export class CandidateAddProfilePage implements OnInit {
       currentLevel: this.formCandidateDetails.get('currentLevel').value,
       jobType: this.formCandidateDetails.get('jobType').value,
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
-      fileName: this.formCandidateDetails.get('cvUpload').value,
       cvUpload: false,
       experienceDtos: this.arrayExperience,
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
       candidateVenueJobSaveDto: this.arrayVenue,
       candidateScreeningDtos: this.arrayScreening,
+      candidateFileDtos: this.arrayFile
     };
     console.log(candidateDetails);
 
@@ -345,6 +349,10 @@ export class CandidateAddProfilePage implements OnInit {
       jobId: window.localStorage.getItem('jobId'),
       jobPriority: window.localStorage.getItem('priority')
     }];
+
+
+    this.arrayFile = [];
+
     const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
@@ -359,16 +367,17 @@ export class CandidateAddProfilePage implements OnInit {
       currentLevel: this.formCandidateDetails.get('currentLevel').value,
       jobType: this.formCandidateDetails.get('jobType').value,
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
-      fileName: this.formCandidateDetails.get('cvUpload').value,
+      // fileName: this.formCandidateDetails.get('cvUpload').value,
       cvUpload: true,
       experienceDtos: this.arrayExperience,
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
       candidateVenueJobSaveDto: this.arrayVenue,
       candidateScreeningDtos: this.arrayScreening,
+      candidateFileDtos: this.arrayFile
     };
 
-    console.log(candidateDetails);
+    console.log('submit', candidateDetails);
 
     if (this.formCandidateDetails.invalid) {
       this.unsuccessMsg();
@@ -378,14 +387,13 @@ export class CandidateAddProfilePage implements OnInit {
 
       setTimeout(() => {
         this.formCandidateDetails.reset();
-        // this.router.navigate(['home']);
         this.router.navigateByUrl('/home');
       }, 2000);
     }
   }
 
   selectFile(event) {
-    this.attachFile(event.target.files)
+    this.attachFile(event.target.files);
     event.target.value = null;
     this.uploading = true;
 
@@ -435,6 +443,9 @@ export class CandidateAddProfilePage implements OnInit {
       jobId: window.localStorage.getItem('jobId'),
       jobPriority: window.localStorage.getItem('priority')
     }];
+
+    this.arrayFile = [];
+
     const candidateDetails = {
       firstName: this.formCandidateDetails.get('firstName').value,
       lastName: this.formCandidateDetails.get('lastName').value,
@@ -449,13 +460,14 @@ export class CandidateAddProfilePage implements OnInit {
       currentLevel: this.formCandidateDetails.get('currentLevel').value,
       jobType: this.formCandidateDetails.get('jobType').value,
       currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
-      fileName: this.formCandidateDetails.get('cvUpload').value,
+      // fileName: this.formCandidateDetails.get('cvUpload').value,
       cvUpload: true,
       experienceDtos: this.arrayExperience,
       qualificationDtos: this.arrayQualification,
       candidateSkillDtos: filteredCandidateSkills,
       candidateVenueJobSaveDto: this.arrayVenue,
       candidateScreeningDtos: this.arrayScreening,
+      candidateFileDtos: this.arrayFile
     };
 
     for (let i = 0; i < fileList.length; i++) {

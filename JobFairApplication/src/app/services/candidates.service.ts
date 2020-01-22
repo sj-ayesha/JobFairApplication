@@ -24,25 +24,14 @@ export class CandidatesService {
       type: 'application/json'
     });
     formData.append('candidateDto', blob);
-    attachments.forEach(attachment => formData.append('file', attachment, attachment.name));
+
+    attachments.forEach(attachment => {
+      formData.append('file', attachment);
+    });
+
     console.log(formData);
-    let httpOptions = {
-      headers: new HttpHeaders().set('Accept', 'application/json')
-    };
 
-    return this.apiService.uploadCV(formData, httpOptions)/* .subscribe(data => {
-      console.log('uploading..');
-      if (data) {
-        console.log('uploaded');
-      }
-    }) */;
-
-    // this.apiService.uploadCV(formData, httpOptions).subscribe(data => {
-    //   console.log('uploading..');
-    //   if (data) {
-    //     console.log('uploaded');
-    //   }
-    // });
+    return this.apiService.uploadCV(formData);
 
   }
 }
