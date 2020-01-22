@@ -5,14 +5,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-list-header color="light">Vertical Bar Chart</ion-list-header>
-  <ion-card class="welcome-card">
-    <ion-card-header>
-      <ion-card-subtitle>Number of Viewers per season for</ion-card-subtitle>
-      <ion-card-title>Game of Thrones</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <canvas #barChart></canvas>
-    </ion-card-content>
-  </ion-card>
+  <ion-row>
+    <ion-col col-md-6 size="6" size-sm>
+      <!-- <ion-list-header color="light">Vertical Bar Chart</ion-list-header> -->
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Number of Candidates per Venue</ion-card-subtitle>
+          <ion-card-title>Candidates | Venue</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barChart></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-md-6 size="6" size-sm>
+      <!-- <ion-list-header color="light">Vertical Bar Chart</ion-list-header> -->
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Number of Candidates per Venue</ion-card-subtitle>
+          <ion-card-title>Candidates | Venue</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barChart></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 </ion-content>

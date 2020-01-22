@@ -43,7 +43,9 @@ export class CandidateListPage implements OnInit {
   pageLEVEL = 0;
 
   data: any;
+
   totalPages = 0;
+  totalCandidates = 0;
   filterText: number;
   filterTextScreening: string;
   filterTextLevel: string;
@@ -110,12 +112,14 @@ export class CandidateListPage implements OnInit {
     if (!isLoadevent) {
       this.page = 0;
       this.candidateVenueJobsLists = [];
+      this.totalCandidates = 0;
     }
 
     this.subAll = this.apiService.getAllCandidatesVenueJob(this.page, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
+        this.totalCandidates = this.totalCandidates + data.totalElements;
 
         if (this.candidateVenueJobsLists.length === 0) {
           this.noCandidatesAvailable = true;
@@ -137,7 +141,6 @@ export class CandidateListPage implements OnInit {
 
     if (this.page === this.totalPages) {
       event.target.disabled = true;
-
     }
   }
 
@@ -185,12 +188,14 @@ export class CandidateListPage implements OnInit {
     if (!isLoadevent) {
       this.pageVenue = 0;
       this.candidateVenueJobsListsVENUE = [];
+      this.totalCandidates = 0;
     }
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(this.filterText, this.pageVenue, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsListsVENUE = [...this.candidateVenueJobsListsVENUE, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
+        this.totalCandidates = this.totalCandidates + data.totalElements;
 
         if (this.totalPages === 0) {
           this.noCandidatesAvailable = true;
@@ -213,7 +218,6 @@ export class CandidateListPage implements OnInit {
 
     if (this.pageVenue === this.totalPages) {
       event.target.disabled = true;
-
     }
   }
 
@@ -251,12 +255,14 @@ export class CandidateListPage implements OnInit {
     if (!isLoadevent) {
       this.pageSCREEN = 0;
       this.candidateVenueJobsListsSCREEN = [];
+      this.totalCandidates = 0;
     }
     // tslint:disable-next-line: radix
     this.apiService.getAllCandidatesByScreeningStatus(this.filterTextScreening, this.pageSCREEN, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsListsSCREEN = [...this.candidateVenueJobsListsSCREEN, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
+        this.totalCandidates = this.totalCandidates + data.totalElements;
 
         if (this.totalPages === 0) {
           this.noCandidatesAvailable = true;
@@ -279,7 +285,6 @@ export class CandidateListPage implements OnInit {
 
     if (this.pageSCREEN === this.totalPages) {
       event.target.disabled = true;
-
     }
   }
 
@@ -317,12 +322,14 @@ export class CandidateListPage implements OnInit {
     if (!isLoadevent) {
       this.pageLEVEL = 0;
       this.candidateVenueJobsListsLEVEL = [];
+      this.totalCandidates = 0;
     }
     // tslint:disable-next-line: radix
     this.apiService.getAllCandidatesByLevel(this.filterTextLevel, this.pageLEVEL, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsListsLEVEL = [...this.candidateVenueJobsListsLEVEL, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
+        this.totalCandidates = this.totalCandidates + data.totalElements;
 
         if (this.totalPages === 0) {
           this.noCandidatesAvailable = true;
@@ -377,12 +384,15 @@ export class CandidateListPage implements OnInit {
     if (!isLoadevent) {
       this.pageASC = 0;
       this.candidateVenueJobsListsASC = [];
+      this.totalCandidates = 0;
     }
 
     this.subASC = this.apiService.getAllCandidateByASC(this.pageASC, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsListsASC = this.candidateVenueJobsListsASC.concat(data.candidateVenueJobDtoList);
         this.totalPages = data.totalPages;
+        this.totalCandidates = this.totalCandidates + data.totalElements;
+
         if (event) {
           event.target.complete();
         } else {
@@ -423,12 +433,15 @@ export class CandidateListPage implements OnInit {
     if (!isLoadevent) {
       this.pageDESC = 0;
       this.candidateVenueJobsListsSDESC = [];
+      this.totalCandidates = 0;
     }
 
     this.subDESC = this.apiService.getAllCandidateByDESC(this.pageDESC, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsListsSDESC = this.candidateVenueJobsListsSDESC.concat(data.candidateVenueJobDtoList);
         this.totalPages = data.totalPages;
+        this.totalCandidates = this.totalCandidates + data.totalElements;
+
         console.log(this.candidateVenueJobsListsSDESC);
         if (event) {
           event.target.complete();
