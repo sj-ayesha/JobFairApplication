@@ -7,3 +7,10 @@ export class Job {
     minimumExperience: string;
     qualificationNeeded: string;
 }
+
+
+export class JobResponseList {
+    jobDtoList: Job[];
+    totalElements: number;
+    totalPages: number;
+}

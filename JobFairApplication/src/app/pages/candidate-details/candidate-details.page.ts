@@ -44,6 +44,8 @@ export class CandidateDetailsPage implements OnInit {
   showCV = false;
   baseUrl = this.apiService.baseUrl;
 
+  public screeningStatus: string;
+
   // tslint:disable-next-line: variable-name
   error_messages = {
     interviewerName: [
@@ -102,6 +104,13 @@ export class CandidateDetailsPage implements OnInit {
   getCandidateById(candidateId: number) {
     this.apiService.getCandidateById(candidateId).subscribe(data => {
       this.candidate = data;
+
+      for (let i = 0; i < this.candidate.candidateScreeningDtos.length; i++){
+        if (this.candidate.candidateScreeningDtos[i].screeningStatus === 'proceed-to-next-interview'){
+          this.candidate.candidateScreeningDtos[i].screeningStatus = 'Proceed to next interview';
+        }
+      }
+
       console.log(this.candidate)
       if (this.candidate.cvUpload === false) {
         this.showCV = false;

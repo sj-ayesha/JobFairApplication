@@ -10,7 +10,7 @@
     <form [formGroup]="formAddJob">
       <ion-row>
         <ion-col col-md-6 size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Category</ion-label>
             <ion-select formControlName="category" interface="popover" cancelText="Cancel" okText="OK"placeholder="Select a category">
               <ion-select-option value="software-engineer">Software Engineer</ion-select-option>
@@ -19,6 +19,18 @@
               <ion-select-option value="quality-assurance">Quality Assurance</ion-select-option>
             </ion-select>
           </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Category</ion-label>
+            <ion-select formControlName="category" interface="popover" placeholder="Select a category" >
+              <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX" [selected]="categoryX === category">{{categoryX}}</ion-select-option>
+              <!-- <ion-select-option value="{{category}}" selected>{{category}}</ion-select-option>
+              <ion-select-option value="human-resource">Human Resource</ion-select-option>
+              <ion-select-option value="manager">Manager</ion-select-option>
+              <ion-select-option value="quality-assurance">Quality Assurance</ion-select-option> -->
+            </ion-select>
+          </ion-item>
+
           <div class="error-messages">
             <ng-container *ngFor="let error of error_messages.category">
               <div class="error-message"
@@ -32,9 +44,14 @@
 
       <ion-row>
         <ion-col col-md-6 size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Job Title</ion-label>
             <ion-input formControlName="title" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Job Title</ion-label>
+            <ion-input formControlName="title" type="text" value="{{title}}"></ion-input>
           </ion-item>
           <div class="error-messages">
             <ng-container *ngFor="let error of error_messages.title">
@@ -49,9 +66,14 @@
 
       <ion-row>
         <ion-col col-md-6 size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Job Description</ion-label>
             <ion-textarea formControlName="description" type="text"></ion-textarea>
+          </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Job Description</ion-label>
+            <ion-textarea rows="5" formControlName="description" type="text" value="{{description}}"></ion-textarea>
           </ion-item>
           <div class="error-messages">
             <ng-container *ngFor="let error of error_messages.description">
@@ -66,10 +88,16 @@
 
       <ion-row>
         <ion-col col-md-6 size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Qualification required</ion-label>
             <ion-input formControlName="qualificationNeeded" type="text"></ion-input>
           </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Qualification required</ion-label>
+            <ion-input formControlName="qualificationNeeded" type="text" value="{{qualificationNeeded}}"></ion-input>
+          </ion-item>
+
           <div class="error-messages">
             <ng-container *ngFor="let error of error_messages.qualificationNeeded">
               <div class="error-message"
@@ -83,10 +111,16 @@
 
       <ion-row>
         <ion-col col-md-6 size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Years of Experience</ion-label>
             <ion-input formControlName="minimumExperience" type="text"></ion-input>
           </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Years of Experience</ion-label>
+            <ion-input formControlName="minimumExperience" type="text" value="{{minimumExperience}}"></ion-input>
+          </ion-item>
+
           <div class="error-messages">
             <ng-container *ngFor="let error of error_messages.minimumExperience">
               <div class="error-message"
@@ -100,7 +134,7 @@
 
       <ion-row>
         <ion-col col-md-6 size="12" size-sm>
-          <ion-item>
+          <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Level</ion-label>
             <ion-select formControlName="level" interface="popover" cancelText="Cancel" okText="OK"placeholder="Select Level">
               <ion-select-option value="Fresher">Fresher</ion-select-option>
@@ -108,6 +142,16 @@
               <ion-select-option value="Senior">Senior</ion-select-option>
             </ion-select>
           </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Level</ion-label>
+            <ion-select formControlName="level" interface="popover" cancelText="Cancel" okText="OK"placeholder="Select Level">
+              <ion-select-option value="Fresher">Fresher</ion-select-option>
+              <ion-select-option value="Junior">Junior</ion-select-option>
+              <ion-select-option value="Senior">Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+
           <div class="error-messages">
             <ng-container *ngFor="let error of error_messages.level">
               <div class="error-message"

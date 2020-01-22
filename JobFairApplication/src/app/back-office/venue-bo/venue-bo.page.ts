@@ -70,7 +70,8 @@ export class VenueBoPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.ionViewWillEnter();
+    this.venues = [];
+    this.ngOnInit();
 
     setTimeout(() => {
       event.target.complete();

@@ -94,10 +94,10 @@
               </div>
             </ion-col>
             <ion-col size="1" text-right>
-              <div class="btn-checkbox" (click)="openEditModal()">
+              <div class="Edit" data-th="Edit" (click)="edit(job.jobId)">
                 <!-- <ion-checkbox color="danger" class="btn-checkbox__item" #checkboxes
                   (ionChange)="addPriority($event,job.jobId)"></ion-checkbox> -->
-                  <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
+                  <ion-icon class="edit-btn" ios="ios-create" md="md-create" ></ion-icon>
               </div>
             </ion-col>
           </ion-row>
@@ -111,6 +111,12 @@
           <img class="not-found" src="../../../assets/img/Not Available/job-not-found.png">
         </ion-col>
       </ion-row>
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="crescent"
+          loadingText="Loading more candidates...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </ion-grid>
   </div>
 </ion-content>

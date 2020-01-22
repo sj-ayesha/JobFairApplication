@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ElementRef, ViewChild, ViewChildren } from '@angular/core';
 import { IonInfiniteScroll, ToastController, ModalController } from '@ionic/angular';
-import { Job } from 'src/app/model/job';
+import { Job, JobResponseList } from 'src/app/model/job';
 import { VenueJob, VenueJobResponseList } from 'src/app/model/venueJob';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
@@ -16,7 +16,7 @@ export class JobsBoPage implements OnInit {
   @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
 
-  jobs: Job[];
+  jobs: Job[] = [];
   public venueJobs: VenueJob[] = [];
   public searchTerm: string = '';
   public items: any;
@@ -27,10 +27,11 @@ export class JobsBoPage implements OnInit {
   priority = [];
   filterText: string;
   refreshCheck = false;
-  limit = 5;
+  limit = 20;
   page = 0;
   data: any;
   totalPages = 0;
+  editJobs: any[] = [];
   // allJobs = Job[];
 
   constructor(
@@ -51,6 +52,7 @@ export class JobsBoPage implements OnInit {
 
   doRefresh(event) {
     console.log('Begin async operation');
+    this.jobs = [];
     this.ngOnInit();
 
     setTimeout(() => {
@@ -71,17 +73,7 @@ export class JobsBoPage implements OnInit {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
-  loadData(event) {
-    setTimeout(() => {
-      this.page++;
-      this.getAllJobsByVenueId(event);
-    }, 500);
 
-    if (this.page === this.totalPages) {
-      event.target.disabled = true;
-    }
-
-  }
 
   styleAccordion() {
     const coll = document.getElementsByClassName('collapsible');
@@ -138,15 +130,35 @@ export class JobsBoPage implements OnInit {
     });
   }
 
-  getAllJobs() {
-    this.apiService.getAllJobs().subscribe(data => {
-      this.jobs = data;
+  getAllJobs(event?) {
+    this.apiService.getAllJobs(this.page, this.limit).subscribe(
+      (data: JobResponseList) => {
+
+      this.jobs = [...this.jobs, ...data.jobDtoList];
+      console.log(this.jobs);
       setTimeout(() => {
         this.styleAccordion();
       }, 0);
     });
+
+    if (event) {
+      event.target.complete();
+    }
   }
 
+  loadData(event) {
+    setTimeout(() => {
+      this.page++;
+      this.getAllJobs(event);
+    }, 500);
+    setTimeout(() => {
+      this.styleAccordion();
+    }, 0);
+    if (this.page === this.totalPages) {
+      event.target.disabled = true;
+    }
+
+  }
 
   getJobByLevel() {
     // tslint:disable-next-line: radix
@@ -223,6 +235,24 @@ export class JobsBoPage implements OnInit {
     this.modalController.create({component: JobsPopupPage}).then((modalElement) => {
       modalElement.present();
     });
+  }
+
+  edit(Id) {
+    this.openEditModal();
+    this.editJobs = [];
+    for (let i = 0; i < this.jobs.length; i++) {
+      if ( this.jobs[i].jobId === Id) {
+          this.editJobs.push(this.jobs[i].jobId);
+          this.editJobs.push(this.jobs[i].title);
+          this.editJobs.push(this.jobs[i].level);
+          this.editJobs.push(this.jobs[i].category);
+          this.editJobs.push(this.jobs[i].description);
+          this.editJobs.push(this.jobs[i].minimumExperience);
+          this.editJobs.push(this.jobs[i].qualificationNeeded);
+      }
+    }
+    const LSeditJobs = JSON.stringify(this.editJobs);
+    localStorage.setItem('editJobs', LSeditJobs);
   }
 
 }

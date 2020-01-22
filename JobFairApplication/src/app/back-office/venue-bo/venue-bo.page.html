@@ -17,7 +17,6 @@
     </div>
     <table class="rwd-table">
       <tr>
-        <th>Id</th>
         <th>Venue</th>
         <th>Venue Display Name</th>
         <th>Address</th>
@@ -27,7 +26,6 @@
         <th>Edit</th>
       </tr>
       <tr *ngFor="let venue of venues">
-        <td data-th="Id">{{venue.venueId}}</td>
         <td data-th="Venue">{{venue.venueName}}</td>
         <td data-th="Venue">{{venue.venueName}} | {{venue.startDate}}</td>
         <td data-th="Address">{{venue.address}}</td>

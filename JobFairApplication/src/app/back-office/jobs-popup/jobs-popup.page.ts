@@ -3,6 +3,9 @@ import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { CategoryService } from 'src/app/services/category.service';
+import { ThrowStmt } from '@angular/compiler';
+import { DropdownsService } from 'src/app/services/dropdowns.service';
 
 @Component({
   selector: 'app-jobs-popup',
@@ -14,32 +17,36 @@ export class JobsPopupPage implements OnInit {
   edit: boolean;
   formAddJob: FormGroup;
   submitted = false;
+  categories: Array<string>;
 
+  jobId: string;
   title: string;
   level: string;
   category: string;
   description: string;
   minimumExperience: string;
   qualificationNeeded: string;
+  apiJobId: number;
+  jobs: string;
 
   error_messages = {
     title: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Title is required' },
     ],
     level: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Level is required' },
     ],
     category: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Job Category is required' },
     ],
     description: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Job Description is required' },
     ],
     minimumExperience: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Minimum Experience is required' },
     ],
     qualificationNeeded: [
-      { type: 'required', message: '⚠ Skill is required' },
+      { type: 'required', message: '⚠ Qualification is required' },
     ],
   };
 
@@ -48,21 +55,26 @@ export class JobsPopupPage implements OnInit {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private dropdowns: DropdownsService,
   ) { }
 
   ngOnInit() {
+    this.categories = this.dropdowns.categories;
+    console.log(this.categories)
+
     this.addEditPopupService.cast.subscribe(edit => this.edit = edit);
-    console.log('Ha', this.edit);
+    console.log('Ha', this.title);
 
     if (this.edit === true) {
       this.formAddJob = this.formBuilder.group({
-        skillName: new FormControl('',
-          Validators.compose([
-            Validators.maxLength(30),
-          ])
-        )
-      });
+      title: new FormControl(''),
+      level: new FormControl(''),
+      category: new FormControl(''),
+      description: new FormControl(''),
+      minimumExperience: new FormControl(''),
+      qualificationNeeded: new FormControl('')
+    });
     } else {
       this.formAddJob = this.formBuilder.group({
         title: new FormControl('',
@@ -97,6 +109,7 @@ export class JobsPopupPage implements OnInit {
         ),
       });
     }
+
   }
 
   closeModal() {
@@ -115,6 +128,45 @@ export class JobsPopupPage implements OnInit {
     };
     console.log(addJob);
     this.apiService.saveJob(addJob).subscribe(
+      data => {
+        // this.router.navigate(['home']);
+      },
+      error => {
+        // alert("Data not saved!");
+      }
+    );
+  }
+
+  ionViewWillEnter() {
+    this.jobs = JSON.parse(localStorage.getItem('editJobs'));
+    if (this.edit === true) {
+      this.jobId = this.jobs[0];
+      this.title = this.jobs[1];
+      this.level = this.jobs[2];
+      this.category = this.jobs[3];
+      this.description = this.jobs[4];
+      this.minimumExperience = this.jobs[5];
+      this.qualificationNeeded = this.jobs[6];
+    }
+  }
+
+  ionViewWillLeave(){
+    localStorage.removeItem('editJobs');
+  }
+
+  editJob() {
+    const editJob = {
+      jobId: JSON.parse(this.jobId),
+      title: this.formAddJob.get('title').value,
+      level: this.formAddJob.get('level').value,
+      category: this.formAddJob.get('category').value,
+      description: this.formAddJob.get('description').value,
+      minimumExperience: this.formAddJob.get('minimumExperience').value,
+      qualificationNeeded: this.formAddJob.get('qualificationNeeded').value
+    };
+    this.apiJobId = JSON.parse(this.jobId);
+
+    this.apiService.editJob(editJob).subscribe(
       data => {
         // this.router.navigate(['home']);
       },
@@ -154,6 +206,10 @@ export class JobsPopupPage implements OnInit {
       this.unsuccessMsg();
     } else {
       if (this.edit === true) {
+        this.editJob();
+        this.successMsg();
+        this.formAddJob.reset();
+        this.modalController.dismiss();
       } else {
         this.addJob();
         this.successMsg();
@@ -162,5 +218,6 @@ export class JobsPopupPage implements OnInit {
       }
     }
   }
+
 
 }

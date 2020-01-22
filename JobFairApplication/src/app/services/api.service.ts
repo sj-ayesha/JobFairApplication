@@ -52,7 +52,7 @@ export class ApiService {
 
   getCandidatesByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
     return this.http.get<CandidateVenueJobDtoResponseList[] | any>
-    (this.baseUrl + 'candidate-venue-job/candidates/' + venueId + '/' + pageNumber + '/' + pageSize);
+    (this.baseUrl + 'candidate-venue-job/candidates-by-venue/' + venueId + '?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   getAllCandidatesVenueJob(pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
@@ -72,12 +72,32 @@ export class ApiService {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-desc/' + venueId);
   }
 
+  getAllCandidateByDESC(pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/all-candidates-desc?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+  }
+
   getCandidateByASC(venueId: number): Observable<CandidateVenueJob[]> {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates-asc/' + venueId);
   }
 
+  getAllCandidateByASC(pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/all-candidates-asc?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+  }
+
   getCandidateByLastName(lastName: string): Observable<CandidateVenueJob[] | any> {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/lastname/' + lastName);
+  }
+
+  getAllCandidatesByScreeningStatus(screeningStatus: string, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/candidates-screening-status/' + screeningStatus + '?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+  }
+
+  getAllCandidatesByLevel(level: string, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    (this.baseUrl + 'candidate-venue-job/candidates-level/' + level + '?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   // candidate skills
@@ -96,12 +116,16 @@ export class ApiService {
     return this.http.get<Job[]>(this.baseUrl + 'job/' + jobId);
   }
 
-  getAllJobs(): Observable<Job[]> {
-    return this.http.get<Job[]>(this.baseUrl + 'job/all');
+  getAllJobs(pageNumber: number, pageSize: number): Observable<Job[] | any> {
+    return this.http.get<Job[] | any>(this.baseUrl + 'job/all?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   saveJob(job: Job): Observable<Job> {
     return this.http.post<Job>(this.baseUrl + 'job', job);
+  }
+
+  editJob(job: Job): Observable<Job> {
+    return this.http.put<Job>(this.baseUrl + 'job/' + job.jobId, job);
   }
   // venue-job
 
@@ -125,7 +149,7 @@ export class ApiService {
   // venue
 
   getAllVenue(pageNumber: number, pageSize: number): Observable<Venue[] | any> {
-    return this.http.get<Venue[] | any>(this.baseUrl + 'venue/all' + '/' + pageNumber + '/' + pageSize);
+    return this.http.get<Venue[] | any>(this.baseUrl + 'venue/all?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   getVenueByActive(active: boolean): Observable<Venue[]> {

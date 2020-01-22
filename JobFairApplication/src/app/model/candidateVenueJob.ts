@@ -4,7 +4,6 @@ import { Job } from './job';
 import { NumberSymbol } from '@angular/common';
 
 export class CandidateVenueJob {
-    message: string;
     candidateVenueJob: number;
     venueJob: VenueJob;
     candidate: {
