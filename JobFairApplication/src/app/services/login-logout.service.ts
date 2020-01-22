@@ -8,17 +8,12 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 export class LoginLogoutService {
 
-  isLoggedIn: string;
+  isLoggedIn: 'true';
+  
   private logged = new BehaviorSubject<string>(this.isLoggedIn);
   private storage = new BehaviorSubject<boolean>(localStorage.getItem('dashboard') && !!localStorage.getItem('dashboard').length);
   // cast = this.storage.asObservable();
   cast = this.logged.asObservable();
-
-
-
-  private storageSub = new Subject<boolean>();
-
-
 
   @Output() sessionStateEmitter = new EventEmitter<boolean>();
   constructor(
@@ -29,6 +24,7 @@ export class LoginLogoutService {
   loginUser() {
     this.sessionStateEmitter.emit(true);
     this.router.navigate(['/dashboard']);
+    localStorage.setItem('dashboard', 'true');
     /* if (this.isLoggedIn = true) {
       this.router.navigate(['/venue']);
     }
@@ -38,6 +34,7 @@ export class LoginLogoutService {
   }
   logoutUser() {
     this.sessionStateEmitter.emit(false);
+    localStorage.setItem('dashboard', 'false');
     this.router.navigate(['/venue']);
   }
 
@@ -56,28 +53,4 @@ export class LoginLogoutService {
     return this.storage.asObservable();
   }
 
-
-
-
-
-
-
-
-
-
-
-
-  watchStorage(): Observable<any> {
-    return this.storageSub.asObservable();
-  }
-
-  setItem(key: string, data: any) {
-    localStorage.setItem(key, data);
-    this.storageSub.next(true);
-  }
-
-  removeItem(key) {
-    localStorage.removeItem(key);
-    this.storageSub.next(false);
-  }
 }

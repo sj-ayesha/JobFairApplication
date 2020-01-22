@@ -41,13 +41,7 @@ export class AppComponent implements OnInit {
     //     console.log('false', this.loggedIn);
     //   }
     // });
-
     this.loginLogoutService.cast.subscribe(data => this.loggedIn = data);
-    console.log(this.loggedIn);
-  }
-
-  ionViewWillLeave(){
-    console.log('left');
   }
 
   initializeApp() {

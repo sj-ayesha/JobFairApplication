@@ -1,18 +1,62 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <div class="router-links">
-        <!-- <img src='../../../assets/img/Logo.png' routerLink="/home"> -->
-        <img src='../../../assets/img/recruitix_logo.png' (click)="navigateToHome()">
-        <!-- <img class="dissableRediretion" src='../../../assets/img/ELCA.png' (click)="navigateToHome()"> -->
-        <div class="router-links--right">
-          <!-- <a (click)="navigateToDashboard()">Dashboard</a> -->
-          <a class="venue-name" (click)="navigateToVenue()">Venue: {{venue}} </a>
-          <a *ngIf="!loggedIn" routerLink="/login">Login</a>
-          <a *ngIf="loggedIn" (click)="logout()">Logout</a>
-        </div>
-      </div>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ng-container *ngIf="!loggedIn">
+  <ion-app>
+  <ion-header >
+    <ion-toolbar>
+      <ion-title>
+        <div class="router-links">
+          <!-- <img src='../../../assets/img/Logo.png' routerLink="/home"> -->
+          <img src='../../../assets/img/recruitix_logo.png' (click)="navigateToHome()">
+          <!-- <img class="dissableRediretion" src='../../../assets/img/ELCA.png' (click)="navigateToHome()"> -->
+          <div class="router-links--right">
+            <!-- <a (click)="navigateToDashboard()">Dashboard</a> -->
+            <a class="venue-name" (click)="navigateToVenue()">Venue: {{venue}} </a>
+            <a *ngIf="!loggedIn" routerLink="/login">Login</a>
+            <a *ngIf="loggedIn" (click)="logout()">Logout</a>
 
+          </div>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+  <div class="footer-container">
+    <app-footer></app-footer>
+  </div>
+</ion-app>
+  </ng-container>
+
+
+
+  <ion-split-pane *ngIf="loggedIn" contentId="menu-content">
+    <ion-menu contentId="menu-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button autoHide='false'></ion-menu-button>
+          </ion-buttons>
+          <div class="header-section">
+            <img class="menu-logo" src='../../../assets/img/recruitix_logo.png' width="175px" (click)="navigateToHome()">
+            <a *ngIf="!loggedIn" routerLink="/login">Login</a>
+            <a *ngIf="loggedIn" (click)="logout()">Logout</a>
+          </div>
+  
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list no-padding>
+          <div class="side-nav">
+            <a routerLink="/dashboard">Dashboard</a>
+            <a routerLink="/venue-bo">Venue</a>
+            <a routerLink="jobs-bo">Job</a>
+            <a routerLink="skills-bo">Skills</a>
+            <a routerLink="/candidate-list">Candidate</a>
+            <a routerLink="/venue-job">Venue - Job</a>
+          </div>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+  
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
+  </ion-split-pane>

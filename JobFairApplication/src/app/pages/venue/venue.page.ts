@@ -42,7 +42,6 @@ export class VenuePage implements OnInit {
   ngOnInit() {
     this.formVenue.reset();
     this.getVenueByActive();
-    this.changeVenueService.cast.subscribe(data => this.oldVenue = data);
   }
 
 

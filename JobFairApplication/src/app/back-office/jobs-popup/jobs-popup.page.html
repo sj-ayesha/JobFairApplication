@@ -23,7 +23,7 @@
           <ion-item *ngIf="edit">
             <ion-label position="floating" color="medium">*Category</ion-label>
             <ion-select formControlName="category" interface="popover" placeholder="Select a category" >
-              <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX" [selected]="categoryX === category">{{categoryX}}</ion-select-option>
+              <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX">{{categoryX}}</ion-select-option>
               <!-- <ion-select-option value="{{category}}" selected>{{category}}</ion-select-option>
               <ion-select-option value="human-resource">Human Resource</ion-select-option>
               <ion-select-option value="manager">Manager</ion-select-option>
