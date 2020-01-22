@@ -154,8 +154,8 @@
                         <div class="separation"></div>
                         <div class="download-section">
                           <p><b>Click to download {{ candidate?.firstName}} CV:</b></p>
-                          <div class="file-download" *ngFor="let candidateFile of candidateFiles">
-                            <ion-button class="btn-download ion-text-wrap ion-text-left">
+                          <div class="file-download" >
+                            <ion-button class="btn-download ion-text-wrap ion-text-left" *ngFor="let candidateFile of candidateFiles">
                               <a href='{{baseUrl}}candidate-file/{{candidateFile.fileName}}'>{{candidateFile.fileName}}</a>
                             </ion-button>
                           </div>

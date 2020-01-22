@@ -472,14 +472,18 @@ export class CandidateAddProfilePage implements OnInit {
       candidateFileDtos: this.arrayFile
     };
 
+    const input = document.getElementById('file');
+    const output = document.getElementById('fileList');
+
     for (let i = 0; i < fileList.length; i++) {
-      let file = fileList.item(i);
+      const file = fileList.item(i);
+      output.innerHTML += '<li>' + file.name + '</li>';
       this.attachments.push(file);
     }
 
     this.candidateService.uploadCVs(candidateDetails, this.attachments).toPromise().then(
       (res) => {
-        console.log('res', res)
+        console.log('res', res);
       }
     )
     .catch(err => console.log('err', err))
