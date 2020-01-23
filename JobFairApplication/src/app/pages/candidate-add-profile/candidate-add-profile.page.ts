@@ -19,7 +19,6 @@ import { Candidate } from 'src/app/model/candidate';
 export class CandidateAddProfilePage implements OnInit {
 
   formCandidateDetails: FormGroup;
-  formCandidateUploadCV: FormGroup;
 
   photos: any[];
   genders: Array<string>;
@@ -93,6 +92,9 @@ export class CandidateAddProfilePage implements OnInit {
     division: [{ type: 'required', message: '⚠ Division is required.' }],
     availabilityDate: [
       { type: 'required', message: '⚠ Availability Date is required.' }
+    ],
+    cvUpload: [
+      { type: 'required', message: '⚠ A file upload is required.' }
     ],
     jobType: [{ type: 'required', message: '⚠ Job Type is required.' }],
     currentLevel: [
@@ -190,35 +192,7 @@ export class CandidateAddProfilePage implements OnInit {
       companyName: new FormControl(),
       duration: new FormControl(),
       skillId: new FormControl(),
-      cvUpload: new FormControl()
-    });
-
-    this.formCandidateUploadCV = this.formBuilder.group({
-      firstNameCV: new FormControl(
-        '',
-        Validators.compose([
-          Validators.maxLength(30),
-          Validators.pattern('[a-zA-Z ]*'),
-          Validators.required
-        ])
-      ),
-      lastNameCV: new FormControl(
-        '',
-        Validators.compose([
-          Validators.maxLength(30),
-          Validators.pattern('[a-zA-Z ]*'),
-          Validators.required
-        ])
-      ),
-      emailCV: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-        ])
-      ),
-      availabilityDateCV: new FormControl('', Validators.required),
-      jobTypeCV: new FormControl('', Validators.required),
+      cvUpload: new FormControl(Validators.required)
     });
   }
 
@@ -236,7 +210,6 @@ export class CandidateAddProfilePage implements OnInit {
     this.minutes = this.today.getMinutes();
     this.seconds = this.today.getSeconds();
 
-    // this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
     this.date = this.year + '-' + this.month + '-' + this.day;
 
     this.populateSkills();
@@ -399,26 +372,9 @@ export class CandidateAddProfilePage implements OnInit {
     event.target.value = null;
     this.uploading = true;
 
-    // if (event.target.files.length > 0) {
-    //   this.fileData = event.target.files[0];
-    //   // this.formCandidateDetails.get('cvUpload').setValue(file);
-    // }
-    // for (var i = 0; i < event.target.files.length; i++) { 
-    //   this.myFiles.push(event.target.files[i]);
-    // }
-    // this.fileData =  event.target.files.item(0);
-
-    // if (this.fileData.type.match('image.*|application.*')) {
-    //   const size = event.target.files[0].size;
-    //   if (size > 5266467) {
-    //     alert('size must not exceeds 5 MB');
-    //     this.formCandidateDetails.get('cvUpload').setValue('');
-    //   } else {
-    //     this.selectedFiles = event.target.files;
-    //   }
-    // } else {
-    //   alert('invalid format!');
-    // }
+    if (event.target.files.length > 0) {
+      this.fileData = event.target.files[0];
+    }
   }
 
   attachFile(fileList: FileList) {
@@ -472,13 +428,23 @@ export class CandidateAddProfilePage implements OnInit {
       candidateFileDtos: this.arrayFile
     };
 
-    const input = document.getElementById('file');
     const output = document.getElementById('fileList');
 
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList.item(i);
-      output.innerHTML += '<li>' + file.name + '</li>';
-      this.attachments.push(file);
+
+      if (file.type.match('image.*|application.*')) {
+        const size = fileList.item(i).size;
+        if (size > 5266467) {
+          alert('size must not exceeds 5 MB');
+        } else {
+          output.innerHTML += '<li style="list-style: none;"><ion-icon ios="ios-document" md="md-document"></ion-icon>'
+          + file.name + '</li>';
+          this.attachments.push(file);
+        }
+      } else {
+        alert('invalid format!');
+      }
     }
 
     this.candidateService.uploadCVs(candidateDetails, this.attachments).toPromise().then(
@@ -486,7 +452,7 @@ export class CandidateAddProfilePage implements OnInit {
         console.log('res', res);
       }
     )
-    .catch(err => console.log('err', err))
+    .catch(err => console.log('err', err));
   }
 
   ionViewWillLoad() { }

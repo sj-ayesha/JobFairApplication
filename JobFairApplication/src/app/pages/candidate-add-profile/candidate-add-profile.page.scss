@@ -58,5 +58,11 @@ ion-datetime{
 }
 
 input[type='file'] {
+    max-width: 125px;
     color: transparent;
   }
+
+
+.fileUploadedList {
+    list-style: none;
+}
