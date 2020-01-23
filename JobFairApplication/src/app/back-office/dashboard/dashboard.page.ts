@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { Candidate, CandidateResponseList } from 'src/app/model/candidate';
+import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
+import { CandidateVenueJobDtoResponseList, CandidateVenueJob } from 'src/app/model/candidateVenueJob';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,9 +23,17 @@ export class DashboardPage implements OnInit {
   verticalBars: any;
   doughnut: any;
 
-  constructor() { }
+  allCandidates: Candidate[] = [];
+  limit = 5;
+  page = 0;
+  totalPages = 0;
+  noCandidatesAvailable = false;
+  candidateVenueJobsLists: CandidateVenueJob[] = [];
+
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
+    // this.populateCandidate();
   }
 
   ionViewDidEnter() {
@@ -29,6 +41,7 @@ export class DashboardPage implements OnInit {
     this.createHorizontalBarChart();
     this.createVerticalBarChart();
     this.createDoughnutChart();
+    this.populateCandidate();
   }
 
   // Pie Chart
@@ -57,12 +70,12 @@ export class DashboardPage implements OnInit {
     this.horizontalBars = new Chart(this.horizontalBarChart.nativeElement, {
       type: 'horizontalBar',
       data: {
-        labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
+        labels: ['Total no. of Candidates', 'Total No. of Jobs'],
         datasets: [{
-          label: 'Viewers in millions',
-          data: [2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17],
-          backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
-          borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+          label: 'List of Candidates & Jobs',
+          data: [43, 9],
+          backgroundColor: 'rgb(226, 54, 21)', // array should have same number of elements as number of dataset
+          borderColor: 'rgb(226, 54, 21)', // array should have same number of elements as number of dataset
           borderWidth: 1
         }]
       },
@@ -76,7 +89,7 @@ export class DashboardPage implements OnInit {
         },
         title: {
           display: true,
-          text: 'Game of Thrones'
+          text: 'UTM Candidates & Jobs'
         }
       }
     });
@@ -87,12 +100,13 @@ export class DashboardPage implements OnInit {
     this.verticalBars = new Chart(this.verticalBarChart.nativeElement, {
       type: 'bar',
       data: {
-        labels: ['UOM', 'UTM', 'CTI'],
+        labels: ['Jan 2020', 'Feb 2020', 'Mar 2020', 'Apr 2020', 'May 2020', 'Jun 2020',
+        'Jul 2020', 'Aug 2020', 'Sep 2020', 'Oct 2020', 'Nov 2020', 'Dec 2020'],
         datasets: [{
-          label: 'Candidates',
-          data: [2.5, 11, 4.5],
-          backgroundColor: '#E23615', // array should have same number of elements as number of dataset
-          borderColor: '#E23615', // array should have same number of elements as number of dataset
+          label: 'No. of Candidates',
+          data: [2, 3, 5, 6, 6, 7, 4, 2, 1, 2, 5, 0],
+          backgroundColor: 'rgb(0, 102, 204)', // array should have same number of elements as number of dataset
+          borderColor: 'rgb(0, 102, 204)', // array should have same number of elements as number of dataset
           borderWidth: 1
         }]
       },
@@ -106,7 +120,7 @@ export class DashboardPage implements OnInit {
         },
         title: {
           display: true,
-          text: 'Game of Thrones'
+          text: 'Availability of Candidates by Date'
         }
       }
     });
@@ -117,21 +131,43 @@ export class DashboardPage implements OnInit {
     this.doughnut = new Chart(this.doughnutChart.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: ['Africa', 'Asia', 'Europe', 'Latin America', 'North America'],
+        labels: ['Rejected', 'Proceed to next interview', 'Accepted'],
         datasets: [
           {
             label: 'Population (millions)',
-            backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850'],
-            data: [2478, 5267, 734, 784, 433]
+            backgroundColor: ['#E23615', '#0080FF', '#00CC66'],
+            data: [25, 35, 40]
           }
         ]
       },
       options: {
         title: {
           display: true,
-          text: 'Predicted world population (millions) in 2050'
+          text: '% results of candidates during screening'
         }
       }
     });
+  }
+
+  // FOR CANDIDATES BASED ON VENUE 
+  populateCandidate() {
+    // tslint:disable-next-line: radix
+    this.apiService.getCandidatesByVenueId(1, this.page, this.limit).subscribe(
+      (data: CandidateVenueJobDtoResponseList) => {
+        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
+        this.totalPages = data.totalPages;
+        console.log(this.candidateVenueJobsLists);
+
+        if (this.candidateVenueJobsLists.length === 0) {
+          this.noCandidatesAvailable = true;
+        } else {
+          this.noCandidatesAvailable = false;
+        }
+      });
+
+  }
+  
+  routeTo(candidateId: number) {
+    this.router.navigate(['/candidate-details', candidateId]);
   }
 }
