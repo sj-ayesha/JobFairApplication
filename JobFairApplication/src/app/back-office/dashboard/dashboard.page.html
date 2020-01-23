@@ -6,20 +6,20 @@
 
 <ion-content>
   <ion-row>
-    <!--Pie Chart-->
-    <ion-col size="6">
-      <ion-card>
-        <ion-card-content>
-          <canvas #pieChart width="800" height="450"></canvas>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-
     <!--Horizontal Bar Chart-->
     <ion-col size="6">
       <ion-card class="welcome-card">
         <ion-card-content>
           <canvas #horizontalBarChart></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <!--Doughnut Chart-->
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-content>
+          <canvas #doughnutChart width="800" height="450"></canvas>
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -35,25 +35,42 @@
       </ion-card>
     </ion-col>
 
-    <!--Doughnut Chart-->
+    <!--Pie Chart-->
     <ion-col size="6">
       <ion-card>
         <ion-card-content>
-          <canvas #doughnutChart width="800" height="450"></canvas>
+          <canvas #pieChart width="800" height="450"></canvas>
         </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>
 
-  <!--Vertical Bar-->
-  <!-- <ion-list-header color="light">Vertical Bar Chart</ion-list-header>
-  <ion-card class="welcome-card">
-    <ion-card-header>
-      <ion-card-subtitle>Number of Viewers per season for</ion-card-subtitle>
-      <ion-card-title>Game of Thrones</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <canvas #barChart></canvas>
-    </ion-card-content>
-  </ion-card> -->
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-content>
+          <ion-item class="candidate-item" (click)="routeTo(candidate.candidateId)"
+          *ngFor="let candidate of allCandidates">
+          <ion-avatar *ngIf="candidate.gender == 'Male'" slot="start">
+            <img src="../../../assets/img/avatar_male.jpg" />
+          </ion-avatar>
+          <ion-avatar *ngIf="candidate.gender=='Female'" slot="start">
+            <img src="../../../assets/img/avatar_female.jpg" />
+          </ion-avatar>
+          <ion-label class="ion-text-wrap">
+            <h5><b>{{candidate.lastName}} {{candidate.firstName}}</b></h5>
+            <p><b>Level:</b> {{candidate.currentLevel}}</p>
+            <p>
+              <b>Available from:</b>
+              {{candidate.availabilityDate}}
+            </p>
+          </ion-label>
+          <ion-label slot="end">
+            <p><b>Job Type:</b> {{candidate.jobType}}</p>
+          </ion-label>
+        </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 </ion-content>
