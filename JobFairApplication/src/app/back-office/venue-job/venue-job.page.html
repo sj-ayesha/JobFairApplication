@@ -16,7 +16,7 @@
           <ion-col size="6" class="ion-padding">
             <ion-item class="venue-input">
               <ion-label position="floating" color="medium">Please select venue..</ion-label>
-              <ion-select (ionChange)="filter($event)" formControlName="venue" interface="popover"
+              <ion-select (ionChange)="filter($event);" formControlName="venue" interface="popover"
                 class="ion-float-left">
                 <!-- <ion-select-option value="all" selected="selected">All</ion-select-option> -->
                 <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}}
@@ -30,8 +30,8 @@
             <ion-list>
               <ion-item *ngFor="let job of jobs; let i = index;">
                 <ion-label>{{ job.title }}</ion-label>
-                <ion-checkbox color="danger" class="messageCheckbox" slot="end" [checked]="false" formControlName="job"
-                  value="{{job.jobId}}" (ionChange)="checkCheckBoxvalue($event,job)">
+                <ion-checkbox color="danger" class="messageCheckbox" slot="end" [checked]="checkBoxArray.includes(job.jobId)"
+                  formControlName="job" value="{{job.jobId}}"  (ionChange)="checkCheckBoxvalue($event,job)">
                 </ion-checkbox>
               </ion-item>
             </ion-list>
@@ -39,21 +39,29 @@
           <!-- <ion-input formControlName="candidateId" type="text" hidden></ion-input> -->
         </ion-row>
 
-        <ion-row>
-          <ion-card>
-            <ion-card-content>
-              <ion-col col-md-4 size="4">
+
+        <ion-card class="card-association">
+          <ion-card-content>
+            <ion-row>
+              <ion-col col-md-6 size="6">
                 <div class="Venue Information">
                   <h5><b>Venue</b></h5>
+                  <div class="separation"></div>
+                  <p>{{ selectedVenue }}</p>
+                </div>
+              </ion-col>
+              <ion-col col-md-6 size="6">
+                <div class="Job Information">
+                  <h5><b>Jobs</b></h5>
+                  <div class="separation"></div>
                   <div *ngFor="let venueJob of venueJobs">
-                    <div class="separation"></div>
-                    <p><b>Venue:</b> {{ venueJob.venue.venueName }}</p>
+                    <p>{{ venueJob.job.title }}</p>
                   </div>
                 </div>
-            </ion-col>
-            </ion-card-content>
-          </ion-card>
-        </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
       </ion-grid>
     </form>
   </div>

@@ -23,6 +23,9 @@ export class VenueJobPage implements OnInit {
   venueJobs: VenueJob[] = [];
   addJob = [];
   filterText: number;
+  selectedVenue: string;
+
+  checkBoxArray: Array<number> = [];
 
   limitVenueJobs = 50;
   pageVenueJobs = 0;
@@ -30,6 +33,8 @@ export class VenueJobPage implements OnInit {
   pageVenue = 0;
   limitJob = 50;
   pageJob = 0;
+
+  venueName: string;
 
   totalPages = 0;
 
@@ -77,7 +82,7 @@ export class VenueJobPage implements OnInit {
       });
   }
 
-  JOB
+  // JOB
   getAllJobs() {
     this.apiService.getAllJobs(this.pageJob, this.limitJob).subscribe(
       (data: JobResponseList) => {
@@ -112,18 +117,23 @@ export class VenueJobPage implements OnInit {
 
     }
 
-    console.log(this.addJob)
+    console.log('addJob', this.addJob);
   }
 
-  //VENUE JOBS
-
+  // VENUE JOBS
   getAllJobsByVenueId() {
+    this.venueJobs = [];
+    this.selectedVenue = '';
+    this.checkBoxArray = [];
     // tslint:disable-next-line: radix
     this.apiService.getJobsByVenueId(this.filterText, this.pageVenueJobs, this.limitVenueJobs).subscribe(
       (data: VenueJobResponseList) => {
         this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
         this.totalPages = data.totalPages;
-        console.log(this.venueJobs);
+        this.venueJobs.forEach(venueJob => {
+          this.checkBoxArray.push(venueJob.job.jobId);
+          this.selectedVenue = venueJob.venue.venueName;
+        });
       }
     );
   }
@@ -133,9 +143,10 @@ export class VenueJobPage implements OnInit {
   filter(event) {
     this.filterText = event.target.value;
     if (this.filterText === 0) {
-      this.venueJobs = [];
+      this.getAllJobsByVenueId();
     } else {
       this.getAllJobsByVenueId();
+      // this.venueName = this.venueJobs[0].venue.venueName;
     }
   }
 }
