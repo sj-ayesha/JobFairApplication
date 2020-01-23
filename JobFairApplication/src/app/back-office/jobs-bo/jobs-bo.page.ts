@@ -157,7 +157,6 @@ export class JobsBoPage implements OnInit {
     if (this.page === this.totalPages) {
       event.target.disabled = true;
     }
-
   }
 
   getJobByLevel() {
