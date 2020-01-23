@@ -169,11 +169,12 @@ export class JobListPage implements OnInit {
       this.page++;
       this.getAllJobsByVenueId(event);
     }, 500);
-
+    setTimeout(() => {
+      this.styleAccordion();
+    }, 0);
     if (this.page === this.totalPages) {
       event.target.disabled = true;
     }
-
   }
 
   getAllJobsByVenueIdAndCategory() {

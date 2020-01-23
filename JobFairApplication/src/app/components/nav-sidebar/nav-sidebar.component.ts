@@ -34,6 +34,7 @@ export class NavSidebarComponent implements OnInit, OnDestroy {
     this.changeVenueService.cast.subscribe(data => this.venue = data);
 
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
+
   }
   ngOnDestroy() {
     this.sessionStateSubscription.unsubscribe();
@@ -41,7 +42,6 @@ export class NavSidebarComponent implements OnInit, OnDestroy {
 
   logout() {
     this.loggedIn = false;
-    this.loginLogoutService.showDashboard(false);
     localStorage.removeItem('user');
     localStorage.removeItem('venue_id');
     localStorage.removeItem('priority');
@@ -49,7 +49,6 @@ export class NavSidebarComponent implements OnInit, OnDestroy {
     localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
     this.venue = '';
-    this.loginLogoutService.removeItem('data');
   }
 
   navigateToVenue(){

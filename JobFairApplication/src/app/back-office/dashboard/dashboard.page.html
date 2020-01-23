@@ -5,6 +5,47 @@
 </ion-header>
 
 <ion-content>
+  <ion-row>
+    <!--Pie Chart-->
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-content>
+          <canvas #pieChart width="800" height="450"></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <!--Horizontal Bar Chart-->
+    <ion-col size="6">
+      <ion-card class="welcome-card">
+        <ion-card-content>
+          <canvas #horizontalBarChart></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <!--Vertical Bar Chart-->
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-content>
+          <canvas #verticalBarChart></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <!--Doughnut Chart-->
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-content>
+          <canvas #doughnutChart width="800" height="450"></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!--Vertical Bar-->
   <!-- <ion-list-header color="light">Vertical Bar Chart</ion-list-header>
   <ion-card class="welcome-card">
     <ion-card-header>

@@ -18,11 +18,12 @@ export class NavComponent implements OnInit, OnDestroy {
   loggedIn: boolean;
   clickDashboard: false;
 
+  isLoggedIn = 'false';
+
+
 
   venue: string;
   changeVenue: string;
-
-  dashboard = true;
 
   constructor(
     private loginLogoutService: LoginLogoutService,
@@ -33,6 +34,7 @@ export class NavComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loggedIn = !!localStorage.getItem('user');
     this.venueName = window.localStorage.getItem('venueName');
+
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
 
     this.changeVenueService.cast.subscribe(data => this.venue = data);
@@ -45,8 +47,6 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.loggedIn = false;
-    this.loginLogoutService.showDashboard(false);
     localStorage.removeItem('user');
     localStorage.removeItem('venue_id');
     localStorage.removeItem('priority');
@@ -54,7 +54,6 @@ export class NavComponent implements OnInit, OnDestroy {
     localStorage.removeItem('venueName');
     this.loginLogoutService.logoutUser();
     this.venue = '';
-    this.dashboard = false;
   }
 
   navigateToVenue(){
@@ -82,6 +81,5 @@ export class NavComponent implements OnInit, OnDestroy {
   navigateToDashboard(){
     // this.dashboard = true;
     this.router.navigate(['/dashboard']);
-    this.dashboard = true;
   }
 }

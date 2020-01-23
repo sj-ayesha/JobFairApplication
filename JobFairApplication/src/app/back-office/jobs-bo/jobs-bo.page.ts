@@ -27,7 +27,7 @@ export class JobsBoPage implements OnInit {
   priority = [];
   filterText: string;
   refreshCheck = false;
-  limit = 20;
+  limit = 3;
   page = 0;
   data: any;
   totalPages = 0;
