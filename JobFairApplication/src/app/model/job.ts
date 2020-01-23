@@ -13,4 +13,5 @@ export class JobResponseList {
     jobDtoList: Job[];
     totalElements: number;
     totalPages: number;
+    // checked = false;
 }
