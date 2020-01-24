@@ -30,14 +30,23 @@
             <ion-list>
               <ion-item *ngFor="let job of jobs; let i = index;">
                 <ion-label>{{ job.title }}</ion-label>
-                <ion-checkbox color="danger" class="messageCheckbox" slot="end" [checked]="checkBoxArray.includes(job.jobId)"
-                  formControlName="job" value="{{job.jobId}}"  (ionChange)="checkCheckBoxvalue($event,job)">
+                <ion-checkbox color="danger" class="messageCheckbox" slot="end" #checkboxes [checked]="job['checked']"
+                  formControlName="job" value="{{job.jobId}}"  (ionChange)="job.checked = $event.detail.checked;">
                 </ion-checkbox>
               </ion-item>
             </ion-list>
           </ion-col>
-          <!-- <ion-input formControlName="candidateId" type="text" hidden></ion-input> -->
+
+          <!-- <button (click)="reset()">sfsdf</button> -->
+          
         </ion-row>
+
+        <div class="btn-actions">
+          <div class="submit-button ion-text-right">
+            <!-- <ion-button class='btn' color="dark" (click)="submitCandidate()">Submit</ion-button> -->
+            <ion-button class="btn" (click)="onSubmit()" type="submit" color="dark">Submit</ion-button>
+          </div>
+        </div>
 
 
         <ion-card class="card-association">

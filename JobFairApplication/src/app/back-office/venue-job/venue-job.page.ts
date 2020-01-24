@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, QueryList, ElementRef, ViewChildren, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { VenueResponseList, Venue } from 'src/app/model/venue';
 import { IonInfiniteScroll } from '@ionic/angular';
@@ -13,17 +13,19 @@ import { VenueJobResponseList, VenueJob } from 'src/app/model/venueJob';
   templateUrl: './venue-job.page.html',
   styleUrls: ['./venue-job.page.scss'],
 })
-export class VenueJobPage implements OnInit {
+export class VenueJobPage implements OnInit, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
+  @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
 
   formAddVenueJob: FormGroup;
 
   venues: Venue[] = [];
   jobs: Job[] = [];
   venueJobs: VenueJob[] = [];
-  addJob = [];
+  addJob: any[] = [];
   filterText: number;
   selectedVenue: string;
+  genders: Array<string>;
 
   checkBoxArray: Array<number> = [];
 
@@ -40,17 +42,22 @@ export class VenueJobPage implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.formAddVenueJob = this.formBuilder.group({
       venue: new FormControl(),
       job: new FormControl()
     });
-   }
+  }
 
   ngOnInit() {
     this.getAllVenue();
     this.getAllJobs();
+  }
+
+  ngOnDestroy() {
+    this.changeDetectorRef.detach()
   }
 
   ionViewWillEnter() {
@@ -86,38 +93,9 @@ export class VenueJobPage implements OnInit {
   getAllJobs() {
     this.apiService.getAllJobs(this.pageJob, this.limitJob).subscribe(
       (data: JobResponseList) => {
-      this.jobs = [...this.jobs, ...data.jobDtoList];
-      console.log('jobs', this.jobs);
-    });
-  }
-
-  // populateAllJobs() {
-  //   this.apiService.getAllJobs(this.pageJob, this.limitJob).subscribe(
-  //     (data: JobResponseList[]) => {
-  //     data.forEach((element, index) => {
-  //       let data = {
-  //         job: element.jobDtoList,
-  //         checked: null
-  //       };
-  //       // if (element !== null && this) {
-  //       //   this.jobs.push(data);
-  //       // }
-  //     });
-  //     // console.log(this.CandidateSkills);
-  //   });
-  // }
-
-  checkCheckBoxvalue(event: CustomEvent, job: AssociateVenueJobs) {
-    job.checked = event.detail.checked;
-    console.log(job.jobId);
-
-    if (job.checked === true) {
-      this.addJob.push(job);
-    } else {
-
-    }
-
-    console.log('addJob', this.addJob);
+        this.jobs = [...this.jobs, ...data.jobDtoList];
+        console.log('jobs', this.jobs);
+      });
   }
 
   // VENUE JOBS
@@ -125,14 +103,21 @@ export class VenueJobPage implements OnInit {
     this.venueJobs = [];
     this.selectedVenue = '';
     this.checkBoxArray = [];
+    this.addJob = [];
+
     // tslint:disable-next-line: radix
     this.apiService.getJobsByVenueId(this.filterText, this.pageVenueJobs, this.limitVenueJobs).subscribe(
       (data: VenueJobResponseList) => {
         this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
         this.totalPages = data.totalPages;
         this.venueJobs.forEach(venueJob => {
-          this.checkBoxArray.push(venueJob.job.jobId);
           this.selectedVenue = venueJob.venue.venueName;
+        });
+        const jobIdsForVenue = this.venueJobs.map((venueJob) => venueJob.job.jobId);
+        this.jobs = this.jobs.map((job) => {
+          job['checked'] = false;
+          job['checked'] = jobIdsForVenue.includes(job.jobId);
+          return job;
         });
       }
     );
@@ -142,11 +127,42 @@ export class VenueJobPage implements OnInit {
   // FILTER BY VENUE
   filter(event) {
     this.filterText = event.target.value;
-    if (this.filterText === 0) {
-      this.getAllJobsByVenueId();
-    } else {
-      this.getAllJobsByVenueId();
-      // this.venueName = this.venueJobs[0].venue.venueName;
-    }
+    this.getAllJobsByVenueId();
+  }
+
+  // GET VENUE BY ACTIVE
+  getVenueByActive() {
+    this.apiService.getVenueByActive(true).subscribe(data => {
+      this.venues = data;
+    });
+  }
+
+
+  reset() {
+    this.formAddVenueJob.reset();
+  }
+
+
+  // SUBMIT ADD JOBS TO VENUE
+  postJobsVenue() {
+    const addVenueJob = {
+      venue: {
+        venueId: this.filterText
+      },
+      job: this.addJob
+    };
+
+    console.log(addVenueJob);
+  }
+
+  onSubmit() {
+    const addVenueJob = {
+      venue: {
+        venueId: this.filterText
+      },
+      job: this.jobs
+    };
+
+    console.log(addVenueJob)
   }
 }

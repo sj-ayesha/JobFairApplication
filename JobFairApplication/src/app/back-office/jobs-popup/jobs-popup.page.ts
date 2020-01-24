@@ -61,20 +61,61 @@ export class JobsPopupPage implements OnInit {
 
   ngOnInit() {
     this.categories = this.dropdowns.categories;
-    console.log(this.categories)
+    console.log(this.categories);
 
     this.addEditPopupService.cast.subscribe(edit => this.edit = edit);
-    console.log('Ha', this.title);
+
 
     if (this.edit === true) {
+      this.jobs = JSON.parse(localStorage.getItem('editJobs'));
+      if (this.edit === true) {
+        this.jobId = this.jobs[0];
+        this.title = this.jobs[1];
+        this.level = this.jobs[2];
+        this.category = this.jobs[3];
+        this.description = this.jobs[4];
+        this.minimumExperience = this.jobs[5];
+        this.qualificationNeeded = this.jobs[6];
+      }
+
+      if (this.jobs[3] === 'software-engineer') {
+        this.category = 'Software Engineer';
+      } else
+        if (this.jobs[3] === 'architect') {
+          this.category = 'Architect';
+        } else
+          if (this.jobs[3] === 'manager') {
+            this.category = 'Manager';
+          } else
+            if (this.jobs[3] === 'business-analyst') {
+              this.category = 'Business Analyst';
+            } else
+              if (this.jobs[3] === 'quality-assurance') {
+                this.category = 'Quality Assurance';
+              } else
+                if (this.jobs[3] === 'human-resource') {
+                  this.category = 'Human Resource';
+                } else
+                  if (this.jobs[2] === 'fresher') {
+                    this.category = 'Fresher';
+                  } else
+                    if (this.jobs[2] === 'junior') {
+                      this.category = 'Junior';
+                    } else
+                      if (this.jobs[2] === 'senior') {
+                        this.category = 'Senior';
+                      }
+
+
+
       this.formAddJob = this.formBuilder.group({
-      title: new FormControl(''),
-      level: new FormControl(''),
-      category: new FormControl(''),
-      description: new FormControl(''),
-      minimumExperience: new FormControl(''),
-      qualificationNeeded: new FormControl('')
-    });
+        title: new FormControl(''),
+        level: new FormControl(this.level),
+        category: new FormControl(this.category),
+        description: new FormControl(''),
+        minimumExperience: new FormControl(''),
+        qualificationNeeded: new FormControl(''),
+      });
     } else {
       this.formAddJob = this.formBuilder.group({
         title: new FormControl('',
@@ -150,7 +191,7 @@ export class JobsPopupPage implements OnInit {
     }
   }
 
-  ionViewWillLeave(){
+  ionViewWillLeave() {
     localStorage.removeItem('editJobs');
   }
 
