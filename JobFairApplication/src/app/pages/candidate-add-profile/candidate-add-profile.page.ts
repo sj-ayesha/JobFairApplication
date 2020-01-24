@@ -53,7 +53,7 @@ export class CandidateAddProfilePage implements OnInit {
 
   fileData: File = null; // File Upload
   selectedFiles: FileList;
-  myFiles:string [] = [];
+  myFiles: string[] = [];
   uploading: boolean;
   attachments = [];
 
@@ -472,7 +472,7 @@ export class CandidateAddProfilePage implements OnInit {
         console.log('res', res)
       }
     )
-    .catch(err => console.log('err', err))
+      .catch(err => console.log('err', err))
   }
 
   ionViewWillLoad() { }
@@ -510,7 +510,7 @@ export class CandidateAddProfilePage implements OnInit {
           this.CandidateSkills.push(data);
         }
       });
-      // console.log(this.CandidateSkills);
+      console.log(this.CandidateSkills);
     });
   }
 

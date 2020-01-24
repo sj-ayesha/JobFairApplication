@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, QueryList, ElementRef, ViewChildren } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { VenueResponseList, Venue } from 'src/app/model/venue';
 import { IonInfiniteScroll } from '@ionic/angular';
@@ -15,6 +15,7 @@ import { VenueJobResponseList, VenueJob } from 'src/app/model/venueJob';
 })
 export class VenueJobPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
+  @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
 
   formAddVenueJob: FormGroup;
 
@@ -24,6 +25,7 @@ export class VenueJobPage implements OnInit {
   addJob = [];
   filterText: number;
   selectedVenue: string;
+  genders: Array<string>;
 
   checkBoxArray: Array<number> = [];
 
@@ -109,15 +111,19 @@ export class VenueJobPage implements OnInit {
 
   checkCheckBoxvalue(event: CustomEvent, job: AssociateVenueJobs) {
     job.checked = event.detail.checked;
-    console.log(job.jobId);
+    // console.log(job.jobId);
 
     if (job.checked === true) {
       this.addJob.push(job);
     } else {
-
+      for (let i = 0; i < this.addJob.length; i++) {
+        if (this.addJob[i].jobId === job.jobId){
+          console.log(this.addJob[i].jobId);
+          this.addJob.splice(i, 1);
+        }
+      }
     }
-
-    console.log('addJob', this.addJob);
+    console.log('addjob checkbox', this.addJob);
   }
 
   // VENUE JOBS
@@ -125,6 +131,8 @@ export class VenueJobPage implements OnInit {
     this.venueJobs = [];
     this.selectedVenue = '';
     this.checkBoxArray = [];
+    this.addJob = [];
+
     // tslint:disable-next-line: radix
     this.apiService.getJobsByVenueId(this.filterText, this.pageVenueJobs, this.limitVenueJobs).subscribe(
       (data: VenueJobResponseList) => {
@@ -148,5 +156,34 @@ export class VenueJobPage implements OnInit {
       this.getAllJobsByVenueId();
       // this.venueName = this.venueJobs[0].venue.venueName;
     }
+  }
+
+  // GET VENUE BY ACTIVE
+  getVenueByActive() {
+    this.apiService.getVenueByActive(true).subscribe(data => {
+      this.venues = data;
+    });
+  }
+
+
+  reset() {
+    this.formAddVenueJob.reset();
+  }
+
+
+  // SUBMIT ADD JOBS TO VENUE
+  postJobsVenue(){
+    const addVenueJob = {
+      venue: {
+      venueId: this.filterText
+      },
+      job: this.addJob
+    };
+
+    console.log(addVenueJob);
+  }
+
+  onSubmit(){
+    this.postJobsVenue();
   }
 }

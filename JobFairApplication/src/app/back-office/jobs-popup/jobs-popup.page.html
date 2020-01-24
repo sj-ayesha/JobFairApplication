@@ -12,22 +12,21 @@
         <ion-col col-md-6 size="12" size-sm>
           <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Category</ion-label>
-            <ion-select formControlName="category" interface="popover" cancelText="Cancel" okText="OK"placeholder="Select a category">
+            <ion-select formControlName="category" interface="popover" cancelText="Cancel" okText="OK">
               <ion-select-option value="software-engineer">Software Engineer</ion-select-option>
               <ion-select-option value="human-resource">Human Resource</ion-select-option>
               <ion-select-option value="manager">Manager</ion-select-option>
               <ion-select-option value="quality-assurance">Quality Assurance</ion-select-option>
+              <ion-select-option value="business-analyst">Business Analyst</ion-select-option>
+              <ion-select-option value="architect">Architect</ion-select-option>
             </ion-select>
           </ion-item>
 
           <ion-item *ngIf="edit">
             <ion-label position="floating" color="medium">*Category</ion-label>
-            <ion-select formControlName="category" interface="popover" placeholder="Select a category" >
+            <ion-select interface="popover" formControlName="category" cancelText="Cancel" okText="OK" >
               <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX">{{categoryX}}</ion-select-option>
-              <!-- <ion-select-option value="{{category}}" selected>{{category}}</ion-select-option>
-              <ion-select-option value="human-resource">Human Resource</ion-select-option>
-              <ion-select-option value="manager">Manager</ion-select-option>
-              <ion-select-option value="quality-assurance">Quality Assurance</ion-select-option> -->
+              <!-- <ion-select-option value="{{category}}">{{category}}</ion-select-option> -->
             </ion-select>
           </ion-item>
 
