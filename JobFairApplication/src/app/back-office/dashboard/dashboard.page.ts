@@ -24,7 +24,7 @@ export class DashboardPage implements OnInit {
   doughnut: any;
 
   allCandidates: Candidate[] = [];
-  limit = 5;
+  limit = 4;
   page = 0;
   totalPages = 0;
   noCandidatesAvailable = false;
@@ -33,7 +33,7 @@ export class DashboardPage implements OnInit {
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
-    // this.populateCandidate();
+    this.populateCandidate();
   }
 
   ionViewDidEnter() {
@@ -41,7 +41,6 @@ export class DashboardPage implements OnInit {
     this.createHorizontalBarChart();
     this.createVerticalBarChart();
     this.createDoughnutChart();
-    this.populateCandidate();
   }
 
   // Pie Chart
@@ -59,7 +58,11 @@ export class DashboardPage implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'Predicted world population (millions) in 2050'
+          text: 'Predicted world population (millions) in 2050',
+          fontStyle: 'normal',
+          fontFamily: 'Proxima Nova Regular',
+          fontSize: 24,
+          fontColor: '#414344'
         }
       }
     });
@@ -89,7 +92,11 @@ export class DashboardPage implements OnInit {
         },
         title: {
           display: true,
-          text: 'UTM Candidates & Jobs'
+          text: 'UTM Candidates & Jobs',
+          fontStyle: 'normal',
+          fontFamily: 'Proxima Nova Regular',
+          fontSize: 24,
+          fontColor: '#414344'
         }
       }
     });
@@ -120,7 +127,11 @@ export class DashboardPage implements OnInit {
         },
         title: {
           display: true,
-          text: 'Availability of Candidates by Date'
+          text: 'Availability of Candidates by Date',
+          fontStyle: 'normal',
+          fontFamily: 'Proxima Nova Regular',
+          fontSize: 24,
+          fontColor: '#414344'
         }
       }
     });
@@ -143,7 +154,11 @@ export class DashboardPage implements OnInit {
       options: {
         title: {
           display: true,
-          text: '% results of candidates during screening'
+          text: 'Candidates per Screening',
+          fontStyle: 'normal',
+          fontFamily: 'Proxima Nova Regular',
+          fontSize: 24,
+          fontColor: '#414344'
         }
       }
     });
@@ -151,6 +166,7 @@ export class DashboardPage implements OnInit {
 
   // FOR CANDIDATES BASED ON VENUE 
   populateCandidate() {
+    this.candidateVenueJobsLists = [];
     // tslint:disable-next-line: radix
     this.apiService.getCandidatesByVenueId(1, this.page, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {

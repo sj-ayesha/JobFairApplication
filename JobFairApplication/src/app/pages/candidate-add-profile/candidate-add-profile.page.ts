@@ -93,9 +93,9 @@ export class CandidateAddProfilePage implements OnInit {
     availabilityDate: [
       { type: 'required', message: '⚠ Availability Date is required.' }
     ],
-    cvUpload: [
-      { type: 'required', message: '⚠ A file upload is required.' }
-    ],
+    // cvUpload: [
+    //   { type: 'required', message: '⚠ A file upload is required.' }
+    // ],
     jobType: [{ type: 'required', message: '⚠ Job Type is required.' }],
     currentLevel: [
       { type: 'required', message: '⚠ Current Level is required.' }
@@ -192,7 +192,7 @@ export class CandidateAddProfilePage implements OnInit {
       companyName: new FormControl(),
       duration: new FormControl(),
       skillId: new FormControl(),
-      cvUpload: new FormControl(Validators.required)
+      cvUpload: new FormControl()
     });
   }
 
@@ -370,7 +370,6 @@ export class CandidateAddProfilePage implements OnInit {
   selectFile(event) {
     this.attachFile(event.target.files);
     event.target.value = null;
-    this.uploading = true;
 
     if (event.target.files.length > 0) {
       this.fileData = event.target.files[0];

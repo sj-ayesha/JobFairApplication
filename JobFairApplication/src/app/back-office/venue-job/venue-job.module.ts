@@ -13,7 +13,7 @@ import { VenueJobPage } from './venue-job.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    VenueJobPageRoutingModule, 
+    VenueJobPageRoutingModule,
     ReactiveFormsModule
   ],
   declarations: [VenueJobPage]
