@@ -34,7 +34,7 @@
           <ion-button class="btn btn--search" color="dark" size="small" (click)="searchByTitle(title.value)">
             <ion-icon name="search"></ion-icon>
           </ion-button> -->
-          <ion-searchbar placeholder="Search by last name..." type="text" #title
+          <ion-searchbar placeholder="Search..." type="text" #title
             (ionInput)="searchByTitle(title.value)"></ion-searchbar>
         </ion-col>
 
@@ -121,11 +121,10 @@
         </ion-col>
       </ion-row>
       <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more candidates...">
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more jobs...">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </ion-grid>
   </div>
-
-  {{ isReload }}
+  <!-- {{ isReload }} -->
 </ion-content>

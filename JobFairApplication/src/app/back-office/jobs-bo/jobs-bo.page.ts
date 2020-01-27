@@ -27,7 +27,7 @@ export class JobsBoPage implements OnInit {
   priority = [];
   filterText: string;
   refreshCheck = false;
-  limit = 20;
+  limit = 10;
   page = 0;
   data: any;
   totalPages = 0;
@@ -52,7 +52,7 @@ export class JobsBoPage implements OnInit {
     window.localStorage.setItem('jobId', '');
     this.getAllJobs();
 
-    if (this.isReload == true) {
+    if (this.isReload === true) {
       this.jobs = [];
       this.addEditPopupService.reloadComponent(false);
     }
@@ -70,8 +70,9 @@ export class JobsBoPage implements OnInit {
 
     filter(event) {
       this.filterText = event.target.value;
-      if (this.filterText == 'all') {
-        this.getAllJobsByVenueId();
+      if (this.filterText === 'all') {
+        this.jobs = [];
+        this.getAllJobs();
       } else {
         this.getJobByLevel();
       }
@@ -125,12 +126,11 @@ export class JobsBoPage implements OnInit {
 
     searchByTitle(title: string) {
       this.jobNotFound = false;
-      const venueId = parseInt(window.localStorage.getItem('venue_id'));
-      this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
-        if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+      this.apiService.searchAllJobsByTitle(title).subscribe(data => {
+        if (data.message === 'JOB_NOT_FOUND') {
           this.jobNotFound = true;
         } else {
-          this.venueJobs = data;
+          this.jobs = data;
           setTimeout(() => {
             this.styleAccordion();
           }, 0);
@@ -170,12 +170,12 @@ export class JobsBoPage implements OnInit {
     getJobByLevel() {
       // tslint:disable-next-line: radix
       // this.jobNotFound = false;
-      this.apiService.searchJobByLevel(parseInt(window.localStorage.getItem('venue_id')), this.filterText).subscribe(data => {
+      this.apiService.searchAllJobsByLevel(this.filterText).subscribe(data => {
         this.jobNotFound = false;
-        if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+        if (data.message === 'NO_JOB_FOUND') {
           this.jobNotFound = true;
         } else {
-          this.venueJobs = data;
+          this.jobs = data;
           setTimeout(() => {
             this.styleAccordion();
           }, 0);
