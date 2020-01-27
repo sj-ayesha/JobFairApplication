@@ -354,7 +354,7 @@ export class CandidateAddProfilePage implements OnInit {
 
     console.log('submit', candidateDetails);
 
-    if (this.formCandidateDetails.invalid) {
+    if (this.formCandidateDetails.invalid || this.fileData === null) {
       this.unsuccessMsg();
     } else {
       // this.uploadCV(candidateDetails, this.fileData);
@@ -476,6 +476,7 @@ export class CandidateAddProfilePage implements OnInit {
     });
     toast.present();
   }
+  
 
   populateSkills() {
     this.apiService.getAllSkills().subscribe(data => {
