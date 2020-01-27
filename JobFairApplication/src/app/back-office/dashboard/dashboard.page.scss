@@ -19,19 +19,15 @@
     // justify-content: center;
 }
 
-.title{
-    display: flex;
-    width: 100%;
-    align-items: center;
-    .list-icon {
-        font-size: 30px;
-        padding: 10px 5px;
+
+.header-wrap{
+    .title {
+        display: flex;
+        align-items: center;
+
+        .icon-dashboard {
+            font-size: 30px;
+            padding: 10px 18px;
+        }
     }
 }
-
-.title h3{
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-  

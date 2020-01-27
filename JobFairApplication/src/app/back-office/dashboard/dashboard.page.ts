@@ -4,6 +4,8 @@ import { Candidate, CandidateResponseList } from 'src/app/model/candidate';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 import { CandidateVenueJobDtoResponseList, CandidateVenueJob } from 'src/app/model/candidateVenueJob';
+import { Venue, VenueResponseList } from 'src/app/model/venue';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,10 +14,10 @@ import { CandidateVenueJobDtoResponseList, CandidateVenueJob } from 'src/app/mod
 })
 export class DashboardPage implements OnInit {
 
-  @ViewChild('horizontalBarChart', {static: false}) horizontalBarChart;
-  @ViewChild('pieChart', {static: false}) pieChart;
-  @ViewChild('verticalBarChart', {static: false}) verticalBarChart;
-  @ViewChild ('doughnutChart', {static: false}) doughnutChart;
+  @ViewChild('horizontalBarChart', { static: false }) horizontalBarChart;
+  @ViewChild('pieChart', { static: false }) pieChart;
+  @ViewChild('verticalBarChart', { static: false }) verticalBarChart;
+  @ViewChild('doughnutChart', { static: false }) doughnutChart;
 
   horizontalBars: any;
   colorArray: any;
@@ -30,10 +32,21 @@ export class DashboardPage implements OnInit {
   noCandidatesAvailable = false;
   candidateVenueJobsLists: CandidateVenueJob[] = [];
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  limitVenue = 50;
+  pageVenue = 0;
+  venues: Venue[] = [];
+  filterText: string;
+  formDashboard: FormGroup;
+
+  constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
+    this.formDashboard = this.formBuilder.group({
+      venue: new FormControl()
+    });
+  }
 
   ngOnInit() {
     this.populateCandidate();
+    this.getAllVenue();
   }
 
   ionViewDidEnter() {
@@ -116,7 +129,7 @@ export class DashboardPage implements OnInit {
       type: 'bar',
       data: {
         labels: ['Jan 2020', 'Feb 2020', 'Mar 2020', 'Apr 2020', 'May 2020', 'Jun 2020',
-        'Jul 2020', 'Aug 2020', 'Sep 2020', 'Oct 2020', 'Nov 2020', 'Dec 2020'],
+          'Jul 2020', 'Aug 2020', 'Sep 2020', 'Oct 2020', 'Nov 2020', 'Dec 2020'],
         datasets: [{
           label: 'No. of Candidates',
           data: [2, 3, 5, 6, 6, 7, 4, 2, 1, 2, 5, 0],
@@ -190,8 +203,31 @@ export class DashboardPage implements OnInit {
       });
 
   }
-  
+
   routeTo(candidateId: number) {
     this.router.navigate(['/candidate-details', candidateId]);
+  }
+
+  // VENUE
+  getAllVenue() {
+    this.apiService.getAllVenue(this.pageVenue, this.limitVenue).subscribe(
+      (data: VenueResponseList) => {
+
+        this.venues = [...this.venues, ...data.venueDtoList];
+        // this.venues = this.venues.concat(data.venueDtoList);
+        console.log('venues', data.venueDtoList);
+        this.totalPages = data.totalPages;
+      });
+  }
+
+  // FILTER BY VENUE
+  filter(event) {
+    this.filterText = event.target.value;
+    if (this.filterText == 'all') {
+      console.log('get data for venue')
+    }
+    else {
+      console.log('get data by venue')
+    }
   }
 }
