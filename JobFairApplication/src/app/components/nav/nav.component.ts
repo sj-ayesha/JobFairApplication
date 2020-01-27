@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, AfterViewInit } from '@angular/core';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { ChangeVenueService } from 'src/app/services/change-venue.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
-export class NavComponent implements OnInit, OnDestroy {
+export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   public venueName: string;
   count: number;
   dissabled = true;
@@ -40,6 +40,11 @@ export class NavComponent implements OnInit, OnDestroy {
     this.changeVenueService.cast.subscribe(data => this.venue = data);
 
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
+
+  }
+
+  ngAfterViewInit(): void {
+    this.treeViewNav();
   }
 
   ngOnDestroy() {
@@ -66,11 +71,6 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   navigateToHome() {
-    // if (localStorage.user !== undefined && localStorage.venue_id !== undefined) {
-    //   this.router.navigate(['/home']);
-    // } else {
-    //   this.dissabled = true;
-    // }
     if (localStorage.venue_id !== undefined) {
       this.router.navigate(['/home']);
     } else {
@@ -81,5 +81,18 @@ export class NavComponent implements OnInit, OnDestroy {
   navigateToDashboard(){
     // this.dashboard = true;
     this.router.navigate(['/dashboard']);
+  }
+
+  treeViewNav() {
+    console.log('test')
+    const toggler = document.getElementsByClassName('caret');
+    let i;
+
+    for (i = 0; i < toggler.length; i++) {
+      toggler[i].addEventListener('click', function() {
+        this.parentElement.querySelector('.nested').classList.toggle('active');
+        this.classList.toggle('caret-down');
+      });
+    }
   }
 }

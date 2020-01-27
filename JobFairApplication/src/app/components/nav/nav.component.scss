@@ -84,9 +84,51 @@ a.venue-name {
   display: flex;
   flex-direction: column;
 
+  ul {
+    padding: 0 10px;
+
+    li {
+      padding: 15px 0;
+      list-style: none;
+      font-size: 18px;
+      color: $color-light-black;
+    }
+  }
+
+  ul.nested {
+    li {
+      padding-bottom: 0;
+    }
+  }
+
+  .nested {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+  .caret {
+    cursor: pointer;
+  }
+
+  .caret::before {
+    content: "\25B6";
+    color: $color-light-red;
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg);
+}
+
   a {
-    padding: 20px 18px;
     font-size: 18px;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
 
     &:hover {
       // background-color: $color-light-red;
