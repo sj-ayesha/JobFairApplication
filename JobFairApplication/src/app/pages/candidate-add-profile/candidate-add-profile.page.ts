@@ -51,7 +51,7 @@ export class CandidateAddProfilePage implements OnInit {
   arrayScreening: any[];
   arrayFile: any[];
 
-  fileData: File = null; // File Upload
+  fileData: FileList = null; // File Upload
   selectedFiles: File[] = [];
   myFiles:string [] = [];
   uploading: boolean;
@@ -358,6 +358,7 @@ export class CandidateAddProfilePage implements OnInit {
       this.unsuccessMsg();
     } else {
       // this.uploadCV(candidateDetails, this.fileData);
+      this.attachFile();
       this.successMsg();
 
       setTimeout(() => {
@@ -368,19 +369,32 @@ export class CandidateAddProfilePage implements OnInit {
   }
 
   selectFile(event) {
-    debugger;
-    this.attachFile(event.target.files);
-    event.target.value = null;
-    debugger
+    this.fileData = event.target.files;
+    this.checkFileFormatSize();
+  }
 
-    if (event.target.files.length > 0) {
-      debugger
-      this.fileData = event.target.files[0];
+  checkFileFormatSize() {
+    const output = document.getElementById('fileList');
+
+    for (let i = 0; i < this.fileData.length; i++) {
+      const file = this.fileData.item(i);
+
+      if (file.type.match('image.*|application.*')) {
+        const size = this.fileData.item(i).size;
+        if (size > 5266467) {
+          alert('size must not exceeds 5 MB');
+        } else {
+          output.innerHTML += '<li style="list-style: none;"><ion-icon ios="ios-document" md="md-document"></ion-icon>'
+          + file.name + '</li>';
+          this.attachments.push(file);
+        }
+      } else {
+        alert('invalid format!');
+      }
     }
   }
 
-  attachFile(fileList: FileList) {
-    debugger
+  attachFile() {
     const filteredCandidateSkills = this.CandidateSkills.filter(data => {
       return data.checked === true;
     });
@@ -430,25 +444,6 @@ export class CandidateAddProfilePage implements OnInit {
       candidateScreeningDtos: this.arrayScreening,
       candidateFileDtos: this.arrayFile
     };
-
-    const output = document.getElementById('fileList');
-
-    for (let i = 0; i < fileList.length; i++) {
-      const file = fileList.item(i);
-
-      if (file.type.match('image.*|application.*')) {
-        const size = fileList.item(i).size;
-        if (size > 5266467) {
-          alert('size must not exceeds 5 MB');
-        } else {
-          output.innerHTML += '<li style="list-style: none;"><ion-icon ios="ios-document" md="md-document"></ion-icon>'
-          + file.name + '</li>';
-          this.attachments.push(file);
-        }
-      } else {
-        alert('invalid format!');
-      }
-    }
 
     this.candidateService.uploadCVs(candidateDetails, this.attachments).toPromise().then(
       (res) => {

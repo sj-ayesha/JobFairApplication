@@ -4,6 +4,9 @@ import { Candidate, CandidateResponseList } from 'src/app/model/candidate';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 import { CandidateVenueJobDtoResponseList, CandidateVenueJob } from 'src/app/model/candidateVenueJob';
+import { Venue, VenueResponseList } from 'src/app/model/venue';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { VenueJobResponseList, VenueJob } from 'src/app/model/venueJob';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,10 +15,10 @@ import { CandidateVenueJobDtoResponseList, CandidateVenueJob } from 'src/app/mod
 })
 export class DashboardPage implements OnInit {
 
-  @ViewChild('horizontalBarChart', {static: false}) horizontalBarChart;
-  @ViewChild('pieChart', {static: false}) pieChart;
-  @ViewChild('verticalBarChart', {static: false}) verticalBarChart;
-  @ViewChild ('doughnutChart', {static: false}) doughnutChart;
+  @ViewChild('horizontalBarChart', { static: false }) horizontalBarChart;
+  @ViewChild('pieChart', { static: false }) pieChart;
+  @ViewChild('verticalBarChart', { static: false }) verticalBarChart;
+  @ViewChild('doughnutChart', { static: false }) doughnutChart;
 
   horizontalBars: any;
   colorArray: any;
@@ -30,10 +33,26 @@ export class DashboardPage implements OnInit {
   noCandidatesAvailable = false;
   candidateVenueJobsLists: CandidateVenueJob[] = [];
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  limitVenue = 50;
+  pageVenue = 0;
+  venues: Venue[] = [];
+  filterText: string;
+  formDashboard: FormGroup;
+
+  jobNotFound = false;
+  public venueJobs: VenueJob[] = [];
+  noJobsAvailable = false;
+
+  constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
+    this.formDashboard = this.formBuilder.group({
+      venue: new FormControl()
+    });
+  }
 
   ngOnInit() {
     this.populateCandidate();
+    this.getAllVenue();
+    this.getAllJobsByVenueId();
   }
 
   ionViewDidEnter() {
@@ -56,11 +75,11 @@ export class DashboardPage implements OnInit {
     this.pie = new Chart(this.pieChart.nativeElement, {
       type: 'pie',
       data: {
-        labels: ['Africa', 'Asia', 'Europe', 'Latin America', 'North America'],
+        labels: ['SE', 'HR', 'BA', 'Architect', 'QA', 'Manager'],
         datasets: [{
-          label: 'Population (millions)',
-          backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850'],
-          data: [2478, 5267, 734, 784, 433]
+          label: 'Candidates',
+          backgroundColor: ['#833471', '#EA2027', '#EE5A24', '#0652DD', '#009432', '#F79F1F'],
+          data: [2478, 1000, 734, 784, 433, 900]
         }]
       },
       options: {
@@ -85,8 +104,8 @@ export class DashboardPage implements OnInit {
         datasets: [{
           label: 'List of Candidates & Jobs',
           data: [43, 9],
-          backgroundColor: 'rgb(226, 54, 21)', // array should have same number of elements as number of dataset
-          borderColor: 'rgb(226, 54, 21)', // array should have same number of elements as number of dataset
+          backgroundColor: '#0652DD', // array should have same number of elements as number of dataset
+          borderColor: '#0652DD', // array should have same number of elements as number of dataset
           borderWidth: 1
         }]
       },
@@ -116,12 +135,12 @@ export class DashboardPage implements OnInit {
       type: 'bar',
       data: {
         labels: ['Jan 2020', 'Feb 2020', 'Mar 2020', 'Apr 2020', 'May 2020', 'Jun 2020',
-        'Jul 2020', 'Aug 2020', 'Sep 2020', 'Oct 2020', 'Nov 2020', 'Dec 2020'],
+          'Jul 2020', 'Aug 2020', 'Sep 2020', 'Oct 2020', 'Nov 2020', 'Dec 2020'],
         datasets: [{
           label: 'No. of Candidates',
           data: [2, 3, 5, 6, 6, 7, 4, 2, 1, 2, 5, 0],
-          backgroundColor: 'rgb(0, 102, 204)', // array should have same number of elements as number of dataset
-          borderColor: 'rgb(0, 102, 204)', // array should have same number of elements as number of dataset
+          backgroundColor: '#009432', // array should have same number of elements as number of dataset
+          borderColor: '#009432', // array should have same number of elements as number of dataset
           borderWidth: 1
         }]
       },
@@ -154,7 +173,7 @@ export class DashboardPage implements OnInit {
         datasets: [
           {
             label: 'Population (millions)',
-            backgroundColor: ['#E23615', '#0080FF', '#00CC66'],
+            backgroundColor: ['#EA2027', '#0652DD', '#009432'],
             data: [25, 35, 40]
           }
         ]
@@ -190,8 +209,53 @@ export class DashboardPage implements OnInit {
       });
 
   }
-  
+
   routeTo(candidateId: number) {
     this.router.navigate(['/candidate-details', candidateId]);
+  }
+
+  // VENUE
+  getAllVenue() {
+    this.apiService.getAllVenue(this.pageVenue, this.limitVenue).subscribe(
+      (data: VenueResponseList) => {
+
+        this.venues = [...this.venues, ...data.venueDtoList];
+        // this.venues = this.venues.concat(data.venueDtoList);
+        console.log('venues', data.venueDtoList);
+        this.totalPages = data.totalPages;
+      });
+  }
+
+  // FILTER BY VENUE
+  filter(event) {
+    this.filterText = event.target.value;
+    if (this.filterText == 'all') {
+      console.log('get data for venue')
+    }
+    else {
+      console.log('get data by venue')
+    }
+  }
+
+  // Get All jobs by venue
+  getAllJobsByVenueId(event?) {
+    // tslint:disable-next-line: radix
+    this.jobNotFound = false;
+    this.apiService.getJobsByVenueId(1, 0, 3).subscribe(
+      (data: VenueJobResponseList) => {
+        this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
+        console.log('jobs', this.venueJobs)
+        this.totalPages = data.totalPages;
+
+        if (this.venueJobs.length === 0) {
+          this.noJobsAvailable = true;
+        } else {
+          this.noJobsAvailable = false;
+        }
+        if (event) {
+          event.target.complete();
+        }
+      }
+    );
   }
 }
