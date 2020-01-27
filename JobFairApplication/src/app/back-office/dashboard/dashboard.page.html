@@ -27,7 +27,7 @@
       <ion-col size="4">
         <ion-card class="welcome-card">
           <ion-card-content class="horizontal-chart">
-            <canvas #horizontalBarChart width="800" height="450"></canvas>
+            <canvas #horizontalBarChart width="800" height="600"></canvas>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -36,7 +36,7 @@
       <ion-col size="4">
         <ion-card>
           <ion-card-content>
-            <canvas #doughnutChart width="800" height="450"></canvas>
+            <canvas #doughnutChart width="800" height="600"></canvas>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -45,18 +45,47 @@
       <ion-col size="4">
         <ion-card>
           <ion-card-content>
-            <canvas #pieChart width="800" height="450"></canvas>
+            <canvas #pieChart width="800" height="600"></canvas>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <!--Vertical Bar Chart-->
       <ion-col size="6">
-        <ion-card class="vertical-chart">
+        <ion-card>
+          <ion-card-title text-center>
+            <h5>List of Jobs</h5>
+          </ion-card-title>
           <ion-card-content>
-            <canvas #verticalBarChart width="800" height="450"></canvas>
+            <ion-item class="candidate-item"
+              *ngFor="let job of venueJobs">
+              <ion-avatar slot="start">
+                <img src="../../../assets/img/avatar_work.png" />
+              </ion-avatar>
+              <ion-label>
+                <h5 class="title"><b>{{ job.job.title }}</b></h5>
+                <p class="text"><b>Category:</b> {{job.job.category}}</p>
+                <p class="text">
+                  <b>Level:</b>
+                  {{job.job.level}}
+                </p>
+              </ion-label>
+              <ion-label slot="end">
+                <p class="text"><b>Years of Experience:</b> {{job.job.minimumExperience}}</p>
+                <p class="text"><b>Qualification:</b> {{job.job.qualificationNeeded}}</p>
+                <p class="text"><b>Venue:</b> {{job.venue.venueName}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-row>
+              <ion-col size="12" class="ion-padding btn-actions">
+                <div class="btn-back ion-text-center">
+                  <ion-button class="btn" color="dark" routerLink="/jobs-bo">
+                    View More
+                  </ion-button>
+                </div>
+              </ion-col>
+            </ion-row>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -92,7 +121,7 @@
             <ion-row>
               <ion-col size="12" class="ion-padding btn-actions">
                 <div class="btn-back ion-text-center">
-                  <ion-button class="btn" color="dark">
+                  <ion-button class="btn" color="dark" routerLink="/candidate-list">
                     View More
                   </ion-button>
                 </div>
@@ -105,6 +134,14 @@
     </ion-row>
 
     <ion-row>
+            <!--Vertical Bar Chart-->
+            <ion-col size="12">
+              <ion-card class="vertical-chart">
+                <ion-card-content>
+                  <canvas #verticalBarChart width="800" height="200"></canvas>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
 
 
       <!-- <ion-col size="6">
