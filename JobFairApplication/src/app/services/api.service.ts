@@ -13,6 +13,7 @@ import { CandidateVenueJobPriority } from '../model/candidateVenueJobPriority';
 import { Skills } from '../model/skills';
 import { CandidateScreening } from '../model/candidateScreening';
 import { JobCategoryDto } from '../model/jobCategoryDto';
+import { VenueJobMultipleSaveDto } from '../model/VenueJobMultipleSaveDto';
 
 
 @Injectable({
@@ -21,7 +22,7 @@ import { JobCategoryDto } from '../model/jobCategoryDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  // baseUrl = 'https://dd26b9cf.ngrok.io/'; // url to access backend
+  // baseUrl = 'https://f86927ff.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
   baseUrl = 'http://localhost:8081/';
 
@@ -90,9 +91,11 @@ export class ApiService {
     return this.http.get<CandidateVenueJob[]>(this.baseUrl + 'candidate-venue-job/candidates/lastname/' + lastName);
   }
 
-  getAllCandidatesByScreeningStatus(screeningStatus: string, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
+  getAllCandidatesByScreeningStatus(screeningStatus: string, pageNumber: number, pageSize: number):
+  Observable<CandidateVenueJobDtoResponseList[] | any> {
     return this.http.get<CandidateVenueJobDtoResponseList[] | any>
-    (this.baseUrl + 'candidate-venue-job/candidates-screening-status/' + screeningStatus + '?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+    (this.baseUrl + 'candidate-venue-job/candidates-screening-status/' + screeningStatus + '?pageNumber='
+    + pageNumber + '&pageSize=' + pageSize);
   }
 
   getAllCandidatesByLevel(level: string, pageNumber: number, pageSize: number): Observable<CandidateVenueJobDtoResponseList[] | any> {
@@ -144,6 +147,10 @@ export class ApiService {
 
   searchJobByLevel(venueId: number, level: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/level' + '?venueId=' + venueId + '&level=' + level);
+  }
+
+  saveMultipleVenueJob(multipleVenueJob: VenueJobMultipleSaveDto): Observable<VenueJobMultipleSaveDto | any> {
+    return this.http.post<VenueJobMultipleSaveDto>(this.baseUrl + 'venue-job/multiple-job', multipleVenueJob);
   }
 
   // venue

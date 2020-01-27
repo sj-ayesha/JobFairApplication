@@ -1,43 +1,49 @@
-<ion-content padding>
+<ion-content>
   <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
-  <div class="wrapper-content">
-    <ion-card-header>
-      <ion-row>
-        <ion-col size="12">
-          <div class="title">
-            <ion-icon class="icon-users" ios="ios-people" md="md-people"></ion-icon>
-            <h3>List of Candidates</h3>
-          </div>
-        </ion-col>
-      </ion-row>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <div class="title">
+          <ion-icon class="icon-users" ios="ios-people" md="md-people"></ion-icon>
+          <h3>List of Candidates</h3>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
+  <div class="wrapper-content">
       <ion-row class="filter-row" *ngIf="!noCandidatesAvailable">
         <ion-col size="6">
           <div class="btn-order">
             <div class="search-container">
               <!-- <ion-input #test class="no-padding"></ion-input> -->
-              <ion-item class="search-input">
+              <!-- <ion-item class="search-input">
                 <ion-input placeholder="Search by last name..." type="text" #name
                   (keyup.enter)="searchByLastName(name.value)"></ion-input>
               </ion-item>
+
               <ion-button (click)="searchByLastName(name.value)" class="btn btn--search" color="dark" size="small">
                 <ion-icon name="search"></ion-icon>
-              </ion-button>
+              </ion-button> -->
+              <ion-searchbar placeholder="Search by last name..." type="text" #lastName
+                (ionInput)="searchByLastName(lastName.value)"></ion-searchbar>
             </div>
           </div>
         </ion-col>
 
         <ion-col size="6" class="ion-padding btn-order">
           <div class="btn-asc ion-padding">
-            <ion-button [disabled]="disableASC" (click)="getAllCandidatesByAsc()" class="btn" color="light" size="small">
+            <ion-button [disabled]="disableASC" (click)="getAllCandidatesByAsc()" class="btn" color="light"
+              size="small">
               <ion-icon name="arrow-up"></ion-icon>
             </ion-button>
           </div>
           <div class="btn-desc ion-padding-top ion-padding-bottom ion-padding-end">
-            <ion-button [disabled]="disableDESC" (click)="getAllCandidatesByDesc()" class="btn" color="light" size="small">
+            <ion-button [disabled]="disableDESC" (click)="getAllCandidatesByDesc()" class="btn" color="light"
+              size="small">
               <ion-icon name="arrow-down"></ion-icon>
             </ion-button>
           </div>
@@ -50,7 +56,8 @@
             <ion-label position="floating" color="medium">Filter Candidates by venue..</ion-label>
             <ion-select (ionChange)="filterByVenue($event)" interface="popover" class="ion-float-left">
               <ion-select-option value='0' selected="selected">All</ion-select-option>
-              <ion-select-option *ngFor="let venue of venues" value={{venue.venueId}}>{{venue.venueName}}</ion-select-option>
+              <ion-select-option *ngFor="let venue of venues" value={{venue.venueId}}>{{venue.venueName}}
+              </ion-select-option>
               <!-- <ion-select-option value='1'>UOM</ion-select-option>
               <ion-select-option value='2'>UTM</ion-select-option>
               <ion-select-option value='3'>CTI</ion-select-option> -->
@@ -80,7 +87,6 @@
           </ion-item>
         </ion-col>
       </ion-row>
-    </ion-card-header>
 
     <div class="asc" *ngIf="resetAll">
       <div class="candidateNotFound" *ngIf="!candidateNotFound">
@@ -307,10 +313,10 @@
             Total number of candidates: {{totalCandidates}}
           </p>
         </div>
-        <ion-button class="btn ion-float-right" color="light" [routerLink]="['/home']"
+        <!-- <ion-button class="btn ion-float-right" color="light" [routerLink]="['/home']"
           routerLinkActive="router-link-active">
           <ion-icon name="arrow-back"></ion-icon>Back
-        </ion-button>
+        </ion-button> -->
       </ion-col>
     </ion-row>
   </div>

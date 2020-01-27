@@ -33,6 +33,7 @@ export class CandidateListPage implements OnInit {
   message: any;
   public responseData: any;
   public dataSet: [];
+  lastname: string;
 
   limit = 10;
   page = 0;
@@ -463,7 +464,7 @@ export class CandidateListPage implements OnInit {
 
   searchByLastName(lastName: any) {
     this.candidateNotFound = false;
-    if (lastName === '') {
+    if (lastName === '' ) {
       this.resetAll = true;
       this.resetASC = false;
       this.resetDESC = false;
@@ -477,6 +478,7 @@ export class CandidateListPage implements OnInit {
           this.candidateNotFound = true;
         } else {
           this.candidateVenueJobsLists = data;
+          return this.candidateVenueJobsLists;
         }
       });
     }

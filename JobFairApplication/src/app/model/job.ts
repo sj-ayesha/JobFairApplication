@@ -6,6 +6,7 @@ export class Job {
     description: string;
     minimumExperience: string;
     qualificationNeeded: string;
+    checked: boolean;
 }
 
 

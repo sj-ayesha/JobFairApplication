@@ -61,7 +61,6 @@ export class JobsPopupPage implements OnInit {
 
   ngOnInit() {
     this.categories = this.dropdowns.categories;
-    console.log(this.categories);
 
     this.addEditPopupService.cast.subscribe(edit => this.edit = edit);
 
@@ -95,26 +94,15 @@ export class JobsPopupPage implements OnInit {
               } else
                 if (this.jobs[3] === 'human-resource') {
                   this.category = 'Human Resource';
-                } else
-                  if (this.jobs[2] === 'fresher') {
-                    this.category = 'Fresher';
-                  } else
-                    if (this.jobs[2] === 'junior') {
-                      this.category = 'Junior';
-                    } else
-                      if (this.jobs[2] === 'senior') {
-                        this.category = 'Senior';
-                      }
-
-
+                }
 
       this.formAddJob = this.formBuilder.group({
-        title: new FormControl(''),
+        title: new FormControl(this.title),
         level: new FormControl(this.level),
         category: new FormControl(this.category),
-        description: new FormControl(''),
-        minimumExperience: new FormControl(''),
-        qualificationNeeded: new FormControl(''),
+        description: new FormControl(this.description),
+        minimumExperience: new FormControl(this.minimumExperience),
+        qualificationNeeded: new FormControl(this.qualificationNeeded),
       });
     } else {
       this.formAddJob = this.formBuilder.group({
@@ -166,6 +154,7 @@ export class JobsPopupPage implements OnInit {
       description: this.formAddJob.get('description').value,
       minimumExperience: this.formAddJob.get('minimumExperience').value,
       qualificationNeeded: this.formAddJob.get('qualificationNeeded').value,
+      checked: null
     };
     console.log(addJob);
     this.apiService.saveJob(addJob).subscribe(
@@ -196,20 +185,39 @@ export class JobsPopupPage implements OnInit {
   }
 
   editJob() {
+    if (this.formAddJob.get('category').value === 'Software Engineer') {
+      this.category = 'software-engineer';
+    } else
+      if (this.formAddJob.get('category').value === 'Architect') {
+        this.category = 'architect';
+      } else
+        if (this.formAddJob.get('category').value === 'Manager') {
+          this.category = 'manager';
+        } else
+          if (this.formAddJob.get('category').value === 'Business Analyst') {
+            this.category = 'business-analyst';
+          } else
+            if (this.formAddJob.get('category').value === 'Quality Assurance') {
+              this.category = 'quality-assurance';
+            } else
+              if (this.formAddJob.get('category').value === 'Human Resource') {
+                this.category = 'human-resource';
+              }
     const editJob = {
       jobId: JSON.parse(this.jobId),
       title: this.formAddJob.get('title').value,
       level: this.formAddJob.get('level').value,
-      category: this.formAddJob.get('category').value,
+      category: this.category,
       description: this.formAddJob.get('description').value,
       minimumExperience: this.formAddJob.get('minimumExperience').value,
-      qualificationNeeded: this.formAddJob.get('qualificationNeeded').value
+      qualificationNeeded: this.formAddJob.get('qualificationNeeded').value,
+      checked: null
     };
     this.apiJobId = JSON.parse(this.jobId);
-
+    console.log('category', this.category);
     this.apiService.editJob(editJob).subscribe(
       data => {
-        // this.router.navigate(['home']);
+
       },
       error => {
         // alert("Data not saved!");
@@ -219,7 +227,18 @@ export class JobsPopupPage implements OnInit {
 
   async successMsg() {
     const toast = await this.toastCtrl.create({
-      message: 'New skill has been succesfully saved',
+      message: 'New job has been succesfully saved',
+      position: 'top',
+      color: 'success',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  async successEditMsg() {
+    const toast = await this.toastCtrl.create({
+      message: this.title + ' has been succesfully edited',
       position: 'top',
       color: 'success',
       duration: 2000,
@@ -239,6 +258,9 @@ export class JobsPopupPage implements OnInit {
     toast.present();
   }
 
+  makeFalse(){
+    this.addEditPopupService.reloadComponent(false);
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -248,9 +270,10 @@ export class JobsPopupPage implements OnInit {
     } else {
       if (this.edit === true) {
         this.editJob();
-        this.successMsg();
+        this.successEditMsg();
         this.formAddJob.reset();
         this.modalController.dismiss();
+        this.addEditPopupService.reloadComponent(true);
       } else {
         this.addJob();
         this.successMsg();

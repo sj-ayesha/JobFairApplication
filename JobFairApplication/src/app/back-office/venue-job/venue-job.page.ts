@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, QueryList, ElementRef, ViewChildren, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { VenueResponseList, Venue } from 'src/app/model/venue';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, ToastController } from '@ionic/angular';
 import { JobResponseList, Job } from 'src/app/model/job';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AssociateVenueJobs } from 'src/app/model/AssociateVenueJob';
 import { element } from 'protractor';
 import { VenueJobResponseList, VenueJob } from 'src/app/model/venueJob';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-venue-job',
@@ -25,6 +26,8 @@ export class VenueJobPage implements OnInit, OnDestroy {
   addJob: any[] = [];
   filterText: number;
   selectedVenue: string;
+  selectedVenueDate: Date;
+  selectedVenueDto: Venue;
   genders: Array<string>;
 
   checkBoxArray: Array<number> = [];
@@ -38,15 +41,24 @@ export class VenueJobPage implements OnInit, OnDestroy {
 
   venueName: string;
 
+  submitted = false;
+
   totalPages = 0;
+
+  error_messages = {
+    venue: [
+      { type: 'required', message: '⚠ Venue is required' },
+    ]
+  };
 
   constructor(
     private apiService: ApiService,
     private formBuilder: FormBuilder,
+    private toastCtrl: ToastController,
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.formAddVenueJob = this.formBuilder.group({
-      venue: new FormControl(),
+      venue: new FormControl('', Validators.required),
       job: new FormControl()
     });
   }
@@ -57,7 +69,7 @@ export class VenueJobPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.changeDetectorRef.detach()
+    this.changeDetectorRef.detach();
   }
 
   ionViewWillEnter() {
@@ -75,6 +87,8 @@ export class VenueJobPage implements OnInit, OnDestroy {
     setTimeout(() => {
       event.target.complete();
     }, 2000);
+
+    this.getAllJobsByVenueId();
   }
 
   // VENUE
@@ -94,7 +108,6 @@ export class VenueJobPage implements OnInit, OnDestroy {
     this.apiService.getAllJobs(this.pageJob, this.limitJob).subscribe(
       (data: JobResponseList) => {
         this.jobs = [...this.jobs, ...data.jobDtoList];
-        console.log('jobs', this.jobs);
       });
   }
 
@@ -112,6 +125,8 @@ export class VenueJobPage implements OnInit, OnDestroy {
         this.totalPages = data.totalPages;
         this.venueJobs.forEach(venueJob => {
           this.selectedVenue = venueJob.venue.venueName;
+          this.selectedVenueDate = venueJob.venue.startDate;
+          this.selectedVenueDto = venueJob.venue;
         });
         const jobIdsForVenue = this.venueJobs.map((venueJob) => venueJob.job.jobId);
         this.jobs = this.jobs.map((job) => {
@@ -145,24 +160,60 @@ export class VenueJobPage implements OnInit, OnDestroy {
 
   // SUBMIT ADD JOBS TO VENUE
   postJobsVenue() {
+    const venue = {
+      venueId: this.filterText,
+      venueName: null,
+      startDate: null,
+      endDate: null,
+      address: null,
+      active: null
+    }
     const addVenueJob = {
-      venue: {
-        venueId: this.filterText
-      },
-      job: this.addJob
+      venue: venue,
+      job: this.jobs,
+      venueJobDate: new Date()
     };
 
-    console.log(addVenueJob);
+    console.log('addVenueJob', addVenueJob);
+    this.apiService.saveMultipleVenueJob(addVenueJob).subscribe(
+      data => {
+        this.getAllJobsByVenueId();
+      },
+      error => {
+        // alert("Data not saved!");
+      }
+    );
+  }
+
+  async successMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Job(s) have been successfully added to Venue: ' + this.selectedVenue,
+      position: 'top',
+      color: 'success',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  async unsuccessMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Please select a venue',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
   }
 
   onSubmit() {
-    const addVenueJob = {
-      venue: {
-        venueId: this.filterText
-      },
-      job: this.jobs
-    };
-
-    console.log(addVenueJob)
+    if (this.formAddVenueJob.invalid) {
+      this.unsuccessMsg();
+    } else {
+      this.submitted = true;
+      this.postJobsVenue();
+      this.successMsg();
+    }
   }
 }

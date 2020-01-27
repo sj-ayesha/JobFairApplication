@@ -12,28 +12,26 @@
         </ion-col>
       </ion-row>
       <ion-row *ngIf="!noJobsAvailable">
+        <ion-col size="6" class="filter-search ion-padding">
+          <!-- <ion-item class="search-input">
+            <ion-input placeholder="Search by job title..." type="text" #title
+              (keyup.enter)="searchByTitle(title.value)"></ion-input>
+          </ion-item>
+          <ion-button class="btn btn--search" color="dark" size="small" (click)="searchByTitle(title.value)">
+            <ion-icon name="search"></ion-icon>
+          </ion-button> -->
+          <ion-searchbar placeholder="Search..." type="text" #title (ionInput)="searchByTitle(title.value)"></ion-searchbar>
+        </ion-col>
         <ion-col size="6" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Please select position..</ion-label>
-            <ion-select (ionChange)="filter($event)" interface="popover" class="ion-float-left">
+            <ion-select (ionChange)="filter($event)" interface="popover" class="ion-float-left" >
               <ion-select-option value="all" selected="selected">All</ion-select-option>
               <ion-select-option value="fresher">Fresher</ion-select-option>
               <ion-select-option value="junior">Junior</ion-select-option>
               <ion-select-option value="senior">Senior</ion-select-option>
             </ion-select>
           </ion-item>
-        </ion-col>
-
-        <ion-col size="6" class="filter-search ion-padding">
-          <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" class="ion-float-right">
-          </ion-searchbar> -->
-          <ion-item class="search-input">
-            <ion-input placeholder="Search by job title..." type="text" #title
-              (keyup.enter)="searchByTitle(title.value)"></ion-input>
-          </ion-item>
-          <ion-button class="btn btn--search" color="dark" size="small" (click)="searchByTitle(title.value)">
-            <ion-icon name="search"></ion-icon>
-          </ion-button>
         </ion-col>
       </ion-row>
 

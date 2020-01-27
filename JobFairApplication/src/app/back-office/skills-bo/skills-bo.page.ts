@@ -15,6 +15,7 @@ export class SkillsBoPage implements OnInit {
   skills: Skills[];
   public columns: any;
   editSkills: any[] = [];
+  reload: boolean;
 
   constructor(
     private apiService: ApiService,
@@ -24,13 +25,15 @@ export class SkillsBoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    if (this.reload === true){
+      this.getAllSkills();
+    }
   }
 
   ionViewWillEnter() {
     this.getAllSkills();
     localStorage.removeItem('editSkills');
-  }
-  ionViewWillLeave() {
   }
 
   getAllSkills() {

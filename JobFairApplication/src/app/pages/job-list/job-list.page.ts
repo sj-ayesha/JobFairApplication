@@ -113,7 +113,7 @@ export class JobListPage implements OnInit {
 
   async unsuccessMsgEmpty() {
     const toast = await this.toastCtrl.create({
-      message: 'Please select atleast a job',
+      message: 'Please select at least one job',
       position: 'top',
       color: 'danger',
       duration: 2000,

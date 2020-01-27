@@ -6,11 +6,18 @@ p{
 }
 .title{
     display: flex;
+    padding: 0 10px;
+}
+  
+.title h3{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5px;
 }
 
 .icon-users{
     font-size: 48px;
-    padding-top: 12px;
+    // padding-top: 12px;
     padding-right: 10px;
 }
 

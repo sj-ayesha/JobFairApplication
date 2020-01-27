@@ -17,10 +17,10 @@ h5{
 .header-wrap{
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  // padding: 0 20px;
 }
 .add-button{
-  padding-top: 19px;
+  // padding-top: 19px;
 }
 
 .list-icon {
@@ -288,4 +288,9 @@ h5{
       cursor: pointer;
       color: $color-light-red;
     }
+  }
+
+  .title h3{
+    margin-top: 0;
+    margin-bottom: 0;
   }

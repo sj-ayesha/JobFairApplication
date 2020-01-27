@@ -43,6 +43,14 @@ export class DashboardPage implements OnInit {
     this.createDoughnutChart();
   }
 
+  doRefresh(event) {
+    this.ngOnInit();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
   // Pie Chart
   createPieChart() {
     this.pie = new Chart(this.pieChart.nativeElement, {
@@ -58,7 +66,7 @@ export class DashboardPage implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'Predicted world population (millions) in 2050',
+          text: 'Candidates per Job',
           fontStyle: 'normal',
           fontFamily: 'Proxima Nova Regular',
           fontSize: 24,
@@ -73,7 +81,7 @@ export class DashboardPage implements OnInit {
     this.horizontalBars = new Chart(this.horizontalBarChart.nativeElement, {
       type: 'horizontalBar',
       data: {
-        labels: ['Total no. of Candidates', 'Total No. of Jobs'],
+        labels: ['Candidates', 'Jobs'],
         datasets: [{
           label: 'List of Candidates & Jobs',
           data: [43, 9],

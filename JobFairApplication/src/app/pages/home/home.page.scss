@@ -201,3 +201,24 @@ ion-list{
 //         height: 60%;
 //     }
 // }
+
+ion-card.why-elca{
+    background-color: #414344;
+    h3,p,h5{
+        color:white!important;
+    }
+    h5,p{
+        text-align: left;
+    }
+
+}
+
+.border-right{
+    border-right: 1px solid white;
+}
+.add-space{
+    padding-left:10px;
+}
+.wrap-motive{
+    padding-bottom: 20px;
+}

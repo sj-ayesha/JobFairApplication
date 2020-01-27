@@ -16,9 +16,10 @@ h5{
 .header-wrap{
     display: flex;
     justify-content: space-between;
+    // padding: 0 20px;
 }
 .add-button{
-    padding-top: 19px;
+    // padding-top: 19px;
 }
 
 $breakpoint-alpha: 480px; // adjust to your needs
@@ -132,5 +133,23 @@ body {
   .edit-btn{
     cursor: pointer;
     color: $color-light-red;
+  }
+}
+
+.list-icon {
+  font-size: 39px;
+  padding-right: 10px;
+  // padding: 13px 18px;
+}
+
+
+.title h3{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1024px){
+  .rwd-table tr{
+    font-size: 16px;
   }
 }

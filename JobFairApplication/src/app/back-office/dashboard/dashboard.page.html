@@ -1,112 +1,128 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
-  <ion-row>
-    <ion-col size="12" class="ion-padding">
-      <ion-item class="venue-input">
-        <ion-label position="floating" color="medium">Please select venue..</ion-label>
-        <ion-select interface="popover" class="ion-float-left">
-          <ion-select-option>UTM</ion-select-option>
-          <ion-select-option>UOM</ion-select-option>
-          <ion-select-option>ELCA</ion-select-option>
-          <!-- <ion-select-option value="all" selected="selected">All</ion-select-option> -->
-          <!-- <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}}
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <div class="header-wrap">
+          <div class="title">
+            <ion-icon class="list-icon" ios="ios-clipboard" md="md-clipboard"></ion-icon>
+            <h3>Dashboard</h3>
+          </div>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="wrapper-content">
+    <ion-row>
+      <ion-col size="12" class="ion-padding">
+        <ion-item class="venue-input">
+          <ion-label position="floating" color="medium">Please select venue..</ion-label>
+          <ion-select interface="popover" class="ion-float-left">
+            <ion-select-option>UTM</ion-select-option>
+            <ion-select-option>UOM</ion-select-option>
+            <ion-select-option>ELCA</ion-select-option>
+            <!-- <ion-select-option value="all" selected="selected">All</ion-select-option> -->
+            <!-- <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}}
           </ion-select-option> -->
-        </ion-select>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <!--Horizontal Bar Chart-->
-    <ion-col size="4">
-      <ion-card class="welcome-card">
-        <ion-card-content class="horizontal-chart">
-          <canvas #horizontalBarChart></canvas>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-grid>
+      <ion-row>
+        <!--Horizontal Bar Chart-->
+        <ion-col size="6">
+          <ion-card class="welcome-card">
+            <ion-card-content class="horizontal-chart">
+              <canvas #horizontalBarChart width="800" height="700"></canvas>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
 
-    <!--Doughnut Chart-->
-    <ion-col size="4">
-      <ion-card>
-        <ion-card-content>
-          <canvas #doughnutChart width="800" height="450"></canvas>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
+        <!--Doughnut Chart-->
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-content>
+              <canvas #doughnutChart width="800" height="700"></canvas>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
 
-    <!--Pie Chart-->
-    <ion-col size="4">
-      <ion-card>
-        <ion-card-content>
-          <canvas #pieChart width="800" height="450"></canvas>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+        <!--Pie Chart-->
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-content>
+              <canvas #pieChart width="800" height="1000"></canvas>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
 
-  <ion-row>
-    <!--Vertical Bar Chart-->
-    <ion-col size="6">
-      <ion-card class="vertical-chart">
-        <ion-card-content>
-          <canvas #verticalBarChart></canvas>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    
-    <ion-col size="6">
-      <ion-card>
-        <ion-card-title text-center>
-          <h5>List of Candidates</h5>
-        </ion-card-title>
-        <ion-card-content>
-          <ion-item class="candidate-item" (click)="routeTo(candidate.candidate.candidateId)"
-            *ngFor="let candidate of candidateVenueJobsLists">
-            <ion-avatar *ngIf="candidate.candidate.gender == 'Male'" slot="start">
-              <img src="../../../assets/img/avatar_male.jpg" />
-            </ion-avatar>
-            <ion-avatar *ngIf="candidate.candidate.gender=='Female'" slot="start">
-              <img src="../../../assets/img/avatar_female.jpg" />
-            </ion-avatar>
-            <ion-label class="ion-text-wrap">
-              <h5 class="title"><b>{{candidate.candidate.lastName}} {{candidate.candidate.firstName}}</b></h5>
-              <p class="text"><b>Level:</b> {{candidate.candidate.currentLevel}}</p>
-              <p class="text">
-                <b>Available from:</b>
-                {{candidate.candidate.availabilityDate}}
-              </p>
-            </ion-label>
-            <ion-label slot="end">
-              <p class="text"><b>Venue:</b> {{candidate.venueJob.venue.venueName}}</p>
-              <p class="text"><b>Job Applied:</b> {{candidate.venueJob.job.title}}</p>
-              <p class="text"><b>Job Type:</b> {{candidate.candidate.jobType}}</p>
-            </ion-label>
-          </ion-item>
-          <ion-row>
-            <ion-col size="12" class="ion-padding btn-actions">
-              <div class="btn-back ion-text-center">
-                <ion-button class="btn" color="dark">
-                  View More
-                </ion-button>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
 
-  </ion-row>
 
-  <ion-row>
-    
+        <ion-col size="6" float-sm-end>
+          <ion-card>
+            <ion-card-title text-center>
+              <h5>List of Candidates</h5>
+            </ion-card-title>
+            <ion-card-content>
+              <ion-item class="candidate-item" (click)="routeTo(candidate.candidate.candidateId)"
+                *ngFor="let candidate of candidateVenueJobsLists">
+                <ion-avatar *ngIf="candidate.candidate.gender == 'Male'" slot="start">
+                  <img src="../../../assets/img/avatar_male.jpg" />
+                </ion-avatar>
+                <ion-avatar *ngIf="candidate.candidate.gender=='Female'" slot="start">
+                  <img src="../../../assets/img/avatar_female.jpg" />
+                </ion-avatar>
+                <ion-label class="ion-text-wrap">
+                  <h5 class="title"><b>{{candidate.candidate.lastName}} {{candidate.candidate.firstName}}</b></h5>
+                  <p class="text"><b>Level:</b> {{candidate.candidate.currentLevel}}</p>
+                  <p class="text">
+                    <b>Available from:</b>
+                    {{candidate.candidate.availabilityDate}}
+                  </p>
+                </ion-label>
+                <ion-label slot="end">
+                  <p class="text"><b>Venue:</b> {{candidate.venueJob.venue.venueName}}</p>
+                  <p class="text"><b>Job Applied:</b> {{candidate.venueJob.job.title}}</p>
+                  <p class="text"><b>Job Type:</b> {{candidate.candidate.jobType}}</p>
+                </ion-label>
+              </ion-item>
+              <ion-row>
+                <ion-col size="12" class="ion-padding btn-actions">
+                  <div class="btn-back ion-text-center">
+                    <ion-button class="btn" color="dark">
+                      View More
+                    </ion-button>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-    <!-- <ion-col size="6">
+    <ion-row>
+      <!--Vertical Bar Chart-->
+      <ion-col size="6">
+        <ion-card class="vertical-chart">
+          <ion-card-content>
+            <canvas #verticalBarChart width="800" height="443"></canvas>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+
+    </ion-row>
+
+    <ion-row>
+
+
+      <!-- <ion-col size="6">
       <ion-card>
         <ion-card-title text-center>
           <h5>List of all Jobs</h5>
@@ -135,5 +151,6 @@
         </ion-card-content>
       </ion-card>
     </ion-col> -->
-  </ion-row>
+    </ion-row>
+  </div>
 </ion-content>

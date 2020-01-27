@@ -14,7 +14,7 @@
             <ion-item class="venue-input" color="red">
               <ion-label position="floating" color="dark">Venue</ion-label>
               <ion-select formControlName="venues" interface="popover" (ionChange)="selected($event)">
-                <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}}
+                <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}} | {{venue.startDate}}
                 </ion-select-option>
               </ion-select>
             </ion-item>

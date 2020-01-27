@@ -156,6 +156,17 @@ export class VenuePopupPage implements OnInit {
     toast.present();
   }
 
+  async successEditMsg() {
+    const toast = await this.toastCtrl.create({
+      message: this.venueName + ' has been succesfully saved',
+      position: 'top',
+      color: 'success',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
   async unsuccessMsg() {
     const toast = await this.toastCtrl.create({
       message: 'Please fill in all the required fields',
@@ -175,7 +186,7 @@ export class VenuePopupPage implements OnInit {
     } else {
       if (this.edit === true) {
         this.editVenue();
-        this.successMsg();
+        this.successEditMsg();
         this.formAddVenue.reset();
         this.modalController.dismiss();
       } else {

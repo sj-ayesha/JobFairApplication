@@ -3,20 +3,41 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <div class="header-wrap">
+          <div class="title">
+            <ion-icon class="list-icon" ios="ios-list" md="md-list"></ion-icon>
+            <h3>Job List</h3>
+          </div>
+          <div class="add-button">
+            <ion-button color='danger' (click)="openAddModal()">
+              <ion-icon ios="ios-add" md="md-add"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   <div class="wrapper-content">
-    <div class="header-wrap">
-      <div class="title">
-        <ion-icon class="list-icon" ios="ios-list" md="md-list"></ion-icon>
-        <h3>Job List</h3>
-      </div>
-      <div class="add-button">
-        <ion-button color='danger' (click)="openAddModal()">
-          <ion-icon ios="ios-add" md="md-add"></ion-icon>
-        </ion-button>
-      </div>
-    </div>
+
     <ion-grid>
       <ion-row>
+        <ion-col size="6" class="filter-search ion-padding">
+          <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" class="ion-float-right">
+          </ion-searchbar> -->
+          <!-- <ion-item class="search-input">
+            <ion-input placeholder="Search by job title..." type="text" #title
+              (keyup.enter)="searchByTitle(title.value)"></ion-input>
+          </ion-item>
+          <ion-button class="btn btn--search" color="dark" size="small" (click)="searchByTitle(title.value)">
+            <ion-icon name="search"></ion-icon>
+          </ion-button> -->
+          <ion-searchbar placeholder="Search by last name..." type="text" #title
+            (ionInput)="searchByTitle(title.value)"></ion-searchbar>
+        </ion-col>
+
         <ion-col size="6" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Please select position..</ion-label>
@@ -27,18 +48,6 @@
               <ion-select-option value="senior">Senior</ion-select-option>
             </ion-select>
           </ion-item>
-        </ion-col>
-
-        <ion-col size="6" class="filter-search ion-padding">
-          <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" class="ion-float-right">
-          </ion-searchbar> -->
-          <ion-item class="search-input">
-            <ion-input placeholder="Search by job title..." type="text" #title
-              (keyup.enter)="searchByTitle(title.value)"></ion-input>
-          </ion-item>
-          <ion-button class="btn btn--search" color="dark" size="small" (click)="searchByTitle(title.value)">
-            <ion-icon name="search"></ion-icon>
-          </ion-button>
         </ion-col>
       </ion-row>
 
@@ -97,7 +106,7 @@
               <div class="Edit" data-th="Edit" (click)="edit(job.jobId)">
                 <!-- <ion-checkbox color="danger" class="btn-checkbox__item" #checkboxes
                   (ionChange)="addPriority($event,job.jobId)"></ion-checkbox> -->
-                  <ion-icon class="edit-btn" ios="ios-create" md="md-create" ></ion-icon>
+                <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
               </div>
             </ion-col>
           </ion-row>
@@ -112,11 +121,11 @@
         </ion-col>
       </ion-row>
       <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content
-          loadingSpinner="crescent"
-          loadingText="Loading more candidates...">
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more candidates...">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </ion-grid>
   </div>
+
+  {{ isReload }}
 </ion-content>

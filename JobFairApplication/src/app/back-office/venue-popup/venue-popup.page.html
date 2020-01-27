@@ -101,13 +101,13 @@
 
               <ion-item>
                 <ion-label>Active</ion-label>
-                <ion-radio color="danger" slot="start" value="true" (ionSelect)="radioButtonValue($event)">
+                <ion-radio color="success" slot="start" value="true" (ionSelect)="radioButtonValue($event)">
                 </ion-radio>
               </ion-item>
 
               <ion-item>
                 <ion-label>Inactive</ion-label>
-                <ion-radio color="success" slot="start" value="false" (ionSelect)="radioButtonValue($event)">
+                <ion-radio color="danger" slot="start" value="false" (ionSelect)="radioButtonValue($event)">
                 </ion-radio>
               </ion-item>
 
@@ -118,8 +118,8 @@
 
       <div class="option-button ion-text-right">
         <ion-button class="btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
-        <ion-button class='btn' *ngIf="!edit" color="success" (click)="onSubmit()">Add</ion-button>
-        <ion-button class='btn' *ngIf="edit" color="success" (click)="onSubmit()">Edit</ion-button>
+        <ion-button class='btn' *ngIf="!edit" color="dark" (click)="onSubmit()">Add</ion-button>
+        <ion-button class='btn' *ngIf="edit" color="dark" (click)="onSubmit()">Edit</ion-button>
       </div>
     </form>
   </div>

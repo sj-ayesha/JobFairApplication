@@ -3,13 +3,19 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <div class="header-wrap">
+          <div class="title">
+            <ion-icon class="list-icon" md="md-options"></ion-icon>
+            <h3>Venue - Job</h3>
+          </div>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   <div class="wrapper-content">
-    <div class="header-wrap">
-      <div class="title">
-        <ion-icon class="list-icon" md="md-options"></ion-icon>
-        <h3>Venue - Job</h3>
-      </div>
-    </div>
     <form [formGroup]="formAddVenueJob">
       <ion-grid>
         <ion-row>
@@ -19,10 +25,18 @@
               <ion-select (ionChange)="filter($event);" formControlName="venue" interface="popover"
                 class="ion-float-left">
                 <!-- <ion-select-option value="all" selected="selected">All</ion-select-option> -->
-                <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}}
+                <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}} | {{venue.startDate}}
                 </ion-select-option>
               </ion-select>
             </ion-item>
+            <div class="error-messages">
+              <ng-container *ngFor="let error of error_messages.venue">
+                <div class="error-message"
+                  *ngIf="formAddVenueJob.get('venue').hasError(error.type) && (formAddVenueJob.get('venue').dirty || formAddVenueJob.get('venue').touched)">
+                  {{ error.message }}
+                </div>
+              </ng-container>
+            </div>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -31,14 +45,14 @@
               <ion-item *ngFor="let job of jobs; let i = index;">
                 <ion-label>{{ job.title }}</ion-label>
                 <ion-checkbox color="danger" class="messageCheckbox" slot="end" #checkboxes [checked]="job['checked']"
-                  formControlName="job" value="{{job.jobId}}"  (ionChange)="job.checked = $event.detail.checked;">
+                  formControlName="job" value="{{job.jobId}}" (ionChange)="job.checked = $event.detail.checked;">
                 </ion-checkbox>
               </ion-item>
             </ion-list>
           </ion-col>
 
           <!-- <button (click)="reset()">sfsdf</button> -->
-          
+
         </ion-row>
 
         <div class="btn-actions">
@@ -56,7 +70,7 @@
                 <div class="Venue Information">
                   <h5><b>Venue</b></h5>
                   <div class="separation"></div>
-                  <p>{{ selectedVenue }}</p>
+                  <p>{{ selectedVenue }}  {{ selectedVenueDate }}</p>
                 </div>
               </ion-col>
               <ion-col col-md-6 size="6">

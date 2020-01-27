@@ -368,15 +368,19 @@ export class CandidateAddProfilePage implements OnInit {
   }
 
   selectFile(event) {
+    debugger;
     this.attachFile(event.target.files);
     event.target.value = null;
+    debugger
 
     if (event.target.files.length > 0) {
+      debugger
       this.fileData = event.target.files[0];
     }
   }
 
   attachFile(fileList: FileList) {
+    debugger
     const filteredCandidateSkills = this.CandidateSkills.filter(data => {
       return data.checked === true;
     });

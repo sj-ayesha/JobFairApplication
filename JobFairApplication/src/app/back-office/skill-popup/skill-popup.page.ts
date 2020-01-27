@@ -133,6 +133,17 @@ export class SkillPopupPage implements OnInit {
     toast.present();
   }
 
+  async successEditMsg() {
+    const toast = await this.toastCtrl.create({
+      message: this.skillName + ' has been succesfully saved',
+      position: 'top',
+      color: 'success',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
   async unsuccessMsg() {
     const toast = await this.toastCtrl.create({
       message: 'Please fill in all the required fields',
@@ -152,7 +163,7 @@ export class SkillPopupPage implements OnInit {
     } else {
       if (this.edit === true) {
         this.editSkill();
-        this.successMsg();
+        this.successEditMsg();
         this.formAddSkill.reset();
         this.modalController.dismiss();
       } else {

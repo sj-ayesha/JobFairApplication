@@ -16,9 +16,10 @@ h5{
 .header-wrap{
     display: flex;
     justify-content: space-between;
+    // padding: 0 20px;
 }
 .add-button{
-    padding-top: 19px;
+    // padding-top: 19px;
 }
 
 $breakpoint-alpha: 480px; // adjust to your needs
@@ -145,6 +146,13 @@ body {
 }
 
 .list-icon {
-  font-size: 48px;
-  padding: 10px 18px;
+  font-size: 39px;
+  padding-right: 10px;
+  // padding: 10px 18px;
+}
+
+
+.title h3{
+  margin-top: 0;
+  margin-bottom: 0;
 }

@@ -77,18 +77,23 @@ const routes: Routes = [
   },
   {
     path: 'skill-popup',
-    loadChildren: () => import('./back-office/skill-popup/skill-popup.module').then( m => m.SkillPopupPageModule)
+    loadChildren: () => import('./back-office/skill-popup/skill-popup.module').then( m => m.SkillPopupPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'skill-popup/:skillId',
-    loadChildren: () => import('./back-office/skill-popup/skill-popup.module').then( m => m.SkillPopupPageModule)
+    loadChildren: () => import('./back-office/skill-popup/skill-popup.module').then( m => m.SkillPopupPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'jobs-popup',
-    loadChildren: () => import('./back-office/jobs-popup/jobs-popup.module').then( m => m.JobsPopupPageModule)
-  },  {
+    loadChildren: () => import('./back-office/jobs-popup/jobs-popup.module').then( m => m.JobsPopupPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'venue-job',
-    loadChildren: () => import('./back-office/venue-job/venue-job.module').then( m => m.VenueJobPageModule)
+    loadChildren: () => import('./back-office/venue-job/venue-job.module').then( m => m.VenueJobPageModule),
+    canActivate: [AuthGuard]
   },
 
 

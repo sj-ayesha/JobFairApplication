@@ -164,9 +164,10 @@
   
       <div class="option-button ion-text-right">
         <ion-button class="btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
-        <ion-button class='btn' *ngIf="!edit" color="success" (click)="onSubmit()">Add</ion-button>
-        <ion-button class='btn' *ngIf="edit" color="success" (click)="onSubmit()">Edit</ion-button>
+        <ion-button class='btn' *ngIf="!edit" color="dark" (click)="onSubmit()">Add</ion-button>
+        <ion-button class='btn' *ngIf="edit" color="dark" (click)="onSubmit()">Edit</ion-button>
       </div>
     </form>
   </div>
+  <button (click)="makeFalse()"> YYOOOO</button>
 </ion-content>
