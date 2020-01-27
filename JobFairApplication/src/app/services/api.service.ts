@@ -22,7 +22,7 @@ import { VenueJobMultipleSaveDto } from '../model/VenueJobMultipleSaveDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  // baseUrl = 'https://f86927ff.ngrok.io/'; // url to access backend
+  // baseUrl = 'https://82f819d1.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
   baseUrl = 'http://localhost:8081/';
 
@@ -130,12 +130,19 @@ export class ApiService {
   editJob(job: Job): Observable<Job> {
     return this.http.put<Job>(this.baseUrl + 'job/' + job.jobId, job);
   }
+
+  searchAllJobsByTitle(title: string): Observable<Job[] | any> {
+    return this.http.get<Job[]>(this.baseUrl + 'job/title' + '?title=' + title);
+  }
+
+  searchAllJobsByLevel(level: string): Observable<Job[] | any> {
+    return this.http.get<Job[]>(this.baseUrl + 'job/level' + '?level=' + level);
+  }
   // venue-job
 
   getJobsByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/' + venueId + '/' + pageNumber + '/' + pageSize);
   }
-  
 
   getJobsByVenueIdAndCategory(venueId: number, category: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/category?venueId=' + venueId + '&category=' + category);
@@ -144,6 +151,7 @@ export class ApiService {
   searchJobByTitle(venueId: number, title: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/title' + '?venueId=' + venueId + '&title=' + title);
   }
+
 
   searchJobByLevel(venueId: number, level: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/level' + '?venueId=' + venueId + '&level=' + level);

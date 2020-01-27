@@ -54,9 +54,8 @@ export class JobListPage implements OnInit {
   }
 
   doRefresh(event) {
-    console.log('Begin async operation');
-    this.ngOnInit();
-
+    this.venueJobs = [];
+    this.getAllJobsByVenueId();
     setTimeout(() => {
       event.target.complete();
     }, 2000);
@@ -64,7 +63,7 @@ export class JobListPage implements OnInit {
 
   filter(event) {
     this.filterText = event.target.value;
-    if (this.filterText == 'all') {
+    if (this.filterText === 'all') {
       this.venueJobs = [];
       this.getAllJobsByVenueId();
     } else {
