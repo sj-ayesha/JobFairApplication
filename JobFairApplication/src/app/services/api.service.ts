@@ -14,6 +14,7 @@ import { Skills } from '../model/skills';
 import { CandidateScreening } from '../model/candidateScreening';
 import { JobCategoryDto } from '../model/jobCategoryDto';
 import { VenueJobMultipleSaveDto } from '../model/VenueJobMultipleSaveDto';
+import { Dashboard } from '../model/dashboard';
 
 
 @Injectable({
@@ -241,5 +242,14 @@ export class ApiService {
 
   getCategoryCount(): Observable<JobCategoryDto | any> {
     return this.http.get<JobCategoryDto>(this.baseUrl + 'job/category/count');
+  }
+
+  // Dashboard
+  getCountByVenue(venueId: number): Observable<Dashboard | any> {
+    return this.http.get<Dashboard>(this.baseUrl + 'candidate-venue-job/count-by-venue/' + venueId);
+  }
+
+  getCountByAllVenue(): Observable<Dashboard | any> {
+    return this.http.get<Dashboard>(this.baseUrl + 'candidate-venue-job/count-by-all-venue');
   }
 }
