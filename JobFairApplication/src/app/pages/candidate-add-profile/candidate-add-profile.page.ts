@@ -489,7 +489,6 @@ export class CandidateAddProfilePage implements OnInit {
           this.CandidateSkills.push(data);
         }
       });
-      console.log(this.CandidateSkills);
     });
   }
 
