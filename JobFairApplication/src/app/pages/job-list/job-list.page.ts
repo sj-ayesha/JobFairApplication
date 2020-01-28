@@ -33,6 +33,8 @@ export class JobListPage implements OnInit {
   page = 0;
   data: any;
   totalPages = 0;
+  insideCategory = false;
+  category: string;
 
   constructor(
     private router: Router,
@@ -54,11 +56,19 @@ export class JobListPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.venueJobs = [];
-    this.getAllJobsByVenueId();
-    setTimeout(() => {
-      event.target.complete();
-    }, 2000);
+    if (this.category == null) {
+      this.venueJobs = [];
+      this.getAllJobsByVenueId();
+      setTimeout(() => {
+        event.target.complete();
+      }, 2000);
+    } else {
+      this.venueJobs = [];
+      this.getAllJobsByVenueIdAndCategory();
+      setTimeout(() => {
+        event.target.complete();
+      }, 2000);
+    }
   }
 
   ionViewWillEnter() {
@@ -120,9 +130,8 @@ export class JobListPage implements OnInit {
 
   styleAccordion() {
     const coll = document.getElementsByClassName('collapsible');
-
     for (let i = 0; i < coll.length; i++) {
-      coll[i].addEventListener('click', function() {
+      coll[i].addEventListener('click', function () {
 
         this.classList.toggle('active');
         const content = this.nextElementSibling;
@@ -180,8 +189,8 @@ export class JobListPage implements OnInit {
   }
 
   getAllJobsByVenueIdAndCategory() {
-    const category: any = this.route.snapshot.paramMap.get('jobQueryParam');
-    this.apiService.getJobsByVenueIdAndCategory(parseInt(window.localStorage.getItem('venue_id')), category).subscribe(data => {
+    this.category = this.route.snapshot.paramMap.get('jobQueryParam');
+    this.apiService.getJobsByVenueIdAndCategory(parseInt(window.localStorage.getItem('venue_id')), this.category).subscribe(data => {
       if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
         this.noJobsAvailable = true;
       } else {
@@ -238,16 +247,33 @@ export class JobListPage implements OnInit {
   searchByTitle(title: string) {
     this.jobNotFound = false;
     const venueId = parseInt(window.localStorage.getItem('venue_id'));
-    this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
-      if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
-        this.jobNotFound = true;
+    if (this.category == null) {
+        this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
+          if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+            this.jobNotFound = true;
+          } else {
+            this.venueJobs = data;
+            setTimeout(() => {
+              this.styleAccordion();
+            }, 0);
+          }
+        });
+    } else {
+      if (title === '') {
+        this.getAllJobsByVenueIdAndCategory();
       } else {
-        this.venueJobs = data;
-        setTimeout(() => {
-          this.styleAccordion();
-        }, 0);
+        this.apiService.searchJobByCategoryAndTitle(venueId, this.category, title).subscribe(data => {
+          if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+            this.jobNotFound = true;
+          } else {
+            this.venueJobs = data;
+            setTimeout(() => {
+              this.styleAccordion();
+            }, 0);
+          }
+        });
       }
-    });
+    }
   }
 
   routeToApplyJob() {

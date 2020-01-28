@@ -25,7 +25,8 @@ export class JobsBoPage implements OnInit {
   public splitJobDescriptions;
   checked = true;
   priority = [];
-  filterText: string;
+  level: string;
+  category: string;
   refreshCheck = false;
   limit = 10;
   page = 0;
@@ -56,10 +57,10 @@ export class JobsBoPage implements OnInit {
       this.jobs = [];
       this.addEditPopupService.reloadComponent(false);
     }
+
   }
 
     doRefresh(event) {
-      console.log('Begin async operation');
       this.jobs = [];
       this.ngOnInit();
 
@@ -68,13 +69,23 @@ export class JobsBoPage implements OnInit {
       }, 2000);
     }
 
-    filter(event) {
-      this.filterText = event.target.value;
-      if (this.filterText === 'all') {
+    filterLevel(event) {
+      this.level = event.target.value;
+      if (this.level === 'all') {
         this.jobs = [];
         this.getAllJobs();
       } else {
         this.getJobByLevel();
+      }
+    }
+
+    filterCategory(event) {
+      this.category = event.target.value;
+      if (this.level === 'all') {
+        this.jobs = [];
+        this.getAllJobs();
+      } else {
+        this.getAllJobsByCategory();
       }
     }
 
@@ -143,7 +154,7 @@ export class JobsBoPage implements OnInit {
         (data: JobResponseList) => {
 
           this.jobs = [...this.jobs, ...data.jobDtoList];
-          console.log(this.jobs);
+  
           setTimeout(() => {
             this.styleAccordion();
           }, 0);
@@ -170,7 +181,7 @@ export class JobsBoPage implements OnInit {
     getJobByLevel() {
       // tslint:disable-next-line: radix
       // this.jobNotFound = false;
-      this.apiService.searchAllJobsByLevel(this.filterText).subscribe(data => {
+      this.apiService.searchAllJobsByLevel(this.level).subscribe(data => {
         this.jobNotFound = false;
         if (data.message === 'NO_JOB_FOUND') {
           this.jobNotFound = true;
@@ -183,28 +194,19 @@ export class JobsBoPage implements OnInit {
       });
     }
 
-    getAllJobsByVenueId(event ?) {
-      // tslint:disable-next-line: radix
-      this.jobNotFound = false;
-      this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
-        (data: VenueJobResponseList) => {
-          this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
+
+    getAllJobsByCategory() {
+      this.apiService.getJobsByCategory(this.category).subscribe(data => {
+        this.jobNotFound = false;
+        if (data.message === 'NO_JOB_FOUND') {
+          this.jobNotFound = true;
+        } else {
+          this.jobs = data;
           setTimeout(() => {
             this.styleAccordion();
           }, 0);
-
-          this.totalPages = data.totalPages;
-
-          if (this.venueJobs.length === 0) {
-            this.noJobsAvailable = true;
-          } else {
-            this.noJobsAvailable = false;
-          }
-          if (event) {
-            event.target.complete();
-          }
         }
-      );
+      });
     }
 
     getAllJobsByVenueIdAndCategory() {
@@ -225,10 +227,6 @@ export class JobsBoPage implements OnInit {
       );
     }
 
-
-    routeToJob(jobQueryParam: string) {
-      this.router.navigate(['/job-list', jobQueryParam]);
-    }
 
     openAddModal() {
       this.addEditPopupService.showEdit(false);

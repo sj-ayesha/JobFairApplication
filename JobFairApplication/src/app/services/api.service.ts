@@ -22,7 +22,7 @@ import { VenueJobMultipleSaveDto } from '../model/VenueJobMultipleSaveDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  // baseUrl = 'https://82f819d1.ngrok.io/'; // url to access backend
+  // baseUrl = 'https://eab23dab.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
   baseUrl = 'http://localhost:8081/';
 
@@ -111,8 +111,8 @@ export class ApiService {
 
   // jobs
 
-  getJobsByCategory(category: string): Observable<Job[]> {
-    return this.http.get<Job[]>(this.baseUrl + 'job/category/' + category);
+  getJobsByCategory(category: string): Observable<Job[] | any> {
+    return this.http.get<Job[] | any>(this.baseUrl + 'job/category/' + category);
   }
 
   getJobsById(jobId: number): Observable<Job[]> {
@@ -150,6 +150,11 @@ export class ApiService {
 
   searchJobByTitle(venueId: number, title: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/title' + '?venueId=' + venueId + '&title=' + title);
+  }
+
+  searchJobByCategoryAndTitle(venueId: number, category: string, title: string): Observable<VenueJob[] | any> {
+    return this.http.get<VenueJob[]>
+    (this.baseUrl + 'venue-job/jobs/category/title' + '?venueId=' + venueId + '&category=' + category + '&title=' + title);
   }
 
 

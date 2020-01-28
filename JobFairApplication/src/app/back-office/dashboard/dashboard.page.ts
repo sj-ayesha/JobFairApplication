@@ -33,6 +33,8 @@ export class DashboardPage implements OnInit {
   noCandidatesAvailable = false;
   candidateVenueJobsLists: CandidateVenueJob[] = [];
 
+  onTablet: boolean;
+
   limitVenue = 50;
   pageVenue = 0;
   venues: Venue[] = [];
@@ -53,6 +55,15 @@ export class DashboardPage implements OnInit {
     this.populateCandidate();
     this.getAllVenue();
     this.getAllJobsByVenueId();
+
+    const mq = window.matchMedia( "(max-width: 1024px)" );
+    if (mq.matches) {
+      this.onTablet = true;
+    } else {
+      this.onTablet = false;
+    }
+
+    console.log('this.on', this.onTablet)
   }
 
   ionViewDidEnter() {
@@ -191,7 +202,7 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  // FOR CANDIDATES BASED ON VENUE 
+  // FOR CANDIDATES BASED ON VENUE
   populateCandidate() {
     this.candidateVenueJobsLists = [];
     // tslint:disable-next-line: radix
@@ -199,7 +210,6 @@ export class DashboardPage implements OnInit {
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
-        console.log(this.candidateVenueJobsLists);
 
         if (this.candidateVenueJobsLists.length === 0) {
           this.noCandidatesAvailable = true;
@@ -220,8 +230,6 @@ export class DashboardPage implements OnInit {
       (data: VenueResponseList) => {
 
         this.venues = [...this.venues, ...data.venueDtoList];
-        // this.venues = this.venues.concat(data.venueDtoList);
-        console.log('venues', data.venueDtoList);
         this.totalPages = data.totalPages;
       });
   }

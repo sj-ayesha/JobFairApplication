@@ -38,14 +38,28 @@
             (ionInput)="searchByTitle(title.value)"></ion-searchbar>
         </ion-col>
 
-        <ion-col size="6" class="ion-padding">
+        <ion-col size="3" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Please select position..</ion-label>
-            <ion-select (ionChange)="filter($event)" interface="popover" class="ion-float-left">
+            <ion-select (ionChange)="filterLevel($event)" interface="popover" class="ion-float-left">
               <ion-select-option value="all" selected="selected">All</ion-select-option>
               <ion-select-option value="fresher">Fresher</ion-select-option>
               <ion-select-option value="junior">Junior</ion-select-option>
               <ion-select-option value="senior">Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="3" class="ion-padding">
+          <ion-item class="venue-input">
+            <ion-label position="floating" color="medium">Please select a category..</ion-label>
+            <ion-select (ionChange)="filterCategory($event)" interface="popover" class="ion-float-left">
+              <ion-select-option value='all' selected="selected">All</ion-select-option>
+              <ion-select-option value="human-resource">Human Resource</ion-select-option>
+              <ion-select-option value="manager">Manager</ion-select-option>
+              <ion-select-option value="business-analyst">Business Analyst</ion-select-option>
+              <ion-select-option value="architect">Architect</ion-select-option>
+              <ion-select-option value="software-engineer">Software Engineer</ion-select-option>
+              <ion-select-option value="quality-assurance">Quality Assurance</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>

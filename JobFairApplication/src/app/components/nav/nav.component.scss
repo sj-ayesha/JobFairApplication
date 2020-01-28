@@ -114,6 +114,7 @@ a.venue-name {
 
   .caret::before {
     content: "\25B6";
+    // background-image: "../../../assets/img/chevron-arrow-down.png";
     color: $color-light-red;
     display: inline-block;
     margin-right: 6px;
