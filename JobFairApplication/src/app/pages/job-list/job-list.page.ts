@@ -61,6 +61,10 @@ export class JobListPage implements OnInit {
     }, 2000);
   }
 
+  ionViewWillEnter() {
+    this.uncheckAll();
+  }
+
   filter(event) {
     this.filterText = event.target.value;
     if (this.filterText === 'all') {
@@ -91,14 +95,6 @@ export class JobListPage implements OnInit {
     });
   }
 
-  // ngAfterViewInit() {
-  //   this.styleAccordion();
-  // }
-
-  // ngOnChanges(): void {
-
-  //   this.styleAccordion();
-  // }
   async unsuccessMsg() {
     const toast = await this.toastCtrl.create({
       message: 'Please select a maximum of 5 jobs',
@@ -138,6 +134,13 @@ export class JobListPage implements OnInit {
       });
     }
   }
+
+  uncheckAll() {
+    this.checkboxes.forEach((element) => {
+      element.nativeElement.checked = false;
+    });
+  }
+
 
   getAllJobsByVenueId(event?) {
     // tslint:disable-next-line: radix
@@ -245,5 +248,9 @@ export class JobListPage implements OnInit {
         }, 0);
       }
     });
+  }
+
+  routeToApplyJob() {
+    this.router.navigate(['candidate-add-profile']);
   }
 }
