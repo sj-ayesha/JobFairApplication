@@ -7,6 +7,8 @@ import { CandidateVenueJobDtoResponseList, CandidateVenueJob } from 'src/app/mod
 import { Venue, VenueResponseList } from 'src/app/model/venue';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { VenueJobResponseList, VenueJob } from 'src/app/model/venueJob';
+import { Dashboard } from 'src/app/model/dashboard';
+import { CandidatesPerMonth } from 'src/app/model/CandidatesPerMonth';
 
 @Component({
   selector: 'app-dashboard',
@@ -45,6 +47,26 @@ export class DashboardPage implements OnInit {
   public venueJobs: VenueJob[] = [];
   noJobsAvailable = false;
 
+  dashboard: Dashboard[] = [];
+  totalCandidatesPerMonth: CandidatesPerMonth[] = [];
+  countJanuary: any = [];
+  countFebruary: any = [];
+  countMarch: any = [];
+  countApril: any = [];
+  countMay: any = [];
+  countJune: any = [];
+  countJuly: any = [];
+  countAugust: any = [];
+  countSeptember: any = [];
+  countOctober: any = [];
+  countNovember: any = [];
+  countDecember: any = [];
+
+  countAccepted: any = [];
+  countRejected: any = [];
+  countProceed: any = [];
+
+
   constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
     this.formDashboard = this.formBuilder.group({
       venue: new FormControl()
@@ -55,6 +77,7 @@ export class DashboardPage implements OnInit {
     this.populateCandidate();
     this.getAllVenue();
     this.getAllJobsByVenueId();
+    this.getData();
 
     const mq = window.matchMedia( "(max-width: 1024px)" );
     if (mq.matches) {
@@ -149,7 +172,8 @@ export class DashboardPage implements OnInit {
           'Jul 2020', 'Aug 2020', 'Sep 2020', 'Oct 2020', 'Nov 2020', 'Dec 2020'],
         datasets: [{
           label: 'No. of Candidates',
-          data: [2, 3, 5, 6, 6, 7, 4, 2, 1, 2, 5, 0],
+          data: [this.countJanuary, this.countFebruary, this.countMarch, this.countApril, this.countMay, this.countJune, this.countJuly,
+            this.countAugust, this.countSeptember, this.countOctober, this.countNovember, this.countDecember],
           backgroundColor: '#009432', // array should have same number of elements as number of dataset
           borderColor: '#009432', // array should have same number of elements as number of dataset
           borderWidth: 1
@@ -185,7 +209,7 @@ export class DashboardPage implements OnInit {
           {
             label: 'Population (millions)',
             backgroundColor: ['#EA2027', '#0652DD', '#009432'],
-            data: [25, 35, 40]
+            data: [this.countRejected, this.countProceed, this.countAccepted]
           }
         ]
       },
@@ -264,5 +288,28 @@ export class DashboardPage implements OnInit {
         }
       }
     );
+  }
+
+  getData() {
+    this.apiService.getCountByVenue(1).subscribe((data) => {
+      console.log('data', data);
+      // Get count in months
+      this.countJanuary = data.totalCandidatesPerMonthByVenue.totalCandidatesForJanuaryByVenue;
+      this.countFebruary = data.totalCandidatesPerMonthByVenue.totalCandidatesForFebruaryByVenue;
+      this.countMarch = data.totalCandidatesPerMonthByVenue.totalCandidatesForMarchByVenue;
+      this.countApril = data.totalCandidatesPerMonthByVenue.totalCandidatesForAprilByVenue;
+      this.countMay = data.totalCandidatesPerMonthByVenue.totalCandidatesForMayByVenue;
+      this.countJune = data.totalCandidatesPerMonthByVenue.totalCandidatesForJuneByVenue;
+      this.countJuly = data.totalCandidatesPerMonthByVenue.totalCandidatesForJulyByVenue;
+      this.countAugust = data.totalCandidatesPerMonthByVenue.totalCandidatesForAugustByVenue;
+      this.countSeptember = data.totalCandidatesPerMonthByVenue.totalCandidatesForSeptemberByVenue;
+      this.countOctober = data.totalCandidatesPerMonthByVenue.totalCandidatesForOctoberByVenue;
+      this.countNovember = data.totalCandidatesPerMonthByVenue.totalCandidatesForNovemberByVenue;
+      this.countDecember = data.totalCandidatesPerMonthByVenue.totalCandidatesForDecemberByVenue;
+
+      this.countAccepted = data.totalApprovedScreeningStatusByVenue;
+      this.countRejected = data.totalRejectedScreeningStatusByVenue;
+      this.countProceed = data.totalProceedScreeningStatusByVenue;
+    });
   }
 }
