@@ -238,7 +238,9 @@ export class DashboardPage implements OnInit {
   filter(event) {
     this.filterText = event.target.value;
     if (this.filterText === 'all') {
+      console.log('get data for venue');
     } else {
+      console.log('get data by venue');
     }
   }
 
@@ -249,6 +251,7 @@ export class DashboardPage implements OnInit {
     this.apiService.getJobsByVenueId(1, this.page, this.limit).subscribe(
       (data: VenueJobResponseList) => {
         this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
+        console.log('jobs', this.venueJobs);
         this.totalPages = data.totalPages;
 
         if (this.venueJobs.length === 0) {

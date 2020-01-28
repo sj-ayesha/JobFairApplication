@@ -230,14 +230,17 @@ export class JobsBoPage implements OnInit {
 
     openAddModal() {
       this.addEditPopupService.showEdit(false);
-      this.modalController.create({ component: JobsPopupPage }).then((modalElement) => {
+      this.modalController.create({
+        component: JobsPopupPage,
+        cssClass: 'modal-container'
+      }).then((modalElement) => {
         modalElement.present();
       });
     }
 
     openEditModal() {
       this.addEditPopupService.showEdit(true);
-      this.modalController.create({ component: JobsPopupPage }).then((modalElement) => {
+      this.modalController.create({ component: JobsPopupPage, cssClass: 'modal-container'}).then((modalElement) => {
         modalElement.present();
       });
     }

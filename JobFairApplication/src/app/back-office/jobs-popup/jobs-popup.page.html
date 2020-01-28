@@ -72,7 +72,7 @@
 
           <ion-item *ngIf="edit">
             <ion-label position="floating" color="medium">*Job Description</ion-label>
-            <ion-textarea rows="5" formControlName="description" type="text" value="{{description}}"></ion-textarea>
+            <ion-textarea rows="6" cols="20" formControlName="description" type="text" value="{{description}}"></ion-textarea>
           </ion-item>
           <div class="error-messages">
             <ng-container *ngFor="let error of error_messages.description">

@@ -151,18 +151,17 @@ export class JobsPopupPage implements OnInit {
       title: this.formAddJob.get('title').value,
       level: this.formAddJob.get('level').value,
       category: this.formAddJob.get('category').value,
-      description: this.formAddJob.get('description').value,
+      description: this.formAddJob.get('description').value.replace(/[\r\n]+/g, ';'),
       minimumExperience: this.formAddJob.get('minimumExperience').value,
       qualificationNeeded: this.formAddJob.get('qualificationNeeded').value,
       checked: null
     };
-    console.log(addJob);
+
     this.apiService.saveJob(addJob).subscribe(
       data => {
-        // this.router.navigate(['home']);
+
       },
       error => {
-        // alert("Data not saved!");
       }
     );
   }
@@ -208,7 +207,7 @@ export class JobsPopupPage implements OnInit {
       title: this.formAddJob.get('title').value,
       level: this.formAddJob.get('level').value,
       category: this.category,
-      description: this.formAddJob.get('description').value,
+      description: this.formAddJob.get('description').value.replace(/[\r\n]+/g, ';'),
       minimumExperience: this.formAddJob.get('minimumExperience').value,
       qualificationNeeded: this.formAddJob.get('qualificationNeeded').value,
       checked: null
