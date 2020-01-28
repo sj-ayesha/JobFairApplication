@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -23,6 +23,8 @@ import { VenuePopupPageModule } from './back-office/venue-popup/venue-popup.modu
 import { SkillPopupPageModule } from './back-office/skill-popup/skill-popup.module';
 import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
 import { JobsPopupPageModule } from './back-office/jobs-popup/jobs-popup.module';
+import { TokenInterceptor } from './services/interceptor';
+import { ApiService } from './services/api.service';
 
 
 @NgModule({
@@ -40,14 +42,24 @@ import { JobsPopupPageModule } from './back-office/jobs-popup/jobs-popup.module'
     HttpClientModule,
     VenuePopupPageModule,
     SkillPopupPageModule,
-    JobsPopupPageModule
+    JobsPopupPageModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AuthGuard,
     AuthFrontOfficeGuard,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ApiService,
+    { provide:
+      RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    },
+    { provide:
+      HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     // Camera,
     // File
   ],

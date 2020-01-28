@@ -14,6 +14,8 @@ import { Skills } from '../model/skills';
 import { CandidateScreening } from '../model/candidateScreening';
 import { JobCategoryDto } from '../model/jobCategoryDto';
 import { VenueJobMultipleSaveDto } from '../model/VenueJobMultipleSaveDto';
+import { UserDto } from '../model/UserDto';
+import { ApiResponse } from '../model/ApiResponse';
 
 
 @Injectable({
@@ -26,6 +28,10 @@ export class ApiService {
   // baseUrl = 'http://10.9.0.85:8081/';
   baseUrl = 'http://localhost:8081/';
 
+  // login
+  authenticateUser(user: UserDto): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.baseUrl + 'token/generate-token', user);
+  }
 
   // candidates
 

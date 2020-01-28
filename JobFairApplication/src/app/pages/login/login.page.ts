@@ -4,6 +4,7 @@ import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,8 @@ export class LoginPage implements OnInit {
     private loginLogoutService: LoginLogoutService,
     private router: Router,
     private toastCtrl: ToastController,
-    private authService: AuthService
+    private authService: AuthService, 
+    private apiService: ApiService
   ) {
     this.formLogin = this.formBuilder.group({
       username: new FormControl('', Validators.compose([
@@ -83,9 +85,20 @@ export class LoginPage implements OnInit {
       this.unsuccessMsg();
     } else {
       this.loggedIn = true;
-      localStorage.setItem('user', 'userId');
+      // localStorage.setItem('user', 'userId');
+      const loginUser = {
+        visa: this.formLogin.get('username').value,
+        password: this.formLogin.get('password').value
+      }
 
-      this.loginLogoutService.loginUser();
+      this.apiService.authenticateUser(loginUser).subscribe(data => {
+          localStorage.setItem('token', data.result.token);
+          localStorage.setItem('visa', loginUser.visa);
+        }
+      );
+      setTimeout(() => {
+        this.loginLogoutService.loginUser();
+      }, 1000);
       // console.log(this.loggedIn);
       setTimeout(() => {
         this.formLogin.reset();

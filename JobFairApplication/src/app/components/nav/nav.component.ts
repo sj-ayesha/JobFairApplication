@@ -32,7 +32,8 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     ) { }
 
   ngOnInit() {
-    this.loggedIn = !!localStorage.getItem('user');
+    // this.loggedIn = !!localStorage.getItem('visa');
+    console.log(this.loggedIn, 'logged')
     this.venueName = window.localStorage.getItem('venueName');
 
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
@@ -54,11 +55,7 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   logout() {
-    localStorage.removeItem('user');
-    localStorage.removeItem('venue_id');
-    localStorage.removeItem('priority');
-    localStorage.removeItem('jobId');
-    localStorage.removeItem('venueName');
+    localStorage.clear();
     this.loginLogoutService.logoutUser();
     this.venue = '';
   }

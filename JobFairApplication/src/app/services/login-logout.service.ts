@@ -21,7 +21,13 @@ export class LoginLogoutService {
   }
 
   loginUser() {
+    if (localStorage.getItem('visa').length >= 1){
     this.sessionStateEmitter.emit(true);
+    }
+    else {
+      this.sessionStateEmitter.emit(false);
+      this.router.navigate(['/login']);
+    }
     /* if (this.isLoggedIn = true) {
       this.router.navigate(['/venue']);
     }
