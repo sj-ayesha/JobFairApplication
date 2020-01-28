@@ -44,7 +44,9 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.treeViewNav();
+    setTimeout(() => {
+      this.treeViewNav();
+    }, 0);
   }
 
   ngOnDestroy() {

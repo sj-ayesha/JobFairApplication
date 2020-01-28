@@ -27,11 +27,13 @@ export class DashboardPage implements OnInit {
   doughnut: any;
 
   allCandidates: Candidate[] = [];
-  limit = 4;
+  limit = 3;
   page = 0;
   totalPages = 0;
   noCandidatesAvailable = false;
   candidateVenueJobsLists: CandidateVenueJob[] = [];
+
+  onTablet: boolean;
 
   limitVenue = 50;
   pageVenue = 0;
@@ -53,6 +55,15 @@ export class DashboardPage implements OnInit {
     this.populateCandidate();
     this.getAllVenue();
     this.getAllJobsByVenueId();
+
+    const mq = window.matchMedia( "(max-width: 1024px)" );
+    if (mq.matches) {
+      this.onTablet = true;
+    } else {
+      this.onTablet = false;
+    }
+
+    console.log('this.on', this.onTablet)
   }
 
   ionViewDidEnter() {
@@ -191,7 +202,7 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  // FOR CANDIDATES BASED ON VENUE 
+  // FOR CANDIDATES BASED ON VENUE
   populateCandidate() {
     this.candidateVenueJobsLists = [];
     // tslint:disable-next-line: radix
@@ -199,7 +210,6 @@ export class DashboardPage implements OnInit {
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
-        console.log(this.candidateVenueJobsLists);
 
         if (this.candidateVenueJobsLists.length === 0) {
           this.noCandidatesAvailable = true;
@@ -220,8 +230,6 @@ export class DashboardPage implements OnInit {
       (data: VenueResponseList) => {
 
         this.venues = [...this.venues, ...data.venueDtoList];
-        // this.venues = this.venues.concat(data.venueDtoList);
-        console.log('venues', data.venueDtoList);
         this.totalPages = data.totalPages;
       });
   }
@@ -229,11 +237,8 @@ export class DashboardPage implements OnInit {
   // FILTER BY VENUE
   filter(event) {
     this.filterText = event.target.value;
-    if (this.filterText == 'all') {
-      console.log('get data for venue')
-    }
-    else {
-      console.log('get data by venue')
+    if (this.filterText === 'all') {
+    } else {
     }
   }
 
@@ -241,10 +246,9 @@ export class DashboardPage implements OnInit {
   getAllJobsByVenueId(event?) {
     // tslint:disable-next-line: radix
     this.jobNotFound = false;
-    this.apiService.getJobsByVenueId(1, 0, 3).subscribe(
+    this.apiService.getJobsByVenueId(1, this.page, this.limit).subscribe(
       (data: VenueJobResponseList) => {
         this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
-        console.log('jobs', this.venueJobs)
         this.totalPages = data.totalPages;
 
         if (this.venueJobs.length === 0) {
