@@ -45,11 +45,11 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.isLoggedIn().subscribe(data => {
-      if (data) {
-        this.router.navigateByUrl('/dashboard');
-      }
-    });
+    // this.authService.isLoggedIn().subscribe(data => {
+    //   if (data) {
+    //     this.router.navigateByUrl('/dashboard');
+    //   }
+    // });
     // this.loggedIn = this.loginLogoutService.isLoggedIn;
   }
 
@@ -89,18 +89,20 @@ export class LoginPage implements OnInit {
           console.log('data', data);
           localStorage.setItem('token', data.result.token);
           localStorage.setItem('visa', loginUser.visa);
+          localStorage.setItem('role', data.result.roleDto.name);
           setTimeout(() => {
             this.loginLogoutService.loginUser();
           }, 10);
+          this.router.navigateByUrl('/dashboard');
         }, error => {
           this.unsuccessMsg();
           this.formLogin.reset();
         }
       );
-      setTimeout(() => {
-        // this.formLogin.reset();
-        this.router.navigate(['dashboard']);
-      }, 2000);
+      // setTimeout(() => {
+      //   // this.formLogin.reset();
+        
+      // }, 10);
     }
   }
 }

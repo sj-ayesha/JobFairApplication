@@ -9,15 +9,15 @@ export class AuthService {
   constructor() { }
 
 
-  isLoggedIn(): Observable<boolean> {
-    const loggedin =  new BehaviorSubject<boolean>(false);
+  // isLoggedIn(): Observable<boolean> {
+  //   const loggedin =  new BehaviorSubject<boolean>(false);
 
-    if (localStorage.getItem('user')) {
-      loggedin.next(true);
-    } else {
-      loggedin.next(false);
-    }
+  //   if (localStorage.getItem('user')) {
+  //     loggedin.next(true);
+  //   } else {
+  //     loggedin.next(false);
+  //   }
 
-    return loggedin.asObservable();
-  }
+  //   return loggedin.asObservable();
+  // }
 }

@@ -391,4 +391,10 @@ export class DashboardPage implements OnInit {
     this.pie.update();
   }
 
+  getRoleDetails(){
+    this.apiService.getRoleDetails(localStorage.getItem('role')).subscribe(data => {
+      console.log('data', data);
+    })
+  }
+
 }

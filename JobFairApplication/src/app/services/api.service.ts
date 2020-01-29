@@ -17,6 +17,7 @@ import { VenueJobMultipleSaveDto } from '../model/VenueJobMultipleSaveDto';
 import { UserDto } from '../model/UserDto';
 import { ApiResponse } from '../model/ApiResponse';
 import { Dashboard } from '../model/dashboard';
+import { RoleDto } from '../model/roleDto';
 
 
 @Injectable({
@@ -258,4 +259,10 @@ export class ApiService {
   getCountByAllVenue(): Observable<Dashboard | any> {
     return this.http.get<Dashboard>(this.baseUrl + 'candidate-venue-job/count-by-all-venue');
   }
+
+  // Role
+  getRoleDetails(roleName: string): Observable<RoleDto | any> {
+    return this.http.get<RoleDto | any>(this.baseUrl + 'role/' + roleName);
+  }
 }
+
