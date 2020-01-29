@@ -68,6 +68,13 @@ export class DashboardPage implements OnInit {
   countCandidates: any = [];
   countJobsPerVenue: any = [];
 
+  countSoftware: any = [];
+  countHR: any = [];
+  countBA: any = [];
+  countArchitect: any = [];
+  countQA: any = [];
+  countManager: any = [];
+
 
   constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
     this.formDashboard = this.formBuilder.group({
@@ -135,7 +142,7 @@ export class DashboardPage implements OnInit {
         datasets: [{
           label: 'Candidates',
           backgroundColor: ['#833471', '#EA2027', '#EE5A24', '#0652DD', '#009432', '#F79F1F'],
-          data: [2478, 1000, 734, 784, 433, 900]
+          data: [this.countSoftware, this.countHR, this.countBA, this.countArchitect, this.countQA, this.countManager]
         }]
       },
       options: {
@@ -324,10 +331,18 @@ export class DashboardPage implements OnInit {
       // Count No. of Jobs per Venue
       this.countJobsPerVenue = data.totalJobsByVenue;
 
+      // Count No. of Candidates per Category
+      this.countSoftware = data.totalCandidatesPerSoftwareEngineerByVenue;
+      this.countHR = data.totalCandidatesPerHumanResourceByVenue;
+      this.countBA = data.totalCandidatesPerBusinessAnalystByVenue;
+      this.countArchitect = data.totalCandidatesPerArchitectByVenue;
+      this.countQA = data.totalCandidatesPerQualityAssuranceByVenue;
+      this.countManager = data.totalCandidatesPerManagerByVenue;
+
       console.log(this.countJanuary);
     });
 
-    // tslint:disable-next-line: radix
+    // Count No. of Candidates per Venue
     this.apiService.getCountByVenueId(this.filterText).subscribe(data => {
       this.countCandidates = data.countCandidates;
     });
@@ -359,12 +374,21 @@ export class DashboardPage implements OnInit {
     this.horizontalBars.data.datasets[0].data[0] = this.countCandidates;
     this.horizontalBars.data.datasets[0].data[1] = this.countJobsPerVenue;
 
+    this.pie.data.datasets[0].data[0] = this.countSoftware;
+    this.pie.data.datasets[0].data[1] = this.countHR;
+    this.pie.data.datasets[0].data[2] = this.countBA;
+    this.pie.data.datasets[0].data[3] = this.countArchitect;
+    this.pie.data.datasets[0].data[4] = this.countQA;
+    this.pie.data.datasets[0].data[5] = this.countManager;
+
+
     console.log('no.Candidates', this.countCandidates);
     console.log('no.Candidates', this.countJobsPerVenue);
 
     this.doughnut.update();
     this.verticalBars.update();
     this.horizontalBars.update();
+    this.pie.update();
   }
 
 }
