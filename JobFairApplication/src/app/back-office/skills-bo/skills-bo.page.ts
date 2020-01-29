@@ -13,9 +13,9 @@ import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 export class SkillsBoPage implements OnInit {
 
   skills: Skills[];
-  public columns: any;
   editSkills: any[] = [];
   reload: boolean;
+  public columns: any;
 
   constructor(
     private apiService: ApiService,
@@ -25,8 +25,7 @@ export class SkillsBoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    if (this.reload === true){
+    if (this.reload === true) {
       this.getAllSkills();
     }
   }

@@ -48,7 +48,7 @@
                   <ion-input formControlName="interviewerName" type="text"></ion-input>
                 </ion-item>
                 <div class="error-messages">
-                  <ng-container *ngFor='let error of error_messages.interviewerName'>
+                  <ng-container *ngFor='let error of errorMessages.interviewerName'>
                     <div class="error-message"
                       *ngIf="formCandidateScreening.get('interviewerName').hasError(error.type) && (formCandidateScreening.get('interviewerName').dirty || formCandidateScreening.get('interviewerName').touched)">
                       {{ error.message }}

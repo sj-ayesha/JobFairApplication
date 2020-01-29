@@ -95,10 +95,6 @@ const routes: Routes = [
     loadChildren: () => import('./back-office/venue-job/venue-job.module').then( m => m.VenueJobPageModule),
     canActivate: [AuthGuard]
   },
-
-
-
-
 ];
 
 @NgModule({

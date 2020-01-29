@@ -19,13 +19,13 @@ export class VenuePopupPage implements OnInit {
   startDate: string;
   endDate: string;
   active: string;
+  venues: string;
 
   status = true;
   submitted = false;
   edit: boolean;
-  venues: string;
 
-  error_messages = {
+  errorMessages = {
     venueName: [
       { type: 'required', message: '⚠ Venue Name is required' },
       { type: 'maxLength', message: '⚠ Venue Name must be less than 30 characters' }
@@ -94,7 +94,7 @@ export class VenuePopupPage implements OnInit {
       this.active = this.venues[5];
     }
   }
-  ionViewWillLeave(){
+  ionViewWillLeave() {
     localStorage.removeItem('editVenues');
   }
 
@@ -118,10 +118,8 @@ export class VenuePopupPage implements OnInit {
     console.log(addVenue);
     this.apiService.saveVenue(addVenue).subscribe(
       data => {
-        // this.router.navigate(['home']);
       },
       error => {
-        // alert("Data not saved!");
       }
     );
   }
@@ -138,10 +136,8 @@ export class VenuePopupPage implements OnInit {
     console.log(editVenue);
     this.apiService.editVenue(editVenue).subscribe(
       data => {
-        // this.router.navigate(['home']);
       },
       error => {
-        // alert("Data not saved!");
       }
     );
   }
@@ -180,7 +176,6 @@ export class VenuePopupPage implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    // tslint:disable-next-line: max-line-length
     if (this.formAddVenue.invalid) {
       this.unsuccessMsg();
     } else {

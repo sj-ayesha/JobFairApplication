@@ -78,17 +78,6 @@ export class VenueBoPage implements OnInit {
     }, 2000);
   }
 
-  // async presentPopover(event) {
-  //   const popover = await this.popoverController.create({
-  //     component: AddVenuePopupComponent,
-  //     event
-  //   });
-  //   return await popover.present();
-  // }
-  // closePopover(){
-  //   this.popoverController.dismiss();
-  // }
-
   openAddModal() {
     this.addEditPopupService.showEdit(false);
     this.modalController.create({component: VenuePopupPage}).then((modalElement) => {
@@ -103,7 +92,7 @@ export class VenueBoPage implements OnInit {
     });
   }
 
-  edit(Id) { 
+  edit(Id) {
     this.openEditModal();
     this.editVenues = [];
     for (let i = 0; i < this.venues.length; i++) {

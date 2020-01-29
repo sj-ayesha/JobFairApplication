@@ -19,7 +19,7 @@
               </ion-select>
             </ion-item>
             <div class="error-messages">
-              <ng-container *ngFor='let error of error_messages.venues'>
+              <ng-container *ngFor='let error of errorMessages.venues'>
                 <div class="error-message"
                   *ngIf="formVenue.get('venues').hasError(error.type) && (formVenue.get('venues').dirty || formVenue.get('venues').touched)">
                   {{ error.message }}

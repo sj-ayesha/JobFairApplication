@@ -29,7 +29,7 @@ export class JobsPopupPage implements OnInit {
   apiJobId: number;
   jobs: string;
 
-  error_messages = {
+  errorMessages = {
     title: [
       { type: 'required', message: '⚠ Title is required' },
     ],
@@ -64,7 +64,6 @@ export class JobsPopupPage implements OnInit {
 
     this.addEditPopupService.cast.subscribe(edit => this.edit = edit);
 
-
     if (this.edit === true) {
       this.jobs = JSON.parse(localStorage.getItem('editJobs'));
       if (this.edit === true) {
@@ -80,21 +79,21 @@ export class JobsPopupPage implements OnInit {
       if (this.jobs[3] === 'software-engineer') {
         this.category = 'Software Engineer';
       } else
-        if (this.jobs[3] === 'architect') {
-          this.category = 'Architect';
-        } else
-          if (this.jobs[3] === 'manager') {
-            this.category = 'Manager';
-          } else
-            if (this.jobs[3] === 'business-analyst') {
-              this.category = 'Business Analyst';
-            } else
-              if (this.jobs[3] === 'quality-assurance') {
-                this.category = 'Quality Assurance';
-              } else
-                if (this.jobs[3] === 'human-resource') {
-                  this.category = 'Human Resource';
-                }
+      if (this.jobs[3] === 'architect') {
+        this.category = 'Architect';
+      } else
+      if (this.jobs[3] === 'manager') {
+        this.category = 'Manager';
+      } else
+      if (this.jobs[3] === 'business-analyst') {
+        this.category = 'Business Analyst';
+      } else
+      if (this.jobs[3] === 'quality-assurance') {
+        this.category = 'Quality Assurance';
+      } else
+      if (this.jobs[3] === 'human-resource') {
+        this.category = 'Human Resource';
+      }
 
       this.formAddJob = this.formBuilder.group({
         title: new FormControl(this.title),
@@ -159,7 +158,6 @@ export class JobsPopupPage implements OnInit {
 
     this.apiService.saveJob(addJob).subscribe(
       data => {
-
       },
       error => {
       }
@@ -187,21 +185,21 @@ export class JobsPopupPage implements OnInit {
     if (this.formAddJob.get('category').value === 'Software Engineer') {
       this.category = 'software-engineer';
     } else
-      if (this.formAddJob.get('category').value === 'Architect') {
-        this.category = 'architect';
-      } else
-        if (this.formAddJob.get('category').value === 'Manager') {
-          this.category = 'manager';
-        } else
-          if (this.formAddJob.get('category').value === 'Business Analyst') {
-            this.category = 'business-analyst';
-          } else
-            if (this.formAddJob.get('category').value === 'Quality Assurance') {
-              this.category = 'quality-assurance';
-            } else
-              if (this.formAddJob.get('category').value === 'Human Resource') {
-                this.category = 'human-resource';
-              }
+    if (this.formAddJob.get('category').value === 'Architect') {
+      this.category = 'architect';
+    } else
+    if (this.formAddJob.get('category').value === 'Manager') {
+      this.category = 'manager';
+    } else
+    if (this.formAddJob.get('category').value === 'Business Analyst') {
+      this.category = 'business-analyst';
+    } else
+    if (this.formAddJob.get('category').value === 'Quality Assurance') {
+      this.category = 'quality-assurance';
+    } else
+    if (this.formAddJob.get('category').value === 'Human Resource') {
+      this.category = 'human-resource';
+    }
     const editJob = {
       jobId: JSON.parse(this.jobId),
       title: this.formAddJob.get('title').value,
@@ -216,7 +214,6 @@ export class JobsPopupPage implements OnInit {
     console.log('category', this.category);
     this.apiService.editJob(editJob).subscribe(
       data => {
-
       },
       error => {
         // alert("Data not saved!");
@@ -257,13 +254,12 @@ export class JobsPopupPage implements OnInit {
     toast.present();
   }
 
-  makeFalse(){
+  makeFalse() {
     this.addEditPopupService.reloadComponent(false);
   }
 
   onSubmit() {
     this.submitted = true;
-    // tslint:disable-next-line: max-line-length
     if (this.formAddJob.invalid) {
       this.unsuccessMsg();
     } else {
@@ -281,6 +277,4 @@ export class JobsPopupPage implements OnInit {
       }
     }
   }
-
-
 }

@@ -32,16 +32,12 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     ) { }
 
   ngOnInit() {
-    // this.loggedIn = !!localStorage.getItem('visa');
-    console.log(this.loggedIn, 'logged')
-    this.venueName = window.localStorage.getItem('venueName');
-
+    this.loggedIn = !!localStorage.getItem('visa');
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
 
+    this.venueName = window.localStorage.getItem('venueName');
     this.changeVenueService.cast.subscribe(data => this.venue = data);
-
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
-
   }
 
   ngAfterViewInit(): void {
@@ -60,8 +56,7 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     this.venue = '';
   }
 
-  navigateToVenue(){
-    // this.ngZone.run(() => this.router.navigateByUrl('/venue'));
+  navigateToVenue() {
     this.router.navigateByUrl('/venue');
     // localStorage.removeItem('venue_id');
     localStorage.removeItem('priority');
@@ -77,13 +72,11 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  navigateToDashboard(){
-    // this.dashboard = true;
+  navigateToDashboard() {
     this.router.navigate(['/dashboard']);
   }
 
   treeViewNav() {
-    console.log('test')
     const toggler = document.getElementsByClassName('caret');
     let i;
 

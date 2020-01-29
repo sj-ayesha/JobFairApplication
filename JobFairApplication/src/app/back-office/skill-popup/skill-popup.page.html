@@ -22,7 +22,7 @@
             <ion-input formControlName="skillName" type="text" value="{{skillName}}"></ion-input>
           </ion-item>
           <div class="error-messages">
-            <ng-container *ngFor="let error of error_messages.skillName">
+            <ng-container *ngFor="let error of errorMessages.skillName">
               <div class="error-message"
                 *ngIf="formAddSkill.get('skillName').hasError(error.type) && (formAddSkill.get('skillName').dirty || formAddSkill.get('skillName').touched)">
                 {{ error.message }}

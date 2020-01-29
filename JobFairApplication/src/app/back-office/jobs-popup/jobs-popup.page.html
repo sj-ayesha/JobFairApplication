@@ -31,7 +31,7 @@
           </ion-item>
 
           <div class="error-messages">
-            <ng-container *ngFor="let error of error_messages.category">
+            <ng-container *ngFor="let error of errorMessages.category">
               <div class="error-message"
                 *ngIf="formAddJob.get('category').hasError(error.type) && (formAddJob.get('category').dirty || formAddJob.get('category').touched)">
                 {{ error.message }}
@@ -53,7 +53,7 @@
             <ion-input formControlName="title" type="text" value="{{title}}"></ion-input>
           </ion-item>
           <div class="error-messages">
-            <ng-container *ngFor="let error of error_messages.title">
+            <ng-container *ngFor="let error of errorMessages.title">
               <div class="error-message"
                 *ngIf="formAddJob.get('title').hasError(error.type) && (formAddJob.get('title').dirty || formAddJob.get('title').touched)">
                 {{ error.message }}
@@ -72,10 +72,10 @@
 
           <ion-item *ngIf="edit">
             <ion-label position="floating" color="medium">*Job Description</ion-label>
-            <ion-textarea rows="6" cols="20" formControlName="description" type="text" value="{{description}}"></ion-textarea>
+            <ion-textarea rows="15" cols="20" formControlName="description" type="text" value="{{description}}"></ion-textarea>
           </ion-item>
           <div class="error-messages">
-            <ng-container *ngFor="let error of error_messages.description">
+            <ng-container *ngFor="let error of errorMessages.description">
               <div class="error-message"
                 *ngIf="formAddJob.get('description').hasError(error.type) && (formAddJob.get('description').dirty || formAddJob.get('description').touched)">
                 {{ error.message }}
@@ -98,7 +98,7 @@
           </ion-item>
 
           <div class="error-messages">
-            <ng-container *ngFor="let error of error_messages.qualificationNeeded">
+            <ng-container *ngFor="let error of errorMessages.qualificationNeeded">
               <div class="error-message"
                 *ngIf="formAddJob.get('qualificationNeeded').hasError(error.type) && (formAddJob.get('qualificationNeeded').dirty || formAddJob.get('qualificationNeeded').touched)">
                 {{ error.message }}
@@ -121,7 +121,7 @@
           </ion-item>
 
           <div class="error-messages">
-            <ng-container *ngFor="let error of error_messages.minimumExperience">
+            <ng-container *ngFor="let error of errorMessages.minimumExperience">
               <div class="error-message"
                 *ngIf="formAddJob.get('minimumExperience').hasError(error.type) && (formAddJob.get('minimumExperience').dirty || formAddJob.get('minimumExperience').touched)">
                 {{ error.message }}
@@ -152,7 +152,7 @@
           </ion-item>
 
           <div class="error-messages">
-            <ng-container *ngFor="let error of error_messages.level">
+            <ng-container *ngFor="let error of errorMessages.level">
               <div class="error-message"
                 *ngIf="formAddJob.get('level').hasError(error.type) && (formAddJob.get('level').dirty || formAddJob.get('level').touched)">
                 {{ error.message }}

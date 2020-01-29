@@ -212,7 +212,7 @@ export class JobListPage implements OnInit {
       // console.log(this.priority);
       localStorage.setItem('priority', JSON.stringify(this.priority));
     } else {
-      let index = this.priority.indexOf(jobId);
+      const index = this.priority.indexOf(jobId);
       if (index > -1) {
         this.priority.splice(index, 1);
       }

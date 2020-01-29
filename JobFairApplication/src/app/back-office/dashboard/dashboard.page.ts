@@ -79,14 +79,14 @@ export class DashboardPage implements OnInit {
     this.getAllJobsByVenueId();
     this.getData();
 
-    const mq = window.matchMedia( "(max-width: 1024px)" );
+    const mq = window.matchMedia( '(max-width: 1024px)' );
     if (mq.matches) {
       this.onTablet = true;
     } else {
       this.onTablet = false;
     }
 
-    console.log('this.on', this.onTablet)
+    console.log('this.on', this.onTablet);
   }
 
   ionViewDidEnter() {
