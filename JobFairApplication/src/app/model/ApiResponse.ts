@@ -1,5 +1,13 @@
+import { RoleDto } from './roleDto';
+
 export class ApiResponse {
     status: number;
     message: number;
-    result: any;
+    result: Result;
+}
+
+export class Result {
+    token: any;
+    visa: string;
+    roleDto: RoleDto
 }

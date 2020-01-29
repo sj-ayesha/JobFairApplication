@@ -86,6 +86,7 @@ export class LoginPage implements OnInit {
       };
 
       this.apiService.authenticateUser(loginUser).subscribe(data => {
+          console.log('data', data);
           localStorage.setItem('token', data.result.token);
           localStorage.setItem('visa', loginUser.visa);
           setTimeout(() => {

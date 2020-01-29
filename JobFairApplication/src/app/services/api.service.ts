@@ -148,7 +148,7 @@ export class ApiService {
   // venue-job
 
   getJobsByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<VenueJob[] | any> {
-    return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs/' + venueId + '/' + pageNumber + '/' + pageSize);
+    return this.http.get<VenueJob[] | any>(this.baseUrl + 'venue-job/jobs?venueId=' + venueId + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   getJobsByVenueIdAndCategory(venueId: number, category: string): Observable<VenueJob[] | any> {

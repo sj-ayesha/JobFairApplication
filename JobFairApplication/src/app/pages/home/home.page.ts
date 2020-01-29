@@ -64,8 +64,8 @@ export class HomePage implements OnInit{
   // }
 
   ionViewWillEnter() {
-    this.populateCandidate();
-    this.countCandidatesByVenue();
+    // this.populateCandidate();
+    // this.countCandidatesByVenue();
     this.getCategory();
   }
   ionViewWillLeave(){
@@ -79,21 +79,21 @@ export class HomePage implements OnInit{
       event.target.complete();
     }, 2000);
   }
-  private populateCandidate(): void {
-    // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(
-      (data: CandidateVenueJobDtoResponseList) => {
+  // private populateCandidate(): void {
+  //   // tslint:disable-next-line: radix
+  //   this.apiService.getCandidatesByVenueId(parseInt(window.localStorage.getItem('venue_id')), 0, 5).subscribe(
+  //     (data: CandidateVenueJobDtoResponseList) => {
 
-      this.candidateVenueJobsLists = data.candidateVenueJobDtoList;
+  //     this.candidateVenueJobsLists = data.candidateVenueJobDtoList;
 
-      if (this.candidateVenueJobsLists.length === 0) {
-        this.noCandidatesAvailable = true;
-      } else {
-        this.noCandidatesAvailable = false;
-      }
+  //     if (this.candidateVenueJobsLists.length === 0) {
+  //       this.noCandidatesAvailable = true;
+  //     } else {
+  //       this.noCandidatesAvailable = false;
+  //     }
 
-    });
-  }
+  //   });
+  // }
 
   private getCategory(): void {
     this.apiService.getCategoryCount().subscribe(data => {
@@ -131,11 +131,11 @@ export class HomePage implements OnInit{
     this.router.navigate(['/job-list', jobQueryParam]);
   }
 
-  private countCandidatesByVenue(): void {
-    // tslint:disable-next-line: radix
-    this.apiService.getCountByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
-      this.countCandidates = data.countCandidates;
-      this.percentagCountCandidates = (this.countCandidates / 100);
-    });
-  }
+  // private countCandidatesByVenue(): void {
+  //   // tslint:disable-next-line: radix
+  //   this.apiService.getCountByVenueId(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
+  //     this.countCandidates = data.countCandidates;
+  //     this.percentagCountCandidates = (this.countCandidates / 100);
+  //   });
+  // }
 }
