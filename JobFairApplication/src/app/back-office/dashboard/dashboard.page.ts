@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { Candidate, CandidateResponseList } from 'src/app/model/candidate';
 import { ApiService } from 'src/app/services/api.service';
@@ -40,7 +40,7 @@ export class DashboardPage implements OnInit {
   limitVenue = 50;
   pageVenue = 0;
   venues: Venue[] = [];
-  filterText: string;
+  filterText: number = 0;
   formDashboard: FormGroup;
 
   jobNotFound = false;
@@ -61,10 +61,12 @@ export class DashboardPage implements OnInit {
   countOctober: any = [];
   countNovember: any = [];
   countDecember: any = [];
-
   countAccepted: any = [];
   countRejected: any = [];
   countProceed: any = [];
+
+  countCandidates: any = [];
+  countJobsPerVenue: any = [];
 
 
   constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
@@ -86,8 +88,9 @@ export class DashboardPage implements OnInit {
       this.onTablet = false;
     }
 
-    console.log('this.on', this.onTablet)
+    console.log('this.on', this.onTablet);
   }
+
 
   ionViewDidEnter() {
     this.createPieChart();
@@ -102,6 +105,25 @@ export class DashboardPage implements OnInit {
     setTimeout(() => {
       event.target.complete();
     }, 2000);
+  }
+
+  routeTo(candidateId: number) {
+    this.router.navigate(['/candidate-details', candidateId]);
+  }
+
+  // FILTER BY VENUE
+  filter(event) {
+    this.venueJobs = [];
+    this.filterText = event.target.value;
+    if (this.filterText === 0) {
+    } else {
+      this.getAllJobsByVenueId();
+      this.populateCandidate();
+      this.getData();
+      setTimeout(() => {
+        this.chartUpdate();
+      }, 100);
+    }
   }
 
   // Pie Chart
@@ -137,7 +159,7 @@ export class DashboardPage implements OnInit {
         labels: ['Candidates', 'Jobs'],
         datasets: [{
           label: 'List of Candidates & Jobs',
-          data: [43, 9],
+          data: [this.countCandidates, this.countJobsPerVenue],
           backgroundColor: '#0652DD', // array should have same number of elements as number of dataset
           borderColor: '#0652DD', // array should have same number of elements as number of dataset
           borderWidth: 1
@@ -224,13 +246,15 @@ export class DashboardPage implements OnInit {
         }
       }
     });
+
+    console.log('rejected', this.countRejected);
   }
 
   // FOR CANDIDATES BASED ON VENUE
   populateCandidate() {
     this.candidateVenueJobsLists = [];
     // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(1, this.page, this.limit).subscribe(
+    this.apiService.getCandidatesByVenueId(this.filterText, this.page, this.limit).subscribe(
       (data: CandidateVenueJobDtoResponseList) => {
         this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
         this.totalPages = data.totalPages;
@@ -244,10 +268,6 @@ export class DashboardPage implements OnInit {
 
   }
 
-  routeTo(candidateId: number) {
-    this.router.navigate(['/candidate-details', candidateId]);
-  }
-
   // VENUE
   getAllVenue() {
     this.apiService.getAllVenue(this.pageVenue, this.limitVenue).subscribe(
@@ -258,21 +278,11 @@ export class DashboardPage implements OnInit {
       });
   }
 
-  // FILTER BY VENUE
-  filter(event) {
-    this.filterText = event.target.value;
-    if (this.filterText === 'all') {
-      console.log('get data for venue');
-    } else {
-      console.log('get data by venue');
-    }
-  }
-
   // Get All jobs by venue
   getAllJobsByVenueId(event?) {
     // tslint:disable-next-line: radix
     this.jobNotFound = false;
-    this.apiService.getJobsByVenueId(1, this.page, this.limit).subscribe(
+    this.apiService.getJobsByVenueId(this.filterText, this.page, this.limit).subscribe(
       (data: VenueJobResponseList) => {
         this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
         console.log('jobs', this.venueJobs);
@@ -291,8 +301,7 @@ export class DashboardPage implements OnInit {
   }
 
   getData() {
-    this.apiService.getCountByVenue(1).subscribe((data) => {
-      console.log('data', data);
+    this.apiService.getCountByVenue(this.filterText).subscribe((data) => {
       // Get count in months
       this.countJanuary = data.totalCandidatesPerMonthByVenue.totalCandidatesForJanuaryByVenue;
       this.countFebruary = data.totalCandidatesPerMonthByVenue.totalCandidatesForFebruaryByVenue;
@@ -307,9 +316,55 @@ export class DashboardPage implements OnInit {
       this.countNovember = data.totalCandidatesPerMonthByVenue.totalCandidatesForNovemberByVenue;
       this.countDecember = data.totalCandidatesPerMonthByVenue.totalCandidatesForDecemberByVenue;
 
+      // count of screening status
       this.countAccepted = data.totalApprovedScreeningStatusByVenue;
       this.countRejected = data.totalRejectedScreeningStatusByVenue;
       this.countProceed = data.totalProceedScreeningStatusByVenue;
+
+      // Count No. of Jobs per Venue
+      this.countJobsPerVenue = data.totalJobsByVenue;
+
+      console.log(this.countJanuary);
+    });
+
+    // tslint:disable-next-line: radix
+    this.apiService.getCountByVenueId(this.filterText).subscribe(data => {
+      this.countCandidates = data.countCandidates;
     });
   }
+
+  // changeFilterTextValue() {
+  //   this.filterText = 1;
+  //   this.getData();
+  // }
+
+  chartUpdate() {
+    this.doughnut.data.datasets[0].data[0] = this.countRejected;
+    this.doughnut.data.datasets[0].data[1] = this.countProceed;
+    this.doughnut.data.datasets[0].data[2] = this.countAccepted;
+
+    this.verticalBars.data.datasets[0].data[0] = this.countJanuary;
+    this.verticalBars.data.datasets[0].data[1] = this.countFebruary;
+    this.verticalBars.data.datasets[0].data[2] = this.countMarch;
+    this.verticalBars.data.datasets[0].data[3] = this.countApril;
+    this.verticalBars.data.datasets[0].data[4] = this.countMay;
+    this.verticalBars.data.datasets[0].data[5] = this.countJune;
+    this.verticalBars.data.datasets[0].data[6] = this.countJuly;
+    this.verticalBars.data.datasets[0].data[7] = this.countAugust;
+    this.verticalBars.data.datasets[0].data[8] = this.countSeptember;
+    this.verticalBars.data.datasets[0].data[9] = this.countOctober;
+    this.verticalBars.data.datasets[0].data[10] = this.countNovember;
+    this.verticalBars.data.datasets[0].data[11] = this.countDecember;
+
+    this.horizontalBars.data.datasets[0].data[0] = this.countCandidates;
+    this.horizontalBars.data.datasets[0].data[1] = this.countJobsPerVenue;
+
+    console.log('no.Candidates', this.countCandidates);
+    console.log('no.Candidates', this.countJobsPerVenue);
+
+    this.doughnut.update();
+    this.verticalBars.update();
+    this.horizontalBars.update();
+  }
+
 }
