@@ -36,6 +36,9 @@ export class JobListPage implements OnInit {
   insideCategory = false;
   category: string;
 
+  jobPriority: string;
+  jobId: string;
+
   constructor(
     private router: Router,
     private apiService: ApiService,
@@ -209,16 +212,23 @@ export class JobListPage implements OnInit {
   addPriority(event: CustomEvent, jobId: number) {
     if (event.detail.checked) {
       this.priority.push(jobId);
-      // console.log(this.priority);
       localStorage.setItem('priority', JSON.stringify(this.priority));
     } else {
       const index = this.priority.indexOf(jobId);
       if (index > -1) {
         this.priority.splice(index, 1);
+        console.log('prio', this.priority);
       }
       // console.log(this.priority);
       localStorage.setItem('priority', JSON.stringify(this.priority));
     }
+  }
+
+  setJobId() {
+    this.jobPriority = JSON.parse(localStorage.getItem('priority'));
+    this.jobId = this.jobPriority[0];
+    console.log(this.jobId);
+    localStorage.setItem('jobId', this.jobId);
   }
 
   routeToJob(jobQueryParam: string) {
@@ -228,7 +238,6 @@ export class JobListPage implements OnInit {
   applyOnlyFive() {
     const count = JSON.parse(localStorage.priority).length;
 
-    console.log(count);
     if (count > 5) {
       this.unsuccessMsg();
     } else if (count <= 0) {
@@ -241,7 +250,7 @@ export class JobListPage implements OnInit {
   back() {
     this.router.navigate(['/home']);
     window.localStorage.removeItem('priority');
-    window.localStorage.setItem('jobId', '');
+    window.localStorage.removeItem('jobId');
   }
 
   searchByTitle(title: string) {

@@ -194,10 +194,6 @@ export class CandidateAddProfilePage implements OnInit {
 
 
   ngOnInit() {
-    const getJobIdLS = window.localStorage.getItem('priority');
-    const jobId = getJobIdLS[1];
-    window.localStorage.setItem('jobId', jobId);
-
     this.today = new Date();
     this.day = String(this.today.getDate());
     this.month = this.today.getMonth() + 1;

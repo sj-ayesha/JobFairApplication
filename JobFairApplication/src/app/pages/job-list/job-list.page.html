@@ -124,7 +124,7 @@
             </ion-button>
           </div>
           <div class="btn-fill-details" *ngIf="!noJobsAvailable">
-            <ion-button color="dark" (click)="applyOnlyFive()" routerLinkActive="router-link-active"
+            <ion-button color="dark" (click)="applyOnlyFive(); setJobId()" routerLinkActive="router-link-active"
               class="ion-float-right btn">Apply<ion-icon ios="ios-arrow-forward" md="md-arrow-forward">
               </ion-icon>
             </ion-button>
