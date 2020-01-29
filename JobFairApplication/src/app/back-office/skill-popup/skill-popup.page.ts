@@ -12,20 +12,15 @@ import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 export class SkillPopupPage implements OnInit {
   formAddSkill: FormGroup;
   public today = new Date();
-  // venueName: string;
-  // address: string;
-  // startDate: Date;
-  // endDate: Date;
-  // active: boolean;
   status = false;
   submitted = false;
   edit: boolean;
+  apiSkillId: number;
   skills: string;
   skillId: string;
   skillName: string;
-  apiSkillId: number;
 
-  error_messages = {
+  errorMessages = {
     skillName: [
       { type: 'required', message: '⚠ Skill is required' },
       { type: 'maxLength', message: '⚠ Skill must be less than 30 characters' }
@@ -66,13 +61,13 @@ export class SkillPopupPage implements OnInit {
 
   ionViewWillEnter() {
     this.skills = JSON.parse(localStorage.getItem('editSkills'));
-    if (this.edit === true){
+    if (this.edit === true) {
       this.skillId = this.skills[0];
       this.skillName = this.skills[1];
     }
   }
 
-  ionViewWillLeave(){
+  ionViewWillLeave() {
     localStorage.removeItem('editSkills');
   }
 
@@ -94,10 +89,8 @@ export class SkillPopupPage implements OnInit {
     console.log(addSkill);
     this.apiService.saveSkill(addSkill).subscribe(
       data => {
-        // this.router.navigate(['home']);
       },
       error => {
-        // alert("Data not saved!");
       }
     );
   }
@@ -114,10 +107,8 @@ export class SkillPopupPage implements OnInit {
 
     this.apiService.editSkill(editSkill).subscribe(
       data => {
-        // this.router.navigate(['home']);
       },
       error => {
-        // alert("Data not saved!");
       }
     );
   }
@@ -157,7 +148,6 @@ export class SkillPopupPage implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    // tslint:disable-next-line: max-line-length
     if (this.formAddSkill.invalid) {
       this.unsuccessMsg();
     } else {

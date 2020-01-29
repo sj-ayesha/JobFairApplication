@@ -18,7 +18,7 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class CandidateDetailsPage implements OnInit {
   formCandidateScreening: FormGroup;
-
+  public screeningStatus: string;
   jobs: any;
   jobLists: any[];
   public items: any;
@@ -44,10 +44,7 @@ export class CandidateDetailsPage implements OnInit {
   showCV = false;
   baseUrl = this.apiService.baseUrl;
 
-  public screeningStatus: string;
-
-  // tslint:disable-next-line: variable-name
-  error_messages = {
+  errorMessages = {
     interviewerName: [
       { type: 'required', message: '⚠ interviewer Name is required' },
       { type: 'maxLength', message: '⚠ interviewer Name must be less than 30 letters' },

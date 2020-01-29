@@ -15,14 +15,15 @@ import { ThrowStmt } from '@angular/compiler';
 export class VenuePage implements OnInit {
   formVenue: FormGroup;
   venues: Venue[];
-  public select = '';
-  submitted = false;
   venue: Array<string>;
 
+  public select = '';
   oldVenue: string;
   changeVenue: string;
 
-  error_messages = {
+  submitted = false;
+
+  errorMessages = {
     venues: [
       { type: 'required', message: '⚠ Venue is required.' },
     ],
@@ -54,12 +55,23 @@ export class VenuePage implements OnInit {
     }, 2000);
   }
 
+  async UnsuccessMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Please select a venue to proceed',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
   selected(id) {
     localStorage.setItem('venue_id', id.target.value);
     const LSid = JSON.parse(localStorage.getItem('venue_id'));
 
     for (let i = 0; i < this.venues.length; i++) {
-      if (LSid === this.venues[i].venueId){
+      if (LSid === this.venues[i].venueId) {
         window.localStorage.setItem('venueName', this.venues[i].venueName);
       }
     }
@@ -69,6 +81,16 @@ export class VenuePage implements OnInit {
     this.apiService.getVenueByActive(true).subscribe(data => {
       this.venues = data;
     });
+  }
+
+  editTheVenue() {
+    const LSid = JSON.parse(localStorage.getItem('venue_id'));
+    for (let i = 0; i < this.venues.length; i++) {
+      if (LSid === this.venues[i].venueId) {
+        window.localStorage.setItem('venueName', this.venues[i].venueName);
+      }
+    }
+    this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
   }
 
   onSubmit() {
@@ -86,26 +108,5 @@ export class VenuePage implements OnInit {
     }
       this.router.navigateByUrl('/home');
     }
-  }
-
-  editTheVenue(){
-    const LSid = JSON.parse(localStorage.getItem('venue_id'));
-    for (let i = 0; i < this.venues.length; i++) {
-      if (LSid === this.venues[i].venueId){
-        window.localStorage.setItem('venueName', this.venues[i].venueName);
-      }
-    }
-    this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
-  }
-
-  async UnsuccessMsg() {
-    const toast = await this.toastCtrl.create({
-      message: 'Please select a venue to proceed',
-      position: 'top',
-      color: 'danger',
-      duration: 2000,
-      cssClass: 'toast-custom'
-    });
-    toast.present();
   }
 }

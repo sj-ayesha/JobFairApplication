@@ -24,7 +24,7 @@
                 </ion-item>
 
                 <div class="error-messages">
-                  <ng-container *ngFor="let error of error_messages.username">
+                  <ng-container *ngFor="let error of errorMessages.username">
                     <div class="error-message"
                       *ngIf="formLogin.get('username').hasError(error.type) && (formLogin.get('username').dirty || formLogin.get('username').touched)">
                       {{ error.message }}
@@ -38,7 +38,7 @@
                 </ion-item>
 
                 <div class="error-messages">
-                    <ng-container *ngFor="let error of error_messages.password">
+                    <ng-container *ngFor="let error of errorMessages.password">
                       <div class="error-message"
                         *ngIf="formLogin.get('password').hasError(error.type) && (formLogin.get('password').dirty || formLogin.get('password').touched)">
                         {{ error.message }}

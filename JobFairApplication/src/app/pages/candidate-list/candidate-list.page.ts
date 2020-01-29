@@ -25,15 +25,7 @@ export class CandidateListPage implements OnInit {
   candidateVenueJobsListsLEVEL: CandidateVenueJob[] = [];
   allCandidates: Candidate[] = [];
   venues: Venue[];
-  // candidateVenueJob: CandidateVenueJob;
-  // candidateVenueJobsSort: CandidateVenueJob[];
-  public countCandidates: any;
-  noCandidatesAvailable = false;
-  candidateNotFound = false;
-  message: any;
-  public responseData: any;
   public dataSet: [];
-  lastname: string;
 
   limit = 10;
   page = 0;
@@ -43,13 +35,20 @@ export class CandidateListPage implements OnInit {
   pageSCREEN = 0;
   pageLEVEL = 0;
 
-  data: any;
-
   totalPages = 0;
   totalCandidates = 0;
   filterText: number;
   filterTextScreening: string;
   filterTextLevel: string;
+  lastname: string;
+
+  data: any;
+  message: any;
+  public responseData: any;
+  public countCandidates: any;
+
+  noCandidatesAvailable = false;
+  candidateNotFound = false;
 
   resetASC = false;
   resetDESC = false;
@@ -101,7 +100,7 @@ export class CandidateListPage implements OnInit {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
-  //FOR ALL CANDIDATES
+  // FOR ALL CANDIDATES
   populateAllCandidates(event?, isLoadevent?) {
     this.resetAll = true;
     this.resetASC = false;
@@ -145,7 +144,7 @@ export class CandidateListPage implements OnInit {
     }
   }
 
-  // VENUE 
+  // VENUE
   getVenueByActive() {
     this.apiService.getVenueByActive(true).subscribe(data => {
       this.venues = data;
@@ -157,7 +156,7 @@ export class CandidateListPage implements OnInit {
   // FOR CANDIDATES BASED ON VENUE
   filterByVenue(event) {
     this.filterText = event.target.value;
-    if (this.filterText == 0) {
+    if (this.filterText === 0) {
       this.resetAll = true;
       this.resetASC = false;
       this.resetDESC = false;
@@ -420,7 +419,7 @@ export class CandidateListPage implements OnInit {
     });
   }
 
-  getAllCandidatesByDesc(event?, isLoadevent?){
+  getAllCandidatesByDesc(event?, isLoadevent?) {
     this.disableASC = false;
     this.disableDESC = true;
 

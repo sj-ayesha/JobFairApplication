@@ -19,6 +19,5 @@ export class AuthService {
     }
 
     return loggedin.asObservable();
-
   }
 }

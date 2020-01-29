@@ -30,10 +30,19 @@ export class CandidateAddProfilePage implements OnInit {
   durations: Array<string>;
   CandidateSkills: CandidateSkill[] = [];
   skill: Skills[];
+  arrayExperience: any[];
+  arrayQualification: any[];
+  arrayVenue: any[];
+  arrayScreening: any[];
+  arrayFile: any[];
+  fileData: FileList = null; // File Upload
+  selectedFiles: File[] = [];
+  myFiles: string [] = [];
+  uploading: boolean;
+  attachments: File[] = [];
+
   candidateId: number;
   selectedDay = '';
-  public today: any;
-  submitted = false;
   position: string;
   company: string;
   duration: string;
@@ -45,21 +54,10 @@ export class CandidateAddProfilePage implements OnInit {
   hours: any;
   minutes: any;
   seconds: any;
-  arrayExperience: any[];
-  arrayQualification: any[];
-  arrayVenue: any[];
-  arrayScreening: any[];
-  arrayFile: any[];
+  public today: any;
+  submitted = false;
 
-  fileData: FileList = null; // File Upload
-  selectedFiles: File[] = [];
-  myFiles:string [] = [];
-  uploading: boolean;
-  attachments: File[] = [];
-
-
-  // tslint:disable-next-line: variable-name
-  error_messages = {
+  errorMessages = {
     firstName: [
       { type: 'required', message: '⚠ First Name is required' },
       {
@@ -129,8 +127,6 @@ export class CandidateAddProfilePage implements OnInit {
     private router: Router,
     private toastCtrl: ToastController,
     private dropdowns: DropdownsService,
-    private http: HttpClient,
-    private ngZone: NgZone,
     private candidateService: CandidatesService
   ) {
 
@@ -232,6 +228,29 @@ export class CandidateAddProfilePage implements OnInit {
     }, 2000);
   }
 
+  async successMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Your information has been succesfully saved',
+      position: 'top',
+      color: 'success',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  async unsuccessMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Please fill in all the required fields',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  // submit information without cv
   submitCandidate() {
     const filteredCandidateSkills = this.CandidateSkills.filter(data => {
       return data.checked === true;
@@ -252,9 +271,11 @@ export class CandidateAddProfilePage implements OnInit {
         graduationDate: this.formCandidateDetails.get('graduationDate').value
       }
     ];
-    // tslint:disable-next-line: max-line-length
-    if (this.arrayExperience[0].companyName == null && this.arrayExperience[0].position == null && this.arrayExperience[0].duration == null) {
-      this.arrayExperience = [];
+    if (
+      this.arrayExperience[0].companyName == null &&
+      this.arrayExperience[0].position == null &&
+      this.arrayExperience[0].duration == null) {
+        this.arrayExperience = [];
     }
 
     this.arrayVenue = [{
@@ -288,18 +309,16 @@ export class CandidateAddProfilePage implements OnInit {
       candidateScreeningDtos: this.arrayScreening,
       candidateFileDtos: this.arrayFile
     };
-    console.log(candidateDetails);
 
     this.apiService.saveCandidate(candidateDetails).subscribe(
       data => {
-        // this.router.navigate(['home']);
       },
       error => {
-        // alert("Data not saved!");
       }
     );
   }
 
+  // submit candidate with cv
   submitCandidateCV() {
     const filteredCandidateSkills = this.CandidateSkills.filter(data => {
       return data.checked === true;
@@ -351,8 +370,6 @@ export class CandidateAddProfilePage implements OnInit {
       candidateScreeningDtos: this.arrayScreening,
       candidateFileDtos: this.arrayFile
     };
-
-    console.log('submit', candidateDetails);
 
     if (this.formCandidateDetails.invalid || this.fileData === null) {
       this.unsuccessMsg();
@@ -453,35 +470,10 @@ export class CandidateAddProfilePage implements OnInit {
     .catch(err => console.log('err', err));
   }
 
-  ionViewWillLoad() { }
-
-  async successMsg() {
-    const toast = await this.toastCtrl.create({
-      message: 'Your information has been succesfully saved',
-      position: 'top',
-      color: 'success',
-      duration: 2000,
-      cssClass: 'toast-custom'
-    });
-    toast.present();
-  }
-
-  async unsuccessMsg() {
-    const toast = await this.toastCtrl.create({
-      message: 'Please fill in all the required fields',
-      position: 'top',
-      color: 'danger',
-      duration: 2000,
-      cssClass: 'toast-custom'
-    });
-    toast.present();
-  }
-  
-
   populateSkills() {
     this.apiService.getAllSkills().subscribe(data => {
       data.forEach((element, index) => {
-        let data = {
+        const data = {
           skill: element,
           checked: null
         };

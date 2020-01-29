@@ -131,7 +131,7 @@ export class JobListPage implements OnInit {
   styleAccordion() {
     const coll = document.getElementsByClassName('collapsible');
     for (let i = 0; i < coll.length; i++) {
-      coll[i].addEventListener('click', function () {
+      coll[i].addEventListener('click', function() {
 
         this.classList.toggle('active');
         const content = this.nextElementSibling;
@@ -212,7 +212,7 @@ export class JobListPage implements OnInit {
       // console.log(this.priority);
       localStorage.setItem('priority', JSON.stringify(this.priority));
     } else {
-      let index = this.priority.indexOf(jobId);
+      const index = this.priority.indexOf(jobId);
       if (index > -1) {
         this.priority.splice(index, 1);
       }

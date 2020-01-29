@@ -4,6 +4,7 @@ import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -15,14 +16,11 @@ export class LoginPage implements OnInit {
   loggedIn: boolean;
   submitted = false;
 
-  // tslint:disable-next-line: variable-name
-  error_messages = {
+  errorMessages = {
     username: [
       { type: 'required', message: '⚠ Username is required.' },
       { type: 'minlength', message: '⚠ Username must be of 3 characters.' },
       { type: 'maxlength', message: '⚠ Username must be of 3 characters.' }
-      // { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
-      // { type: 'validUsername', message: 'Your username has already been taken.' }
     ],
     password: [
       { type: 'required', message: '⚠ Password is required.' },
@@ -33,13 +31,13 @@ export class LoginPage implements OnInit {
     private loginLogoutService: LoginLogoutService,
     private router: Router,
     private toastCtrl: ToastController,
-    private authService: AuthService
+    private authService: AuthService,
+    private apiService: ApiService
   ) {
     this.formLogin = this.formBuilder.group({
       username: new FormControl('', Validators.compose([
         Validators.maxLength(3),
         Validators.minLength(3),
-        // Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
         Validators.required
       ])),
       password: new FormControl('', Validators.required)
@@ -78,17 +76,28 @@ export class LoginPage implements OnInit {
 
   LogInEnter() {
     this.submitted = true;
-    // tslint:disable-next-line: max-line-length
     if (this.formLogin.invalid) {
       this.unsuccessMsg();
     } else {
       this.loggedIn = true;
-      localStorage.setItem('user', 'userId');
+      const loginUser = {
+        visa: this.formLogin.get('username').value,
+        password: this.formLogin.get('password').value
+      };
 
-      this.loginLogoutService.loginUser();
-      // console.log(this.loggedIn);
+      this.apiService.authenticateUser(loginUser).subscribe(data => {
+          localStorage.setItem('token', data.result.token);
+          localStorage.setItem('visa', loginUser.visa);
+          setTimeout(() => {
+            this.loginLogoutService.loginUser();
+          }, 10);
+        }, error => {
+          this.unsuccessMsg();
+          this.formLogin.reset();
+        }
+      );
       setTimeout(() => {
-        this.formLogin.reset();
+        // this.formLogin.reset();
         this.router.navigate(['dashboard']);
       }, 2000);
     }

@@ -56,11 +56,12 @@ export class NavSidebarComponent implements OnInit, OnDestroy {
 
   logout() {
     this.loggedIn = false;
-    localStorage.removeItem('user');
-    localStorage.removeItem('venue_id');
-    localStorage.removeItem('priority');
-    localStorage.removeItem('jobId');
-    localStorage.removeItem('venueName');
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('venue_id');
+    // localStorage.removeItem('priority');
+    // localStorage.removeItem('jobId');
+    // localStorage.removeItem('venueName');
+    localStorage.clear();
     this.loginLogoutService.logoutUser();
     this.venue = '';
   }

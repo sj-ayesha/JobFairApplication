@@ -24,13 +24,16 @@ export class VenueJobPage implements OnInit, OnDestroy {
   jobs: Job[] = [];
   venueJobs: VenueJob[] = [];
   addJob: any[] = [];
-  filterText: number;
-  selectedVenue: string;
-  selectedVenueDate: Date;
-  selectedVenueDto: Venue;
+  checkBoxArray: Array<number> = [];
   genders: Array<string>;
 
-  checkBoxArray: Array<number> = [];
+  selectedVenueDto: Venue;
+
+  filterText: number;
+  selectedVenue: string;
+  venueName: string;
+  submitted = false;
+  selectedVenueDate: Date;
 
   limitVenueJobs = 50;
   pageVenueJobs = 0;
@@ -38,14 +41,9 @@ export class VenueJobPage implements OnInit, OnDestroy {
   pageVenue = 0;
   limitJob = 50;
   pageJob = 0;
-
-  venueName: string;
-
-  submitted = false;
-
   totalPages = 0;
 
-  error_messages = {
+  errorMessages = {
     venue: [
       { type: 'required', message: '⚠ Venue is required' },
     ]
@@ -167,7 +165,7 @@ export class VenueJobPage implements OnInit, OnDestroy {
       endDate: null,
       address: null,
       active: null
-    }
+    };
     const addVenueJob = {
       venue: venue,
       job: this.jobs,
