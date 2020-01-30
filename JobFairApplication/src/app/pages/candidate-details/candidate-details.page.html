@@ -8,7 +8,9 @@
       <ion-title>
         <div class="header-wrap">
           <div class="title">
-            <ion-icon class="icon-user" ios="ios-person" md="md-person"></ion-icon>
+            <!-- <ion-icon class="icon-user" ios="ios-person" md="md-person"></ion-icon> -->
+            <img class="title-img" *ngIf="candidate?.gender == 'Male'" src='../../../assets/img/header_icons/man.png'>   
+            <img class="title-img" *ngIf="candidate?.gender == 'Female'" src='../../../assets/img/header_icons/woman.png'>              
             <h3>Candidate Profile</h3>
           </div>
         </div>

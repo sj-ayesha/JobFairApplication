@@ -5,10 +5,16 @@ p{
     font-size:17px;
 }
 .title{
-    display: flex;
+    display: -webkit-box;
     padding: 0 10px;
 }
   
+img.title-img{
+    padding-top: 4px;
+    padding-right: 10px;
+    max-width: 49px;
+}
+
 .title h3{
     margin-top: 0;
     margin-bottom: 0;

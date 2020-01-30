@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'venue', pathMatch: 'full' },
   {
     path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
-    canActivate: [AuthFrontOfficeGuard]
+    // canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'login',
@@ -16,35 +16,32 @@ const routes: Routes = [
   {
     path: 'job-list',
     loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule),
-    canActivate: [AuthFrontOfficeGuard]
+    // canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'job-list/:jobQueryParam',
     loadChildren: () => import('./pages/job-list/job-list.module').then(m => m.JobListPageModule),
-    canActivate: [AuthFrontOfficeGuard]
+    // canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'candidate-list',
     loadChildren: () => import('./pages/candidate-list/candidate-list.module').then(m => m.CandidateListPageModule),
     canActivate: [AuthGuard],
-    // canActivate: [AuthGuard]
   },
   {
     path: 'candidate-details',
     loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule),
     canActivate: [AuthGuard]
-    // canActivate: [AuthGuard]
   },
   {
     path: 'candidate-details/:candidateId',
     loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule),
     canActivate: [AuthGuard]
-    // canActivate: [AuthGuard]
   },
   {
     path: 'candidate-add-profile',
     loadChildren: () => import('./pages/candidate-add-profile/candidate-add-profile.module').then(m => m.CandidateAddProfilePageModule),
-    canActivate: [AuthFrontOfficeGuard]
+    // canActivate: [AuthFrontOfficeGuard]
   },
   {
     path: 'venue',

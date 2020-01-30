@@ -1,7 +1,7 @@
 @import '../../styles/custom.scss';
 
 .title{
-    display: flex;
+    display: -webkit-box;
     width: 100%;
 }
 .icon-map{
@@ -155,4 +155,9 @@ body {
 .title h3{
   margin-top: 0;
   margin-bottom: 0;
+}
+
+img{
+  padding-top: 4px;
+  padding-right: 15px;
 }

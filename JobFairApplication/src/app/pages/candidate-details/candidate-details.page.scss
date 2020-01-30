@@ -3,7 +3,7 @@
 //rejected: #f04141
 @import '../../styles/custom.scss';
 .title{
-    display: flex;
+    display: -webkit-box;
 }
 .icon-user{
     font-size: 35px;
@@ -294,7 +294,10 @@ ion-card-title .feedbacks{
     margin-bottom: 0;
     padding-top: 5px;
 }
-
+img.title-img{
+    padding-top: 7px;
+    padding-right: 10px;
+}
 
 
 

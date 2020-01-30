@@ -1,7 +1,7 @@
 @import '../../styles/custom.scss';
 
 .title{
-    display: flex;
+  display: -webkit-box;
     width: 100%;
 }
 .icon-map{
@@ -152,4 +152,9 @@ body {
   .rwd-table tr{
     font-size: 16px;
   }
+}
+
+img{
+  padding-top: 4px;
+  padding-right: 15px;
 }

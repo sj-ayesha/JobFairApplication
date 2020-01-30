@@ -112,8 +112,14 @@ a.venue-name {
     cursor: pointer;
   }
 
+  .caret:hover{
+    border-bottom: 2px solid $color-light-red;
+    width: 120%;
+    transition: 0.2s;
+  }
+
   .caret::before {
-    content: "\25B6";
+    // content: "\25B6";
     // background-image: "../../../assets/img/chevron-arrow-down.png";
     color: $color-light-red;
     display: inline-block;
