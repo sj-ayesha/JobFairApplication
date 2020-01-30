@@ -10,6 +10,9 @@ import { Skills } from 'src/app/model/skills';
 import { FormGroup, FormBuilder, Validators, FormControl, Form, FormArray } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { ThrowStmt } from '@angular/compiler';
+import { HttpHeaders } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
+import { DownloadDto } from 'src/app/model/DownloadDto';
 
 @Component({
   selector: 'app-candidate-details',
@@ -43,6 +46,8 @@ export class CandidateDetailsPage implements OnInit {
   candidateId: any = this.route.snapshot.paramMap.get('candidateId');
   showCV = false;
   baseUrl = this.apiService.baseUrl;
+  public url: string;
+  fileUrl;
 
   errorMessages = {
     interviewerName: [
@@ -58,7 +63,8 @@ export class CandidateDetailsPage implements OnInit {
     private apiService: ApiService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private sanitizer: DomSanitizer
   ) {
     this.formCandidateScreening = this.formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -102,8 +108,8 @@ export class CandidateDetailsPage implements OnInit {
     this.apiService.getCandidateById(candidateId).subscribe(data => {
       this.candidate = data;
 
-      for (let i = 0; i < this.candidate.candidateScreeningDtos.length; i++){
-        if (this.candidate.candidateScreeningDtos[i].screeningStatus === 'proceed-to-next-interview'){
+      for (let i = 0; i < this.candidate.candidateScreeningDtos.length; i++) {
+        if (this.candidate.candidateScreeningDtos[i].screeningStatus === 'proceed-to-next-interview') {
           this.candidate.candidateScreeningDtos[i].screeningStatus = 'Proceed to next interview';
         }
       }
@@ -181,6 +187,47 @@ export class CandidateDetailsPage implements OnInit {
       cssClass: 'toast-custom'
     });
     toast.present();
+  }
+
+  downloadFile(candidateFilename) {
+    this.apiService.getCandidateCV(candidateFilename).subscribe((res: DownloadDto) => {
+      let downloadFile: File;
+      const byteCharacters = atob(res.file);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'application/octet-stream' });
+      const fileName = candidateFilename;
+
+      // For Edge
+      if (window.navigator && window.navigator.msSaveBlob) {
+        downloadFile = this.blobToFile(blob, fileName);
+      } else {
+        const arrayOfBlob = new Array<Blob>();
+        arrayOfBlob.push(blob);
+        downloadFile = new File(arrayOfBlob, fileName);
+      }
+
+      const url = window.URL.createObjectURL(downloadFile);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = candidateFilename;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+
+    },
+      (err) => console.log('err', err))
+  }
+
+  private blobToFile(theBlob: Blob, fileName: string): File {
+    const file: any = theBlob;
+    file.name = fileName;
+    return theBlob as File;
   }
 
   onSubmit() {

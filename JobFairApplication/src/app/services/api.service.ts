@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Candidate } from '../model/candidate';
 import { Job } from '../model/job';
 import { Venue } from '../model/venue';
@@ -18,6 +18,7 @@ import { UserDto } from '../model/UserDto';
 import { ApiResponse } from '../model/ApiResponse';
 import { Dashboard } from '../model/dashboard';
 import { RoleDto } from '../model/roleDto';
+import { DownloadDto } from '../model/DownloadDto';
 
 
 @Injectable({
@@ -237,12 +238,14 @@ export class ApiService {
 
   // candidate cv
 
-  uploadCV(formData: FormData): Observable<any> {
-    return this.http.post<any>( this.baseUrl + 'candidate/candidate-cv', formData);
+  uploadCV(formData: FormData, httpOption): Observable<any> {
+    return this.http.post<any>( this.baseUrl + 'candidate/candidate-cv', formData, httpOption);
   }
 
-  getCandidateCV(candidateId: number): Observable<any> {
-    return this.http.get<Candidate[]>(this.baseUrl + 'candidate/candidate-cv/' + candidateId);
+  getCandidateCV(filename: string): Observable<DownloadDto> {
+  /*   let headers: HttpHeaders = new HttpHeaders();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token')); */
+    return this.http.get<DownloadDto>(this.baseUrl + 'candidate-file/' + filename);
   }
 
   // categoryCount
