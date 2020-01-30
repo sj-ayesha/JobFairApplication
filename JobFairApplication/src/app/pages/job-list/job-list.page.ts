@@ -80,7 +80,11 @@ export class JobListPage implements OnInit {
     this.filterText = event.target.value;
     if (this.filterText === 'all') {
       this.venueJobs = [];
-      this.getAllJobsByVenueId();
+      if (this.category == null) {
+        this.getAllJobsByVenueId();
+      } else {
+        this.getAllJobsByVenueIdAndCategory();
+      }
     } else {
       this.getJobByLevel();
     }
@@ -93,17 +97,32 @@ export class JobListPage implements OnInit {
   getJobByLevel() {
     // tslint:disable-next-line: radix
     // this.jobNotFound = false;
-    this.apiService.searchJobByLevel(parseInt(window.localStorage.getItem('venue_id')), this.filterText).subscribe(data => {
-      this.jobNotFound = false;
-      if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
-        this.jobNotFound = true;
-      } else {
-        this.venueJobs = data;
-        setTimeout(() => {
-          this.styleAccordion();
-        }, 0);
-      }
-    });
+    const venueId = parseInt(window.localStorage.getItem('venue_id'));
+    if (this.category == null) {
+      this.apiService.searchJobByLevel(parseInt(window.localStorage.getItem('venue_id')), this.filterText).subscribe(data => {
+        this.jobNotFound = false;
+        if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+          this.jobNotFound = true;
+        } else {
+          this.venueJobs = data;
+          setTimeout(() => {
+            this.styleAccordion();
+          }, 0);
+        }
+      });
+    } else {
+      this.apiService.getJobByCategoryAndLevel(venueId, this.category, this.filterText).subscribe(data => {
+        this.jobNotFound = false;
+        if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
+          this.jobNotFound = true;
+        } else {
+          this.venueJobs = data;
+          setTimeout(() => {
+            this.styleAccordion();
+          }, 0);
+        }
+      });
+    }
   }
 
   async unsuccessMsg() {
@@ -133,7 +152,6 @@ export class JobListPage implements OnInit {
     const coll = document.getElementsByClassName('collapsible');
     for (let i = 0; i < coll.length; i++) {
       coll[i].addEventListener('click', function() {
-
         this.classList.toggle('active');
         const content = this.nextElementSibling;
         if (content.style.maxHeight) {
@@ -190,6 +208,8 @@ export class JobListPage implements OnInit {
   }
 
   getAllJobsByVenueIdAndCategory() {
+    this.jobNotFound = false;
+    this.venueJobs = [];
     this.category = this.route.snapshot.paramMap.get('jobQueryParam');
     this.apiService.getJobsByVenueIdAndCategory(parseInt(window.localStorage.getItem('venue_id')), this.category).subscribe(data => {
       if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
@@ -217,7 +237,6 @@ export class JobListPage implements OnInit {
         this.priority.splice(index, 1);
         console.log('prio', this.priority);
       }
-      // console.log(this.priority);
       localStorage.setItem('priority', JSON.stringify(this.priority));
     }
   }
