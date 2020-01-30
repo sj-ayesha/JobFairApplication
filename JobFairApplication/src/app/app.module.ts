@@ -51,6 +51,7 @@ import { ApiService } from './services/api.service';
     AuthGuard,
     AuthFrontOfficeGuard,
     ApiService,
+    
     { provide:
       RouteReuseStrategy,
       useClass: IonicRouteStrategy

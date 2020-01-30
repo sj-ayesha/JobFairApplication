@@ -156,7 +156,7 @@
                           <p><b>Click to download {{ candidate?.firstName}} CV:</b></p>
                           <div class="file-download" >
                             <ion-button class="btn-download ion-text-wrap ion-text-left" *ngFor="let candidateFile of candidateFiles">
-                              <a href='{{baseUrl}}candidate-file/{{candidateFile.fileName}}'>{{candidateFile.fileName}}</a>
+                              <a (click)="downloadFile(candidateFile.fileName)">{{candidateFile.fileName}}</a>
                             </ion-button>
                           </div>
 

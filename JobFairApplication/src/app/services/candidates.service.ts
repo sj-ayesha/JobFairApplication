@@ -23,6 +23,11 @@ export class CandidatesService {
     const blob = new Blob([json], {
       type: 'application/json'
     });
+
+    let httpOptions = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token')).set('Accept', 'application/json')
+    };
+
     formData.append('candidateDto', blob);
 
     attachments.forEach(attachment => {
@@ -31,7 +36,7 @@ export class CandidatesService {
 
     console.log(formData);
 
-    return this.apiService.uploadCV(formData);
+    return this.apiService.uploadCV(formData, httpOptions);
 
   }
 }

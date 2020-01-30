@@ -307,6 +307,12 @@ export class DashboardPage implements OnInit {
     );
   }
 
+  getAllData() {
+    this.apiService.getCountByAllVenue().subscribe((data) => {
+
+    });
+  }
+
   getData() {
     this.apiService.getCountByVenue(this.filterText).subscribe((data) => {
       // Get count in months
