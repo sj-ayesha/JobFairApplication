@@ -9,6 +9,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { VenueJobResponseList, VenueJob } from 'src/app/model/venueJob';
 import { Dashboard } from 'src/app/model/dashboard';
 import { CandidatesPerMonth } from 'src/app/model/CandidatesPerMonth';
+import { JobResponseList, Job } from 'src/app/model/job';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,12 +35,14 @@ export class DashboardPage implements OnInit {
   totalPages = 0;
   noCandidatesAvailable = false;
   candidateVenueJobsLists: CandidateVenueJob[] = [];
+  venue: boolean = false;
 
   onTablet: boolean;
 
   limitVenue = 50;
   pageVenue = 0;
   venues: Venue[] = [];
+  jobs: Job[] = [];
   filterText: number = 0;
   formDashboard: FormGroup;
 
@@ -86,9 +89,11 @@ export class DashboardPage implements OnInit {
     this.populateCandidate();
     this.getAllVenue();
     this.getAllJobsByVenueId();
-    this.getData();
+    this.getAllData();
+    this.getAllJobs();
+    this.getAllCandidatesOfAllVenue();
 
-    const mq = window.matchMedia( '(max-width: 1024px)' );
+    const mq = window.matchMedia('(max-width: 1024px)');
     if (mq.matches) {
       this.onTablet = true;
     } else {
@@ -122,8 +127,16 @@ export class DashboardPage implements OnInit {
   filter(event) {
     this.venueJobs = [];
     this.filterText = event.target.value;
-    if (this.filterText === 0) {
+    if (this.filterText == 0) {
+      this.venue = false;
+      this.getAllJobs();
+      this.getAllCandidatesOfAllVenue();
+      this.getAllData();
+      setTimeout(() => {
+        this.chartUpdate();
+      }, 100);
     } else {
+      this.venue = true;
       this.getAllJobsByVenueId();
       this.populateCandidate();
       this.getData();
@@ -182,7 +195,7 @@ export class DashboardPage implements OnInit {
         },
         title: {
           display: true,
-          text: 'UTM Candidates & Jobs',
+          text: 'Candidates & Jobs',
           fontStyle: 'normal',
           fontFamily: 'Proxima Nova Regular',
           fontSize: 24,
@@ -202,7 +215,7 @@ export class DashboardPage implements OnInit {
         datasets: [{
           label: 'No. of Candidates',
           data: [this.countJanuary, this.countFebruary, this.countMarch, this.countApril, this.countMay, this.countJune, this.countJuly,
-            this.countAugust, this.countSeptember, this.countOctober, this.countNovember, this.countDecember],
+          this.countAugust, this.countSeptember, this.countOctober, this.countNovember, this.countDecember],
           backgroundColor: '#009432', // array should have same number of elements as number of dataset
           borderColor: '#009432', // array should have same number of elements as number of dataset
           borderWidth: 1
@@ -274,12 +287,25 @@ export class DashboardPage implements OnInit {
       });
 
   }
+  // FOR ALL CANDIDATES OF ALL VENUE
+  getAllCandidatesOfAllVenue() {
+    this.candidateVenueJobsLists = [];
+    this.apiService.getAllCandidatesVenueJob(this.page, this.limit).subscribe(
+      (data: CandidateVenueJobDtoResponseList) => {
+        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
+        this.totalPages = data.totalPages;
 
+        if (this.candidateVenueJobsLists.length === 0) {
+          this.noCandidatesAvailable = true;
+        } else {
+          this.noCandidatesAvailable = false;
+        }
+      });
+  }
   // VENUE
   getAllVenue() {
     this.apiService.getAllVenue(this.pageVenue, this.limitVenue).subscribe(
       (data: VenueResponseList) => {
-
         this.venues = [...this.venues, ...data.venueDtoList];
         this.totalPages = data.totalPages;
       });
@@ -287,6 +313,7 @@ export class DashboardPage implements OnInit {
 
   // Get All jobs by venue
   getAllJobsByVenueId(event?) {
+    this.venueJobs = [];
     // tslint:disable-next-line: radix
     this.jobNotFound = false;
     this.apiService.getJobsByVenueId(this.filterText, this.page, this.limit).subscribe(
@@ -307,9 +334,31 @@ export class DashboardPage implements OnInit {
     );
   }
 
+  getAllJobs() {
+    this.jobs = [];
+    this.apiService.getAllJobs(this.page, this.limit).subscribe(
+      (data: JobResponseList) => {
+        this.jobs = [...this.jobs, ...data.jobDtoList];
+      });
+  }
+
   getAllData() {
     this.apiService.getCountByAllVenue().subscribe((data) => {
+      // Count No. of Candidates per Category
+      this.countSoftware = data.totalCandidatesPerSoftwareEngineerByAllVenue;
+      this.countHR = data.totalCandidatesPerHumanResourceByAllVenue;
+      this.countBA = data.totalCandidatesPerBusinessAnalystByAllVenue;
+      this.countArchitect = data.totalCandidatesPerArchitectByAllVenue;
+      this.countQA = data.totalCandidatesPerQualityAssuranceByAllVenue;
+      this.countManager = data.totalCandidatesPerManagerByAllVenue;
 
+      // count of screening status
+      this.countAccepted = data.totalApprovedScreeningStatusByAllVenue;
+      this.countRejected = data.totalRejectedScreeningStatusByAllVenue;
+      this.countProceed = data.totalProceedScreeningStatusByAllVenue;
+
+      // count total no. of candidates
+      this.countCandidates = data.totalCandidatesByAllVenue;
     });
   }
 
@@ -333,6 +382,8 @@ export class DashboardPage implements OnInit {
       this.countAccepted = data.totalApprovedScreeningStatusByVenue;
       this.countRejected = data.totalRejectedScreeningStatusByVenue;
       this.countProceed = data.totalProceedScreeningStatusByVenue;
+
+      console.log('accepted', this.countAccepted);
 
       // Count No. of Jobs per Venue
       this.countJobsPerVenue = data.totalJobsByVenue;
@@ -397,7 +448,7 @@ export class DashboardPage implements OnInit {
     this.pie.update();
   }
 
-  getRoleDetails(){
+  getRoleDetails() {
     this.apiService.getRoleDetails(localStorage.getItem('role')).subscribe(data => {
       console.log('data', data);
     })

@@ -9,5 +9,5 @@ export class ApiResponse {
 export class Result {
     token: any;
     visa: string;
-    roleDto: RoleDto
+    roleDto: RoleDto;
 }
