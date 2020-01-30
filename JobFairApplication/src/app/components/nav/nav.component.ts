@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, NgZone, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ChangeVenueService } from 'src/app/services/change-venue.service';
 
@@ -28,8 +28,9 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private loginLogoutService: LoginLogoutService,
     private router: Router,
-    private changeVenueService: ChangeVenueService,
-    ) { }
+    private changeVenueService: ChangeVenueService, private changeDetectorRef: ChangeDetectorRef
+    ) {
+     }
 
   ngOnInit() {
     this.loggedIn = !!localStorage.getItem('visa');
@@ -40,9 +41,13 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
   }
 
+  ionViewWillEnter() {
+
+  }
+
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.treeViewNav();
+      this.loginLogoutService.treeViewNav();
     }, 0);
   }
 
@@ -76,15 +81,15 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['/dashboard']);
   }
 
-  treeViewNav() {
-    const toggler = document.getElementsByClassName('caret');
-    let i;
+  // treeViewNav() {
+  //   const toggler = document.getElementsByClassName('caret');
+  //   let i;
 
-    for (i = 0; i < toggler.length; i++) {
-      toggler[i].addEventListener('click', function() {
-        this.parentElement.querySelector('.nested').classList.toggle('active');
-        this.classList.toggle('caret-down');
-      });
-    }
-  }
+  //   for (i = 0; i < toggler.length; i++) {
+  //     toggler[i].addEventListener('click', function() {
+  //       this.parentElement.querySelector('.nested').classList.toggle('active');
+  //       this.classList.toggle('caret-down');
+  //     });
+  //   }
+  // }
 }

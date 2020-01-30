@@ -23,6 +23,10 @@ export class LoginLogoutService {
   loginUser() {
     if (localStorage.getItem('visa').length >= 1) {
       this.sessionStateEmitter.emit(true);
+
+      setTimeout(() => {
+        this.treeViewNav();
+      }, 0);
     }
     /* if (this.isLoggedIn = true) {
       this.router.navigate(['/venue']);
@@ -38,6 +42,18 @@ export class LoginLogoutService {
 
   getLoggedIn(): Observable<boolean> {
     return this.storage.asObservable();
+  }
+
+  treeViewNav() {
+    const toggler = document.getElementsByClassName('caret');
+    let i;
+
+    for (i = 0; i < toggler.length; i++) {
+      toggler[i].addEventListener('click', function() {
+        this.parentElement.querySelector('.nested').classList.toggle('active');
+        this.classList.toggle('caret-down');
+      });
+    }
   }
 
 }
