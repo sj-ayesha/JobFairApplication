@@ -1,13 +1,21 @@
-<ion-content class="ion-padding">
+<ion-content>
   <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <div class="header-wrap">
+          <div class="title">
+            <ion-icon class="icon-user" ios="ios-person" md="md-person"></ion-icon>
+            <h3>Candidate Profile</h3>
+          </div>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   <div class="wrapper-content">
-    <div class="title">
-      <ion-icon class="icon-user" ios="ios-person" md="md-person"></ion-icon>
-      <h3>Candidate Profile</h3>
-    </div>
     <ion-row>
       <!-- <ion-col col-md-2 size="2" col-sm-3 size="3">
         <ion-card class="ion-padding">

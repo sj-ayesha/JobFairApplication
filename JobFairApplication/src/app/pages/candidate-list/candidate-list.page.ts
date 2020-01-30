@@ -127,7 +127,6 @@ export class CandidateListPage implements OnInit {
         } else {
           this.noCandidatesAvailable = false;
         }
-        console.log(this.candidateVenueJobsLists[1]);
 
         if (event) {
           event.target.complete();

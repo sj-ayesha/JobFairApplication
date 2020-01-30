@@ -3,6 +3,7 @@ import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ChangeVenueService } from 'src/app/services/change-venue.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -28,9 +29,9 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private loginLogoutService: LoginLogoutService,
     private router: Router,
-    private changeVenueService: ChangeVenueService, private changeDetectorRef: ChangeDetectorRef
-    ) {
-     }
+    private changeVenueService: ChangeVenueService,
+    private authService: AuthService
+    ) { }
 
   ngOnInit() {
     this.loggedIn = !!localStorage.getItem('visa');
@@ -58,6 +59,7 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   logout() {
     localStorage.clear();
     this.loginLogoutService.logoutUser();
+    // this.authService.logout();
     this.venue = '';
   }
 

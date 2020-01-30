@@ -166,6 +166,11 @@ export class ApiService {
     (this.baseUrl + 'venue-job/jobs/category/title' + '?venueId=' + venueId + '&category=' + category + '&title=' + title);
   }
 
+  getJobByCategoryAndLevel(venueId: number, category: string, level: string): Observable<VenueJob[] | any> {
+    return this.http.get<VenueJob[]>
+    (this.baseUrl + 'venue-job/jobs/category/level' + '?venueId=' + venueId + '&category=' + category + '&level=' + level);
+  }
+
 
   searchJobByLevel(venueId: number, level: string): Observable<VenueJob[] | any> {
     return this.http.get<VenueJob[]>(this.baseUrl + 'venue-job/jobs/level' + '?venueId=' + venueId + '&level=' + level);

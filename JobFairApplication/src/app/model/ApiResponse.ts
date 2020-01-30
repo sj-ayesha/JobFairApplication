@@ -1,7 +1,7 @@
 import { RoleDto } from './roleDto';
 
 export class ApiResponse {
-    status: string;
+    status: number;
     message: string;
     result: Result;
 }

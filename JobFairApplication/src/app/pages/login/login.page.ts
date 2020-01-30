@@ -85,24 +85,22 @@ export class LoginPage implements OnInit {
         password: this.formLogin.get('password').value
       };
 
-      this.apiService.authenticateUser(loginUser).subscribe(data => {
+      this.apiService.authenticateUser(loginUser).subscribe(data => {{
           console.log('data', data);
           localStorage.setItem('token', data.result.token);
           localStorage.setItem('visa', loginUser.visa);
           localStorage.setItem('role', data.result.roleDto.name);
           setTimeout(() => {
             this.loginLogoutService.loginUser();
+            // this.authService.login();
           }, 10);
           this.router.navigateByUrl('/dashboard');
-        }, error => {
+        }
+      }, error => {
           this.unsuccessMsg();
           this.formLogin.reset();
         }
       );
-      // setTimeout(() => {
-      //   // this.formLogin.reset();
-        
-      // }, 10);
     }
   }
 }

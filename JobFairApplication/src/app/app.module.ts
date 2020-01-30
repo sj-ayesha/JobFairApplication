@@ -15,6 +15,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { NavSidebarComponent } from './components/nav-sidebar/nav-sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthGuard } from './services/auth.guard';
+import { AuthService } from './services/auth.service';
 
 // import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 // import { File } from '@ionic-native/file/ngx';
@@ -51,7 +52,7 @@ import { ApiService } from './services/api.service';
     AuthGuard,
     AuthFrontOfficeGuard,
     ApiService,
-    
+    AuthService,
     { provide:
       RouteReuseStrategy,
       useClass: IonicRouteStrategy

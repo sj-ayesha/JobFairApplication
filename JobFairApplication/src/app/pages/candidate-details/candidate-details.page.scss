@@ -7,7 +7,7 @@
 }
 .icon-user{
     font-size: 35px;
-    padding-top: 19px;
+    padding-top: 7px;
     padding-right: 10px;
 }
 .jobs-selected{
@@ -40,7 +40,6 @@ ion-checkbox{
 ion-card.candidate-details{
     margin-top:5px;
 }
-
 
 // Rejected
 #ck-button-rejected {
@@ -290,6 +289,11 @@ ion-card-title .feedbacks{
     }
 }
 
+.title h3{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5px;
+}
 
 
 
