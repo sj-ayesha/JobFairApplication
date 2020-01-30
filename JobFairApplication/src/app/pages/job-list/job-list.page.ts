@@ -1,11 +1,9 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChildren, QueryList, ElementRef, ViewChild } from '@angular/core';
-import { DataService } from '../../services/data.service';
+import { Component, OnInit, ViewChildren, QueryList, ElementRef, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Job } from 'src/app/model/job';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenueJob, VenueJobResponseList } from 'src/app/model/venueJob';
 import { ToastController, IonInfiniteScroll } from '@ionic/angular';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-job-list',

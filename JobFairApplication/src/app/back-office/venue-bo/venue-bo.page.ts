@@ -48,7 +48,6 @@ export class VenueBoPage implements OnInit {
 
         this.venues = [...this.venues, ...data.venueDtoList];
         // this.venues = this.venues.concat(data.venueDtoList);
-        console.log(data.venueDtoList);
         this.totalPages = data.totalPages;
       });
 

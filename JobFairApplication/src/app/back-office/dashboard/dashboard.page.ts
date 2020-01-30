@@ -9,6 +9,8 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { VenueJobResponseList, VenueJob } from 'src/app/model/venueJob';
 import { Dashboard } from 'src/app/model/dashboard';
 import { CandidatesPerMonth } from 'src/app/model/CandidatesPerMonth';
+import { RoleDto } from 'src/app/model/roleDto';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -75,8 +77,11 @@ export class DashboardPage implements OnInit {
   countQA: any = [];
   countManager: any = [];
 
-
-  constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private authService: AuthService) {
     this.formDashboard = this.formBuilder.group({
       venue: new FormControl()
     });
@@ -94,8 +99,6 @@ export class DashboardPage implements OnInit {
     } else {
       this.onTablet = false;
     }
-
-    console.log('this.on', this.onTablet);
   }
 
 
@@ -253,8 +256,6 @@ export class DashboardPage implements OnInit {
         }
       }
     });
-
-    console.log('rejected', this.countRejected);
   }
 
   // FOR CANDIDATES BASED ON VENUE
@@ -292,7 +293,6 @@ export class DashboardPage implements OnInit {
     this.apiService.getJobsByVenueId(this.filterText, this.page, this.limit).subscribe(
       (data: VenueJobResponseList) => {
         this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
-        console.log('jobs', this.venueJobs);
         this.totalPages = data.totalPages;
 
         if (this.venueJobs.length === 0) {
@@ -338,8 +338,6 @@ export class DashboardPage implements OnInit {
       this.countArchitect = data.totalCandidatesPerArchitectByVenue;
       this.countQA = data.totalCandidatesPerQualityAssuranceByVenue;
       this.countManager = data.totalCandidatesPerManagerByVenue;
-
-      console.log(this.countJanuary);
     });
 
     // Count No. of Candidates per Venue
@@ -381,10 +379,6 @@ export class DashboardPage implements OnInit {
     this.pie.data.datasets[0].data[4] = this.countQA;
     this.pie.data.datasets[0].data[5] = this.countManager;
 
-
-    console.log('no.Candidates', this.countCandidates);
-    console.log('no.Candidates', this.countJobsPerVenue);
-
     this.doughnut.update();
     this.verticalBars.update();
     this.horizontalBars.update();
@@ -393,8 +387,7 @@ export class DashboardPage implements OnInit {
 
   getRoleDetails(){
     this.apiService.getRoleDetails(localStorage.getItem('role')).subscribe(data => {
-      console.log('data', data);
-    })
+    });
   }
 
 }
