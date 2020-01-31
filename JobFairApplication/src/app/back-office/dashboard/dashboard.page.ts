@@ -344,6 +344,20 @@ export class DashboardPage implements OnInit {
 
   getAllData() {
     this.apiService.getCountByAllVenue().subscribe((data) => {
+      // Get count in months
+      this.countJanuary = data.totalCandidatesPerMonth.totalCandidatesForJanuary;
+      this.countFebruary = data.totalCandidatesPerMonth.totalCandidatesForFebruary;
+      this.countMarch = data.totalCandidatesPerMonth.totalCandidatesForMarch;
+      this.countApril = data.totalCandidatesPerMonth.totalCandidatesForApril;
+      this.countMay = data.totalCandidatesPerMonth.totalCandidatesForMay;
+      this.countJune = data.totalCandidatesPerMonth.totalCandidatesForJune;
+      this.countJuly = data.totalCandidatesPerMonth.totalCandidatesForJuly;
+      this.countAugust = data.totalCandidatesPerMonth.totalCandidatesForAugust;
+      this.countSeptember = data.totalCandidatesPerMonth.totalCandidatesForSeptember;
+      this.countOctober = data.totalCandidatesPerMonth.totalCandidatesForOctober;
+      this.countNovember = data.totalCandidatesPerMonth.totalCandidatesForNovember;
+      this.countDecember = data.totalCandidatesPerMonth.totalCandidatesForDecember;
+
       // Count No. of Candidates per Category
       this.countSoftware = data.totalCandidatesPerSoftwareEngineerByAllVenue;
       this.countHR = data.totalCandidatesPerHumanResourceByAllVenue;
@@ -359,24 +373,29 @@ export class DashboardPage implements OnInit {
 
       // count total no. of candidates
       this.countCandidates = data.totalCandidatesByAllVenue;
+
+      // Count No. of Jobs for all venue
+      this.countJobsPerVenue = data.totalJobsByAllVenue;
+      console.log('countJob', this.countJobsPerVenue);
+
     });
   }
 
   getData() {
     this.apiService.getCountByVenue(this.filterText).subscribe((data) => {
       // Get count in months
-      this.countJanuary = data.totalCandidatesPerMonthByVenue.totalCandidatesForJanuaryByVenue;
-      this.countFebruary = data.totalCandidatesPerMonthByVenue.totalCandidatesForFebruaryByVenue;
-      this.countMarch = data.totalCandidatesPerMonthByVenue.totalCandidatesForMarchByVenue;
-      this.countApril = data.totalCandidatesPerMonthByVenue.totalCandidatesForAprilByVenue;
-      this.countMay = data.totalCandidatesPerMonthByVenue.totalCandidatesForMayByVenue;
-      this.countJune = data.totalCandidatesPerMonthByVenue.totalCandidatesForJuneByVenue;
-      this.countJuly = data.totalCandidatesPerMonthByVenue.totalCandidatesForJulyByVenue;
-      this.countAugust = data.totalCandidatesPerMonthByVenue.totalCandidatesForAugustByVenue;
-      this.countSeptember = data.totalCandidatesPerMonthByVenue.totalCandidatesForSeptemberByVenue;
-      this.countOctober = data.totalCandidatesPerMonthByVenue.totalCandidatesForOctoberByVenue;
-      this.countNovember = data.totalCandidatesPerMonthByVenue.totalCandidatesForNovemberByVenue;
-      this.countDecember = data.totalCandidatesPerMonthByVenue.totalCandidatesForDecemberByVenue;
+      this.countJanuary = data.totalCandidatesPerMonth.totalCandidatesForJanuary;
+      this.countFebruary = data.totalCandidatesPerMonth.totalCandidatesForFebruary;
+      this.countMarch = data.totalCandidatesPerMonth.totalCandidatesForMarch;
+      this.countApril = data.totalCandidatesPerMonth.totalCandidatesForApril;
+      this.countMay = data.totalCandidatesPerMonth.totalCandidatesForMay;
+      this.countJune = data.totalCandidatesPerMonth.totalCandidatesForJune;
+      this.countJuly = data.totalCandidatesPerMonth.totalCandidatesForJuly;
+      this.countAugust = data.totalCandidatesPerMonth.totalCandidatesForAugust;
+      this.countSeptember = data.totalCandidatesPerMonth.totalCandidatesForSeptember;
+      this.countOctober = data.totalCandidatesPerMonth.totalCandidatesForOctober;
+      this.countNovember = data.totalCandidatesPerMonth.totalCandidatesForNovember;
+      this.countDecember = data.totalCandidatesPerMonth.totalCandidatesForDecember;
 
       // count of screening status
       this.countAccepted = data.totalApprovedScreeningStatusByVenue;
