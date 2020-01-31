@@ -16,12 +16,19 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   count: number;
   dissabled = true;
   private sessionStateSubscription: Subscription;
+  private HRSubscription: Subscription;
+  private MANAGERSubscription: Subscription;
+  private INTERVIEWERSubscription: Subscription;
   loggedIn: boolean;
   clickDashboard: false;
 
   isLoggedIn = 'false';
 
-
+  role: string;
+  navDisplay:boolean;
+  navDisplayHR: boolean;
+  navDisplayINTERVIEWER: boolean;
+  navDisplayMANAGER: boolean;
 
   venue: string;
   changeVenue: string;
@@ -35,15 +42,53 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.loggedIn = !!localStorage.getItem('visa');
+
+    if(localStorage.getItem('role') === 'HR') {
+      this.navDisplayHR = true;
+    }
+    if(localStorage.getItem('role') === 'INTERVIEWER') {
+      this.navDisplayINTERVIEWER = true;
+    }
+    if(localStorage.getItem('role') === 'MANAGER') {
+      this.navDisplayMANAGER = true;
+    }
+ 
+
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
+    console.log(this.loggedIn)
+    this.HRSubscription = this.loginLogoutService.EmitHR.subscribe(data => this.navDisplayHR = data);
+    this.HRSubscription = this.loginLogoutService.EmitINTERVIEWER.subscribe(data => this.navDisplayINTERVIEWER = data);
+    this.HRSubscription = this.loginLogoutService.EmitMANAGER.subscribe(data => this.navDisplayMANAGER = data);
+    console.log('hr', this.navDisplay);
 
     this.venueName = window.localStorage.getItem('venueName');
     this.changeVenueService.cast.subscribe(data => this.venue = data);
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
+
+    // this.role = localStorage.getItem('role');
+    // console.log(this.role);
+    // if ( this.role === 'INTERVIEWER') {
+    //   this.navDisplayINTERVIEWER = true;
+    //   this.navDisplayHR = false;
+    //   this.navDisplayMANAGER = false;
+    // } else if ( this.role === 'HR') {
+    //   this.navDisplayINTERVIEWER = false;
+    //   this.navDisplayHR = true;
+    //   this.navDisplayMANAGER = false;
+    // } else if ( this.role === 'MANAGER') {
+    //   this.navDisplayINTERVIEWER = false;
+    //   this.navDisplayHR = false;
+    //   this.navDisplayMANAGER = true;
+    // }
   }
 
   ionViewWillEnter() {
-
+    // if ( this.role === 'INTERVIEWER') {
+    //   this.navDisplayINTERVIEWER = true;
+    // }
+    // if ( this.role === 'MANAGER') {
+    //   this.navDisplayMANAGER = true;
+    // }
   }
 
   ngAfterViewInit(): void {
@@ -54,6 +99,9 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     this.sessionStateSubscription.unsubscribe();
+    this.HRSubscription.unsubscribe();
+    this.INTERVIEWERSubscription.unsubscribe();
+    this.MANAGERSubscription.unsubscribe();
   }
 
   logout() {

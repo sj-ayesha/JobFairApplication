@@ -95,6 +95,7 @@ export class DashboardPage implements OnInit {
     this.getAllVenue();
     this.getAllJobsByVenueId();
     this.getAllData();
+
     this.getAllJobs();
     this.getAllCandidatesOfAllVenue();
 
@@ -344,6 +345,7 @@ export class DashboardPage implements OnInit {
 
   getAllData() {
     this.apiService.getCountByAllVenue().subscribe((data) => {
+      console.log(data);
       // Get count in months
       this.countJanuary = data.totalCandidatesPerMonth.totalCandidatesForJanuary;
       this.countFebruary = data.totalCandidatesPerMonth.totalCandidatesForFebruary;

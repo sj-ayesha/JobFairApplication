@@ -27,10 +27,13 @@ export class AuthGuard implements CanActivate {
                         for (let i = 0; i < expectedRole.length; i++) {
                                 if (expectedRole[i] === role) {
                                         isloggedIn = true;
+                                        // if (expectedRole[i] === 'INTERVIEWER'){
+                                        //         this.router.navigateByUrl('/candidate-list');
+                                        // }
                                         break;
                                 } else {
                                         isloggedIn = false;
-                                        // this.router.navigateByUrl('/');
+                                        // this.router.navigateByUrl('/not-authorized');
                                 }
                         }
                 } else {

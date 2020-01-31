@@ -96,7 +96,12 @@ export class LoginPage implements OnInit {
             this.loginLogoutService.loginUser();
             // this.authService.login();
           }, 10);
-          this.router.navigateByUrl('/dashboard');
+          if (localStorage.getItem('role') === 'INTERVIEWER'){
+            this.router.navigateByUrl('/candidate-list');
+          } else {
+            this.router.navigateByUrl('/dashboard');
+          }
+
         }
       }, error => {
           this.unsuccessMsg();
