@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { LoginLogoutService } from 'src/app/services/login-logout.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController, AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -32,7 +32,9 @@ export class LoginPage implements OnInit {
     private router: Router,
     private toastCtrl: ToastController,
     private authService: AuthService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    public navCtrl: NavController,
+    public alertCtrl: AlertController
   ) {
     this.formLogin = this.formBuilder.group({
       username: new FormControl('', Validators.compose([
@@ -103,4 +105,5 @@ export class LoginPage implements OnInit {
       );
     }
   }
+
 }

@@ -4,6 +4,7 @@ import { Job } from 'src/app/model/job';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenueJob, VenueJobResponseList } from 'src/app/model/venueJob';
 import { ToastController, IonInfiniteScroll } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-job-list',
@@ -41,7 +42,8 @@ export class JobListPage implements OnInit {
     private router: Router,
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public authService: AuthService
   ) {
     const allJobsByVenueId: string = this.route.snapshot.paramMap.get('jobQueryParam');
     if (allJobsByVenueId === 'by-venue') {
@@ -138,7 +140,7 @@ export class JobListPage implements OnInit {
 
   async unsuccessMsgEmpty() {
     const toast = await this.toastCtrl.create({
-      message: 'Please select at least one job',
+      message: 'Please select at least one job or click on "Quick Application"',
       position: 'top',
       color: 'danger',
       duration: 2000,

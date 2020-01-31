@@ -17,6 +17,9 @@ import { JobListPage } from './job-list.page';
     IonicModule,
     JobListPageRoutingModule
   ],
-  declarations: [JobListPage]
+  declarations: [JobListPage],
+  exports: [
+    JobListPage
+  ]
 })
 export class JobListPageModule {}
