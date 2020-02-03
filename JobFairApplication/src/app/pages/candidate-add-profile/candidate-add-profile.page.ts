@@ -316,57 +316,6 @@ export class CandidateAddProfilePage implements OnInit {
 
   // submit candidate with cv
   submitCandidateCV() {
-    const filteredCandidateSkills = this.CandidateSkills.filter(data => {
-      return data.checked === true;
-    });
-    this.arrayExperience = [
-      {
-        companyName: this.formCandidateDetails.get('companyName').value,
-        position: this.formCandidateDetails.get('position').value,
-        duration: this.formCandidateDetails.get('duration').value
-      }
-    ];
-    this.arrayQualification = [
-      {
-        title: this.formCandidateDetails.get('title').value,
-        division: this.formCandidateDetails.get('division').value,
-        institution: this.formCandidateDetails.get('institution').value,
-        graduationDate: this.formCandidateDetails.get('graduationDate').value
-      }
-    ];
-    this.arrayVenue = [{
-      venueId: window.localStorage.getItem('venue_id'),
-      jobId: window.localStorage.getItem('jobId'),
-      jobPriority: window.localStorage.getItem('priority')
-    }];
-
-
-    this.arrayFile = [];
-
-    const candidateDetails = {
-      candidateId: null,
-      firstName: this.formCandidateDetails.get('firstName').value,
-      lastName: this.formCandidateDetails.get('lastName').value,
-      email: this.formCandidateDetails.get('email').value,
-      telNumber: this.formCandidateDetails.get('telNumber').value,
-      mobileNumber: this.formCandidateDetails.get('mobileNumber').value,
-      gender: this.formCandidateDetails.get('gender').value,
-      address: this.formCandidateDetails.get('address').value,
-      nationality: this.formCandidateDetails.get('nationality').value,
-      registrationDate: this.formCandidateDetails.get('registrationDate').value,
-      availabilityDate: this.formCandidateDetails.get('availabilityDate').value,
-      currentLevel: this.formCandidateDetails.get('currentLevel').value,
-      jobType: this.formCandidateDetails.get('jobType').value,
-      currentAcademicYear: this.formCandidateDetails.get('currentAcademicYear').value,
-      cvUpload: true,
-      experienceDtos: this.arrayExperience,
-      qualificationDtos: this.arrayQualification,
-      candidateSkillDtos: filteredCandidateSkills,
-      candidateVenueJobSaveDto: this.arrayVenue,
-      candidateScreeningDtos: this.arrayScreening,
-      candidateFileDtos: this.arrayFile
-    };
-
     if (this.formCandidateDetails.invalid || this.fileData === null) {
       this.unsuccessMsg();
     } else {
@@ -431,6 +380,12 @@ export class CandidateAddProfilePage implements OnInit {
       jobId: window.localStorage.getItem('jobId'),
       jobPriority: window.localStorage.getItem('priority')
     }];
+    if (
+      this.arrayExperience[0].companyName == null &&
+      this.arrayExperience[0].position == null &&
+      this.arrayExperience[0].duration == null) {
+        this.arrayExperience = [];
+    }
 
     this.arrayFile = [];
 
