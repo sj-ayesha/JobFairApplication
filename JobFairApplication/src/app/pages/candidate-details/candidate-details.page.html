@@ -44,13 +44,13 @@
                   </ion-datetime>
                 </ion-item>
               </div>
-              <div class="interviewer-detail">
+              <!-- <div class="interviewer-detail">
                 <ion-item>
                   <ion-label position="floating" color="medium">*Venue</ion-label>
                   <ion-input formControlName="interviewVenue" type="text" value="{{ venueName }}" [disabled]='true'>
                   </ion-input>
                 </ion-item>
-              </div>
+              </div> -->
 
               <div class="interviewer-detail">
                 <ion-item>
@@ -144,7 +144,7 @@
             <div *ngIf="showCV">
               <ion-card class="candidate-cv-details" padding>
                 <ion-row>
-                  <ion-col col-md-6 size="6">
+                  <ion-col col-md-4 size="4">
                     <div class="information">
                       <h5><b>Information</b></h5>
                       <div>
@@ -157,7 +157,17 @@
                       </div>
                     </div>
                   </ion-col>
-                  <ion-col col-md-6 size="6">
+                  <ion-col col-md-4 size="4">
+                    <div class="jobs-applied">
+                      <h5><b>Job(s) Applied</b></h5>
+                      <div *ngFor="let jobList of jobLists; let i = index">
+                        <div class="separation"></div>
+                          <p>{{ jobList.title }}</p>
+                      </div>
+                    </div>
+                  </ion-col>
+
+                  <ion-col col-md-4 size="4">
                     <div class="uploaded-file">
                       <h5><b>CV Uploaded</b></h5>
                       <div>
