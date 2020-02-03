@@ -37,6 +37,7 @@ export class JobListPage implements OnInit {
 
   jobPriority: string;
   jobId: string;
+  getLocalStorageJoBId = false;
 
   constructor(
     private router: Router,
@@ -189,6 +190,10 @@ export class JobListPage implements OnInit {
         } else {
           this.noJobsAvailable = false;
         }
+
+        if (this.venueJobs.find(title => title.job.title === 'Spontaneous')) {
+
+        }
         if (event) {
           event.target.complete();
         }
@@ -301,6 +306,18 @@ export class JobListPage implements OnInit {
           }
         });
       }
+    }
+  }
+
+  quickApplication() {
+    localStorage.setItem('jobId', '20');
+    this.priority.push(20);
+    localStorage.setItem('priority', JSON.stringify(this.priority));
+
+    if  (localStorage.getItem('jobId') == '20') {
+      this.routeToApplyJob();
+    } else {
+      this.applyOnlyFive();
     }
   }
 

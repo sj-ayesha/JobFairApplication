@@ -37,7 +37,7 @@ export class DashboardPage implements OnInit {
   totalPages = 0;
   noCandidatesAvailable = false;
   candidateVenueJobsLists: CandidateVenueJob[] = [];
-  venue: boolean = false;
+  venue = false;
 
   onTablet: boolean;
 
@@ -105,6 +105,16 @@ export class DashboardPage implements OnInit {
     } else {
       this.onTablet = false;
     }
+  }
+
+  ionViewWillEnter() {
+    this.populateCandidate();
+    this.getAllVenue();
+    this.getAllJobsByVenueId();
+    this.getAllData();
+
+    this.getAllJobs();
+    this.getAllCandidatesOfAllVenue();
   }
 
 
