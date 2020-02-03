@@ -5,12 +5,15 @@
   </ion-refresher>
   <div class="wrapper-content">
     <ion-row class="btn-get-started ion-padding">
-      <ion-col size="6" class="ion-text-center">
-        <ion-button id="defaultOpen" class="tablinks btn active" (click)="openTab($event,'candidate-detail')">
-          Fill in Details</ion-button>
+      <ion-col size="5" class="ion-text-center">
+        <ion-button id="defaultOpen" class="tablinks btn active" (click)="openTab($event,'candidate-detail')"> Fill in Details</ion-button>
       </ion-col>
 
-      <ion-col size="6" class="ion-text-center">
+      <ion-col size="2" class="ion-text-center">
+        <h5>OR</h5>
+      </ion-col>
+
+      <ion-col size="5" class="ion-text-center">
         <ion-button class="tablinks btn" (click)="openTab($event,'candidateUpload')">Upload CV</ion-button>
       </ion-col>
     </ion-row>
@@ -452,7 +455,7 @@
         <ion-row>
           <ion-col size="6" size-md size="12" size-sm>
             <ion-item class="upload-file">
-              <input id="file" type="file" formControlName="cvUpload" multiple (change)="selectFile($event)"/>
+              <input id="file" type="file" formControlName="cvUpload" multiple (change)="selectFile($event)" />
               <div>
                 <ul id="fileList"></ul>
               </div>
