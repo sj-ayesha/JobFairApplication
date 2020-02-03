@@ -59,7 +59,7 @@
             <ion-label position="floating" color="medium">Filter Candidates by venue..</ion-label>
             <ion-select (ionChange)="filterByVenue($event)" interface="popover" class="ion-float-left">
               <ion-select-option value='0' selected="selected">All</ion-select-option>
-              <ion-select-option *ngFor="let venue of venues" value={{venue.venueId}}>{{venue.venueName}}
+              <ion-select-option *ngFor="let venue of venues" value={{venue.venueId}}>{{venue.venueName}} | {{venue.startDate}}
               </ion-select-option>
               <!-- <ion-select-option value='1'>UOM</ion-select-option>
               <ion-select-option value='2'>UTM</ion-select-option>

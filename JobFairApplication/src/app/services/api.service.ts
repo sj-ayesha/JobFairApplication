@@ -27,8 +27,9 @@ import { DownloadDto } from '../model/DownloadDto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  // baseUrl = 'https://93317c2c.ngrok.io/'; // url to access backend
+  // baseUrl = 'https://3edd19ca.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
+  // baseUrl = 'http://10.9.2.44/:8081/';
   baseUrl = 'http://localhost:8081/';
 
   // login
