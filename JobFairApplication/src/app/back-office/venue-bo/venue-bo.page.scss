@@ -24,6 +24,7 @@ h5{
 
 $breakpoint-alpha: 480px; // adjust to your needs
 
+
 .rwd-table {
   margin: 1em 0;
   min-width: 300px; // adjust to your needs
@@ -116,6 +117,10 @@ body {
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) { 
       padding: 1em !important; 
+    }
+
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+      width: 122px;
     }
   }
   th, td:before {
