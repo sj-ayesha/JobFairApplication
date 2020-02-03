@@ -49,7 +49,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/candidate-details/candidate-details.module').then(m => m.CandidateDetailsPageModule),
     canActivate: [AuthGuard],
     data: {
-      role: ['HR']
+      role: ['HR', 'INTERVIEWER']
     }
   },
   {
@@ -132,7 +132,8 @@ const routes: Routes = [
     data: {
       role: ['HR']
     }
-  },  {
+  },
+  {
     path: 'not-authorized',
     loadChildren: () => import('./pages/not-authorized/not-authorized.module').then( m => m.NotAuthorizedPageModule)
   },

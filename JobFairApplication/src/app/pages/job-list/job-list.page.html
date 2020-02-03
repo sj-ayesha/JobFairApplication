@@ -20,12 +20,13 @@
           <ion-button class="btn btn--search" color="dark" size="small" (click)="searchByTitle(title.value)">
             <ion-icon name="search"></ion-icon>
           </ion-button> -->
-          <ion-searchbar placeholder="Search..." type="text" #title (ionInput)="searchByTitle(title.value)"></ion-searchbar>
+          <ion-searchbar placeholder="Search..." type="text" #title (ionInput)="searchByTitle(title.value)">
+          </ion-searchbar>
         </ion-col>
         <ion-col size="6" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Please select position..</ion-label>
-            <ion-select (ionChange)="filter($event)" interface="popover" class="ion-float-left" >
+            <ion-select (ionChange)="filter($event)" interface="popover" class="ion-float-left">
               <ion-select-option value="all" selected="selected">All</ion-select-option>
               <ion-select-option value="fresher">Fresher</ion-select-option>
               <ion-select-option value="junior">Junior</ion-select-option>
@@ -35,11 +36,13 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="!noJobsAvailable">
-        <ion-col size="12">
-          <p class="ion-float-right ion-margin-end">Select Job</p>
-        </ion-col>
-      </ion-row>
+      <div *ngIf="!jobNotFound">
+        <ion-row *ngIf="!noJobsAvailable">
+          <ion-col size="12">
+            <p class="ion-float-right ion-margin-end">Select Job</p>
+          </ion-col>
+        </ion-row>
+      </div>
 
       <div class="job-not-found" *ngIf="!jobNotFound">
         <div class="job-list-container" *ngIf="!noJobsAvailable ">
@@ -104,9 +107,7 @@
         </ion-col>
       </ion-row>
       <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content
-          loadingSpinner="crescent"
-          loadingText="Loading more jobs...">
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more jobs...">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
       <ion-row class="section-buttons">

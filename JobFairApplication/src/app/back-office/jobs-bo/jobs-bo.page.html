@@ -66,12 +66,6 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="!noJobsAvailable">
-        <ion-col size="12">
-          <p class="ion-float-right ion-margin-end">Select Job</p>
-        </ion-col>
-      </ion-row>
-
       <div class="job-not-found" *ngIf="!jobNotFound">
         <div class="job-list-container" *ngIf="!noJobsAvailable ">
           <ion-row class="job-box" *ngFor="let job of jobs">
