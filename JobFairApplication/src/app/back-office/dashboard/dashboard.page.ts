@@ -107,15 +107,15 @@ export class DashboardPage implements OnInit {
     }
   }
 
-  ionViewWillEnter() {
-    this.populateCandidate();
-    this.getAllVenue();
-    this.getAllJobsByVenueId();
-    this.getAllData();
+  // ionViewWillEnter() {
+  //   this.populateCandidate();
+  //   this.getAllVenue();
+  //   this.getAllJobsByVenueId();
+  //   this.getAllData();
 
-    this.getAllJobs();
-    this.getAllCandidatesOfAllVenue();
-  }
+  //   this.getAllJobs();
+  //   this.getAllCandidatesOfAllVenue();
+  // }
 
 
   ionViewDidEnter() {
@@ -123,6 +123,7 @@ export class DashboardPage implements OnInit {
     this.createHorizontalBarChart();
     this.createVerticalBarChart();
     this.createDoughnutChart();
+
     setTimeout(() => {
       this.chartUpdate();
     }, 100);
