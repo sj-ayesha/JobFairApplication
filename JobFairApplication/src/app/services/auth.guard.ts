@@ -20,7 +20,6 @@ export class AuthGuard implements CanActivate {
                 const role = localStorage.getItem('role');
                 const venue = localStorage.getItem('venue_id');
                 let isloggedIn: boolean;
-                let hasVenue;
 
                 if (user) {
                         isloggedIn = true;

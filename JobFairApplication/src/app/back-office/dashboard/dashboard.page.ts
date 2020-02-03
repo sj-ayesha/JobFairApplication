@@ -113,6 +113,9 @@ export class DashboardPage implements OnInit {
     this.createHorizontalBarChart();
     this.createVerticalBarChart();
     this.createDoughnutChart();
+    setTimeout(() => {
+      this.chartUpdate();
+    }, 100);
   }
 
   doRefresh(event) {
