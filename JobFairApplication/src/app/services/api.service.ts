@@ -243,8 +243,8 @@ export class ApiService {
 
   // candidate cv
 
-  uploadCV(formData: FormData, httpOption): Observable<any> {
-    return this.http.post<any>( this.baseUrl + 'candidate/candidate-cv', formData, httpOption);
+  uploadCV(formData: FormData): Observable<any> {
+    return this.http.post<any>( this.baseUrl + 'candidate/candidate-cv', formData);
   }
 
   getCandidateCV(filename: string): Observable<DownloadDto> {

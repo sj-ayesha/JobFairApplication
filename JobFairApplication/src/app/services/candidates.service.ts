@@ -24,9 +24,9 @@ export class CandidatesService {
       type: 'application/json'
     });
 
-    let httpOptions = {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token')).set('Accept', 'application/json')
-    };
+    // let httpOptions = {
+    //   headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token')).set('Accept', 'application/json')
+    // };
 
     formData.append('candidateDto', blob);
 
@@ -36,7 +36,7 @@ export class CandidatesService {
 
     console.log(formData);
 
-    return this.apiService.uploadCV(formData, httpOptions);
+    return this.apiService.uploadCV(formData);
 
   }
 }
