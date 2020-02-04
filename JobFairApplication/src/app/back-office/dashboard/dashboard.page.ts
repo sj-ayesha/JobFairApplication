@@ -25,33 +25,33 @@ export class DashboardPage implements OnInit {
   @ViewChild('verticalBarChart', { static: false }) verticalBarChart;
   @ViewChild('doughnutChart', { static: false }) doughnutChart;
 
+  formDashboard: FormGroup;
+
   horizontalBars: any;
   colorArray: any;
   pie: any;
   verticalBars: any;
   doughnut: any;
 
-  allCandidates: Candidate[] = [];
   limit = 3;
   page = 0;
   totalPages = 0;
-  noCandidatesAvailable = false;
-  candidateVenueJobsLists: CandidateVenueJob[] = [];
-  venue = false;
 
   onTablet: boolean;
+  noCandidatesAvailable = false;
+  venue = false;
+  jobNotFound = false;
 
   limitVenue = 50;
   pageVenue = 0;
+  filterText: number = 0;
+
+  noJobsAvailable = false;
+  public venueJobs: VenueJob[] = [];
+  allCandidates: Candidate[] = [];
+  candidateVenueJobsLists: CandidateVenueJob[] = [];
   venues: Venue[] = [];
   jobs: Job[] = [];
-  filterText: number = 0;
-  formDashboard: FormGroup;
-
-  jobNotFound = false;
-  public venueJobs: VenueJob[] = [];
-  noJobsAvailable = false;
-
   dashboard: Dashboard[] = [];
   totalCandidatesPerMonth: CandidatesPerMonth[] = [];
   countJanuary: any = [];
@@ -69,10 +69,8 @@ export class DashboardPage implements OnInit {
   countAccepted: any = [];
   countRejected: any = [];
   countProceed: any = [];
-
   countCandidates: any = [];
   countJobsPerVenue: any = [];
-
   countSoftware: any = [];
   countHR: any = [];
   countBA: any = [];
@@ -131,10 +129,11 @@ export class DashboardPage implements OnInit {
     this.router.navigate(['/candidate-details', candidateId]);
   }
 
-  // FILTER BY VENUE
+  // filter by venue
   filter(event) {
     this.venueJobs = [];
     this.filterText = event.target.value;
+    // tslint:disable-next-line: triple-equals
     if (this.filterText == 0) {
       this.venue = false;
       this.getAllJobs();
@@ -276,7 +275,7 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  // FOR CANDIDATES BASED ON VENUE
+  // all candidates based on a specific venue
   populateCandidate() {
     this.candidateVenueJobsLists = [];
     // tslint:disable-next-line: radix
@@ -293,7 +292,7 @@ export class DashboardPage implements OnInit {
       });
 
   }
-  // FOR ALL CANDIDATES OF ALL VENUE
+  // all candidate based on all venue
   getAllCandidatesOfAllVenue() {
     this.candidateVenueJobsLists = [];
     this.apiService.getAllCandidatesVenueJob(this.page, this.limit).subscribe(
@@ -308,7 +307,8 @@ export class DashboardPage implements OnInit {
         }
       });
   }
-  // VENUE
+
+  // all venue
   getAllVenue() {
     this.apiService.getAllVenue(this.pageVenue, this.limitVenue).subscribe(
       (data: VenueResponseList) => {
@@ -317,7 +317,17 @@ export class DashboardPage implements OnInit {
       });
   }
 
-  // Get All jobs by venue
+  // get all jobs
+  getAllJobs() {
+    this.jobs = [];
+    this.apiService.getAllJobs(this.page, this.limit).subscribe(
+      (data: JobResponseList) => {
+        this.jobs = [...this.jobs, ...data.jobDtoList];
+      });
+  }
+
+
+  // get all jobs by venue
   getAllJobsByVenueId(event?) {
     this.venueJobs = [];
     // tslint:disable-next-line: radix
@@ -339,17 +349,9 @@ export class DashboardPage implements OnInit {
     );
   }
 
-  getAllJobs() {
-    this.jobs = [];
-    this.apiService.getAllJobs(this.page, this.limit).subscribe(
-      (data: JobResponseList) => {
-        this.jobs = [...this.jobs, ...data.jobDtoList];
-      });
-  }
-
+  // get all data for for chart
   getAllData() {
     this.apiService.getCountByAllVenue().subscribe((data) => {
-      console.log(data);
       // Get count in months
       this.countJanuary = data.totalCandidatesPerMonth.totalCandidatesForJanuary;
       this.countFebruary = data.totalCandidatesPerMonth.totalCandidatesForFebruary;
@@ -382,8 +384,6 @@ export class DashboardPage implements OnInit {
 
       // Count No. of Jobs for all venue
       this.countJobsPerVenue = data.totalJobsByAllVenue;
-      console.log('countJob', this.countJobsPerVenue);
-
     });
   }
 
@@ -408,8 +408,6 @@ export class DashboardPage implements OnInit {
       this.countRejected = data.totalRejectedScreeningStatusByVenue;
       this.countProceed = data.totalProceedScreeningStatusByVenue;
 
-      console.log('accepted', this.countAccepted);
-
       // Count No. of Jobs per Venue
       this.countJobsPerVenue = data.totalJobsByVenue;
 
@@ -433,6 +431,7 @@ export class DashboardPage implements OnInit {
   //   this.getData();
   // }
 
+  // update chart when filter text changes in dropdown
   chartUpdate() {
     this.doughnut.data.datasets[0].data[0] = this.countRejected;
     this.doughnut.data.datasets[0].data[1] = this.countProceed;
@@ -471,5 +470,4 @@ export class DashboardPage implements OnInit {
     this.apiService.getRoleDetails(localStorage.getItem('role')).subscribe(data => {
     });
   }
-
 }

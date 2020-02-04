@@ -3,8 +3,6 @@ import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
-import { CategoryService } from 'src/app/services/category.service';
-import { ThrowStmt } from '@angular/compiler';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
 
 @Component({
@@ -26,8 +24,8 @@ export class JobsPopupPage implements OnInit {
   description: string;
   minimumExperience: string;
   qualificationNeeded: string;
-  apiJobId: number;
   jobs: string;
+  apiJobId: number;
 
   errorMessages = {
     title: [
@@ -64,6 +62,7 @@ export class JobsPopupPage implements OnInit {
 
     this.addEditPopupService.cast.subscribe(edit => this.edit = edit);
 
+    // if user clicks on edit icon ELSE if user clicks on the add button
     if (this.edit === true) {
       this.jobs = JSON.parse(localStorage.getItem('editJobs'));
       if (this.edit === true) {
@@ -76,6 +75,7 @@ export class JobsPopupPage implements OnInit {
         this.qualificationNeeded = this.jobs[6];
       }
 
+      // change value format of modal to value format by what is required in back-end
       if (this.jobs[3] === 'software-engineer') {
         this.category = 'Software Engineer';
       } else
@@ -140,10 +140,12 @@ export class JobsPopupPage implements OnInit {
 
   }
 
+  // close modal
   closeModal() {
     this.modalController.dismiss();
   }
 
+  // save a new job
   addJob() {
     const addJob = {
       jobId: null,
@@ -181,6 +183,7 @@ export class JobsPopupPage implements OnInit {
     localStorage.removeItem('editJobs');
   }
 
+  // save an edited job
   editJob() {
     if (this.formAddJob.get('category').value === 'Software Engineer') {
       this.category = 'software-engineer';
@@ -220,6 +223,7 @@ export class JobsPopupPage implements OnInit {
     );
   }
 
+  // successful add message
   async successMsg() {
     const toast = await this.toastCtrl.create({
       message: 'New job has been succesfully saved',
@@ -231,6 +235,7 @@ export class JobsPopupPage implements OnInit {
     toast.present();
   }
 
+  // successfull edit message
   async successEditMsg() {
     const toast = await this.toastCtrl.create({
       message: this.title + ' has been succesfully edited',
@@ -242,6 +247,7 @@ export class JobsPopupPage implements OnInit {
     toast.present();
   }
 
+  // unsuccessful message
   async unsuccessMsg() {
     const toast = await this.toastCtrl.create({
       message: 'Please fill in all the required fields',
@@ -253,10 +259,7 @@ export class JobsPopupPage implements OnInit {
     toast.present();
   }
 
-  makeFalse() {
-    this.addEditPopupService.reloadComponent(false);
-  }
-
+  // when clicking on 'save' or 'submit'
   onSubmit() {
     this.submitted = true;
     if (this.formAddJob.invalid) {

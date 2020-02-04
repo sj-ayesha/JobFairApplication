@@ -31,7 +31,6 @@ export class LoginPage implements OnInit {
     private loginLogoutService: LoginLogoutService,
     private router: Router,
     private toastCtrl: ToastController,
-    private authService: AuthService,
     private apiService: ApiService,
     public navCtrl: NavController,
     public alertCtrl: AlertController
@@ -97,8 +96,7 @@ export class LoginPage implements OnInit {
 
         }
       }, error => {
-          this.unsuccessMsg();
-          this.formLogin.reset();
+          // this.unsuccessMsg();
         }
       );
     }

@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild, QueryList, ElementRef, ViewChildren, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { VenueResponseList, Venue } from 'src/app/model/venue';
+import { Venue } from 'src/app/model/venue';
 import { IonInfiniteScroll, ToastController } from '@ionic/angular';
 import { JobResponseList, Job } from 'src/app/model/job';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { AssociateVenueJobs } from 'src/app/model/AssociateVenueJob';
-import { element } from 'protractor';
 import { VenueJobResponseList, VenueJob } from 'src/app/model/venueJob';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-venue-job',
@@ -29,12 +26,12 @@ export class VenueJobPage implements OnInit, OnDestroy {
 
   selectedVenueDto: Venue;
 
-  filterText: number;
   selectedVenue: string;
   venueName: string;
   submitted = false;
   selectedVenueDate: Date;
 
+  filterText: number;
   limitVenueJobs = 50;
   pageVenueJobs = 0;
   limitVenue = 50;
@@ -68,9 +65,6 @@ export class VenueJobPage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.changeDetectorRef.detach();
-  }
-
-  ionViewWillEnter() {
   }
 
   toggleInfiniteScroll() {
@@ -137,11 +131,9 @@ export class VenueJobPage implements OnInit, OnDestroy {
     });
   }
 
-
   reset() {
     this.formAddVenueJob.reset();
   }
-
 
   // SUBMIT ADD JOBS TO VENUE
   postJobsVenue() {

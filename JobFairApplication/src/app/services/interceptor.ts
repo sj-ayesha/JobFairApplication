@@ -43,10 +43,10 @@ export class TokenInterceptor implements HttpInterceptor {
 
         return next.handle(request).pipe(
             catchError(err => {
-                console.log(err);
+                // console.log(err);
                 if (err instanceof HttpErrorResponse) {
-                    console.log(err.status);
-                    console.log(err.statusText);
+                    // console.log(err.status);
+                    // console.log(err.statusText);
                     if (err.status === 401) {
                         this.unsuccessMsg();
                         setTimeout(() => {

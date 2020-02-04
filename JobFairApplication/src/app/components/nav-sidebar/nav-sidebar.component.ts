@@ -10,13 +10,15 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./nav-sidebar.component.scss'],
 })
 export class NavSidebarComponent implements OnInit, OnDestroy {
-  public venueName: string;
-  count: number;
-  dissabled = true;
   private sessionStateSubscription: Subscription;
+
+  dissabled = true;
   loggedIn: boolean;
   clickDashboard: false;
 
+  count: number;
+
+  public venueName: string;
   venue: string;
   changeVenue: string;
 
@@ -36,8 +38,8 @@ export class NavSidebarComponent implements OnInit, OnDestroy {
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
 
     this.treeViewNav();
-
   }
+
   ngOnDestroy() {
     this.sessionStateSubscription.unsubscribe();
   }
@@ -56,18 +58,12 @@ export class NavSidebarComponent implements OnInit, OnDestroy {
 
   logout() {
     this.loggedIn = false;
-    // localStorage.removeItem('user');
-    // localStorage.removeItem('venue_id');
-    // localStorage.removeItem('priority');
-    // localStorage.removeItem('jobId');
-    // localStorage.removeItem('venueName');
     localStorage.clear();
     this.loginLogoutService.logoutUser();
     this.venue = '';
   }
 
   navigateToVenue(){
-    // this.ngZone.run(() => this.router.navigateByUrl('/venue'));
     this.router.navigateByUrl('/venue');
     localStorage.removeItem('venue_id');
     localStorage.removeItem('priority');
@@ -84,7 +80,6 @@ export class NavSidebarComponent implements OnInit, OnDestroy {
   }
 
   navigateToDashboard() {
-    // this.dashboard = true;
     this.router.navigate(['/dashboard']);
   }
 }

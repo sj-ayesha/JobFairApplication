@@ -12,26 +12,27 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
-  public venueName: string;
-  count: number;
-  dissabled = true;
+
   private sessionStateSubscription: Subscription;
   private HRSubscription: Subscription;
   private MANAGERSubscription: Subscription;
   private INTERVIEWERSubscription: Subscription;
-  loggedIn: boolean;
-  clickDashboard: false;
 
   isLoggedIn = 'false';
-
-  role: string;
-  navDisplay:boolean;
+  loggedIn: boolean;
+  clickDashboard = false;
+  dissabled = true;
+  navDisplay: boolean;
   navDisplayHR: boolean;
   navDisplayINTERVIEWER: boolean;
   navDisplayMANAGER: boolean;
 
+  role: string;
   venue: string;
   changeVenue: string;
+  public venueName: string;
+  count: number;
+
 
   constructor(
     private loginLogoutService: LoginLogoutService,
@@ -43,28 +44,24 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.loggedIn = !!localStorage.getItem('visa');
 
-    if(localStorage.getItem('role') === 'HR') {
+    if (localStorage.getItem('role') === 'HR') {
       this.navDisplayHR = true;
     }
-    if(localStorage.getItem('role') === 'INTERVIEWER') {
+    if (localStorage.getItem('role') === 'INTERVIEWER') {
       this.navDisplayINTERVIEWER = true;
     }
-    if(localStorage.getItem('role') === 'MANAGER') {
+    if (localStorage.getItem('role') === 'MANAGER') {
       this.navDisplayMANAGER = true;
     }
- 
 
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
-    console.log(this.loggedIn)
     this.HRSubscription = this.loginLogoutService.EmitHR.subscribe(data => this.navDisplayHR = data);
     this.HRSubscription = this.loginLogoutService.EmitINTERVIEWER.subscribe(data => this.navDisplayINTERVIEWER = data);
     this.HRSubscription = this.loginLogoutService.EmitMANAGER.subscribe(data => this.navDisplayMANAGER = data);
-    console.log('hr', this.navDisplay);
 
     this.venueName = window.localStorage.getItem('venueName');
     this.changeVenueService.cast.subscribe(data => this.venue = data);
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
-
   }
 
   ionViewWillEnter() {
