@@ -241,7 +241,6 @@ export class JobListPage implements OnInit {
       const index = this.priority.indexOf(jobId);
       if (index > -1) {
         this.priority.splice(index, 1);
-        console.log('prio', this.priority);
       }
       localStorage.setItem('priority', JSON.stringify(this.priority));
     }
@@ -250,7 +249,6 @@ export class JobListPage implements OnInit {
   setJobId() {
     this.jobPriority = JSON.parse(localStorage.getItem('priority'));
     this.jobId = this.jobPriority[0];
-    console.log(this.jobId);
     localStorage.setItem('jobId', this.jobId);
   }
 

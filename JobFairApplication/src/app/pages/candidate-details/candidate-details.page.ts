@@ -113,7 +113,6 @@ export class CandidateDetailsPage implements OnInit {
         }
       }
 
-      console.log(this.candidate)
       if (this.candidate.cvUpload === false) {
         this.showCV = false;
       } else {
@@ -152,7 +151,6 @@ export class CandidateDetailsPage implements OnInit {
       // tslint:disable-next-line: radix
       candidateId: parseInt(this.candidateId)
     };
-    console.log(this.formCandidateScreening.get('interviewDate').value);
     // console.log(interviewDetails);
     this.apiService.saveCandidateScreening(interviewDetails).subscribe(data => {
       this.getCandidateById(this.candidateId);

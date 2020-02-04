@@ -60,7 +60,7 @@
     <ion-row>
       <ion-col size="6">
         <ion-card>
-          <ion-card-title text-center>
+          <ion-card-title class="ion-text-center">
             <h5>List of Jobs</h5>
           </ion-card-title>
           <ion-card-content *ngIf="!venue">
@@ -126,7 +126,7 @@
 
       <ion-col size="6">
         <ion-card>
-          <ion-card-title text-center>
+          <ion-card-title class="ion-text-center">
             <h5>List of Candidates</h5>
           </ion-card-title>
           <ion-card-content>
@@ -186,6 +186,7 @@
             <ion-label position="floating" color="medium">Please select venue..</ion-label>
             <ion-select (ionChange)="filter($event);" formControlName="venue" interface="popover"
               class="ion-float-left">
+              <ion-select-option value='0'>All</ion-select-option>
               <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}}
               </ion-select-option>
             </ion-select>
@@ -228,10 +229,39 @@
     <ion-row>
       <ion-col size="6">
         <ion-card>
-          <ion-card-title text-center>
+          <ion-card-title class="ion-text-center">
             <h5>List of Jobs</h5>
           </ion-card-title>
-          <ion-card-content>
+          <ion-card-content *ngIf="!venue">
+            <ion-item class="candidate-item" *ngFor="let job of jobs">
+              <ion-avatar slot="start">
+                <img src="../../../assets/img/avatar_work.png" />
+              </ion-avatar>
+              <ion-label>
+                <h5 class="title"><b>{{ job.title }}</b></h5>
+                <p class="text"><b>Category:</b> {{job.category}}</p>
+                <p class="text">
+                  <b>Level:</b>
+                  {{job.level}}
+                </p>
+              </ion-label>
+              <ion-label slot="end">
+                <p class="text"><b>Years of Experience:</b> {{job.minimumExperience}}</p>
+                <p class="text"><b>Qualification:</b> {{job.qualificationNeeded}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-row>
+              <ion-col size="12" class="ion-padding btn-actions">
+                <div class="btn-back ion-text-center">
+                  <ion-button class="btn" color="dark" routerLink="/jobs-bo">
+                    View More
+                  </ion-button>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+
+          <ion-card-content *ngIf="venue">
             <ion-item class="candidate-item" *ngFor="let job of venueJobs">
               <ion-avatar slot="start">
                 <img src="../../../assets/img/avatar_work.png" />
@@ -243,6 +273,11 @@
                   <b>Level:</b>
                   {{job.job.level}}
                 </p>
+              </ion-label>
+              <ion-label slot="end">
+                <p class="text"><b>Years of Experience:</b> {{job.job.minimumExperience}}</p>
+                <p class="text"><b>Qualification:</b> {{job.job.qualificationNeeded}}</p>
+                <p class="text"><b>Venue:</b> {{job.venue.venueName}}</p>
               </ion-label>
             </ion-item>
             <ion-row>
@@ -260,7 +295,7 @@
 
       <ion-col size="6">
         <ion-card>
-          <ion-card-title text-center>
+          <ion-card-title class="ion-text-center">
             <h5>List of Candidates</h5>
           </ion-card-title>
           <ion-card-content>

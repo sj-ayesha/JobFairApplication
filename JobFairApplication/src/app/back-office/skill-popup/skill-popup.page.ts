@@ -37,8 +37,8 @@ export class SkillPopupPage implements OnInit {
   }
 
   ngOnInit() {
+    // if user clicks on edit icon ELSE if user clicks on add button
     this.addEditPopupService.cast.subscribe(edit => this.edit = edit);
-    console.log('Ha', this.edit);
     if (this.edit === true) {
       this.formAddSkill = this.formBuilder.group({
         skillName: new FormControl('',
@@ -75,12 +75,7 @@ export class SkillPopupPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  radioButtonValue(getValue) {
-    this.status = getValue.target.value;
-  }
-
-
-
+  // add modal
   addSkill() {
     const addSkill = {
       skillId: null,
@@ -95,6 +90,7 @@ export class SkillPopupPage implements OnInit {
     );
   }
 
+  // edit modal
   editSkill() {
     const editSkill = {
       skillId: JSON.parse(this.skillId),
@@ -113,6 +109,7 @@ export class SkillPopupPage implements OnInit {
     );
   }
 
+  // successful add message
   async successMsg() {
     const toast = await this.toastCtrl.create({
       message: 'New skill has been succesfully saved',
@@ -124,6 +121,7 @@ export class SkillPopupPage implements OnInit {
     toast.present();
   }
 
+  // successful edit message
   async successEditMsg() {
     const toast = await this.toastCtrl.create({
       message: this.skillName + ' has been succesfully saved',
@@ -135,6 +133,7 @@ export class SkillPopupPage implements OnInit {
     toast.present();
   }
 
+  // unsuccessful message
   async unsuccessMsg() {
     const toast = await this.toastCtrl.create({
       message: 'Please fill in all the required fields',
@@ -146,6 +145,7 @@ export class SkillPopupPage implements OnInit {
     toast.present();
   }
 
+  // when clicking on 'save' or 'submit'
   onSubmit() {
     this.submitted = true;
     if (this.formAddSkill.invalid) {

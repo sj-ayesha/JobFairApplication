@@ -9,7 +9,6 @@ import { HomePageRoutingModule } from './home.page-routing.module';
 
 // import { NavComponent } from '../../components/nav/nav.component';
 // import { FooterComponent } from '../../components/footer/footer.component';
-import { ListCandidateJobComponent } from '../../components/list-candidate-job/list-candidate-job.component';
 
 @NgModule({
   imports: [
@@ -21,8 +20,7 @@ import { ListCandidateJobComponent } from '../../components/list-candidate-job/l
   declarations: [
     HomePage,
     // NavComponent,
-    // FooterComponent,
-    ListCandidateJobComponent
+    // FooterComponent
   ]
 })
 export class HomePageModule {}
