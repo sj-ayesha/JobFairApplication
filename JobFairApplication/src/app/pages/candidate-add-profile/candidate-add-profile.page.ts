@@ -80,10 +80,8 @@ export class CandidateAddProfilePage implements OnInit {
     ],
     telNumber: [{ type: 'pattern', message: '⚠ Telephone number is invalid' }],
     mobileNumber: [
-      // { type: 'required', message: '⚠ Mobile number is required.' },
       { type: 'pattern', message: '⚠ Mobile number is invalid' }
     ],
-    // nationality: [{ type: 'required', message: '⚠ Nationality is required.' }],
     gender: [{ type: 'required', message: '⚠ Gender is required.' }],
     title: [{ type: 'required', message: '⚠ Qualification is required.' }],
     academyYear: [{ type: 'required', message: '⚠ Academy Year is required.' }],
@@ -91,9 +89,6 @@ export class CandidateAddProfilePage implements OnInit {
     availabilityDate: [
       { type: 'required', message: '⚠ Availability Date is required.' }
     ],
-    // cvUpload: [
-    //   { type: 'required', message: '⚠ A file upload is required.' }
-    // ],
     jobType: [{ type: 'required', message: '⚠ Job Type is required.' }],
     currentLevel: [
       { type: 'required', message: '⚠ Current Level is required.' }
@@ -319,7 +314,6 @@ export class CandidateAddProfilePage implements OnInit {
     if (this.formCandidateDetails.invalid || this.fileData === null) {
       this.unsuccessMsg();
     } else {
-      // this.uploadCV(candidateDetails, this.fileData);
       this.attachFile();
       this.successMsg();
 
@@ -454,7 +448,6 @@ export class CandidateAddProfilePage implements OnInit {
 
       setTimeout(() => {
         this.formCandidateDetails.reset();
-        // this.router.navigate(['home']);
         this.router.navigateByUrl('/home');
       }, 2000);
     }

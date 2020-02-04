@@ -21,7 +21,6 @@
   }
 }
 img {
-  // max-width: 142px;
   max-width: 178px;
   max-height: 24px;
   &:hover,
@@ -33,7 +32,6 @@ img {
 a {
   color: $color-light-black;
   text-decoration: none;
-  // font-family: "Poppins", sans-serif;
   &:hover {
     color: $color-light-red;
     cursor: pointer;
@@ -69,14 +67,8 @@ a.venue-name {
     &:hover {
       background-color: $color-light-red;
       color: $color-white;
-      // color: $color-light-black;
     }
   }
-  // .item-native {
-  //     &:hover {
-  //         background-color: $color-light-red;
-  //     }
-  // }
 }
 
 .side-nav {
@@ -128,7 +120,6 @@ a.venue-name {
   }
 
   .caret::before {
-    // content: "\25B6";
     background-image: "../../../assets/img/chevron-arrow-down.png";
     width: 25px;
     height: 25px;
@@ -144,10 +135,7 @@ a.venue-name {
 
   li {
     &:hover {
-      // background-color: $color-light-red;
       border-bottom: 2px solid $color-light-red;
-      // color: $color-white;
-      // color: $color-light-black;
       width: 90%;
       transition: 0.2s;
     }

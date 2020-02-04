@@ -17,11 +17,6 @@
               <h3>The inde­pendent Swiss IT company</h3>
               <ion-list>
                 <img class="we_make_it_work" src="../../../assets/img/we_make_it_work.png">
-                <!-- <ion-list-header> -->
-                  <!-- <ion-label color="light">Total number of candidates: {{countCandidates}}</ion-label> -->
-                  <!-- <ion-label color="light">We make it work</ion-label> -->
-                <!-- </ion-list-header> -->
-                <!-- <ion-progress-bar color="dark" value="{{percentagCountCandidates}}"></ion-progress-bar> -->
               </ion-list>
               <div class="venue-button">
                 <ion-button class="btn" color="light" (click)="routeToJob('by-venue')">
@@ -33,34 +28,6 @@
       </div>
 
       <ion-row class="lists">
-        <!-- <ion-col size="6" size-md size="12" size-sm>
-          <ion-card>
-            <ion-card-header>
-              <h3>List of Candidates</h3>
-            </ion-card-header>
-            <ion-card-content *ngFor="let candidateVenueJob of candidateVenueJobsLists; let i = index">
-
-              <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)" *ngIf="i < 5">
-
-                <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Male'" slot="start">
-                  <img src="../../../assets/img/avatar_male.jpg">
-                </ion-avatar>
-                <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
-                  <img src="../../../assets/img/avatar_female.jpg">
-                </ion-avatar>
-                <ion-label class="ion-text-wrap">
-                  <h5><b>{{candidateVenueJob.candidate.lastName}} {{candidateVenueJob.candidate.firstName}}</b></h5>
-                  <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
-                  <p><b>Available from:</b> {{candidateVenueJob.candidate.availabilityDate}}</p>
-                </ion-label>
-              </ion-item>
-            </ion-card-content>
-            <ion-card-content *ngIf="noCandidatesAvailable">
-              <img class="not-available" src="../../../assets/img/Not Available/no-entry.png">
-            </ion-card-content>
-            <ion-button *ngIf="!noCandidatesAvailable" class="btn btn-view-more" color="dark" routerLink='/candidate-list'>View more</ion-button>
-          </ion-card>
-        </ion-col> -->
 
         <ion-col size="12" size-md size="12" size-sm>
           <ion-card>
@@ -104,10 +71,6 @@
                   <h5>Quality Assurance</h5>
                 </ion-card-content>
               </ion-col>
-              <!-- <ion-button (click)=takePhotos() expand="full" color="dark"></ion-button>
-              <ion-list *ngFor="let photo of photos">
-                <img src={{photo}} style="width:200px;height:150px;"/>
-              </ion-list> -->
             </ion-row>
           </ion-card>
         </ion-col>
@@ -125,7 +88,6 @@
                   <h5>We encourage you to develop your technical talents and entrepreneurial skills to shape your
                     future.
                   </h5>
-                  <!-- <h5>Your future is in good hands.</h5> -->
                   <p>We offer interesting career paths and develop our employees to meet the related requirements. We’re
                     fair, we embrace challenges and respect the concept of "work-life" balance.</p>
                 </div>

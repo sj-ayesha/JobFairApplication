@@ -86,20 +86,7 @@ export class VenueJobPage implements OnInit, OnDestroy {
       event.target.complete();
     }, 2000);
 
-    // this.getAllJobsByVenueId();
   }
-
-  // VENUE
-  // getAllVenue() {
-  //   this.apiService.getAllVenue(this.pageVenue, this.limitVenue).subscribe(
-  //     (data: VenueResponseList) => {
-
-  //       this.venues = [...this.venues, ...data.venueDtoList];
-  //       // this.venues = this.venues.concat(data.venueDtoList);
-  //       console.log('venues', data.venueDtoList);
-  //       this.totalPages = data.totalPages;
-  //     });
-  // }
 
   // JOB
   getAllJobs() {
@@ -178,7 +165,6 @@ export class VenueJobPage implements OnInit, OnDestroy {
         this.getAllJobsByVenueId();
       },
       error => {
-        // alert("Data not saved!");
       }
     );
   }

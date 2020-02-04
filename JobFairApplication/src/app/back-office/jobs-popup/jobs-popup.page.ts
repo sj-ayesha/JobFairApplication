@@ -216,7 +216,6 @@ export class JobsPopupPage implements OnInit {
       data => {
       },
       error => {
-        // alert("Data not saved!");
       }
     );
   }

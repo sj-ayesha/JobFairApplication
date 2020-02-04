@@ -21,7 +21,6 @@
   }
 }
 img {
-  // max-width: 142px;
   max-width: 178px;
   max-height: 24px;
   &:hover,
@@ -69,14 +68,8 @@ a.venue-name {
     &:hover {
       background-color: $color-light-red;
       color: $color-white;
-      // color: $color-light-black;
     }
   }
-  // .item-native {
-  //     &:hover {
-  //         background-color: $color-light-red;
-  //     }
-  // }
 }
 
 .side-nav {
@@ -130,10 +123,7 @@ a.venue-name {
     padding: 10px 0;
 
     &:hover {
-      // background-color: $color-light-red;
       border-bottom: 2px solid $color-light-red;
-      // color: $color-white;
-      // color: $color-light-black;
       width: 90%;
       transition: 0.2s;
     }

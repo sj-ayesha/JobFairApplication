@@ -8,7 +8,6 @@
       <ion-title>
         <div class="header-wrap">
           <div class="title">
-            <!-- <ion-icon class="list-icon" md="md-options"></ion-icon> -->
             <img src='../../../assets/img//header_icons/venue-job.png'>
             <h3>Venue - Job</h3>
           </div>
@@ -25,7 +24,6 @@
               <ion-label position="floating" color="medium">Please select venue..</ion-label>
               <ion-select (ionChange)="filter($event);" formControlName="venue" interface="popover"
                 class="ion-float-left">
-                <!-- <ion-select-option value="all" selected="selected">All</ion-select-option> -->
                 <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}} | {{venue.startDate}}
                 </ion-select-option>
               </ion-select>
@@ -51,14 +49,10 @@
               </ion-item>
             </ion-list>
           </ion-col>
-
-          <!-- <button (click)="reset()">sfsdf</button> -->
-
         </ion-row>
 
         <div class="btn-actions">
           <div class="submit-button ion-text-right">
-            <!-- <ion-button class='btn' color="dark" (click)="submitCandidate()">Submit</ion-button> -->
             <ion-button class="btn" (click)="onSubmit()" type="submit" color="dark">Submit</ion-button>
           </div>
         </div>

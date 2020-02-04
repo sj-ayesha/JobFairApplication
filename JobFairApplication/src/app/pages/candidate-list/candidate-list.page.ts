@@ -72,8 +72,6 @@ export class CandidateListPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.populateCandidate();
-    // this.countCandidatesByVenue();
     this.populateAllCandidates();
     this.getVenueByActive();
 
@@ -232,7 +230,6 @@ export class CandidateListPage implements OnInit {
       this.resetVenue = false;
       this.resetScreen = false;
       this.resetLevel = false;
-      // this.candidateVenueJobsLists = [];
       this.populateAllCandidates();
     } else {
       this.resetAll = false;
@@ -299,7 +296,6 @@ export class CandidateListPage implements OnInit {
       this.resetVenue = false;
       this.resetScreen = false;
       this.resetLevel = false;
-      // this.candidateVenueJobsLists = [];
       this.populateAllCandidates();
     } else {
       this.resetAll = false;
@@ -364,12 +360,6 @@ export class CandidateListPage implements OnInit {
     });
   }
 
-  // getCandidateByAsc() {
-  //   // tslint:disable-next-line: radix
-  //   this.apiService.getCandidateByASC(parseInt(window.localStorage.getItem('venue_id'))).subscribe(data => {
-  //     this.candidateVenueJobsLists = data;
-  //   });
-  // }
 
   getAllCandidatesByAsc(event?, isLoadevent?) {
     this.disableASC = true;

@@ -10,15 +10,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-// import { ComponentsModule } from './components/components.module';
 import { NavComponent } from './components/nav/nav.component';
 import { NavSidebarComponent } from './components/nav-sidebar/nav-sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthGuard } from './services/auth.guard';
 import { AuthService } from './services/auth.service';
 
-// import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-// import { File } from '@ionic-native/file/ngx';
 
 import { VenuePopupPageModule } from './back-office/venue-popup/venue-popup.module';
 import { SkillPopupPageModule } from './back-office/skill-popup/skill-popup.module';
@@ -61,9 +58,7 @@ import { ApiService } from './services/api.service';
       HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    },
-    // Camera,
-    // File
+    }
   ],
   bootstrap: [AppComponent]
 })

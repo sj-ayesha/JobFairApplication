@@ -24,9 +24,6 @@ export class CandidatesService {
       type: 'application/json'
     });
 
-    // let httpOptions = {
-    //   headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token')).set('Accept', 'application/json')
-    // };
 
     formData.append('candidateDto', blob);
 

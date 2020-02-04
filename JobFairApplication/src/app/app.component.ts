@@ -26,8 +26,7 @@ export class AppComponent implements OnInit {
     private loginLogoutService: LoginLogoutService,
 
   ) {
-    // this.initializeApp();
-    // this.loggedIn = false;
+
   }
 
   ngOnInit(): void {
@@ -41,7 +40,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  goToDashboard(){
+  goToDashboard() {
     this.router.navigate(['/dashboard']);
   }
 }

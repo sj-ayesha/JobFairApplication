@@ -107,16 +107,6 @@ export class DashboardPage implements OnInit {
     }
   }
 
-  // ionViewWillEnter() {
-  //   this.populateCandidate();
-  //   this.getAllVenue();
-  //   this.getAllJobsByVenueId();
-  //   this.getAllData();
-
-  //   this.getAllJobs();
-  //   this.getAllCandidatesOfAllVenue();
-  // }
-
 
   ionViewDidEnter() {
     this.createPieChart();

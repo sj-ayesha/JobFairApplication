@@ -16,11 +16,8 @@ h5{
 .header-wrap{
     display: flex;
     justify-content: space-between;
-    // padding: 0 20px;
 }
-.add-button{
-    // padding-top: 19px;
-}
+
 
 $breakpoint-alpha: 480px; // adjust to your needs
 
@@ -39,16 +36,11 @@ $breakpoint-alpha: 480px; // adjust to your needs
       border-bottom: 1px solid $color-light-red;
   }
   
-  tr {
-    // border-top: 1px solid $color-light-red;
-    // border-bottom: 1px solid $color-light-red;
-  }
+
   
   th {
     display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
     text-align: center!important;
-    // background-color: $color-light-black;
-    // color: white;
     border-bottom: 2px solid $color-light-black;
   }
   .header tr:hover{
@@ -66,13 +58,10 @@ $breakpoint-alpha: 480px; // adjust to your needs
     }
 
     &:before {
-      content: attr(data-th)": "; // who knew you could do this? The internet, that's who.
+      content: attr(data-th)": "; 
       font-weight: bold;
-
-      // optional stuff to make it look nicer
-      width: 6.5em; // magic number :( adjust according to your own content
+      width: 6.5em; 
       display: inline-block;
-      // end options
       
       @media (min-width: $breakpoint-alpha) {
         display: none;
@@ -110,27 +99,18 @@ body {
 }
 
 .rwd-table {
-  // border-radius: .4em;
   overflow: hidden;
-  tr {
-    // border-color: lighten(#34495E, 10%);
-  }
+
   th, td {
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) { 
       padding: 1em !important; 
     }
   }
-  th, td:before {
 
-  }
 }
 
 
-
-// .rwd-table tr:nth-child(even){background-color: #f2f2f2;}
-
-// .rwd-table tr:hover {background-color: rgb(243, 243, 243);}
 .rwd-table.header tr:hover {background-color: rgb(243, 243, 243);}
 
 .Edit:hover{
@@ -148,7 +128,6 @@ body {
 .list-icon {
   font-size: 39px;
   padding-right: 10px;
-  // padding: 10px 18px;
 }
 
 

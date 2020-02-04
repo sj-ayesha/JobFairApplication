@@ -11,18 +11,18 @@ export class AddEditPopupService {
   private editAgain = new BehaviorSubject<boolean>(this.editValue);
   cast = this.editAgain.asObservable();
 
-  reload = false
+  reload = false;
   private doReload = new BehaviorSubject<boolean>(this.reload);
   castReload = this.doReload.asObservable();
 
   constructor() {
   }
 
-  showEdit(showEdit){
+  showEdit(showEdit) {
     this.editAgain.next(showEdit);
   }
 
-  reloadComponent(isReload){
+  reloadComponent(isReload) {
     this.doReload.next(isReload);
   }
 }

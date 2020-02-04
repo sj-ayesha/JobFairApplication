@@ -1,7 +1,6 @@
 @import '../../styles/custom.scss';
-// welcome
+
 .ion-text-center{
-    // background-image: url('../../../assets/img/banner_4.png');
     width: 100%;
     height: 100%;
     position: absolute;
@@ -11,13 +10,9 @@
 
 .main{
     color: white;
-    // font-family: "Poppins", sans-serif;
-    // max-width: 630px;
-    // margin: 4% auto;
     background-color: #FF483A;
 }
 .main h1{
-    // font-weight: 600;
     color:white;
     margin-top: 0;
     padding-top: 45px;
@@ -41,16 +36,12 @@
     justify-content: center;
 }
 ion-button{
-    // font-family: "Proxima Nova Bold";
     font-size: 20px;
 }
+
 ion-label, ion-select-option{
-    // font-family: "Poppins", sans-serif;
     font-size: 20px;
 }
-// .candidate-item{
-//     max-width: 155px;
-// }
 
 ion-list{
     background: transparent;
@@ -59,7 +50,6 @@ ion-list{
     cursor: pointer;
 }
 .category-item {
-    // max-width: 155px;
     max-width: 155px;
     margin: 0 auto;
 }
@@ -73,7 +63,6 @@ ion-list{
     outline:none;
 }
 .category-item img{
-    // width:100px;
     width:123px;
 }
 .btn-view-more{
@@ -82,16 +71,8 @@ ion-list{
 .category-col{
     width: 125px;
 }
-// .refresh{
-//     background-color: #FF483A;
-// }
+
 @media only screen and (max-width: 1024px) {
-    .ion-text-center{
-        // background-image: none;
-        // background-color: $color-light-red;
-        // height: 35%;
-        // max-height:350px;
-    }
     .lists h3{
         font-size:30px;
     }
@@ -102,17 +83,9 @@ ion-list{
     .main h1{
         font-size: 55px;
     }
-    // .refresh{
-    //     background-color: #E23615;
-    // }
+
 }
 @media only screen and (max-width: 768px) {
-    .ion-text-center{
-        // background-image: none;
-        // background-color: $color-light-red;
-        // height: 45%;
-        // max-height:350px;
-    }
     .venue-input{
         margin-top:20px;
     }
@@ -179,28 +152,6 @@ ion-list{
     }
 }
 
-.lists {
-    // margin: 20px 0;
-}
-
-
-// @media only screen and (max-width: 415px) {
-//     .ion-text-center{
-//         height: 45%;
-//     }
-// }
-
-// @media only screen and (max-width: 380px) {
-//     .ion-text-center{
-//         height: 44%;
-//     }
-// }
-
-// @media only screen and (max-width: 360px) {
-//     .ion-text-center{
-//         height: 60%;
-//     }
-// }
 
 ion-card.why-elca{
     background-color: #414344;

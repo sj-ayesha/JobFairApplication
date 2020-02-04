@@ -1,7 +1,11 @@
 $color-light-red: #E23615;
 $color-light-black: #414344;
+$color-dark-gray: #222428;
 $color-light-gray: #A0A0A0;
 $color-white: #FFF;
+$color-black: #000000;
+$color-light-green: #69bb7b;
+$color-light-blue: #54e0c7;
 
 .ion-color-elca {
     --ion-color-red: var(--ion-color-light-red);
@@ -99,7 +103,6 @@ h6 {
 }
 
 .btn {
-    // font-family: "Poppins", sans-serif;
     font-size: 20px;
     font-weight: 600;
 }

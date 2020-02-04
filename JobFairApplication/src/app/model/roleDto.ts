@@ -13,4 +13,4 @@ export class RoleDto {
     skillBo: boolean;
     venueBo: boolean;
     venueJobBo: boolean;
-} 
+}

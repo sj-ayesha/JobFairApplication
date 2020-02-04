@@ -3,10 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
 import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
 
-// let Role {
-
-// }
-
 
 const routes: Routes = [
   { path: '', redirectTo: 'venue', pathMatch: 'full' },

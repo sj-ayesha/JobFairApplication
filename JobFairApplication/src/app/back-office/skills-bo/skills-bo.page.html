@@ -8,7 +8,6 @@
       <ion-title>
         <div class="header-wrap">
           <div class="title">
-            <!-- <ion-icon class="list-icon" ios="ios-bulb" md="md-bulb"></ion-icon> -->
             <img src='../../../assets/img//header_icons/skill.png'>
             <h3>Skills</h3>
           </div>
@@ -24,12 +23,10 @@
   <div class="wrapper-content" padding="20px">
     <table class="rwd-table">
       <tr class="header">
-        <!-- <th>Id</th> -->
         <th>Skill</th>
         <th>Edit</th>
       </tr>
       <tr *ngFor="let skill of skills">
-        <!-- <td data-th='Id' id="id" >{{skill.skillId}}</td> -->
         <td data-th='Name'>{{skill.skillName}}</td>
         <td class="Edit" data-th="Edit" (click)="edit(skill.skillId)">
           <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
