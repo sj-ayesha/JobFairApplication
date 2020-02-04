@@ -1,0 +1,68 @@
+h5 {
+    font-size:24px;
+}
+
+p {
+    font-size:17px;
+}
+
+.title {
+    display: -webkit-box;
+    padding: 0 10px;
+}
+  
+img.title-img {
+    padding-top: 4px;
+    padding-right: 10px;
+    max-width: 49px;
+}
+
+.title h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5px;
+}
+
+.icon-users{
+    font-size: 48px;
+    padding-right: 10px;
+}
+
+.btn-order {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.candidate-item:hover{
+    cursor: pointer;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.not-available{
+    margin: 0 auto;
+    max-width: 230px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.not-found{
+    margin: 0 auto;
+    max-width: 230px;
+    display: flex;
+    justify-content: center;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    margin-bottom: 7px;
+}

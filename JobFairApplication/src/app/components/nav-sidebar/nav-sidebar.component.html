@@ -1,0 +1,51 @@
+<ion-split-pane contentId="menu-content">
+  <ion-menu contentId="menu-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button autoHide='false'></ion-menu-button>
+        </ion-buttons>
+        <div class="header-section">
+          <img class="menu-logo" src='../../../assets/img/recruitix_logo.png' width="175px" (click)="navigateToHome()">
+          <a *ngIf="!loggedIn" routerLink="/login">Login</a>
+          <a *ngIf="loggedIn" (click)="logout()">Logout</a>
+        </div>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list class="ion-no-padding">
+        <div class="side-nav">
+
+          <ul id="myUL">
+            <li>
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a routerLink="/venue-bo">Venue</a>
+            </li>
+            <li><span class="caret">Job List</span>
+              <ul class="nested">
+                <li>
+                  <a routerLink="jobs-bo">Job</a>
+                </li>
+                <li>
+                  <a routerLink="jobs-bo">Venue Job</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a routerLink="skills-bo">Skills</a>
+            </li>
+            <li>
+              <a routerLink="/candidate-list">Candidate</a>
+            </li>
+          </ul>
+
+        </div>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="menu-content"></ion-router-outlet>
+</ion-split-pane>

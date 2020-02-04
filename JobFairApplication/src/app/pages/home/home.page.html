@@ -1,0 +1,119 @@
+<ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-row>
+    <div class="ion-text-center">
+      <div class="banner-section">
+        <div class="banner-img">
+          <img src="../../../assets/img/banner_4.png" alt="">
+        </div>
+        <div class="main">
+
+          <ion-row class="venue">
+            <ion-col size="12" size-md>
+              <h1>WELCOME TO ELCA</h1>
+              <h3>The inde­pendent Swiss IT company</h3>
+              <ion-list>
+                <img class="we_make_it_work" src="../../../assets/img/we_make_it_work.png">
+              </ion-list>
+              <div class="venue-button">
+                <ion-button class="btn" color="light" (click)="routeToJob('by-venue')">
+                  Apply Job</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+
+      <ion-row class="lists">
+
+        <ion-col size="12" size-md size="12" size-sm>
+          <ion-card>
+            <ion-card-header>
+              <h3>Job Opportunities</h3>
+            </ion-card-header>
+            <ion-row>
+              <ion-col class="category-col" size="2" size-md size="4" size-sm>
+                <ion-card-content class="category-item" (click)="routeToJob('human-resource')">
+                  <img src="../../../assets/img/job_category/hr.png">
+                  <h5>Human Resource</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col class="category-col" size="2" size-md size="4" size-sm>
+                <ion-card-content class="category-item" (click)="routeToJob('manager')">
+                  <img src="../../../assets/img/job_category/management.png">
+                  <h5>Manager</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col class="category-col" size="2" size-md size="4" size-sm>
+                <ion-card-content class="category-item" (click)="routeToJob('business-analyst')">
+                  <img src="../../../assets/img/job_category/BA.png">
+                  <h5>Business Analyst</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col class="category-col" size="2" size-md size="4" size-sm>
+                <ion-card-content class="category-item" (click)="routeToJob('architect')">
+                  <img src="../../../assets/img/job_category/architect_1.png">
+                  <h5>Architect</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col class="category-col" size="2" size-md size="4" size-sm>
+                <ion-card-content class="category-item" (click)="routeToJob('software-engineer')">
+                  <img src="../../../assets/img/job_category/software_engineer.png">
+                  <h5>Software Engineer</h5>
+                </ion-card-content>
+              </ion-col>
+              <ion-col class="category-col" size="2" size-md size="4" size-sm>
+                <ion-card-content class="category-item" (click)="routeToJob('quality-assurance')">
+                  <img src="../../../assets/img/job_category/QA.png">
+                  <h5>Quality Assurance</h5>
+                </ion-card-content>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+
+       
+          <ion-card class="why-elca">
+            <ion-card-header>
+              <h3>ELCA is worth joining</h3>
+            </ion-card-header>
+            <ion-row class="wrap-motive">
+              <ion-col size="4" size-md size="4" size-sm class="border-right">
+                <div class="add-space">
+                  <h5>We encourage you to develop your technical talents and entrepreneurial skills to shape your
+                    future.
+                  </h5>
+                  <p>We offer interesting career paths and develop our employees to meet the related requirements. We’re
+                    fair, we embrace challenges and respect the concept of "work-life" balance.</p>
+                </div>
+              </ion-col>
+              <ion-col size="4" size-md size="4" size-sm class="border-right">
+                <div class="add-space">
+                  <h5>Life at ELCA is fascinating.</h5>
+                  <p>We serve in all main industries on more than 100 projects per year – there’s lots of space for you
+                    to
+                    develop your knowledge, your creativity, your capabilities – lots of space for learning and
+                    improving.
+                  </p>
+                </div>
+              </ion-col>
+              <ion-col size="4" size-md size="4" size-sm>
+                <div class="add-space">
+                  <h5>Work at ELCA is challenging and satisfying.</h5>
+                  <p>we share our knowledge with one another; you’ll learn from smart people, and training and coaching
+                    in
+                    professional and personal aspects will help you succeed.</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+   
+
+    </div>
+  </ion-row>
+</ion-content>

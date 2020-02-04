@@ -1,0 +1,89 @@
+<ng-container *ngIf="!loggedIn">
+  <ion-app>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          <div class="router-links">
+            <img src='../../../assets/img/recruitix_logo.png' (click)="navigateToHome()">
+            <div class="router-links--right">
+              <a class="venue-name" (click)="navigateToVenue()">Venue: {{venue}} </a>
+              <a *ngIf="!loggedIn" routerLink="/login">Login</a>
+              <a *ngIf="loggedIn" (click)="logout()">Logout</a>
+
+            </div>
+          </div>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-content>
+    <div class="footer-container">
+      <app-footer></app-footer>
+    </div>
+  </ion-app>
+</ng-container>
+
+
+
+<ion-split-pane *ngIf="loggedIn" contentId="menu-content">
+  <ion-menu contentId="menu-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button autoHide='false'></ion-menu-button>
+        </ion-buttons>
+        <div class="header-section">
+          <img class="menu-logo" src='../../../assets/img/recruitix_logo.png' width="175px" (click)="navigateToVenue()">
+          <a *ngIf="!loggedIn" routerLink="/login">Login</a>
+          <a *ngIf="loggedIn" (click)="logout()">Logout</a>
+        </div>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list class="ion-no-padding">
+        <div class="side-nav">
+          <ul id="myUL">
+            <div *ngIf="navDisplayHR" class="HR">
+              <li>
+                <a routerLink="/dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a routerLink="/venue-bo">Venue</a>
+              </li>
+              <li class="subnav"><span class="arrow">Job List</span>
+                <ul class="nested">
+                  <li>
+                    <a routerLink="jobs-bo">Job</a>
+                  </li>
+                  <li>
+                    <a routerLink="venue-job">Venue Job</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a routerLink="skills-bo">Skills</a>
+              </li>
+              <li>
+                <a routerLink="/candidate-list">Candidate</a>
+              </li>
+            </div>
+            <div *ngIf="navDisplayMANAGER" class="MANAGER">
+              <li>
+                <a routerLink="/dashboard">Dashboard</a>
+              </li>
+            </div>
+            <div *ngIf="navDisplayINTERVIEWER" class="INTERVIEWER">
+              <li>
+                <a routerLink="/candidate-list">Candidate</a>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="menu-content"></ion-router-outlet>
+</ion-split-pane>

@@ -1,0 +1,36 @@
+<ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="venue-container">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" size-md size="12" size-sm>
+        <div class="wrapper">
+          <div class="venue-content__img">
+            <img src="../../../assets/img/map.png" />
+          </div>
+          <form [formGroup]="formVenue">
+            <ion-item class="venue-input" color="red">
+              <ion-label position="floating" color="dark">Venue</ion-label>
+              <ion-select formControlName="venues" interface="popover" (ionChange)="selected($event)">
+                <ion-select-option *ngFor="let venue of venues" value="{{venue.venueId}}">{{venue.venueName}} | {{venue.startDate}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div class="error-messages">
+              <ng-container *ngFor='let error of errorMessages.venues'>
+                <div class="error-message"
+                  *ngIf="formVenue.get('venues').hasError(error.type) && (formVenue.get('venues').dirty || formVenue.get('venues').touched)">
+                  {{ error.message }}
+                </div>
+              </ng-container>
+            </div>
+          </form>
+          <ion-button color="dark" (click)="editTheVenue(); onSubmit()">Get Started
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,0 +1,128 @@
+<ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="wrapper-content">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="title-container">
+          <ion-icon class="list-icon" ios="ios-list" md="md-list"></ion-icon>
+          <h3 class="ion-text-uppercase">Job list</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!noJobsAvailable">
+        <ion-col size="6" class="filter-search ion-padding">
+          <ion-searchbar placeholder="Search..." type="text" #title (ionInput)="searchByTitle(title.value)">
+          </ion-searchbar>
+        </ion-col>
+        <ion-col size="6" class="ion-padding">
+          <ion-item class="venue-input">
+            <ion-label position="floating" color="medium">Please select position..</ion-label>
+            <ion-select (ionChange)="filter($event)" interface="popover" class="ion-float-left">
+              <ion-select-option value="all" selected="selected">All</ion-select-option>
+              <ion-select-option value="fresher">Fresher</ion-select-option>
+              <ion-select-option value="junior">Junior</ion-select-option>
+              <ion-select-option value="senior">Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <div *ngIf="!jobNotFound">
+        <ion-row *ngIf="!noJobsAvailable">
+          <ion-col size="12">
+            <p class="ion-float-right ion-margin-end">Select Job</p>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div class="job-not-found" *ngIf="!jobNotFound">
+        <div class="job-list-container" *ngIf="!noJobsAvailable ">
+          <ion-row class="job-box" *ngFor="let venueJob of venueJobs">
+            <ion-col size="11">
+              <button class="collapsible">{{ venueJob.job.title }}</button>
+
+              <div class="content">
+                <ion-row>
+                  <ion-col size="12" class="ion-padding-top">
+                    <div class="ion-no-margin job-description-box">
+                      <div class="job-description">
+                        <h6>Job Description</h6>
+
+                        <ul>
+                          <li *ngFor="let splitJobDescription of venueJob.job.description.split(';')">
+                            {{ splitJobDescription }}
+                          </li>
+                        </ul>
+
+                      </div>
+
+                      <div class="job-qualification">
+                        <h6>Job Qualification</h6>
+                        <ul>
+                          <li>
+                            <ion-label>{{ venueJob.job.qualificationNeeded }}</ion-label>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="job-experience">
+                        <h6>Job Experience</h6>
+                        <ul>
+                          <li>
+                            <ion-label>{{ venueJob.job.minimumExperience }}</ion-label>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+            <ion-col size="1" class="ion-text-right">
+              <div class="btn-checkbox">
+                <ion-checkbox color="danger" class="btn-checkbox__item" #checkboxes
+                  (ionChange)="addPriority($event,venueJob.job.jobId)"></ion-checkbox>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+      <ion-card *ngIf="noJobsAvailable">
+        <img class="noJobsImg" src="../../../assets/img/Not Available/no-entry.png">
+      </ion-card>
+      <ion-row *ngIf="jobNotFound">
+        <ion-col size="12" class="ion-padding">
+          <img class="not-found" src="../../../assets/img/Not Available/job-not-found.png">
+        </ion-col>
+      </ion-row>
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more jobs...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <ion-row class="section-buttons">
+        <ion-col size="6" class="ion-padding ion-text-center">
+          <ion-button color="dark" (click)="quickApplication()" routerLinkActive="router-link-active"
+              class="ion-float-left btn">Quick Application<ion-icon ios="ios-arrow-forward" md="md-arrow-forward">
+              </ion-icon>
+            </ion-button>
+        </ion-col>
+
+        <ion-col size="6" class="ion-padding btn-actions">
+          <div class="btn-back ion-text-left">
+            <ion-button class="btn" color="light" (click)="back()">
+              <ion-icon name="arrow-back"></ion-icon>Back
+            </ion-button>
+          </div>
+          <div class="btn-fill-details" *ngIf="!noJobsAvailable">
+            <ion-button color="dark" (click)="applyOnlyFive(); setJobId()" routerLinkActive="router-link-active"
+              class="ion-float-right btn">Apply<ion-icon ios="ios-arrow-forward" md="md-arrow-forward">
+              </ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,196 @@
+@import '../../styles/custom.scss';
+
+.ion-text-center {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: 100% !important;
+    background-repeat: no-repeat;
+}
+
+.main {
+    color: $color-white;
+    background-color: $color-orange-red;
+}
+
+.main h1{
+    color:$color-white;
+    margin-top: 0;
+    padding-top: 45px;
+}
+
+.main h3 {
+    font-weight: 400;
+    color: $color-white;
+}
+
+.venue {
+    max-width: 458px;
+    margin: 0 auto;
+}
+
+.venue-input {
+    margin:0 auto;
+    color: white;
+    margin-top:30px;
+}
+
+.venue-button {
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+}
+
+ion-button {
+    font-size: 20px;
+}
+
+ion-label, ion-select-option{
+    font-size: 20px;
+}
+
+ion-list {
+    background: transparent;
+}
+
+.candidate-item:hover {
+    cursor: pointer;
+}
+
+.category-item {
+    max-width: 155px;
+    margin: 0 auto;
+}
+
+.category-item h5 {
+    font-size:20px;
+}
+
+.category-item:hover {
+    cursor: pointer;
+}
+
+.category-item:focus {
+    outline:none;
+}
+
+.category-item img {
+    width:123px;
+}
+
+.btn-view-more {
+    margin-bottom: 25px;
+}
+
+.category-col {
+    width: 125px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .lists h3{
+        font-size:30px;
+    }
+    .category-item h5{
+        font-size:17px;
+    }
+    //Only For android
+    .main h1{
+        font-size: 55px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .venue-input{
+        margin-top:20px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .ion-text-center{
+        height: 60%;
+    }
+    ion-button{
+        font-size: 15px;
+    }
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .ion-text-center {
+        height: 60%;
+    }
+}
+
+.not-available{
+    width: 122px;
+    margin: 0 auto;
+    margin-bottom: 18px;
+}
+
+.banner {
+    &-section {
+        position: relative;
+
+        .venue {
+            max-width: 575px;
+
+            .list-md {
+                width: 75%;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &-img {
+        position: absolute;
+
+        @media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
+            display: none;
+        }
+
+        img {
+            @media only screen and (min-device-width: 1400px)and (max-device-width: 1600px) {
+                width: 95%;
+            }
+
+            @media only screen and (min-device-width: 1601px) {
+                width: 75%;
+            }          
+
+        }
+
+    }
+}
+
+
+ion-card.why-elca{
+    background-color: $color-light-black;
+
+    h3,p,h5{
+        color: $color-white!important;
+    }
+    
+    h5,p{
+        text-align: left;
+    }
+
+}
+
+.border-right {
+    border-right: 1px solid $color-white;
+}
+
+.add-space {
+    padding-left:10px;
+}
+
+.wrap-motive {
+    padding-bottom: 20px;
+}
+
+.we_make_it_work{
+    width: 67%;
+}

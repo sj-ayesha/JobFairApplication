@@ -1,0 +1,142 @@
+@import "../../styles/custom.scss";
+
+.router-links {
+  margin-top: 20px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+
+  &--right {
+    display: flex;
+    align-items: center;
+
+    .venue-name {
+      font-size: 20px;
+      padding: 0 45px;
+      color: $color-light-red !important;
+      font-weight: 900;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+img {
+  max-width: 178px;
+  max-height: 24px;
+
+  &:hover, &:focus {
+    cursor: pointer;
+    outline: none;
+  }
+}
+
+a {
+  color: $color-light-black;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-light-red;
+    cursor: pointer;
+  }
+}
+
+a.venue-name {
+  font-weight: 100 !important;
+}
+
+.dissableRediretion:hover {
+  cursor: not-allowed;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    padding: 0 20px;
+    color: $color-light-black;
+
+    &:hover {
+        color: $color-light-red;
+    }
+  }
+}
+
+.item-hover {
+  a {
+    width: 100%;
+    padding: 15px 0;
+
+    &:hover {
+      background-color: $color-light-red;
+      color: $color-white;
+    }
+  }
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+
+  ul {
+    padding: 0 10px;
+
+    li {
+      padding: 15px 0;
+      list-style: none;
+      font-size: 18px;
+      color: $color-light-black;
+    }
+  }
+
+  ul.nested {
+    li {
+      padding-bottom: 0;
+    }
+  }
+
+  .nested {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+  .caret {
+    cursor: pointer;
+  }
+
+  .caret::before {
+    content: "\25B6";
+    color: $color-light-red;
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+  .caret-down::before {
+    transform: rotate(90deg);
+  }
+
+  a {
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+
+    &:hover {
+      border-bottom: 2px solid $color-light-red;
+      width: 90%;
+      transition: 0.2s;
+    }
+  }
+}
+
+.split-pane-md.split-pane-visible > .split-pane-side {
+  max-width: 20%;
+}
+
+.menu-logo{
+  max-width: 120px; 
+}

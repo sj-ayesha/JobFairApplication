@@ -1,0 +1,52 @@
+<ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <div class="header-wrap">
+          <div class="title">
+            <img src='../../../assets/img//header_icons/venue.png'>
+            <h3>Venue List</h3>
+          </div>
+          <div class="add-button">
+            <ion-button color='danger' (click)="openAddModal()">
+              <ion-icon ios="ios-add" md="md-add"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="wrapper-content">
+    <table class="rwd-table">
+      <tr>
+        <th>Venue</th>
+        <th>Display Name</th>
+        <th>Address</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Active</th>
+        <th>Edit</th>
+      </tr>
+      <tr *ngFor="let venue of venues">
+        <td data-th="Venue">{{venue.venueName}}</td>
+        <td data-th="Venue">{{venue.venueName}} | {{venue.startDate}}</td>
+        <td data-th="Address">{{venue.address}}</td>
+        <td data-th="Start Date">{{venue.startDate}}</td>
+        <td data-th="End Date">{{venue.endDate}}</td>
+        <td data-th="Active">{{venue.active}}</td>
+        <td class="Edit" data-th="Edit" (click)="edit(venue.venueId)">
+          <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more candidates...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

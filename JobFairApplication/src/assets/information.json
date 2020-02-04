@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "name": "Title",
+      "children": [
+        {
+          "information": "Lorem Ipsum is simply dummyLorem Ipsum is simply dummyLorem Ipsum is simply dummyLorem Ipsum is simply dummy"
+        }
+      ]
+    },
+    {
+      "name": "Title 2",
+      "children": [
+        {
+          "information": "Lorem Ipsum is simply dummyLorem Ipsum is simply dummyLorem Ipsum is simply dummyLorem Ipsum is simply dummy"
+        }
+      ]
+    }
+  ]
+}

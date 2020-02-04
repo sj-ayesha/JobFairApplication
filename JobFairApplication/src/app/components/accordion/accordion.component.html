@@ -1,0 +1,100 @@
+<ion-row class="job-box">
+  <ion-col size="11">
+    <button class="collapsible">Software Engineer</button>
+    <div class="content">
+      <ion-row>
+        <ion-col size="6">
+          <div class="job-description">
+            <h6>Job Description</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+
+          <div class="job-qualification">
+            <h6>Job Qualification</h6>
+            <ul>
+              <li>
+                <ion-label>Pokémon Yellow</ion-label>
+              </li>
+              <li>
+                <ion-label>Mega Man X</ion-label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="job-experience">
+            <h6>Job Experience</h6>
+            <ul>
+              <li>
+                <ion-label>Pokémon Yellow</ion-label>
+              </li>
+              <li>
+                <ion-label>Mega Man X</ion-label>
+              </li>
+            </ul>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-col>
+  <ion-col size="1" text-right>
+    <div class="btn-checkbox">
+
+      <ion-checkbox color="dark" class="btn-checkbox__item"></ion-checkbox>
+    </div>
+  </ion-col>
+</ion-row>
+
+<ion-row class="job-box" *ngFor="let job of jobs">
+  <ion-col size="11">
+    <button class="collapsible">Software Engineer</button>
+    <div class="content">
+      <ion-row>
+        <ion-col size="6">
+          <div class="job-description">
+            <h6>Job Description</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+
+          <div class="job-qualification">
+            <h6>Job Qualification</h6>
+            <ul>
+              <li>
+                <ion-label>Pokémon Yellow</ion-label>
+              </li>
+              <li>
+                <ion-label>Mega Man X</ion-label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="job-experience">
+            <h6>Job Experience</h6>
+            <ul>
+              <li>
+                <ion-label>Pokémon Yellow</ion-label>
+              </li>
+              <li>
+                <ion-label>Mega Man X</ion-label>
+              </li>
+            </ul>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-col>
+  <ion-col size="1" text-right>
+    <div class="btn-checkbox">
+      <ion-checkbox color="dark" class="btn-checkbox__item"></ion-checkbox>
+    </div>
+  </ion-col>
+</ion-row>

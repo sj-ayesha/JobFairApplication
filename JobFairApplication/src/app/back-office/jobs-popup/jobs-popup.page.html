@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="!edit">Add Job</ion-title>
+    <ion-title *ngIf="edit">Edit Job</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="job-content">
+    <form [formGroup]="formAddJob">
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item *ngIf="!edit">
+            <ion-label position="floating" color="medium">*Category</ion-label>
+            <ion-select formControlName="category" interface="popover" cancelText="Cancel" okText="OK">
+              <ion-select-option value="software-engineer">Software Engineer</ion-select-option>
+              <ion-select-option value="human-resource">Human Resource</ion-select-option>
+              <ion-select-option value="manager">Manager</ion-select-option>
+              <ion-select-option value="quality-assurance">Quality Assurance</ion-select-option>
+              <ion-select-option value="business-analyst">Business Analyst</ion-select-option>
+              <ion-select-option value="architect">Architect</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Category</ion-label>
+            <ion-select interface="popover" formControlName="category" cancelText="Cancel" okText="OK" >
+              <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX">{{categoryX}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.category">
+              <div class="error-message"
+                *ngIf="formAddJob.get('category').hasError(error.type) && (formAddJob.get('category').dirty || formAddJob.get('category').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item *ngIf="!edit">
+            <ion-label position="floating" color="medium">*Job Title</ion-label>
+            <ion-input formControlName="title" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Job Title</ion-label>
+            <ion-input formControlName="title" type="text" value="{{title}}"></ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.title">
+              <div class="error-message"
+                *ngIf="formAddJob.get('title').hasError(error.type) && (formAddJob.get('title').dirty || formAddJob.get('title').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item *ngIf="!edit">
+            <ion-label position="floating" color="medium">*Job Description</ion-label>
+            <ion-textarea rows="15" cols="20" formControlName="description" type="text"></ion-textarea>
+          </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Job Description</ion-label>
+            <ion-textarea rows="15" cols="20" formControlName="description" type="text" value="{{description}}"></ion-textarea>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.description">
+              <div class="error-message"
+                *ngIf="formAddJob.get('description').hasError(error.type) && (formAddJob.get('description').dirty || formAddJob.get('description').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item *ngIf="!edit">
+            <ion-label position="floating" color="medium">*Qualification required</ion-label>
+            <ion-input formControlName="qualificationNeeded" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Qualification required</ion-label>
+            <ion-input formControlName="qualificationNeeded" type="text" value="{{qualificationNeeded}}"></ion-input>
+          </ion-item>
+
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.qualificationNeeded">
+              <div class="error-message"
+                *ngIf="formAddJob.get('qualificationNeeded').hasError(error.type) && (formAddJob.get('qualificationNeeded').dirty || formAddJob.get('qualificationNeeded').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item *ngIf="!edit">
+            <ion-label position="floating" color="medium">*Years of Experience</ion-label>
+            <ion-input formControlName="minimumExperience" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Years of Experience</ion-label>
+            <ion-input formControlName="minimumExperience" type="text" value="{{minimumExperience}}"></ion-input>
+          </ion-item>
+
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.minimumExperience">
+              <div class="error-message"
+                *ngIf="formAddJob.get('minimumExperience').hasError(error.type) && (formAddJob.get('minimumExperience').dirty || formAddJob.get('minimumExperience').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item *ngIf="!edit">
+            <ion-label position="floating" color="medium">*Level</ion-label>
+            <ion-select formControlName="level" interface="popover" cancelText="Cancel" okText="OK"placeholder="Select Level">
+              <ion-select-option value="Fresher">Fresher</ion-select-option>
+              <ion-select-option value="Junior">Junior</ion-select-option>
+              <ion-select-option value="Senior">Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Level</ion-label>
+            <ion-select formControlName="level" interface="popover" cancelText="Cancel" okText="OK"placeholder="Select Level">
+              <ion-select-option value="Fresher">Fresher</ion-select-option>
+              <ion-select-option value="Junior">Junior</ion-select-option>
+              <ion-select-option value="Senior">Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.level">
+              <div class="error-message"
+                *ngIf="formAddJob.get('level').hasError(error.type) && (formAddJob.get('level').dirty || formAddJob.get('level').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <div class="option-button ion-text-right">
+        <ion-button class="btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
+        <ion-button class='btn' *ngIf="!edit" color="dark" (click)="onSubmit()">Add</ion-button>
+        <ion-button class='btn' *ngIf="edit" color="dark" (click)="onSubmit()">Save</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

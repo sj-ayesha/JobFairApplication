@@ -1,0 +1,302 @@
+@import '../../styles/custom.scss';
+.title{
+    display: -webkit-box;
+}
+.icon-user{
+    font-size: 35px;
+    padding-top: 7px;
+    padding-right: 10px;
+}
+.jobs-selected{
+    display: flex;
+    justify-content: space-between;
+
+    &--title {
+        display: flex;
+        align-items: center;
+
+        span {
+            font-size: 17px;
+            color: $color-light-black;
+        }
+    }
+
+    p {
+        font-size: 17px;
+        color: $color-light-black;
+        padding: 0 10px;
+        @media only screen and (max-width: 768px) {
+            max-width: 100px;
+        }
+        
+    }
+}
+ion-checkbox{
+    margin-top:20px;
+}
+ion-card.candidate-details{
+    margin-top:5px;
+}
+
+// Rejected
+#ck-button-rejected {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+
+}
+
+#ck-button-rejected:hover {
+    background: $color-lighter-red;
+    color: $color-white;
+    cursor: pointer;
+}
+
+#ck-button-rejected label {
+    float:left;
+    width:6.0em;
+}
+#ck-button-rejected label:hover {
+    cursor: pointer;
+}
+
+#ck-button-rejected label span {
+    text-align:center;
+    padding:5px 0px;
+    display:block;
+    font-size: 16px;
+}
+
+ion-textarea{
+    font-size: 17px;
+}
+
+#ck-button-rejected label input {
+    position:absolute;
+    top:-20px;
+}
+
+#ck-button-rejected input:checked + span {
+    background-color: $color-lighter-red;
+    color:$color-white;
+}
+// Pending
+#ck-button-pending {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+
+}
+
+#ck-button-pending:hover {
+    background: $color-yellow;
+    color: $color-white;
+    cursor: pointer;
+}
+
+#ck-button-pending label {
+    float:left;
+    width:6.0em;
+}
+
+#ck-button-pending label:hover {
+    cursor: pointer;
+}
+
+#ck-button-pending label span {
+    text-align:center;
+    padding:5px 0px;
+    display:block;
+    font-size: 16px;
+}
+
+#ck-button-pending label input {
+    position:absolute;
+    top:-20px;
+}
+
+#ck-button-pending input:checked + span {
+    background-color: $color-yellow;
+    color:$color-white;
+}
+// Next
+#ck-button-next {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+}
+
+#ck-button-next:hover {
+    background: $color-green;
+    color: $color-white;
+    cursor: pointer;
+}
+
+#ck-button-next label {
+    float:left;
+    width:15.0em;
+}
+#ck-button-next label:hover {
+    cursor: pointer;
+}
+
+#ck-button-next label span {
+    text-align: center;
+    padding: 5px 0px;
+    display: block;
+    font-size: 16px;
+}
+
+#ck-button-next label input {
+    position: absolute;
+    top: -20px;
+}
+
+#ck-button-next input:checked + span {
+    background-color: $color-green;
+    color: $color-white;
+}
+
+.status{
+    margin-top: 20px;
+}
+
+.info{
+    width:100%;
+    display: flex;;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+ion-button{
+    font-size: 20px;
+}
+
+.save-button{
+    margin-right: 13px;
+}
+
+.formCandidateScreening{
+    width: 100%;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.label-info {
+    min-width: 140px;
+}
+
+.btn-radio-group {
+    display: flex;
+}
+
+.btn-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn-back {
+        color: $color-black;
+        margin: 0 10px;
+    }
+}
+.separation{
+    border-top: 1px solid $color-lighter-red;
+    width: 90%;
+}
+
+
+.feedbacks {
+    display: flex;
+    padding: 10px 0;
+
+    &-subtitle {
+        padding-right: 25px;
+    }
+}
+.information {
+    h5{
+        font-size: 20px;
+    }
+}
+.qualifications {
+    h5 {
+        font-size: 20px;
+    }
+}
+.jobs-applied, .uploaded-file {
+    h5 {
+        font-size: 20px;
+    }
+}
+
+.experience {
+    h5 {
+        font-size: 20px;
+    }
+}
+.skill {
+    h5 {
+        font-size: 20px;
+    }
+}
+
+ion-card-title .feedbacks{
+    padding-bottom: 10px
+}
+
+.download-section {
+    display: flex;
+
+    @media (min-device-width: 768px) and (max-device-width: 1280px) {
+        display: block;
+    }
+    .btn-download {
+        --background-hover: #E23615;
+        --background:#E23615;
+        margin: 10px 20px;
+
+        @media (min-device-width: 768px) and (max-device-width: 1280px) {
+            margin: 10px 0;
+        }
+
+    
+        a {
+            font-size: 17px;
+            color: $color-white;
+            text-decoration: none;
+            text-transform: none;
+        }
+    
+    }
+}
+
+.title h3{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5px;
+}
+
+img.title-img{
+    padding-top: 7px;
+    padding-right: 10px;
+}
+
+.card-content-md p{
+    font-size:17px;
+}
+
+.feedback-status{
+    padding-bottom: 10px;
+}

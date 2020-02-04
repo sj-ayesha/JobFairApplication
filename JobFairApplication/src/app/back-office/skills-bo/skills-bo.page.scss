@@ -1,0 +1,146 @@
+@import '../../styles/custom.scss';
+
+.title{
+    display: -webkit-box;
+    width: 100%;
+}
+
+.icon-map{
+    font-size: 35px;
+    padding-top: 19px;
+    padding-right: 10px;
+    height: 53px;
+}
+
+h5{
+    font-size:24px;
+}
+
+.header-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+$breakpoint-alpha: 480px; // adjust to your needs
+
+.rwd-table {
+  margin: 1em 0;
+  min-width: 300px; // adjust to your needs
+  width: 100%;
+  text-align: center;
+
+  tr {
+    font-size: 20px;
+    text-align: center!important;
+  }
+
+  td {
+    font-size: 17px;
+    text-align: center!important;
+    border-bottom: 1px solid $color-light-red;
+  }
+  
+  th {
+    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
+    text-align: center!important;
+    border-bottom: 2px solid $color-light-black;
+  }
+
+  .header tr:hover{
+    background-color: none!important;
+  }
+  
+  td {
+    display: block; 
+    
+    &:first-child {
+      padding-top: .5em;
+    }
+
+    &:last-child {
+      padding-bottom: .5em;
+    }
+
+    &:before {
+      content: attr(data-th)": "; 
+      font-weight: bold;
+      width: 6.5em; 
+      display: inline-block;
+      
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+  }
+  
+  th, td {
+    text-align: left;
+    
+    @media (min-width: $breakpoint-alpha) {
+      display: table-cell;
+      padding: .25em .5em;
+      
+      &:first-child {
+        padding-left: 0;
+      }
+      
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+body {
+  padding: 0 2em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: $color-light-black;
+  background: $color-lighter-gray;
+}
+
+.rwd-table {
+  overflow: hidden;
+
+  th, td {
+    margin: .5em 1em;
+    @media (min-width: $breakpoint-alpha) { 
+      padding: 1em !important; 
+    }
+  }
+}
+
+
+.rwd-table.header tr:hover {background-color: $color-white-gray;}
+
+.Edit:hover{
+  cursor: pointer;
+  .edit-btn{
+    cursor: pointer;
+    color: $color-light-red;
+  }
+}
+
+.header tr:hover{
+  background-color: $color-red!important;
+}
+
+.list-icon {
+  font-size: 39px;
+  padding-right: 10px;
+}
+
+.title h3{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+img{
+  padding-top: 4px;
+  padding-right: 15px;
+}
+
+.wrapper-content{
+  padding: 20px;
+}

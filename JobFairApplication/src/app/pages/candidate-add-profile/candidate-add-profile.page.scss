@@ -1,0 +1,72 @@
+@import '../../styles/custom.scss';
+
+.error-messages {
+    font-size : 0.9em;
+    color: $color-light-red;
+}
+
+.title{
+    display: flex;
+}
+
+.icon-add, .icon-upload{
+    font-size: 35px;
+    padding-top: 19px;
+    padding-right: 10px;
+}
+
+ion-button{
+    font-size: 20px;
+}
+
+ion-datetime{
+    padding-bottom: 1px;
+}
+
+.btn-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn-back {
+      margin: 0 10px;
+    }
+  }
+
+  .toast-custom{
+    --color:#E23615;
+    --border-style:solid;
+    --border-width :5px;
+    --border-color:#E23615;
+}
+
+.upload-file{
+    margin-top: 7px;
+}
+
+.tablinks {
+    --background: #414344;
+    --background-hover: #E23615;
+
+    &.active {
+        --background-hover: #E23615;
+        --background:#E23615;
+    }
+}
+
+.candidate-cv {
+    display: none;
+}
+
+input[type='file'] {
+    max-width: 125px;
+    color: transparent;
+}
+
+
+.fileUploadedList {
+    list-style: none;
+}
+
+.ion-text-center h3{
+    margin-top:0;
+}

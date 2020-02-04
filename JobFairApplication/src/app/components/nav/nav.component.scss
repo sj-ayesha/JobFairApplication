@@ -1,0 +1,225 @@
+@import "../../styles/custom.scss";
+
+.router-links {
+  margin-top: 20px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+
+  &--right {
+    display: flex;
+    align-items: center;
+
+    .venue-name {
+      font-size: 20px;
+      padding: 0 45px;
+      color: $color-light-red !important;
+      font-weight: 900;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+img {
+  max-width: 178px;
+  max-height: 24px;
+
+  &:hover, &:focus {
+    cursor: pointer;
+    outline: none;
+  }
+}
+
+a {
+  color: $color-light-black;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-light-red;
+    cursor: pointer;
+  }
+}
+
+a.venue-name {
+  font-weight: 100 !important;
+}
+
+.dissableRediretion:hover {
+  cursor: not-allowed;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    padding: 0 20px;
+    color: $color-light-black;
+
+    &:hover {
+        color: $color-light-red;
+    }
+  }
+}
+
+.item-hover {
+  a {
+    width: 100%;
+
+    &:hover {
+      background-color: $color-light-red;
+      color: $color-white;
+    }
+  }
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+
+  ul {
+    padding: 0 10px;
+
+    li {
+      list-style: none;
+      font-size: 18px;
+      color: $color-light-black;
+      margin: 0px 0 40px 0;
+      padding: 10px 0;
+      cursor: pointer;
+    }
+  }
+
+  ul.nested {
+    padding: 0 30px;
+
+    &.active {
+      padding: 10px 30px;
+    }
+
+    li {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .nested {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+  .caret {
+    cursor: pointer;
+  }
+
+  .caret:hover{
+    border-bottom: 2px solid $color-light-red;
+    width: 120%;
+    transition: 0.2s;
+  }
+
+  .caret::before {
+    background-image: "../../../assets/img/chevron-arrow-down.png";
+    width: 25px;
+    height: 25px;
+    color: $color-light-red;
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+  .caret-down::before {
+    transform: rotate(90deg);
+  }
+
+  li {
+    &:hover {
+      border-bottom: 2px solid $color-light-red;
+      width: 90%;
+      transition: 0.2s;
+    }
+  }
+
+
+  a {
+    font-size: 18px;
+    display: block;
+    width: 100%;
+  }
+
+  .subnav.active {
+    &:hover {
+      border: none;
+    }
+
+    li:first-child {
+      margin: 30px 0;
+    }
+  }
+}
+
+.split-pane-md.split-pane-visible > .split-pane-side {
+  max-width: 20%;
+}
+
+.menu-logo{
+  max-width: 120px; 
+}
+
+
+.dark-shade {
+  background-color: $color-black;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .footer-container {
+      display: none;
+  }
+}
+
+.arrow {
+  display:block;
+  height:20px;
+  text-decoration:none;
+
+  &::before {
+    content: '';
+    background:url('../../../assets/img/chevron-arrow-down.png');
+    background-size:cover;
+    position:absolute;
+    width: 15px;
+    height: 15px;
+    margin-left: 68px;
+    margin-top: 5px;
+  }
+
+  &-down {
+    &::before {
+      transform: rotate(180deg);
+    }
+
+    &:hover {
+      border-bottom: none;
+    }
+  }
+}
+
+.arrow:hover{
+  color: $color-light-red;
+}
+
+.subnav {
+  padding: 10px 0;
+  
+  &:hover {
+    border-bottom: 2px solid $color-light-red;
+    width: 90%;
+    transition: 0.2s;
+  }
+}
+

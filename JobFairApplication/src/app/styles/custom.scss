@@ -1,0 +1,122 @@
+$color-red: #ff0000;
+$color-lighter-red: #f04141;
+$color-light-red: #E23615;
+$color-orange-red: #FF483A;
+$color-light-black: #414344;
+$color-dark-gray: #222428;
+$color-light-gray: #A0A0A0;
+$color-lighter-gray: #eee;
+$color-cloud-gray: #D0D0D0;
+$color-white-gray: #f3f3f3;
+
+$color-white: #FFF;
+$color-black: #000000;
+$color-green: #10dc60;
+$color-light-green: #69bb7b;
+$color-light-blue: #54e0c7;
+$color-yellow: #ffce00;
+
+.ion-color-elca {
+    --ion-color-red: var(--ion-color-light-red);
+    --ion-color-light-black: var(--ion-color-light-black);
+    --ion-color-light-gray: var(--ion-color-light-gray);
+  }
+
+* {
+    font-family: 'Proxima Nova Regular';
+}
+
+body {
+    font-family: 'Proxima Nova Regular' !important;
+}
+
+h1 {
+    font-size: 60px;
+    color: $color-light-black;
+    font-family: 'Proxima Nova Regular';
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 50px;
+    color: $color-light-black;
+    font-family: 'Proxima Nova Regular';
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 36px;
+    color: $color-light-black;
+    font-family: 'Proxima Nova Regular';
+}
+
+h4 {
+    font-size: 28px;
+    color: $color-light-black;
+    font-family: 'Proxima Nova Regular';
+}
+h5 {
+    font-size: 24px;
+    color: $color-light-black;
+    font-family: 'Proxima Nova Regular';
+    
+    @media only screen and (max-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+p{
+    font-size: 17px;
+    font-family: 'Proxima Nova Thin';
+    color: $color-light-black !important;
+    font-weight: 700 !important;
+}
+.sc-ion-label-md-s p {
+    font-size: 17px!important;
+}
+
+.sc-ion-label-md-s h5{
+    font-size: 24px!important;
+}
+
+h6 {
+    font-size: 20px;
+    color: $color-light-black;
+    @media only screen and (max-width: 768px) {
+        font-size: 18px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .main h1{
+        font-size:50px;
+    }
+    .main h3{
+        font-size:30px;
+    }
+}
+@media only screen and (max-width: 450px) {
+    .main h1{
+        font-size:30px;
+    }
+    .main h3{
+        font-size:20px;
+    }
+}
+.footer-container {
+    background-color: $color-light-black;
+}
+
+.wrapper-content {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.btn {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.error-messages {
+    font-size : 0.9em;
+    color: $color-light-red;
+}

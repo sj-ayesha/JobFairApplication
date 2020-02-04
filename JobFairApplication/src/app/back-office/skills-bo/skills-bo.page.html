@@ -1,0 +1,37 @@
+<ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <div class="header-wrap">
+          <div class="title">
+            <img src='../../../assets/img//header_icons/skill.png'>
+            <h3>Skills</h3>
+          </div>
+          <div class="add-button">
+            <ion-button color='danger' (click)="openAddModal()">
+              <ion-icon ios="ios-add" md="md-add"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="wrapper-content">
+    <table class="rwd-table">
+      <tr class="header">
+        <th>Skill</th>
+        <th>Edit</th>
+      </tr>
+      <tr *ngFor="let skill of skills">
+        <td data-th='Name'>{{skill.skillName}}</td>
+        <td class="Edit" data-th="Edit" (click)="edit(skill.skillId)">
+          <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
+        </td>
+      </tr>
+    </table>
+  </div>
+</ion-content>

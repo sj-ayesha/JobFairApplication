@@ -1,0 +1,61 @@
+<ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="login-container">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="8" size-md size="12" size-sm>
+        <div class="login-content__img">
+          <img src="../../../assets/img/woman-working.png" />
+        </div>
+      </ion-col>
+      <ion-col size="4" size-md size="12" size-sm>
+        <ion-card class="login-card ion-no-margin">
+          <ion-card-header class="ion-text-center ion-no-padding">
+            <h3>Sign in</h3>
+          </ion-card-header>
+          <form [formGroup]="formLogin" (submit)="LogInEnter()">
+            <ion-card-content>
+              <div class="login-content__field">
+                <ion-item class="login-content__input">
+                  <ion-label position="floating" color="danger-shade">Username</ion-label>
+                  <ion-input formControlName="username" type="text" ></ion-input>
+                </ion-item>
+
+                <div class="error-messages">
+                  <ng-container *ngFor="let error of errorMessages.username">
+                    <div class="error-message"
+                      *ngIf="formLogin.get('username').hasError(error.type) && (formLogin.get('username').dirty || formLogin.get('username').touched)">
+                      {{ error.message }}
+                    </div>
+                  </ng-container>
+                </div>
+
+                <ion-item class="login-content__input">
+                  <ion-label position="floating">Password</ion-label>
+                  <ion-input formControlName="password" type="password" (keyup.enter)="LogInEnter()"></ion-input>
+                </ion-item>
+
+                <div class="error-messages">
+                    <ng-container *ngFor="let error of errorMessages.password">
+                      <div class="error-message"
+                        *ngIf="formLogin.get('password').hasError(error.type) && (formLogin.get('password').dirty || formLogin.get('password').touched)">
+                        {{ error.message }}
+                      </div>
+                    </ng-container>
+                  </div>
+
+                <ion-row center>
+                  <ion-col class="ion-text-center ion-padding">
+                    <ion-button type="submit" color="dark">Log In</ion-button>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-card-content>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
