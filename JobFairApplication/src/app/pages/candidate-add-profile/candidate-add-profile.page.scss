@@ -4,6 +4,7 @@
     font-size : 0.9em;
     color: $color-light-red;
 }
+
 .title{
     display: flex;
 }
@@ -43,12 +44,12 @@ ion-datetime{
 }
 
 .tablinks {
-    --background: #222428;
-    --background-hover: #E23615;
+    --background: $color-light-black;
+    --background-hover: $color-light-red;
 
     &.active {
-        --background-hover: #E23615;
-        --background:#E23615;
+        --background-hover: $color-light-red;
+        --background:$color-light-red;
     }
 }
 
@@ -59,7 +60,7 @@ ion-datetime{
 input[type='file'] {
     max-width: 125px;
     color: transparent;
-  }
+}
 
 
 .fileUploadedList {

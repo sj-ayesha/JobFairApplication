@@ -94,12 +94,13 @@ body {
   padding: 0 2em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  color: #414344;
-  background: #eee;
+  color: $color-light-black;
+  background: $color-lighter-gray;
 }
 
 .rwd-table {
   overflow: hidden;
+
   th, td {
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) { 
@@ -110,9 +111,7 @@ body {
       width: 122px;
     }
   }
-
 }
-
 
 .Edit:hover{
   cursor: pointer;

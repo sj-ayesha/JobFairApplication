@@ -1,233 +1,232 @@
 @import "../../styles/custom.scss";
 
 .job-list {
-    &-container {
-        
-        @media only screen and (min-width: 992px) {
-            margin: 0 20px;
-        }
+  &-container {
+    @media only screen and (min-width: 992px) {
+      margin: 0 20px;
     }
+  }
 }
 
 .collapsible {
-    background-color: white;
-    color: $color-light-black;
-    cursor: pointer;
-    padding: 15px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 25px;
-  }
-
-  .not-found{
-    margin: 0 auto;
-    max-width: 230px;
-    display: flex;
-    justify-content: center;
+  background-color: $color-white;
+  color: $color-light-black;
+  cursor: pointer;
+  padding: 15px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 25px;
 }
-  
-  .noJobsImg{
-    margin: 0 auto;
-    //for img NotAvailable4
-    max-width: 230px;
-    padding-top: 100px;
-    padding-bottom: 100px;
-  }
-  .active,
-  .collapsible:hover {
-    background-color: white;
-  }
-  
-  .collapsible:after {
-    content: "\002B";
-    color: $color-light-black;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-  }
-  
-  .active:after {
-    content: "\2212";
-  }
-  
-  .content {
-    padding: 0 18px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-    background-color: white;
-  
-    ul {
-      padding-left: 10px;
 
-      li {
-        line-height: 20px;
-        padding: 5px 0;
-      }
-    }
+.not-found {
+  margin: 0 auto;
+  max-width: 230px;
+  display: flex;
+  justify-content: center;
+}
 
+.noJobsImg {
+  margin: 0 auto;
+  //for img NotAvailable4
+  max-width: 230px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
 
-  
-    ul li:before {
-      padding-right: 10px;
-    }
-  }
-  
-  .btn-apply {
-    font-size: 16px;
-    margin-top: 0;
-  }
-  
-  .inputGroup {
-    display: block;
-    position: relative;
-    background-color: #222428;
-    border-radius: 5px;
-    width: 125px;
-    margin: 0 auto;
-  
-    label {
-      width: 100%;
-      display: block;
-      cursor: pointer;
-      position: relative;
-      z-index: 2;
-      transition: color 200ms ease-in;
-      overflow: hidden;
-      color: white;
-      text-transform: uppercase;
-      text-align: center;
-      padding: 16px 30px;
-  
-      &:before {
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
-        content: "";
-        background-color: #69bb7b;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%) scale3d(1, 1, 1);
-        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-        opacity: 0;
-        z-index: -1;
-      }
-    }
-  
-    input:checked ~ label {
-      color: #fff;
-  
-      &:before {
-        transform: translate(-50%, -50%) scale3d(56, 56, 1);
-        opacity: 1;
-      }
-  
-      &:after {
-        background-color: #54e0c7;
-        border-color: #54e0c7;
-      }
-    }
-  
-    input {
-      width: 32px;
-      height: 32px;
-      order: 1;
-      z-index: 2;
-      position: absolute;
-      right: 30px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      visibility: hidden;
-    }
-  }
-  
-  .btn-checkbox {
-    &__item {
-      width: 35px;
-      height: 35px;
-      margin: 9px 7px 7px 7px;
-    }
-  }
-  
-  .questions ~ .question::before{
-    content: 'Apply '
-  }
-  
-  .questions:checked ~ .question::before{
-    content: 'Less Info '
-  }
+.active,
+.collapsible:hover {
+  background-color: $color-white;
+}
 
-  .job-box {
-    border-bottom: 2px solid $color-light-red;
+.collapsible:after {
+  content: "\002B";
+  color: $color-light-black;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
 
-    &:first-child {
-      border-top: 2px solid $color-light-red;
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: $color-white;
+
+  ul {
+    padding-left: 10px;
+
+    li {
+      line-height: 20px;
+      padding: 5px 0;
     }
   }
 
-  .title-container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-
-    .list-icon {
-      font-size: 35px;
-      padding: 10px;
-    }
+  ul li:before {
+    padding-right: 10px;
   }
+}
 
-  .icon-detail {
-    display: flex;
-    padding: 15px 0;
+.btn-apply {
+  font-size: 16px;
+  margin-top: 0;
+}
 
-    .location {
-      padding-right: 15px;
-    }
+.inputGroup {
+  display: block;
+  position: relative;
+  background-color: $color-dark-gray;
+  border-radius: 5px;
+  width: 125px;
+  margin: 0 auto;
 
-    .icon {
-      padding-right: 5px;
-    }
-  }
-  .job-summary {
-    p {
-      padding: 10px 0;
-      color: black;
-    }
-  }
-
-  .btn-actions {
-    display: flex;
-    justify-content: flex-end;
-
-    .btn-back {
-      margin: 0 10px;
-    }
-  }
-
-  .job-description {
-    p {
-      margin: 20px 0;
-    }
-
-    &-box {
-      color: black;
-    }
-  }
-
-  .search-input {
+  label {
     width: 100%;
-    margin-bottom: 7px;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: color 200ms ease-in;
+    overflow: hidden;
+    color: $color-white;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 16px 30px;
+
+    &:before {
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      content: "";
+      background-color: $color-light-green;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale3d(1, 1, 1);
+      transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      z-index: -1;
+    }
   }
 
-  .filter-search {
-    display: flex;
-    margin-top: 7px;
+  input:checked ~ label {
+    color: $color-white;
+
+    &:before {
+      transform: translate(-50%, -50%) scale3d(56, 56, 1);
+      opacity: 1;
+    }
+
+    &:after {
+      background-color: $color-light-blue;
+      border-color: $color-light-blue;
+    }
   }
 
-  ion-infinite-scroll{
-    margin-top:30px;
+  input {
+    width: 32px;
+    height: 32px;
+    order: 1;
+    z-index: 2;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    visibility: hidden;
   }
+}
+
+.btn-checkbox {
+  &__item {
+    width: 35px;
+    height: 35px;
+    margin: 9px 7px 7px 7px;
+  }
+}
+
+.questions ~ .question::before {
+  content: "Apply ";
+}
+
+.questions:checked ~ .question::before {
+  content: "Less Info ";
+}
+
+.job-box {
+  border-bottom: 2px solid $color-light-red;
+
+  &:first-child {
+    border-top: 2px solid $color-light-red;
+  }
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+
+  .list-icon {
+    font-size: 35px;
+    padding: 10px;
+  }
+}
+
+.icon-detail {
+  display: flex;
+  padding: 15px 0;
+
+  .location {
+    padding-right: 15px;
+  }
+
+  .icon {
+    padding-right: 5px;
+  }
+}
+
+.job-summary {
+  p {
+    padding: 10px 0;
+    color: $color-black;
+  }
+}
+
+.btn-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  .btn-back {
+    margin: 0 10px;
+  }
+}
+
+.job-description {
+  p {
+    margin: 20px 0;
+  }
+
+  &-box {
+    color: $color-black;
+  }
+}
+
+.search-input {
+  width: 100%;
+  margin-bottom: 7px;
+}
+
+.filter-search {
+  display: flex;
+  margin-top: 7px;
+}
+
+ion-infinite-scroll {
+  margin-top: 30px;
+}

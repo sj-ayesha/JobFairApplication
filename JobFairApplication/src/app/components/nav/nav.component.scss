@@ -20,18 +20,21 @@
     }
   }
 }
+
 img {
   max-width: 178px;
   max-height: 24px;
-  &:hover,
-  &:focus {
+
+  &:hover, &:focus {
     cursor: pointer;
     outline: none;
   }
 }
+
 a {
   color: $color-light-black;
   text-decoration: none;
+
   &:hover {
     color: $color-light-red;
     cursor: pointer;
@@ -41,6 +44,7 @@ a {
 a.venue-name {
   font-weight: 100 !important;
 }
+
 .dissableRediretion:hover {
   cursor: not-allowed;
 }
@@ -169,7 +173,7 @@ a.venue-name {
 
 
 .dark-shade {
-  background-color: black;
+  background-color: $color-black;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -211,6 +215,7 @@ a.venue-name {
 
 .subnav {
   padding: 10px 0;
+  
   &:hover {
     border-bottom: 2px solid $color-light-red;
     width: 90%;

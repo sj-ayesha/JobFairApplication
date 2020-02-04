@@ -23,15 +23,17 @@
 img {
   max-width: 178px;
   max-height: 24px;
-  &:hover,
-  &:focus {
+
+  &:hover, &:focus {
     cursor: pointer;
     outline: none;
   }
 }
+
 a {
   color: $color-light-black;
   text-decoration: none;
+
   &:hover {
     color: $color-light-red;
     cursor: pointer;
@@ -41,6 +43,7 @@ a {
 a.venue-name {
   font-weight: 100 !important;
 }
+
 .dissableRediretion:hover {
   cursor: not-allowed;
 }
@@ -112,9 +115,9 @@ a.venue-name {
   }
 
   /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
-.caret-down::before {
-  transform: rotate(90deg);
-}
+  .caret-down::before {
+    transform: rotate(90deg);
+  }
 
   a {
     font-size: 18px;

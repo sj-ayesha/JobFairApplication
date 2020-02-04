@@ -50,8 +50,8 @@ ion-card.candidate-details{
 }
 
 #ck-button-rejected:hover {
-    background: #f04141;
-    color: white;
+    background: $color-lighter-red;
+    color: $color-white;
     cursor: pointer;
 }
 
@@ -80,8 +80,8 @@ ion-textarea{
 }
 
 #ck-button-rejected input:checked + span {
-    background-color: #f04141;
-    color:#fff;
+    background-color: $color-lighter-red;
+    color:$color-white;
 }
 // Pending
 #ck-button-pending {
@@ -95,8 +95,8 @@ ion-textarea{
 }
 
 #ck-button-pending:hover {
-    background: #ffce00;
-    color: white;
+    background: $color-yellow;
+    color: $color-white;
     cursor: pointer;
 }
 
@@ -104,6 +104,7 @@ ion-textarea{
     float:left;
     width:6.0em;
 }
+
 #ck-button-pending label:hover {
     cursor: pointer;
 }
@@ -121,8 +122,8 @@ ion-textarea{
 }
 
 #ck-button-pending input:checked + span {
-    background-color: #ffce00;
-    color:#fff;
+    background-color: $color-yellow;
+    color:$color-white;
 }
 // Next
 #ck-button-next {
@@ -135,8 +136,8 @@ ion-textarea{
 }
 
 #ck-button-next:hover {
-    background: #10dc60;
-    color: white;
+    background: $color-green;
+    color: $color-white;
     cursor: pointer;
 }
 
@@ -149,20 +150,20 @@ ion-textarea{
 }
 
 #ck-button-next label span {
-    text-align:center;
-    padding:5px 0px;
-    display:block;
+    text-align: center;
+    padding: 5px 0px;
+    display: block;
     font-size: 16px;
 }
 
 #ck-button-next label input {
-    position:absolute;
-    top:-20px;
+    position: absolute;
+    top: -20px;
 }
 
 #ck-button-next input:checked + span {
-    background-color: #10dc60;
-    color:#fff;
+    background-color: $color-green;
+    color: $color-white;
 }
 
 .status{
@@ -206,12 +207,12 @@ ion-button{
     justify-content: flex-end;
 
     .btn-back {
-        color: black;
+        color: $color-black;
         margin: 0 10px;
     }
 }
 .separation{
-    border-top: 1px solid #f04141;
+    border-top: 1px solid $color-lighter-red;
     width: 90%;
 }
 
@@ -262,8 +263,8 @@ ion-card-title .feedbacks{
         display: block;
     }
     .btn-download {
-        --background-hover: #E23615;
-        --background:#E23615;
+        --background-hover: $color-light-red;
+        --background:$color-light-red;
         margin: 10px 20px;
 
         @media (min-device-width: 768px) and (max-device-width: 1280px) {
@@ -273,7 +274,7 @@ ion-card-title .feedbacks{
     
         a {
             font-size: 17px;
-            color: white;
+            color: $color-white;
             text-decoration: none;
             text-transform: none;
         }
@@ -286,18 +287,11 @@ ion-card-title .feedbacks{
     margin-bottom: 0;
     padding-top: 5px;
 }
+
 img.title-img{
     padding-top: 7px;
     padding-right: 10px;
 }
-
-
-
-// .btn-checkbox__item:disabled, .btn-checkbox__ite[disabled] {
-//     color: #f04141;
-//       opacity: 1;
-//       background: #f04141;
-// }
 
 .card-content-md p{
     font-size:17px;

@@ -1,6 +1,6 @@
 @import '../../styles/custom.scss';
 
-.ion-text-center{
+.ion-text-center {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -8,34 +8,40 @@
     background-repeat: no-repeat;
 }
 
-.main{
-    color: white;
-    background-color: #FF483A;
+.main {
+    color: $color-white;
+    background-color: $color-orange-red;
 }
+
 .main h1{
-    color:white;
+    color:$color-white;
     margin-top: 0;
     padding-top: 45px;
 }
-.main h3{
+
+.main h3 {
     font-weight: 400;
-    color:white;
+    color: $color-white;
 }
-.venue{
+
+.venue {
     max-width: 458px;
     margin: 0 auto;
 }
-.venue-input{
+
+.venue-input {
     margin:0 auto;
     color: white;
     margin-top:30px;
 }
-.venue-button{
+
+.venue-button {
     margin: 30px auto;
     display: flex;
     justify-content: center;
 }
-ion-button{
+
+ion-button {
     font-size: 20px;
 }
 
@@ -43,32 +49,40 @@ ion-label, ion-select-option{
     font-size: 20px;
 }
 
-ion-list{
+ion-list {
     background: transparent;
 }
-.candidate-item:hover{
+
+.candidate-item:hover {
     cursor: pointer;
 }
+
 .category-item {
     max-width: 155px;
     margin: 0 auto;
 }
-.category-item h5{
+
+.category-item h5 {
     font-size:20px;
 }
-.category-item:hover{
+
+.category-item:hover {
     cursor: pointer;
 }
-.category-item:focus{
+
+.category-item:focus {
     outline:none;
 }
-.category-item img{
+
+.category-item img {
     width:123px;
 }
-.btn-view-more{
+
+.btn-view-more {
     margin-bottom: 25px;
 }
-.category-col{
+
+.category-col {
     width: 125px;
 }
 
@@ -83,8 +97,8 @@ ion-list{
     .main h1{
         font-size: 55px;
     }
-
 }
+
 @media only screen and (max-width: 768px) {
     .venue-input{
         margin-top:20px;
@@ -144,8 +158,7 @@ ion-list{
 
             @media only screen and (min-device-width: 1601px) {
                 width: 75%;
-            }
-            
+            }          
 
         }
 
@@ -154,23 +167,27 @@ ion-list{
 
 
 ion-card.why-elca{
-    background-color: #414344;
+    background-color: $color-light-black;
+
     h3,p,h5{
-        color:white!important;
+        color: $color-white!important;
     }
+    
     h5,p{
         text-align: left;
     }
 
 }
 
-.border-right{
-    border-right: 1px solid white;
+.border-right {
+    border-right: 1px solid $color-white;
 }
-.add-space{
+
+.add-space {
     padding-left:10px;
 }
-.wrap-motive{
+
+.wrap-motive {
     padding-bottom: 20px;
 }
 
