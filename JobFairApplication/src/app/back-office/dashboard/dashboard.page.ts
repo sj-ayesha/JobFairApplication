@@ -12,6 +12,8 @@ import { CandidatesPerMonth } from 'src/app/model/CandidatesPerMonth';
 import { JobResponseList, Job } from 'src/app/model/job';
 import { RoleDto } from 'src/app/model/roleDto';
 import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
+import { LoginLogoutService } from 'src/app/services/login-logout.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -45,6 +47,9 @@ export class DashboardPage implements OnInit {
   limitVenue = 50;
   pageVenue = 0;
   filterText: number = 0;
+
+  roleManager: boolean;
+  private MANAGERSubscription: Subscription;
 
   noJobsAvailable = false;
   public venueJobs: VenueJob[] = [];
@@ -82,7 +87,8 @@ export class DashboardPage implements OnInit {
     private apiService: ApiService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private loginLogoutService: LoginLogoutService) {
     this.formDashboard = this.formBuilder.group({
       venue: new FormControl()
     });
@@ -103,6 +109,16 @@ export class DashboardPage implements OnInit {
     } else {
       this.onTablet = false;
     }
+
+    if (localStorage.getItem('role') === 'MANAGER') {
+      this.roleManager = true;
+    }
+
+    this.MANAGERSubscription = this.loginLogoutService.EmitMANAGER.subscribe(data => this.roleManager = data);
+  }
+
+  ngOnDestroy() {
+    this.MANAGERSubscription.unsubscribe();
   }
 
 

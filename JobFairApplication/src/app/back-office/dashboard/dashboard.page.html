@@ -57,7 +57,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row *ngIf="!roleManager">
       <ion-col size="6">
         <ion-card>
           <ion-card-title class="ion-text-center">
@@ -226,7 +226,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row *ngIf="!roleManager">
       <ion-col size="6">
         <ion-card>
           <ion-card-title class="ion-text-center">
