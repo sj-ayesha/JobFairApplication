@@ -99,7 +99,6 @@ export class JobListPage implements OnInit {
 
   getJobByLevel() {
     // tslint:disable-next-line: radix
-    // this.jobNotFound = false;
     const venueId = parseInt(window.localStorage.getItem('venue_id'));
     if (this.category == null) {
       this.apiService.searchJobByLevel(parseInt(window.localStorage.getItem('venue_id')), this.filterText).subscribe(data => {

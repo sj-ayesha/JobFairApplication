@@ -126,7 +126,6 @@ export class JobsBoPage implements OnInit {
   // get all jobs based on level
   getJobByLevel() {
     // tslint:disable-next-line: radix
-    // this.jobNotFound = false;
     this.apiService.searchAllJobsByLevel(this.level).subscribe(data => {
       this.jobNotFound = false;
       if (data.message === 'NO_JOB_FOUND') {

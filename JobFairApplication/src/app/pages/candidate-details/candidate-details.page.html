@@ -8,7 +8,6 @@
       <ion-title>
         <div class="header-wrap">
           <div class="title">
-            <!-- <ion-icon class="icon-user" ios="ios-person" md="md-person"></ion-icon> -->
             <img class="title-img" *ngIf="candidate?.gender == 'Male'" src='../../../assets/img/header_icons/man.png'>   
             <img class="title-img" *ngIf="candidate?.gender == 'Female'" src='../../../assets/img/header_icons/woman.png'>              
             <h3>Candidate Profile</h3>
@@ -19,20 +18,6 @@
   </ion-header>
   <div class="wrapper-content">
     <ion-row>
-      <!-- <ion-col col-md-2 size="2" col-sm-3 size="3">
-        <ion-card class="ion-padding">
-          <ion-card-title>
-            <h5><b>Job(s) Applied:</b></h5>
-          </ion-card-title>
-          <div class="separation"></div>
-          <div class="jobs-selected" *ngFor="let jobList of jobLists; let i = index">
-            <div class="jobs-selected--title">
-              <span>{{i + 1}}. </span>
-              <p>{{ jobList.title }}</p>
-            </div>
-          </div>
-        </ion-card>
-      </ion-col> -->
       <ion-col col-md-10 size="12" col-sm-9 size="12">
         <ion-row>
           <form class="formCandidateScreening" [formGroup]="formCandidateScreening" (ngSubmit)="onSubmit()">
@@ -44,13 +29,6 @@
                   </ion-datetime>
                 </ion-item>
               </div>
-              <!-- <div class="interviewer-detail">
-                <ion-item>
-                  <ion-label position="floating" color="medium">*Venue</ion-label>
-                  <ion-input formControlName="interviewVenue" type="text" value="{{ venueName }}" [disabled]='true'>
-                  </ion-input>
-                </ion-item>
-              </div> -->
 
               <div class="interviewer-detail">
                 <ion-item>
@@ -201,8 +179,6 @@
                 <div class="feedback-container" *ngFor="let candidateScreening of candidateScreenings">
                   <div class="separation"></div>
                   <div class="feedbacks">
-                    <!-- <ion-card-subtitle class="feedbacks-subtitle">Interviewer Name</ion-card-subtitle>
-                  <ion-card-subtitle class="feedbacks-subtitle">Date</ion-card-subtitle> -->
                     <p class="feedbacks-subtitle"><b>Interviewer Name: </b> {{ candidateScreening.interviewerName }}</p>
                     <p class="feedbacks-subtitle"><b>Date:</b> {{ candidateScreening.interviewDate }}</p>
                   </div>
@@ -220,7 +196,6 @@
             <ion-card class="ion-padding">
               <form [formGroup]="formCandidateScreening" (ngSubmit)="onSubmit()">
                 <ion-item class="add-feedback">
-                  <!-- <ion-label>Comments: </ion-label> -->
                   <ion-textarea formControlName="feedback" rows="6" cols="20" placeholder="Enter your feedback here...">
                   </ion-textarea>
                 </ion-item>

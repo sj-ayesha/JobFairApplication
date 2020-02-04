@@ -123,14 +123,6 @@
               <ion-label position="floating" color="medium">Nationality</ion-label>
               <ion-input formControlName="nationality" type="text" value="Mauritian"></ion-input>
             </ion-item>
-            <!-- <div class="error-messages">
-                            <ng-container *ngFor="let error of errorMessages.nationality">
-                                <div class="error-message"
-                                    *ngIf="formCandidateDetails.get('nationality').hasError(error.type) && (formCandidateDetails.get('nationality').dirty || formCandidateDetails.get('nationality').touched)">
-                                    {{ error.message }}
-                                </div>
-                            </ng-container>
-                        </div> -->
           </ion-col>
 
           <ion-col size="6" size-md size="12" size-sm>
@@ -222,14 +214,6 @@
                 </ion-select-option>
               </ion-select>
             </ion-item>
-            <!-- <div class="error-messages">
-                            <ng-container *ngFor="let error of errorMessages.title">
-                                <div class="error-message"
-                                    *ngIf="formCandidateDetails.get('title').hasError(error.type) && (formCandidateDetails.get('title').dirty || formCandidateDetails.get('title').touched)">
-                                    {{ error.message }}
-                                </div>
-                            </ng-container>
-                        </div> -->
           </ion-col>
           <ion-col size="6" size-md size="12" size-sm>
             <ion-item>
@@ -259,12 +243,6 @@
         </ion-row>
         <ion-input formControlName="candidateId" type="text" hidden></ion-input>
 
-        <!-- <div class="add-qualification-button ion-text-right">
-                    <ion-button class='btn' color="danger">
-                        <ion-icon ios="ios-add" md="md-add"></ion-icon>Add Qualification
-                    </ion-button>
-                </div> -->
-
         <h4>Experience</h4>
 
         <ion-row id="duplicater">
@@ -274,12 +252,6 @@
               <ion-input formControlName="position" type="text"></ion-input>
             </ion-item>
             <div class="error-messages">
-              <!-- <ng-container *ngFor='let error of errorMessages.position'>
-                                <div class="error-message"
-                                    *ngIf="formExperience.get('position').hasError(error.type) && (formExperience.get('position').dirty || formExperience.get('position').touched)">
-                                    {{ error.message }}
-                                </div>
-                            </ng-container> -->
             </div>
           </ion-col>
           <ion-col col-md-6 size="12" size-sm>
@@ -329,7 +301,6 @@
             </ion-button>
           </div>
           <div class="submit-button ion-text-right">
-            <!-- <ion-button class='btn' color="dark" (click)="submitCandidate()">Submit</ion-button> -->
             <ion-button class="btn" type="submit" color="dark">Submit</ion-button>
           </div>
         </div>
@@ -459,14 +430,6 @@
               <div>
                 <ul id="fileList"></ul>
               </div>
-              <!-- <div class="error-messages">
-                <ng-container *ngFor="let error of errorMessages.cvUpload">
-                  <div class="error-message"
-                    *ngIf="formCandidateDetails.get('cvUpload').hasError(error.type) && (formCandidateDetails.get('cvUpload').dirty || formCandidateDetails.get('cvUpload').touched)">
-                    {{ error.message }}
-                  </div>
-                </ng-container>
-              </div> -->
             </ion-item>
           </ion-col>
         </ion-row>
@@ -478,7 +441,6 @@
             </ion-button>
           </div>
           <div class="submit-button ion-text-right">
-            <!-- <ion-button class='btn' color="dark" (click)="submitCandidate()">Submit</ion-button> -->
             <ion-button class="btn" (click)="submitCandidateCV()" type="submit" color="dark">Submit</ion-button>
           </div>
         </div>

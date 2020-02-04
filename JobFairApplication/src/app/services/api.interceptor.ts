@@ -19,8 +19,6 @@ export class ApiInterceptor implements HttpInterceptor {
 
         req = req.clone({ setHeaders: headers });
 
-        /* let headers: HttpHeaders = new HttpHeaders();
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('token')); */
         return next.handle(req);
     }
 

@@ -38,13 +38,7 @@ export class TokenInterceptor implements HttpInterceptor {
         }
 
         if (request.url.includes('candidate-file')) {
-            // headers = { 'Content-Type': 'application/json' };
-            // request = request.clone({
-            //     setHeaders: {
-            //         'Content-Type': '*/*'
-            //     }
-            // });
-            /* request = request.clone({ responseType: 'text' }); */
+
         }
 
         return next.handle(request).pipe(

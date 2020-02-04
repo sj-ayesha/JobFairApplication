@@ -21,7 +21,7 @@ export class CandidateVenueJob {
         currentLevel: string;
         jobType: string;
         currentAcademicYear: string;
-    }
+    };
     jobPriority: string;
     jobList: Job[];
 }

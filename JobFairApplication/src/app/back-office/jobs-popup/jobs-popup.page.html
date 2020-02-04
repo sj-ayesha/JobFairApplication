@@ -26,7 +26,6 @@
             <ion-label position="floating" color="medium">*Category</ion-label>
             <ion-select interface="popover" formControlName="category" cancelText="Cancel" okText="OK" >
               <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX">{{categoryX}}</ion-select-option>
-              <!-- <ion-select-option value="{{category}}">{{category}}</ion-select-option> -->
             </ion-select>
           </ion-item>
 
@@ -169,5 +168,4 @@
       </div>
     </form>
   </div>
-  <!-- <button (click)="makeFalse()"> YYOOOO</button> -->
 </ion-content>

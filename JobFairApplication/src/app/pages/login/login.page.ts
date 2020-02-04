@@ -47,12 +47,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.authService.isLoggedIn().subscribe(data => {
-    //   if (data) {
-    //     this.router.navigateByUrl('/dashboard');
-    //   }
-    // });
-    // this.loggedIn = this.loginLogoutService.isLoggedIn;
   }
 
   doRefresh(event) {
@@ -94,7 +88,6 @@ export class LoginPage implements OnInit {
           localStorage.setItem('role', data.result.roleDto.name);
           setTimeout(() => {
             this.loginLogoutService.loginUser();
-            // this.authService.login();
           }, 10);
           if (localStorage.getItem('role') === 'INTERVIEWER'){
             this.router.navigateByUrl('/candidate-list');

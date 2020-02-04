@@ -65,30 +65,9 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     this.changeVenueService.cast.subscribe(data => this.venue = data);
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
 
-    // this.role = localStorage.getItem('role');
-    // console.log(this.role);
-    // if ( this.role === 'INTERVIEWER') {
-    //   this.navDisplayINTERVIEWER = true;
-    //   this.navDisplayHR = false;
-    //   this.navDisplayMANAGER = false;
-    // } else if ( this.role === 'HR') {
-    //   this.navDisplayINTERVIEWER = false;
-    //   this.navDisplayHR = true;
-    //   this.navDisplayMANAGER = false;
-    // } else if ( this.role === 'MANAGER') {
-    //   this.navDisplayINTERVIEWER = false;
-    //   this.navDisplayHR = false;
-    //   this.navDisplayMANAGER = true;
-    // }
   }
 
   ionViewWillEnter() {
-    // if ( this.role === 'INTERVIEWER') {
-    //   this.navDisplayINTERVIEWER = true;
-    // }
-    // if ( this.role === 'MANAGER') {
-    //   this.navDisplayMANAGER = true;
-    // }
   }
 
   ngAfterViewInit(): void {
@@ -107,16 +86,13 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   logout() {
     localStorage.clear();
     this.loginLogoutService.logoutUser();
-    // this.authService.logout();
     this.venue = '';
   }
 
   navigateToVenue() {
     this.router.navigateByUrl('/venue');
-    // localStorage.removeItem('venue_id');
     localStorage.removeItem('priority');
     localStorage.removeItem('jobId');
-    // localStorage.removeItem('venueName');
   }
 
   navigateToHome() {
@@ -130,16 +106,4 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   navigateToDashboard() {
     this.router.navigate(['/dashboard']);
   }
-
-  // treeViewNav() {
-  //   const toggler = document.getElementsByClassName('caret');
-  //   let i;
-
-  //   for (i = 0; i < toggler.length; i++) {
-  //     toggler[i].addEventListener('click', function() {
-  //       this.parentElement.querySelector('.nested').classList.toggle('active');
-  //       this.classList.toggle('caret-down');
-  //     });
-  //   }
-  // }
 }

@@ -93,7 +93,6 @@ export class CandidateDetailsPage implements OnInit {
     this.seconds = this.today.getSeconds();
 
     this.date = (this.year + '-' + this.month + '-' + this.day + 'T' + this.hours + ':' + this.minutes + ':' + this.seconds);
-    // console.log(this.date);
   }
 
   doRefresh(event) {
@@ -134,13 +133,6 @@ export class CandidateDetailsPage implements OnInit {
         this.ScreeningDisplay = false;
       }
 
-
-      // To be used later on
-      // for(let i = 0; i < this.candidateScreenings.length; i++) {
-      //   let d = this.candidateScreenings[i].interviewDate;
-      //   d = d.split('T')[i];
-      //   console.log(d);
-      // }
     }
     );
   }

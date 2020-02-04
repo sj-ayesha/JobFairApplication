@@ -4,6 +4,4 @@ export class AssociateVenueJobs {
     jobId: number;
     job: Job;
     checked = false;
-    // candidateId: Number;
-    // message:String;
 }
