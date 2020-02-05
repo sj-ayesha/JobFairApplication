@@ -6,7 +6,7 @@
           <div class="router-links">
             <img src='../../../assets/img/recruitix_logo.png' (click)="navigateToHome()">
             <div class="router-links--right">
-              <a class="venue-name" (click)="navigateToVenue()">Venue: {{venue}} </a>
+              <a class="venue-name" (click)="navigateToVenue()">{{venue}} </a>
               <a *ngIf="!loggedIn" routerLink="/login">Login</a>
               <a *ngIf="loggedIn" (click)="logout()">Logout</a>
 
