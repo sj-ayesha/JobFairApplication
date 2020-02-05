@@ -176,7 +176,7 @@ a.venue-name {
   background-color: $color-black;
 }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
   .footer-container {
       display: none;
   }
@@ -222,4 +222,28 @@ a.venue-name {
     transition: 0.2s;
   }
 }
+
+@media only screen and (max-width: 600px){
+  ion-title{
+    padding: 0 7px;
+  }
+  .router-links{
+    align-items: center;
+
+    img{
+      max-width: 116px;
+      max-height: 15px;
+    }
+
+    &--right{
+      a{
+        font-size: 3vh;
+      }
+      .venue-name{
+        padding: 0 15px;
+        font-size: 3vh;
+      }
+    }
+  }
+} 
 

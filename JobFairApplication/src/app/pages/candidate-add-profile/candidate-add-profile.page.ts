@@ -416,6 +416,7 @@ export class CandidateAddProfilePage implements OnInit {
 
   populateSkills() {
     this.apiService.getAllSkills().subscribe(data => {
+      // tslint:disable-next-line: no-shadowed-variable
       data.forEach((element, index) => {
         const data = {
           skill: element,

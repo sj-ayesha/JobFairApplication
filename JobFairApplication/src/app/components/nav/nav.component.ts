@@ -38,7 +38,6 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     private loginLogoutService: LoginLogoutService,
     private router: Router,
     private changeVenueService: ChangeVenueService,
-    private authService: AuthService
     ) { }
 
   ngOnInit() {
@@ -56,8 +55,8 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.sessionStateSubscription = this.loginLogoutService.sessionStateEmitter.subscribe(data => this.loggedIn = data);
     this.HRSubscription = this.loginLogoutService.EmitHR.subscribe(data => this.navDisplayHR = data);
-    this.HRSubscription = this.loginLogoutService.EmitINTERVIEWER.subscribe(data => this.navDisplayINTERVIEWER = data);
-    this.HRSubscription = this.loginLogoutService.EmitMANAGER.subscribe(data => this.navDisplayMANAGER = data);
+    this.INTERVIEWERSubscription = this.loginLogoutService.EmitINTERVIEWER.subscribe(data => this.navDisplayINTERVIEWER = data);
+    this.MANAGERSubscription = this.loginLogoutService.EmitMANAGER.subscribe(data => this.navDisplayMANAGER = data);
 
     this.venueName = window.localStorage.getItem('venueName');
     this.changeVenueService.cast.subscribe(data => this.venue = data);
