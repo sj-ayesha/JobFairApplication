@@ -11,7 +11,7 @@
           <h3 class="ion-text-uppercase">Job list</h3>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="!noJobsAvailable">
+      <ion-row class="filter-row" *ngIf="!noJobsAvailable">
         <ion-col size="6" class="filter-search ion-padding">
           <ion-searchbar placeholder="Search..." type="text" #title (ionInput)="searchByTitle(title.value)">
           </ion-searchbar>
@@ -32,7 +32,7 @@
       <div *ngIf="!jobNotFound">
         <ion-row *ngIf="!noJobsAvailable">
           <ion-col size="12">
-            <p class="ion-float-right ion-margin-end">Select Job</p>
+            <p class="text ion-float-right ion-margin-end">Select Job</p>
           </ion-col>
         </ion-row>
       </div>
@@ -102,25 +102,34 @@
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
       <ion-row class="section-buttons">
-        <ion-col size="6" class="ion-padding ion-text-center">
+        <!-- <ion-col size="6" class="ion-padding ion-text-center">
           <ion-button color="dark" (click)="quickApplication()" routerLinkActive="router-link-active"
-              class="ion-float-left btn">Quick Application<ion-icon ios="ios-arrow-forward" md="md-arrow-forward">
+              class="btn">Quick Application<ion-icon ios="ios-arrow-forward" md="md-arrow-forward">
               </ion-icon>
             </ion-button>
-        </ion-col>
+        </ion-col> -->
 
-        <ion-col size="6" class="ion-padding btn-actions">
-          <div class="btn-back ion-text-left">
-            <ion-button class="btn" color="light" (click)="back()">
-              <ion-icon name="arrow-back"></ion-icon>Back
-            </ion-button>
+        <ion-col size="12" class="ion-padding btn-actions">
+          <div class="btn-quick-application">
+            <ion-button color="dark" (click)="quickApplication()" routerLinkActive="router-link-active"
+            class="btn">Quick Application<ion-icon ios="ios-arrow-forward" md="md-arrow-forward">
+            </ion-icon>
+          </ion-button>
           </div>
-          <div class="btn-fill-details" *ngIf="!noJobsAvailable">
-            <ion-button color="dark" (click)="applyOnlyFive(); setJobId()" routerLinkActive="router-link-active"
-              class="ion-float-right btn">Apply<ion-icon ios="ios-arrow-forward" md="md-arrow-forward">
-              </ion-icon>
-            </ion-button>
+          <div class="btn-actions--section">
+            <div class="btn-back ion-text-left">
+              <ion-button class="btn" color="light" (click)="back()">
+                <ion-icon name="arrow-back"></ion-icon>Back
+              </ion-button>
+            </div>
+            <div class="btn-fill-details" *ngIf="!noJobsAvailable">
+              <ion-button color="dark" (click)="applyOnlyFive(); setJobId()" routerLinkActive="router-link-active"
+                class="ion-float-right btn">Apply<ion-icon ios="ios-arrow-forward" md="md-arrow-forward">
+                </ion-icon>
+              </ion-button>
+            </div>
           </div>
+
         </ion-col>
       </ion-row>
     </ion-grid>

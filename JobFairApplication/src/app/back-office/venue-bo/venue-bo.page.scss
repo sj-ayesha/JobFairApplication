@@ -49,6 +49,11 @@ $breakpoint-alpha: 480px; // adjust to your needs
   td {
     display: block; 
     
+    @media only screen and (max-width: 600px){
+      display: flex;
+      justify-content: space-between;
+    }
+    
     &:first-child {
       padding-top: .5em;
     }
@@ -61,6 +66,10 @@ $breakpoint-alpha: 480px; // adjust to your needs
       font-weight: bold;
       width: 6.5em; 
       display: inline-block;
+
+      @media only screen and (max-width: 600px){
+        width: initial;
+      }
 
       
       @media (min-width: $breakpoint-alpha) {

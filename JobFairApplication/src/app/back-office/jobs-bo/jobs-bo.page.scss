@@ -77,6 +77,10 @@ h5{
   font-weight: bold;
   float: right;
   margin-left: 5px;
+
+  @media only screen and (max-width: 600px){
+    margin-right: 11px;
+  }
 }
   
 .active:after {
@@ -256,6 +260,10 @@ h5{
 .filter-search {
   display: flex;
   margin-top: 7px;
+
+  @media only screen and (max-width: 600px){
+    display: initial;
+  }
 }
 
 .Edit:hover{
@@ -277,4 +285,20 @@ ion-infinite-scroll{
 
 img{
   padding-right: 10px;
+}
+
+@media only screen and (max-width: 600px){
+  .Edit {
+    margin-right: 10px;
+    
+    .edit-btn {
+      margin-right: 10px;
+      padding: 13px 0 0 0;
+    }
+  }
+
+  .job-list-container {
+    display: block;
+  }
+
 }

@@ -195,7 +195,7 @@
       </ion-row>
     </form>
 
-    <ion-row>
+    <ion-row class="mobile-display">
       <!--Horizontal Bar Chart-->
       <ion-col size="6">
         <ion-card class="welcome-card">
@@ -226,7 +226,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="!roleManager">
+    <ion-row class="mobile-display" *ngIf="!roleManager">
       <ion-col size="6">
         <ion-card>
           <ion-card-title class="ion-text-center">
@@ -244,10 +244,6 @@
                   <b>Level:</b>
                   {{job.level}}
                 </p>
-              </ion-label>
-              <ion-label slot="end">
-                <p class="text"><b>Years of Experience:</b> {{job.minimumExperience}}</p>
-                <p class="text"><b>Qualification:</b> {{job.qualificationNeeded}}</p>
               </ion-label>
             </ion-item>
             <ion-row>
@@ -273,11 +269,6 @@
                   <b>Level:</b>
                   {{job.job.level}}
                 </p>
-              </ion-label>
-              <ion-label slot="end">
-                <p class="text"><b>Years of Experience:</b> {{job.job.minimumExperience}}</p>
-                <p class="text"><b>Qualification:</b> {{job.job.qualificationNeeded}}</p>
-                <p class="text"><b>Venue:</b> {{job.venue.venueName}}</p>
               </ion-label>
             </ion-item>
             <ion-row>

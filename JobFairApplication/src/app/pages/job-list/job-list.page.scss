@@ -18,6 +18,10 @@
   text-align: left;
   outline: none;
   font-size: 25px;
+  @media only screen and (max-width: 600px){
+      font-size: 4vh;
+      padding: 15px 0;
+  }
 }
 
 .not-found {
@@ -46,6 +50,10 @@
   font-weight: bold;
   float: right;
   margin-left: 5px;
+
+  @media only screen and (max-width: 600px){
+    margin-right: 20px;
+  }
 }
 
 .active:after {
@@ -144,10 +152,19 @@
 }
 
 .btn-checkbox {
+  @media only screen and (max-width: 600px){
+    margin-right: 17px;
+
+  }
   &__item {
     width: 35px;
     height: 35px;
     margin: 9px 7px 7px 7px;
+
+    @media only screen and (max-width: 600px){
+      margin: 9px -10px 7px -10px;
+      z-index: 2;
+    }
   }
 }
 
@@ -176,6 +193,12 @@
     font-size: 35px;
     padding: 10px;
   }
+
+  @media only screen and (max-width: 600px){
+    h3 {
+      font-size: 5vh;
+    }
+  }
 }
 
 .icon-detail {
@@ -200,7 +223,15 @@
 
 .btn-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 600px){
+    flex-direction: column;
+  }
+
+  &--section {
+    display: flex;
+  }
 
   .btn-back {
     margin: 0 10px;
@@ -225,8 +256,39 @@
 .filter-search {
   display: flex;
   margin-top: 7px;
+    @media only screen and (max-width: 600px){
+      display: initial;
+      margin: 0;
+    }
 }
 
 ion-infinite-scroll {
   margin-top: 30px;
+}
+
+@media only screen and (max-width: 600px){
+  .filter-row{
+    display: block;
+  }
+  .section-buttons{
+    display: block;
+  }
+
+  .btn {
+    &-quick-application {
+      text-align: right;
+    }
+
+    &-actions--section {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+}
+
+.text {
+  @media only screen and (max-width: 600px){
+    margin: 0;
+  }
 }
