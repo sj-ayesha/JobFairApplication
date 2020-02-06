@@ -252,13 +252,7 @@
       </div>
     </div>
 
-    <ion-card>
-      <ion-card-content *ngIf="noCandidatesAvailable">
-        <img class="not-available" src="../../../assets/img/Not Available/candidate-not-found.png">
-      </ion-card-content>
-    </ion-card>
-
-    <ion-row *ngIf="candidateNotFound">
+    <ion-row *ngIf="candidateNotFound || noCandidatesAvailable">
       <ion-col size="12" class="ion-padding">
         <img class="not-found" src="../../../assets/img/Not Available/candidate-not-found.png">
       </ion-col>

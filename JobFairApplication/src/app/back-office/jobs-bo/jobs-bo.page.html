@@ -109,10 +109,7 @@
           </ion-row>
         </div>
       </div>
-      <ion-card *ngIf="noJobsAvailable">
-        <img class="noJobsImg" src="../../../assets/img/Not Available/job-not-found.png">
-      </ion-card>
-      <ion-row *ngIf="jobNotFound">
+      <ion-row *ngIf="jobNotFound || noJobsAvailable">
         <ion-col size="12" class="ion-padding">
           <img class="not-found" src="../../../assets/img/Not Available/job-not-found.png">
         </ion-col>
