@@ -142,7 +142,7 @@ export class JobsBoPage implements OnInit {
   // filter jobs based on category
   filterCategory(event) {
     this.category = event.target.value;
-    if (this.level === 'all') {
+    if (this.category === 'all') {
       this.jobs = [];
       this.getAllJobs();
     } else {
