@@ -114,6 +114,7 @@ export class JobsBoPage implements OnInit {
 
   // filter jobs based on level
   filterLevel(event) {
+    this.jobNotFound = false;
     this.level = event.target.value;
     if (this.level === 'all') {
       this.jobs = [];
@@ -141,6 +142,7 @@ export class JobsBoPage implements OnInit {
 
   // filter jobs based on category
   filterCategory(event) {
+    this.jobNotFound = false;
     this.category = event.target.value;
     if (this.category === 'all') {
       this.jobs = [];
@@ -154,7 +156,7 @@ export class JobsBoPage implements OnInit {
   getAllJobsByCategory() {
     this.apiService.getJobsByCategory(this.category).subscribe(data => {
       this.jobNotFound = false;
-      if (data.message === 'NO_JOB_FOUND') {
+      if (data.message === 'JOB_NOT_FOUND') {
         this.jobNotFound = true;
       } else {
         this.jobs = data;
