@@ -173,7 +173,7 @@ export class DashboardPage implements OnInit {
   createPieChart() {
     const phone = window.matchMedia('(max-width: 600px)');
     if (phone.matches) {
-      this.pieChart.nativeElement.height = 700;
+      this.pieChart.nativeElement.height = 750;
     }
 
     this.pie = new Chart(this.pieChart.nativeElement, {
