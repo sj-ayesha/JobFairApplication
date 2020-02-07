@@ -49,7 +49,7 @@
           <ion-col col-md-12 size="12">
             <div *ngIf="!showCV">
               <ion-card class="candidate-details" class="ion-padding">
-                <ion-row>
+                <ion-row class="candidate-info">
                   <ion-col col-md-4 size="4">
                     <div class="information">
                       <h5><b>Information</b></h5>
@@ -92,7 +92,7 @@
                 </ion-col>
               </ion-row>
 
-              <ion-row>
+              <ion-row class="candidate-info">
                 <ion-col col-md-4 size="4">
                   <div class="experience">
                     <h5><b>Experience(s)</b></h5>
@@ -121,7 +121,7 @@
 
             <div *ngIf="showCV">
               <ion-card class="candidate-cv-details" class="ion-padding">
-                <ion-row>
+                <ion-row class="candidate-info">
                   <ion-col col-md-4 size="4">
                     <div class="information">
                       <h5><b>Information</b></h5>

@@ -6,10 +6,18 @@
 }
 
 .title{
+    h3{
+        @media only screen and (max-width: 600px){
+            font-size: 5vh;
+        }
+    }
     display: flex;
 }
 
 .icon-add, .icon-upload{
+    @media only screen and (max-width: 600px){
+        padding-top: 2.5vh;
+    }
     font-size: 35px;
     padding-top: 19px;
     padding-right: 10px;
@@ -69,4 +77,17 @@ input[type='file'] {
 
 .ion-text-center h3{
     margin-top:0;
+}
+@media only screen and (max-width: 600px){
+    .btn-get-started{
+        display: block;
+        text-align: center;
+    }
+    .candidate-details-container{
+        h4{
+            @media only screen and (max-width: 600px){
+                font-size: 4vh;
+            }
+        }
+    }
 }

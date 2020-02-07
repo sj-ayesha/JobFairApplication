@@ -66,3 +66,41 @@ img.title-img {
     width: 100%;
     margin-bottom: 7px;
 }
+
+
+@media only screen and (max-width: 600px){
+    .filter-section {
+        display: block;
+    }
+
+    .card-content {
+        h5 {
+            font-size: 5vh;
+        }
+
+        p {
+            font-size: 3vh !important;
+        }
+    }
+
+    .title {
+        h3 {
+            font-size: 33px;
+        }
+    }
+
+    img.title-img{
+        max-width: 45px;
+        padding-top: 3px;
+    }
+
+    .mobile {
+        &--hidden {
+            display: none !important;
+        }
+    }
+
+    .btn-order {
+        padding: 0;
+    }
+  }

@@ -60,10 +60,13 @@ ion-list {
 .category-item {
     max-width: 155px;
     margin: 0 auto;
-}
 
-.category-item h5 {
-    font-size:20px;
+    
+    @media only screen and (max-width: 600px){
+        padding: 20px 10px;
+    }
+
+    
 }
 
 .category-item:hover {
@@ -96,6 +99,13 @@ ion-list {
     //Only For android
     .main h1{
         font-size: 55px;
+    }
+}
+.category-item h5 {
+    font-size:20px;
+
+    @media only screen and (max-width: 600px){
+        font-size: 2vh;
     }
 }
 
@@ -153,7 +163,7 @@ ion-list {
 
         img {
             @media only screen and (min-device-width: 1400px)and (max-device-width: 1600px) {
-                width: 95%;
+                width: 90%;
             }
 
             @media only screen and (min-device-width: 1601px) {
@@ -193,4 +203,27 @@ ion-card.why-elca{
 
 .we_make_it_work{
     width: 67%;
+}
+
+@media only screen and (max-width: 600px){
+    .main h1 {
+        font-size: 7vh;
+    }
+    .lists {
+        h3 {
+            font-size: 4vh;
+        }
+    }
+
+    ion-card {
+        h3 {
+            font-size: 4vh;
+        }
+
+        h5, p {
+            font-size: 2vh;
+            font-family: "Proxima Nova Regular";
+            font-weight: 500 !important;
+        }
+    }
 }

@@ -336,7 +336,7 @@ export class CandidateAddProfilePage implements OnInit {
 
       if (file.type.match('image.*|application.*')) {
         const size = this.fileData.item(i).size;
-        if (size > 5266467) {
+        if (size > 20971520) {
           alert('size must not exceeds 5 MB');
         } else {
           output.innerHTML += '<li style="list-style: none;"><ion-icon ios="ios-document" md="md-document"></ion-icon>'
@@ -416,6 +416,7 @@ export class CandidateAddProfilePage implements OnInit {
 
   populateSkills() {
     this.apiService.getAllSkills().subscribe(data => {
+      // tslint:disable-next-line: no-shadowed-variable
       data.forEach((element, index) => {
         const data = {
           skill: element,

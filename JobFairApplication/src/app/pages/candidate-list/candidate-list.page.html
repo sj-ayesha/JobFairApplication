@@ -41,7 +41,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row class="filter-section">
         <ion-col size="4" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Filter Candidates by venue..</ion-label>
@@ -95,7 +95,7 @@
                 {{candidateVenueJob.candidate.availabilityDate}}
               </p>
             </ion-label>
-            <ion-label slot="end">
+            <ion-label slot="end" class="mobile--hidden">
               <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
               <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
               <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
@@ -252,13 +252,7 @@
       </div>
     </div>
 
-    <ion-card>
-      <ion-card-content *ngIf="noCandidatesAvailable">
-        <img class="not-available" src="../../../assets/img/Not Available/no-entry.png">
-      </ion-card-content>
-    </ion-card>
-
-    <ion-row *ngIf="candidateNotFound">
+    <ion-row *ngIf="candidateNotFound || noCandidatesAvailable">
       <ion-col size="12" class="ion-padding">
         <img class="not-found" src="../../../assets/img/Not Available/candidate-not-found.png">
       </ion-col>

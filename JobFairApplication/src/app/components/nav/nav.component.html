@@ -6,7 +6,7 @@
           <div class="router-links">
             <img src='../../../assets/img/recruitix_logo.png' (click)="navigateToHome()">
             <div class="router-links--right">
-              <a class="venue-name" (click)="navigateToVenue()">Venue: {{venue}} </a>
+              <a class="venue-name" (click)="navigateToVenue()">Venue: {{venue}}</a>
               <a *ngIf="!loggedIn" routerLink="/login">Login</a>
               <a *ngIf="loggedIn" (click)="logout()">Logout</a>
 
@@ -52,10 +52,10 @@
               <li>
                 <a routerLink="/venue-bo">Venue</a>
               </li>
-              <li class="subnav"><span class="arrow">Job List</span>
+              <li class="subnav"><span class="arrow">Jobs</span>
                 <ul class="nested">
                   <li>
-                    <a routerLink="jobs-bo">Job</a>
+                    <a routerLink="jobs-bo">Job List</a>
                   </li>
                   <li>
                     <a routerLink="venue-job">Venue Job</a>
@@ -66,7 +66,7 @@
                 <a routerLink="skills-bo">Skills</a>
               </li>
               <li>
-                <a routerLink="/candidate-list">Candidate</a>
+                <a routerLink="/candidate-list">Candidates</a>
               </li>
             </div>
             <div *ngIf="navDisplayMANAGER" class="MANAGER">
@@ -76,7 +76,7 @@
             </div>
             <div *ngIf="navDisplayINTERVIEWER" class="INTERVIEWER">
               <li>
-                <a routerLink="/candidate-list">Candidate</a>
+                <a routerLink="/candidate-list">Candidates</a>
               </li>
             </div>
           </ul>

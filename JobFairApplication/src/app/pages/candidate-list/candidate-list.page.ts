@@ -155,7 +155,7 @@ export class CandidateListPage implements OnInit {
   // FOR CANDIDATES BASED ON VENUE
   filterByVenue(event) {
     this.filterText = event.target.value;
-    if (this.filterText === 0) {
+    if (this.filterText == 0) {
       this.resetAll = true;
       this.resetASC = false;
       this.resetDESC = false;

@@ -23,7 +23,7 @@
   <div class="wrapper-content">
 
     <ion-grid>
-      <ion-row>
+      <ion-row class="job-list-container">
         <ion-col size="6" class="filter-search ion-padding">
           <ion-searchbar placeholder="Search..." type="text" #title
             (ionInput)="searchByTitle(title.value)"></ion-searchbar>
@@ -109,10 +109,7 @@
           </ion-row>
         </div>
       </div>
-      <ion-card *ngIf="noJobsAvailable">
-        <img class="noJobsImg" src="../../../assets/img/Not Available/no-entry.png">
-      </ion-card>
-      <ion-row *ngIf="jobNotFound">
+      <ion-row *ngIf="jobNotFound || noJobsAvailable">
         <ion-col size="12" class="ion-padding">
           <img class="not-found" src="../../../assets/img/Not Available/job-not-found.png">
         </ion-col>

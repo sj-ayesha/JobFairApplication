@@ -171,6 +171,11 @@ export class DashboardPage implements OnInit {
 
   // Pie Chart
   createPieChart() {
+    const phone = window.matchMedia('(max-width: 600px)');
+    if (phone.matches) {
+      this.pieChart.nativeElement.height = 750;
+    }
+
     this.pie = new Chart(this.pieChart.nativeElement, {
       type: 'pie',
       data: {
@@ -230,6 +235,10 @@ export class DashboardPage implements OnInit {
 
   // Vertical Bar Chart
   createVerticalBarChart() {
+    const phone = window.matchMedia('(max-width: 600px)');
+    if (phone.matches) {
+      this.verticalBarChart.nativeElement.height = 700;
+    }
     this.verticalBars = new Chart(this.verticalBarChart.nativeElement, {
       type: 'bar',
       data: {
