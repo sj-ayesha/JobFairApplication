@@ -50,6 +50,10 @@ h5{
   text-align: left;
   outline: none;
   font-size: 25px;
+
+  @media only screen and (max-width: 600px){
+    font-size: 3vh;
+  }
 }
 
 .not-found{

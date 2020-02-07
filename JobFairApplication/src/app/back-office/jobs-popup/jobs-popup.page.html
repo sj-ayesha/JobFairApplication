@@ -1,7 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngIf="!edit">Add Job</ion-title>
-    <ion-title *ngIf="edit">Edit Job</ion-title>
+    <div class="toolbar-content">
+      <div class="header-title">
+        <ion-title class="ion-text-left" *ngIf="!edit">Add Job</ion-title>
+        <ion-title class="ion-text-left" *ngIf="edit">Edit Job</ion-title>
+      </div>
+      <div class="modal-close">
+        <button (click)="closeModal()" class="modal__close-btn ion-float-right">X</button>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -24,8 +31,9 @@
 
           <ion-item *ngIf="edit">
             <ion-label position="floating" color="medium">*Category</ion-label>
-            <ion-select interface="popover" formControlName="category" cancelText="Cancel" okText="OK" >
-              <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX">{{categoryX}}</ion-select-option>
+            <ion-select interface="popover" formControlName="category" cancelText="Cancel" okText="OK">
+              <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX">{{categoryX}}
+              </ion-select-option>
             </ion-select>
           </ion-item>
 
@@ -71,7 +79,8 @@
 
           <ion-item *ngIf="edit">
             <ion-label position="floating" color="medium">*Job Description</ion-label>
-            <ion-textarea rows="15" cols="20" formControlName="description" type="text" value="{{description}}"></ion-textarea>
+            <ion-textarea rows="15" cols="20" formControlName="description" type="text" value="{{description}}">
+            </ion-textarea>
           </ion-item>
           <div class="error-messages">
             <ng-container *ngFor="let error of errorMessages.description">
@@ -134,7 +143,8 @@
         <ion-col col-md-6 size="12" size-sm>
           <ion-item *ngIf="!edit">
             <ion-label position="floating" color="medium">*Level</ion-label>
-            <ion-select formControlName="level" interface="popover" cancelText="Cancel" okText="OK"placeholder="Select Level">
+            <ion-select formControlName="level" interface="popover" cancelText="Cancel" okText="OK"
+              placeholder="Select Level">
               <ion-select-option value="Fresher">Fresher</ion-select-option>
               <ion-select-option value="Junior">Junior</ion-select-option>
               <ion-select-option value="Senior">Senior</ion-select-option>
@@ -143,7 +153,8 @@
 
           <ion-item *ngIf="edit">
             <ion-label position="floating" color="medium">*Level</ion-label>
-            <ion-select formControlName="level" interface="popover" cancelText="Cancel" okText="OK"placeholder="Select Level">
+            <ion-select formControlName="level" interface="popover" cancelText="Cancel" okText="OK"
+              placeholder="Select Level">
               <ion-select-option value="Fresher">Fresher</ion-select-option>
               <ion-select-option value="Junior">Junior</ion-select-option>
               <ion-select-option value="Senior">Senior</ion-select-option>
@@ -160,7 +171,7 @@
           </div>
         </ion-col>
       </ion-row>
-  
+
       <div class="option-button ion-text-right">
         <ion-button class="btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
         <ion-button class='btn' *ngIf="!edit" color="dark" (click)="onSubmit()">Add</ion-button>
