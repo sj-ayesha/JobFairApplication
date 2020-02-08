@@ -179,9 +179,15 @@
 .job-box {
   border-bottom: 2px solid $color-light-red;
 
-  &:first-child {
-    border-top: 2px solid $color-light-red;
-  }
+  // &:first-child {
+  //   border-top: 2px solid $color-light-red;
+  // }
+  // &:last-child {
+  //   border-bottom: 1px solid $color-light-red;
+  // }
+}
+.top-accordeon:first-child{
+  border-top:2px solid$color-light-red;
 }
 
 .title-container {

@@ -93,16 +93,26 @@ export class VenueBoPage implements OnInit {
   edit(Id) {
     this.openEditModal();
     this.editVenues = [];
-    for (let i = 0; i < this.venues.length; i++) {
-      if ( this.venues[i].venueId === Id) {
-          this.editVenues.push(this.venues[i].venueId);
-          this.editVenues.push(this.venues[i].venueName);
-          this.editVenues.push(this.venues[i].address);
-          this.editVenues.push(this.venues[i].startDate);
-          this.editVenues.push(this.venues[i].endDate);
-          this.editVenues.push(this.venues[i].active);
-      }
+    this.venues.forEach((element, index) => {
+      if ( this.venues[index].venueId === Id) {
+        this.editVenues.push(this.venues[index].venueId);
+        this.editVenues.push(this.venues[index].venueName);
+        this.editVenues.push(this.venues[index].address);
+        this.editVenues.push(this.venues[index].startDate);
+        this.editVenues.push(this.venues[index].endDate);
+        this.editVenues.push(this.venues[index].active);
     }
+    });
+    // for (let i = 0; i < this.venues.length; i++) {
+    //   if ( this.venues[i].venueId === Id) {
+    //       this.editVenues.push(this.venues[i].venueId);
+    //       this.editVenues.push(this.venues[i].venueName);
+    //       this.editVenues.push(this.venues[i].address);
+    //       this.editVenues.push(this.venues[i].startDate);
+    //       this.editVenues.push(this.venues[i].endDate);
+    //       this.editVenues.push(this.venues[i].active);
+    //   }
+    // }
     const LSeditVenues = JSON.stringify(this.editVenues);
     localStorage.setItem('editVenues', LSeditVenues);
   }

@@ -236,17 +236,28 @@ export class JobsBoPage implements OnInit {
   edit(Id) {
     this.openEditModal();
     this.editJobs = [];
-    for (let i = 0; i < this.jobs.length; i++) {
-      if (this.jobs[i].jobId === Id) {
-        this.editJobs.push(this.jobs[i].jobId);
-        this.editJobs.push(this.jobs[i].title);
-        this.editJobs.push(this.jobs[i].level);
-        this.editJobs.push(this.jobs[i].category);
-        this.editJobs.push(this.jobs[i].description);
-        this.editJobs.push(this.jobs[i].minimumExperience);
-        this.editJobs.push(this.jobs[i].qualificationNeeded);
+    this.jobs.forEach((element, index) => {
+      if (this.jobs[index].jobId === Id) {
+        this.editJobs.push(this.jobs[index].jobId);
+        this.editJobs.push(this.jobs[index].title);
+        this.editJobs.push(this.jobs[index].level);
+        this.editJobs.push(this.jobs[index].category);
+        this.editJobs.push(this.jobs[index].description);
+        this.editJobs.push(this.jobs[index].minimumExperience);
+        this.editJobs.push(this.jobs[index].qualificationNeeded);
       }
-    }
+    });
+    // for (let i = 0; i < this.jobs.length; i++) {
+    //   if (this.jobs[i].jobId === Id) {
+    //     this.editJobs.push(this.jobs[i].jobId);
+    //     this.editJobs.push(this.jobs[i].title);
+    //     this.editJobs.push(this.jobs[i].level);
+    //     this.editJobs.push(this.jobs[i].category);
+    //     this.editJobs.push(this.jobs[i].description);
+    //     this.editJobs.push(this.jobs[i].minimumExperience);
+    //     this.editJobs.push(this.jobs[i].qualificationNeeded);
+    //   }
+    // }
     const LSeditJobs = JSON.stringify(this.editJobs);
     localStorage.setItem('editJobs', LSeditJobs);
   }

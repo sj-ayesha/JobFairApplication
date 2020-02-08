@@ -107,11 +107,16 @@ export class CandidateDetailsPage implements OnInit {
     this.apiService.getCandidateById(candidateId).subscribe(data => {
       this.candidate = data;
 
-      for (let i = 0; i < this.candidate.candidateScreeningDtos.length; i++) {
-        if (this.candidate.candidateScreeningDtos[i].screeningStatus === 'proceed-to-next-interview') {
-          this.candidate.candidateScreeningDtos[i].screeningStatus = 'Proceed to next interview';
+      this.candidate.candidateScreeningDtos.forEach((element, index) => {
+        if (this.candidate.candidateScreeningDtos[index].screeningStatus === 'proceed-to-next-interview') {
+          this.candidate.candidateScreeningDtos[index].screeningStatus = 'Proceed to next interview';
         }
-      }
+      });
+      // for (let i = 0; i < this.candidate.candidateScreeningDtos.length; i++) {
+      //   if (this.candidate.candidateScreeningDtos[i].screeningStatus === 'proceed-to-next-interview') {
+      //     this.candidate.candidateScreeningDtos[i].screeningStatus = 'Proceed to next interview';
+      //   }
+      // }
 
       if (this.candidate.cvUpload === false) {
         this.showCV = false;
@@ -211,7 +216,7 @@ export class CandidateDetailsPage implements OnInit {
       a.remove();
 
     },
-      (err) => console.log('err', err))
+      (err) => console.log('err', err));
   }
 
   private blobToFile(theBlob: Blob, fileName: string): File {

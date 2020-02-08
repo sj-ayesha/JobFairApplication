@@ -1,7 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngIf="!edit">Add Venue</ion-title>
-    <ion-title *ngIf="edit">Edit Venue</ion-title>
+    <div class="toolbar-content">
+      <div class="header-title">
+        <ion-title class="ion-text-left" *ngIf="!edit">Add Venue</ion-title>
+        <ion-title class="ion-text-left" *ngIf="edit">Edit Venue</ion-title>
+      </div>
+      <div class="modal-close">
+        <button (click)="closeModal()" class="modal__close-btn ion-float-right">X</button>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 

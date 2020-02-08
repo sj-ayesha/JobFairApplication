@@ -8,8 +8,6 @@ import { element } from 'protractor';
 import { ToastController } from '@ionic/angular';
 import { Skills } from 'src/app/model/skills';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
-import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
-import { Candidate } from 'src/app/model/candidate';
 
 @Component({
   selector: 'app-candidate-add-profile',
@@ -445,6 +443,8 @@ export class CandidateAddProfilePage implements OnInit {
     } else {
       this.submitCandidate();
       this.successMsg();
+      localStorage.removeItem('jobId');
+      localStorage.removeItem('priority');
 
       setTimeout(() => {
         this.formCandidateDetails.reset();
