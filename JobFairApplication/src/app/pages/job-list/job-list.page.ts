@@ -63,8 +63,7 @@ export class JobListPage implements OnInit {
   }
 
   ngOnInit() {
-    window.localStorage.setItem('priority', '[]');
-    window.localStorage.setItem('jobId', '');
+
   }
 
   doRefresh(event) {
@@ -85,6 +84,8 @@ export class JobListPage implements OnInit {
 
   ionViewWillEnter() {
     this.uncheckAll();
+    window.localStorage.setItem('priority', '[]');
+    window.localStorage.setItem('jobId', '');
   }
 
   filter(event) {
@@ -146,9 +147,20 @@ export class JobListPage implements OnInit {
     toast.present();
   }
 
-  async unsuccessMsgEmpty() {
+  async unsuccessMsgEmptyQuickA() {
     const toast = await this.toastCtrl.create({
       message: 'Please select at least one job or click on "Quick Application"',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  async unsuccessMsgEmptyNoQuickA() {
+    const toast = await this.toastCtrl.create({
+      message: 'Please select at least one job"',
       position: 'top',
       color: 'danger',
       duration: 2000,
@@ -197,10 +209,6 @@ export class JobListPage implements OnInit {
         } else {
           this.noJobsAvailable = false;
         }
-
-        // if (this.venueJobs.find(title => title.job.title === 'Spontaneous')) {
-        //   console.log('hahahhaha');
-        // }
 
         this.venueJobs.forEach((element, index) => {
           if (this.venueJobs[index].job.title === 'Spontaneous Application') {
@@ -284,7 +292,12 @@ export class JobListPage implements OnInit {
     if (count > 5) {
       this.unsuccessMsg();
     } else if (count <= 0) {
-      this.unsuccessMsgEmpty();
+      if ( this.spontaneousId != null){
+        this.unsuccessMsgEmptyQuickA();
+      }
+      else {
+        this.unsuccessMsgEmptyNoQuickA();
+      }
     } else {
       this.router.navigate(['candidate-add-profile']);
     }
@@ -292,8 +305,11 @@ export class JobListPage implements OnInit {
 
   back() {
     this.router.navigate(['/home']);
-    window.localStorage.removeItem('priority');
-    window.localStorage.removeItem('jobId');
+    // window.localStorage.setItem('priority', '[]');
+    // this.priority = JSON.parse(localStorage.getItem('priority'));
+    // this.priority.forEach((element, index) => {
+    //   this.priority.splice(index);
+    // });
   }
 
   searchByTitle(title: string) {
