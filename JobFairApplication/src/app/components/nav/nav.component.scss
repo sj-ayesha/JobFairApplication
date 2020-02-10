@@ -87,7 +87,7 @@ a.venue-name {
       font-size: 18px;
       color: $color-light-black;
       margin: 0px 0 40px 0;
-      padding: 10px 0;
+      // padding: 10px 0;
       cursor: pointer;
     }
   }
@@ -150,6 +150,7 @@ a.venue-name {
     font-size: 18px;
     display: block;
     width: 100%;
+    padding: 10px 0;
   }
 
   .subnav.active {
