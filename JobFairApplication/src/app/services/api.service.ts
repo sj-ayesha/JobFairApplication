@@ -29,7 +29,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   // baseUrl = 'https://3d4a5055.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
-  baseUrl = 'http://192.168.52.110:8081/'; // elca ip
+  baseUrl = 'http://192.168.52.208:8081/'; // elca ip
   // baseUrl = 'http://localhost:8081/';
   // baseUrl = 'http://192.168.100.9:8081/'; // home ip
 

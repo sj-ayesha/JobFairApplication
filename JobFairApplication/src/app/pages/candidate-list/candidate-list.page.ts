@@ -463,11 +463,13 @@ export class CandidateListPage implements OnInit {
       this.resetLevel = false;
       this.populateAllCandidates();
     } else {
+      this.totalCandidates = 0;
       this.apiService.getCandidateByLastName(lastName).subscribe(data => {
         if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
           this.candidateNotFound = true;
         } else {
           this.candidateVenueJobsLists = data;
+          this.totalCandidates = this.candidateVenueJobsLists.length;
           return this.candidateVenueJobsLists;
         }
       });

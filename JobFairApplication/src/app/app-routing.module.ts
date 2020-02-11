@@ -6,6 +6,7 @@ import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'venue', pathMatch: 'full' },
+  // {path: '**', redirectTo: 'not-authorized', canActivate: [AuthFrontOfficeGuard]},
   {
     path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
     canActivate: [AuthFrontOfficeGuard]
