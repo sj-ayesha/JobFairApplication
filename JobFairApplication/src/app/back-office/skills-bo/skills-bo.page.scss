@@ -38,13 +38,13 @@ $breakpoint-alpha: 480px; // adjust to your needs
   td {
     font-size: 17px;
     text-align: center!important;
-    border-bottom: 1px solid $color-light-red;
+    border-bottom: 2px solid $color-light-red;
   }
   
   th {
     display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
     text-align: center!important;
-    border-bottom: 2px solid $color-light-black;
+    border-bottom: 3px solid $color-light-black;
   }
 
   .header tr:hover{
@@ -156,4 +156,15 @@ img{
 
 .wrapper-content{
   padding: 20px;
+}
+
+ion-title {
+  &.title-ios {
+    .title{
+      img,h3{
+        padding-top:10px;
+      }
+    }
+  }
+
 }

@@ -35,7 +35,7 @@ $breakpoint-alpha: 480px; // adjust to your needs
   td {
       font-size: 17px;
       text-align: center!important;
-      border-bottom: 1px solid $color-light-red;
+      border-bottom: 2px solid $color-light-red;
   }
   
 
@@ -43,7 +43,7 @@ $breakpoint-alpha: 480px; // adjust to your needs
   th {
     display: none;    
     text-align: center!important;
-    border-bottom: 2px solid $color-light-black;
+    border-bottom: 3px solid $color-light-black;
   }
   
   td {
@@ -154,4 +154,14 @@ img{
 
 .wrapper-content{
   padding: 20px;
+}
+
+ion-title {
+  &.title-ios {
+    .title{
+      img,h3{
+        padding-top:10px;
+      }
+    }
+  }
 }
