@@ -1,0 +1,41 @@
+@import '../../styles/custom.scss';
+.title {
+    display: -webkit-box;
+    padding: 0 10px;
+}
+  
+img.title-img {
+    padding-top: 4px;
+    padding-right: 10px;
+    max-width: 49px;
+}
+
+.title h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5px;
+}
+
+.image-box {
+    padding: 25px 0;
+}
+
+.btn-download {
+    --background-hover: #E23615;
+    --background:#E23615;
+    margin: 10px 20px;
+
+    @media (min-device-width: 768px) and (max-device-width: 1280px) {
+        margin: 10px 0;
+    }
+
+
+    a {
+        font-size: 17px;
+        color: $color-white;
+        text-decoration: none;
+        text-transform: none;
+        padding: 0 15px;
+    }
+
+}

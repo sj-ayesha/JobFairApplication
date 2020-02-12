@@ -19,6 +19,7 @@ import { ApiResponse } from '../model/ApiResponse';
 import { Dashboard } from '../model/dashboard';
 import { RoleDto } from '../model/roleDto';
 import { DownloadDto } from '../model/DownloadDto';
+import { ExcelDto } from '../model/ExcelDto';
 
 
 @Injectable({
@@ -275,5 +276,11 @@ export class ApiService {
   getRoleDetails(roleName: string): Observable<RoleDto | any> {
     return this.http.get<RoleDto | any>(this.baseUrl + 'role/' + roleName);
   }
+
+  // Excel
+  getCandidateDetailsExcel(): Observable<DownloadDto | any> {
+    return this.http.get<DownloadDto | any>(this.baseUrl + 'excel/export');
+  }
+
 }
 

@@ -1,0 +1,61 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="title">
+          <div class="img-box">
+            <img class="title-img" src='../../../assets/img//header_icons/upload.png'>
+          </div>
+          <h3>Export Files</h3>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="wrapper-content">
+    <ion-row class="filter-row">
+      <ion-col size="6" class="ion-padding">
+        <ion-item class="venue-input">
+          <ion-label position="floating" color="medium">Filter Candidates by venue..</ion-label>
+          <ion-select interface="popover" class="ion-float-left">
+            <ion-select-option value='0' selected="selected">All</ion-select-option>
+            <!-- <ion-select-option *ngFor="let venue of venues" value={{venue.venueId}}>{{venue.venueName}} | {{venue.startDate}}
+                </ion-select-option> -->
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" class="ion-padding">
+        <ion-item class="venue-input">
+          <ion-label position="floating" color="medium">Filter Candidates by Job Category..</ion-label>
+          <ion-select interface="popover" class="ion-float-left">
+            <ion-select-option value='0' selected="selected">All</ion-select-option>
+            <!-- <ion-select-option *ngFor="let venue of venues" value={{venue.venueId}}>{{venue.venueName}} | {{venue.startDate}}
+                </ion-select-option> -->
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-text-center">
+      <ion-col size="12">
+        <div class="image-box">
+          <img src="../../../assets/img/header_icons/excel-l.png">
+        </div>
+        <div class="file-download" >
+          <ion-button class="btn-download ion-text-wrap ion-text-left" (click)="downloadExcel()"><ion-icon ios="ios-download" md="md-download"></ion-icon>
+            <a>Download</a>
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+
+    </ion-row>
+
+  </div>
+
+</ion-content>
