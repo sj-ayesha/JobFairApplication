@@ -90,15 +90,20 @@ ion-buttons{
     }
 }
 
-
+ion-title.title-ios{
+    .add-button{
+        margin-right: 0;
+    }
+}
 
 
  .add-button {
+     margin-right: 10px;
     ion-button.ios {
         --border-radius: 4px !important;
         --transition: box-shadow 280ms cubic-bezier(0.4,0,0.2,1),background-color 15ms linear,color 15ms linear !important;
         --box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12) !important;
-        margin-top: 0.2vh !important;
+        // margin-top: 0.2vh !important;
         height: 5.5vh !important;
     }
  }
