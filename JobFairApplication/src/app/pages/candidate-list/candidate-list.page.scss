@@ -105,8 +105,18 @@ img.title-img {
     }
   }
 
-  .date-box {
-    display: flex;
-    align-items: center;
-    height: 25px;
+  .date {
+
+    &-box {
+        display: flex;
+        align-items: center;
+        height: 25px;
+    }
+
+    &-available {
+        ion-datetime {
+            padding: 10px 5px;
+        }
+    }
+
   }
