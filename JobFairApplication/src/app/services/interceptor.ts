@@ -1,5 +1,5 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { error } from 'protractor';
@@ -54,7 +54,8 @@ export class TokenInterceptor implements HttpInterceptor {
                         }, 2000);
                     }
                 }
-                return Observable.throw(err);
+                // return Observable.throw(err);
+                return throwError(err);
             }));
         // return next.handle(request);
     }
