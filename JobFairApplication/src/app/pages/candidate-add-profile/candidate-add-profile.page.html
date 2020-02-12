@@ -301,7 +301,7 @@
             </ion-button>
           </div>
           <div class="submit-button ion-text-right">
-            <ion-button class="btn" type="submit" color="dark">Submit</ion-button>
+            <ion-button [disabled]="dissabled" class="btn" type="submit" color="dark">Submit</ion-button>
           </div>
         </div>
       </form>
@@ -441,7 +441,7 @@
             </ion-button>
           </div>
           <div class="submit-button ion-text-right">
-            <ion-button class="btn" (click)="submitCandidateCV()" type="submit" color="dark">Submit</ion-button>
+            <ion-button [disabled]="dissabled" class="btn" (click)="submitCandidateCV()" type="submit" color="dark">Submit</ion-button>
           </div>
         </div>
       </form>

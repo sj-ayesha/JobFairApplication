@@ -5,6 +5,10 @@
   margin-bottom: 14px;
   display: flex;
   justify-content: space-between;
+  @media only screen and (min-width: 768px){
+    padding: 0 15px;
+  }
+  
 
   &--right {
     display: flex;

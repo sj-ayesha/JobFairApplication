@@ -54,6 +54,7 @@ export class CandidateAddProfilePage implements OnInit {
   seconds: any;
   public today: any;
   submitted = false;
+  dissabled = false;
 
   errorMessages = {
     firstName: [
@@ -308,14 +309,18 @@ export class CandidateAddProfilePage implements OnInit {
 
   // submit candidate with cv
   submitCandidateCV() {
+    this.dissabled = true;
     if (this.formCandidateDetails.invalid || this.fileData === null) {
       this.unsuccessMsg();
+      this.dissabled = false;
     } else {
+      this.dissabled = true;
       this.attachFile();
       this.successMsg();
 
       setTimeout(() => {
         this.formCandidateDetails.reset();
+        this.dissabled = false;
         this.router.navigateByUrl('/home');
       }, 2000);
     }
@@ -437,10 +442,13 @@ export class CandidateAddProfilePage implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.dissabled = true;
     // tslint:disable-next-line: max-line-length
     if (this.formCandidateDetails.invalid) {
       this.unsuccessMsg();
+      this.dissabled = false;
     } else {
+      this.dissabled = true;
       this.submitCandidate();
       this.successMsg();
       localStorage.removeItem('jobId');
@@ -448,6 +456,7 @@ export class CandidateAddProfilePage implements OnInit {
 
       setTimeout(() => {
         this.formCandidateDetails.reset();
+        this.dissabled = false;
         this.router.navigateByUrl('/home');
       }, 2000);
     }

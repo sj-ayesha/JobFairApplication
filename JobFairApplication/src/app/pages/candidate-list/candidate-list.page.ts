@@ -74,7 +74,6 @@ export class CandidateListPage implements OnInit {
   ngOnInit() {
     this.populateAllCandidates();
     this.getVenueByActive();
-
   }
 
 
