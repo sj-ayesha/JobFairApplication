@@ -1,3 +1,4 @@
+@import '../../styles/custom.scss';
 .candidate-item {
     .title {
         font-size: 18px !important;
@@ -6,6 +7,24 @@
     .text {
         font-size: 15px !important;
     }
+
+    .date {
+
+        &-box {
+            display: flex;
+            align-items: center;
+            height: 25px;
+        }
+    
+        &-available {
+            font-size: 15px;
+            color: $color-light-black;
+            ion-datetime {
+                padding: 10px 5px;
+            }
+        }
+    
+      }
 }
 
 
