@@ -66,7 +66,14 @@
                         <p><b>Address:</b> {{candidate?.address}}</p>
                         <p><b>Nationality:</b> {{candidate?.nationality}}</p>
                         <p><b>Current Level:</b> {{candidate?.currentLevel}}</p>
-                        <p><b>Available From:</b> {{candidate?.availabilityDate}}</p>
+                        <div class="date-box">
+                          <div class="date-text">
+                            <p><b>Available from:</b></p>
+                          </div>
+                          <div class="date-available">
+                            <ion-datetime displayFormat="MMM D, YYYY" value="{{candidate?.availabilityDate}}" readonly></ion-datetime>
+                          </div>
+                        </div>
                       </div>
                     </div>
                 </ion-col>
@@ -89,7 +96,14 @@
                       <p><b>Qualification Level:</b> {{ qualification.title }}</p>
                       <p><b>Division:</b> {{ qualification.division }}</p>
                       <p><b>Institution:</b> {{ qualification.institution }}</p>
-                      <p><b>Graduation Date:</b> {{ qualification.graduationDate }}</p>
+                      <div class="date-box">
+                        <div class="date-text">
+                          <p><b>Graduation Date:</b></p>
+                        </div>
+                        <div class="date-available">
+                          <ion-datetime displayFormat="MMM D, YYYY" value="{{ qualification.graduationDate }}" readonly></ion-datetime>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </ion-col>
@@ -134,7 +148,14 @@
                         <p><b>Email:</b> {{candidate?.email}}</p>
                         <p><b>Current Level:</b> {{candidate?.currentLevel}}</p>
                         <p><b>Job Type:</b> {{candidate?.jobType}}</p>
-                        <p><b>Availability Date:</b> {{candidate?.availabilityDate}}</p>
+                        <div class="date-box">
+                          <div class="date-text">
+                            <p><b>Available from:</b></p>
+                          </div>
+                          <div class="date-available">
+                            <ion-datetime displayFormat="MMM D, YYYY" value="{{candidate?.availabilityDate}}" readonly></ion-datetime>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </ion-col>
@@ -183,7 +204,16 @@
                   <div class="separation"></div>
                   <div class="feedbacks">
                     <p class="feedbacks-subtitle"><b>Interviewer Name: </b> {{ candidateScreening.interviewerName }}</p>
-                    <p class="feedbacks-subtitle"><b>Date:</b> {{ candidateScreening.interviewDate }}</p>
+                    <!-- <p class="feedbacks-subtitle"><b>Date:</b> {{ candidateScreening.interviewDate }}</p> -->
+
+                    <div class="date-box">
+                      <div class="date-text">
+                        <p class="feedbacks-subtitle"><b>Date:</b></p>
+                      </div>
+                      <div class="date-available">
+                        <ion-datetime displayFormat="MMM D, YYYY" value="{{ candidateScreening.interviewDate }}" readonly></ion-datetime>
+                      </div>
+                    </div>
                   </div>
                   <p><b>Comments:</b></p>
                   <p>{{ candidateScreening.interviewerFeedback }}</p>

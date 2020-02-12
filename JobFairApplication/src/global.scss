@@ -135,3 +135,21 @@ ion-title.title-ios{
          height: 6vh !important;
      }
  }
+
+ .date {
+
+    &-box {
+        display: flex;
+        align-items: center;
+        height: 25px;
+    }
+
+    &-available {
+        font-size: 17px;
+        color: $color-light-black;
+        ion-datetime {
+            padding: 10px 5px;
+        }
+    }
+
+  }
