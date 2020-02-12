@@ -104,3 +104,19 @@ img.title-img {
         padding: 0;
     }
   }
+
+  .date {
+
+    &-box {
+        display: flex;
+        align-items: center;
+        height: 25px;
+    }
+
+    &-available {
+        ion-datetime {
+            padding: 10px 5px;
+        }
+    }
+
+  }
