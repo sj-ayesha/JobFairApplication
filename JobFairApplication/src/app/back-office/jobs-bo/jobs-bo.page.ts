@@ -188,6 +188,7 @@ export class JobsBoPage implements OnInit {
       (data: JobResponseList) => {
 
         this.jobs = [...this.jobs, ...data.jobDtoList];
+        this.totalPages = data.totalPages;
 
         setTimeout(() => {
           this.styleAccordion();
