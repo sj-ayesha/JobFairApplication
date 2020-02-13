@@ -6,6 +6,12 @@ ion-title{
 .header{
     display: flex;
     justify-content: space-between;
+
+    &-title {
+        ion-title {
+            padding: 0 20px;
+        }
+    }
 }
 
 .addVenue{
