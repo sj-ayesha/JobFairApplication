@@ -131,6 +131,14 @@ const routes: Routes = [
     }
   },
   {
+    path: 'user',
+    loadChildren: () => import('./back-office/user/user.module').then( m => m.UserPageModule),
+    canActivate: [AuthGuard],
+    data: {
+      role: ['HR']
+    }
+  },
+  {
     path: 'export-files',
     loadChildren: () => import('./back-office/export-files/export-files.module').then( m => m.ExportFilesPageModule),
     canActivate: [AuthGuard],
@@ -141,7 +149,12 @@ const routes: Routes = [
   {
     path: 'not-authorized',
     loadChildren: () => import('./pages/not-authorized/not-authorized.module').then( m => m.NotAuthorizedPageModule)
+  },  {
+    path: 'user-popup',
+    loadChildren: () => import('./back-office/user-popup/user-popup.module').then( m => m.UserPopupPageModule)
   }
+
+
 ];
 
 @NgModule({

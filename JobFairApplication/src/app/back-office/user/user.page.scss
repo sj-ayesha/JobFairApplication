@@ -1,0 +1,176 @@
+@import "../../styles/custom.scss";
+
+.title {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  &-img {
+    padding-top: 4px;
+    padding-right: 15px;
+    width: 60px;
+  }
+}
+
+.icon-map {
+  font-size: 35px;
+  padding-top: 19px;
+  padding-right: 10px;
+  height: 53px;
+}
+
+h5 {
+  font-size: 24px;
+}
+
+.header-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+$breakpoint-alpha: 480px; // adjust to your needs
+
+.rwd-table {
+  margin: 1em 0;
+  min-width: 300px; // adjust to your needs
+  width: 100%;
+  text-align: center;
+
+  tr {
+    font-size: 20px;
+    text-align: center !important;
+  }
+
+  td {
+    font-size: 17px;
+    text-align: center !important;
+    border-bottom: 2px solid $color-light-red;
+  }
+
+  th {
+    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!
+    text-align: center !important;
+    border-bottom: 3px solid $color-light-black;
+  }
+
+  .header tr:hover {
+    background-color: none !important;
+  }
+
+  td {
+    display: block;
+
+    &:first-child {
+      padding-top: 0.5em;
+    }
+
+    &:last-child {
+      padding-bottom: 0.5em;
+    }
+
+    &:before {
+      content: attr(data-th) ": ";
+      font-weight: bold;
+      width: 6.5em;
+      display: inline-block;
+
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+
+      @media only screen and (max-width: 600px) {
+        width: initial;
+      }
+    }
+  }
+
+  th,
+  td {
+    text-align: left;
+
+    @media (min-width: $breakpoint-alpha) {
+      display: table-cell;
+      padding: 0.25em 0.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+body {
+  padding: 0 2em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: $color-light-black;
+  background: $color-lighter-gray;
+}
+
+.rwd-table {
+  overflow: hidden;
+
+  th,
+  td {
+    margin: 0.5em 1em;
+    @media (min-width: $breakpoint-alpha) {
+      padding: 1em !important;
+    }
+  }
+
+  td {
+    @media only screen and (max-width: 600px) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.rwd-table.header tr:hover {
+  background-color: $color-white-gray;
+}
+
+.Edit:hover {
+  cursor: pointer;
+  .edit-btn {
+    cursor: pointer;
+    color: $color-light-red;
+  }
+}
+
+.header tr:hover {
+  background-color: $color-red !important;
+}
+
+.list-icon {
+  font-size: 39px;
+  padding-right: 10px;
+}
+
+.title h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+img {
+  padding-top: 4px;
+  padding-right: 15px;
+}
+
+.wrapper-content {
+  padding: 20px;
+}
+
+// ion-title {
+//   &.title-ios {
+//     .title{
+//       img,h3{
+//         padding-top:10px;
+//       }
+//     }
+//   }
+// }
