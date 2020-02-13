@@ -117,10 +117,11 @@
           <img class="not-found" src="../../../assets/img/Not Available/job-not-found.png">
         </ion-col>
       </ion-row>
-      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more jobs...">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+
     </ion-grid>
   </div>
+  <ion-infinite-scroll (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more jobs...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

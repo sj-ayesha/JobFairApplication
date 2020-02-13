@@ -70,7 +70,7 @@ export class JobsPopupPage implements OnInit {
         this.title = this.jobs[1];
         this.level = this.jobs[2];
         this.category = this.jobs[3];
-        this.description = this.jobs[4];
+        this.description = this.jobs[4].replace(/;/g, '\n');
         this.minimumExperience = this.jobs[5];
         this.qualificationNeeded = this.jobs[6];
       }
@@ -173,7 +173,7 @@ export class JobsPopupPage implements OnInit {
       this.title = this.jobs[1];
       this.level = this.jobs[2];
       this.category = this.jobs[3];
-      this.description = this.jobs[4];
+      this.description = this.jobs[4].replace(/;/g, '\n');
       this.minimumExperience = this.jobs[5];
       this.qualificationNeeded = this.jobs[6];
     }
