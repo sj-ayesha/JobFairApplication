@@ -70,11 +70,16 @@ export class VenuePage implements OnInit {
     localStorage.setItem('venue_id', id.target.value);
     const LSid = JSON.parse(localStorage.getItem('venue_id'));
 
-    for (let i = 0; i < this.venues.length; i++) {
-      if (LSid === this.venues[i].venueId) {
-        window.localStorage.setItem('venueName', this.venues[i].venueName);
+    this.venues.forEach((element, index) => {
+      if (LSid === this.venues[index].venueId) {
+        window.localStorage.setItem('venueName', this.venues[index].venueName);
       }
-    }
+    });
+    // for (let i = 0; i < this.venues.length; i++) {
+    //   if (LSid === this.venues[i].venueId) {
+    //     window.localStorage.setItem('venueName', this.venues[i].venueName);
+    //   }
+    // }
   }
 
   getVenueByActive() {
@@ -85,11 +90,16 @@ export class VenuePage implements OnInit {
 
   editTheVenue() {
     const LSid = JSON.parse(localStorage.getItem('venue_id'));
-    for (let i = 0; i < this.venues.length; i++) {
-      if (LSid === this.venues[i].venueId) {
-        window.localStorage.setItem('venueName', this.venues[i].venueName);
+    this.venues.forEach((element, index) => {
+      if (LSid === this.venues[index].venueId) {
+        window.localStorage.setItem('venueName', this.venues[index].venueName);
       }
-    }
+    });
+    // for (let i = 0; i < this.venues.length; i++) {
+    //   if (LSid === this.venues[i].venueId) {
+    //     window.localStorage.setItem('venueName', this.venues[i].venueName);
+    //   }
+    // }
     this.changeVenueService.editVenue(window.localStorage.getItem('venueName'));
   }
 
@@ -101,12 +111,16 @@ export class VenuePage implements OnInit {
       window.localStorage.setItem('venue_id', this.formVenue.get('venues').value);
       const LSid = JSON.parse(localStorage.getItem('venue_id'));
 
-      for (let i = 0; i < this.venues.length; i++) {
-      if (LSid === this.venues[i].venueId) {
-        window.localStorage.setItem('venueName', this.venues[i].venueName);
-      }
+      this.venues.forEach((element, index) => {
+        if (LSid === this.venues[index].venueId) {
+          window.localStorage.setItem('venueName', this.venues[index].venueName);
+        }
+      });
+      // for (let i = 0; i < this.venues.length; i++) {
+      // if (LSid === this.venues[i].venueId) {
+      //   window.localStorage.setItem('venueName', this.venues[i].venueName);
+      // }
     }
-      this.router.navigateByUrl('/home');
-    }
+    this.router.navigateByUrl('/home');
   }
 }

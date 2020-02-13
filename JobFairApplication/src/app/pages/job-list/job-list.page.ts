@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VenueJob, VenueJobResponseList } from 'src/app/model/venueJob';
 import { ToastController, IonInfiniteScroll } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-job-list',
@@ -19,25 +20,32 @@ export class JobListPage implements OnInit {
   // jobs: any;
   jobs: Job[];
   public venueJobs: VenueJob[] = [];
-  public searchTerm: string = '';
-  public items: any;
+  priority = [];
+
+  public splitJobDescriptions;
+
+  checked = true;
   noJobsAvailable = false;
   jobNotFound = false;
-  public splitJobDescriptions;
-  checked = true;
-  priority = [];
-  filterText: string;
   refreshCheck = false;
+  insideCategory = false;
+  getLocalStorageJoBId = false;
+  showQuickApply: boolean;
+
   limit = 10;
   page = 0;
-  data: any;
   totalPages = 0;
-  insideCategory = false;
-  category: string;
+  spontaneousId: number;
 
+  category: string;
   jobPriority: string;
   jobId: string;
-  getLocalStorageJoBId = false;
+  public searchTerm: string = '';
+  filterText: string;
+
+  data: any;
+  public items: any;
+
 
   constructor(
     private router: Router,
@@ -55,8 +63,7 @@ export class JobListPage implements OnInit {
   }
 
   ngOnInit() {
-    window.localStorage.setItem('priority', '[]');
-    window.localStorage.setItem('jobId', '');
+
   }
 
   doRefresh(event) {
@@ -77,6 +84,8 @@ export class JobListPage implements OnInit {
 
   ionViewWillEnter() {
     this.uncheckAll();
+    window.localStorage.setItem('priority', '[]');
+    window.localStorage.setItem('jobId', '');
   }
 
   filter(event) {
@@ -138,9 +147,20 @@ export class JobListPage implements OnInit {
     toast.present();
   }
 
-  async unsuccessMsgEmpty() {
+  async unsuccessMsgEmptyQuickA() {
     const toast = await this.toastCtrl.create({
       message: 'Please select at least one job or click on "Quick Application"',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  async unsuccessMsgEmptyNoQuickA() {
+    const toast = await this.toastCtrl.create({
+      message: 'Please select at least one job"',
       position: 'top',
       color: 'danger',
       duration: 2000,
@@ -153,7 +173,7 @@ export class JobListPage implements OnInit {
   styleAccordion() {
     const coll = document.getElementsByClassName('collapsible');
     for (let i = 0; i < coll.length; i++) {
-      coll[i].addEventListener('click', function() {
+      coll[i].addEventListener('click', function(){
         this.classList.toggle('active');
         const content = this.nextElementSibling;
         if (content.style.maxHeight) {
@@ -190,15 +210,25 @@ export class JobListPage implements OnInit {
           this.noJobsAvailable = false;
         }
 
-        if (this.venueJobs.find(title => title.job.title === 'Spontaneous')) {
+        this.venueJobs.forEach((element, index) => {
+          if (this.venueJobs[index].job.title === 'Spontaneous Application') {
+            this.spontaneousId = this.venueJobs[index].job.jobId;
+            console.log(this.spontaneousId);
+            this.showQuickApply = true;
+          }
+          else {
+            this.showQuickApply = false;
+          }
+        });
 
-        }
         if (event) {
           event.target.complete();
         }
       }
     );
   }
+
+
 
   loadData(event) {
     setTimeout(() => {
@@ -262,7 +292,12 @@ export class JobListPage implements OnInit {
     if (count > 5) {
       this.unsuccessMsg();
     } else if (count <= 0) {
-      this.unsuccessMsgEmpty();
+      if ( this.spontaneousId != null){
+        this.unsuccessMsgEmptyQuickA();
+      }
+      else {
+        this.unsuccessMsgEmptyNoQuickA();
+      }
     } else {
       this.router.navigate(['candidate-add-profile']);
     }
@@ -270,8 +305,11 @@ export class JobListPage implements OnInit {
 
   back() {
     this.router.navigate(['/home']);
-    window.localStorage.removeItem('priority');
-    window.localStorage.removeItem('jobId');
+    // window.localStorage.setItem('priority', '[]');
+    // this.priority = JSON.parse(localStorage.getItem('priority'));
+    // this.priority.forEach((element, index) => {
+    //   this.priority.splice(index);
+    // });
   }
 
   searchByTitle(title: string) {
@@ -307,11 +345,12 @@ export class JobListPage implements OnInit {
   }
 
   quickApplication() {
-    localStorage.setItem('jobId', '20');
-    this.priority.push(20);
+    localStorage.setItem('jobId', JSON.stringify(this.spontaneousId));
+    this.priority.pop();
+    this.priority.push(this.spontaneousId);
     localStorage.setItem('priority', JSON.stringify(this.priority));
 
-    if  (localStorage.getItem('jobId') == '20') {
+    if  (localStorage.getItem('jobId') == JSON.stringify(this.spontaneousId)) {
       this.routeToApplyJob();
     } else {
       this.applyOnlyFive();

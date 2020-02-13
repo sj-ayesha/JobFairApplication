@@ -1,0 +1,35 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="title">
+          <div class="img-box">
+            <img class="title-img" src='../../../assets/img//header_icons/upload.png'>
+          </div>
+          <h3>Export Files</h3>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="wrapper-content">
+    <div class="export-container">
+      <ion-row class="ion-text-center ion-align-items-center">
+        <ion-col size="12">
+          <div class="wrapper">
+            <div class="image-box">
+              <img src="../../../assets/img/header_icons/excel-l.png">
+            </div>
+            <div class="file-download" >
+              <ion-button class="btn-download ion-text-wrap ion-text-left" (click)="downloadExcel()"><ion-icon ios="ios-download" md="md-download"></ion-icon>
+                <a>Download Candidate List</a>
+              </ion-button>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

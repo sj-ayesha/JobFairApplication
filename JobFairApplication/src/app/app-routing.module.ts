@@ -6,6 +6,7 @@ import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'venue', pathMatch: 'full' },
+  // {path: '**', redirectTo: 'not-authorized', canActivate: [AuthFrontOfficeGuard]},
   {
     path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
     canActivate: [AuthFrontOfficeGuard]
@@ -130,10 +131,17 @@ const routes: Routes = [
     }
   },
   {
+    path: 'export-files',
+    loadChildren: () => import('./back-office/export-files/export-files.module').then( m => m.ExportFilesPageModule),
+    canActivate: [AuthGuard],
+    data: {
+      role: ['HR']
+    }
+  },
+  {
     path: 'not-authorized',
     loadChildren: () => import('./pages/not-authorized/not-authorized.module').then( m => m.NotAuthorizedPageModule)
-  },
-
+  }
 ];
 
 @NgModule({

@@ -26,7 +26,7 @@
 
 
 
-<ion-split-pane *ngIf="loggedIn" contentId="menu-content">
+<ion-split-pane  when="(min-width: 10000px)"  *ngIf="loggedIn" contentId="menu-content">
   <ion-menu contentId="menu-content">
     <ion-header>
       <ion-toolbar>
@@ -68,6 +68,9 @@
               <li>
                 <a routerLink="/candidate-list">Candidates</a>
               </li>
+              <li>
+                <a routerLink="/export-files">Export Files</a>
+              </li>
             </div>
             <div *ngIf="navDisplayMANAGER" class="MANAGER">
               <li>
@@ -85,5 +88,6 @@
     </ion-content>
   </ion-menu>
 
-  <ion-router-outlet id="menu-content"></ion-router-outlet>
+  <ion-router-outlet id="menu-content">
+  </ion-router-outlet>
 </ion-split-pane>

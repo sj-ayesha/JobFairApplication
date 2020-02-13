@@ -4,4 +4,15 @@
 .ion-text-right{
     width: 100%;
 }
-  
+
+
+.header{
+    display: flex;
+    justify-content: space-between;
+
+    &-title {
+        ion-title {
+            padding: 0 20px;
+        }
+    }
+}

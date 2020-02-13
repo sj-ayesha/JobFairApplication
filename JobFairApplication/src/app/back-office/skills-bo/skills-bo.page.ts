@@ -66,12 +66,18 @@ export class SkillsBoPage implements OnInit {
   edit(Id) {
     this.openEditModal();
     this.editSkills = [];
-    for (let i = 0; i < this.skills.length; i++) {
-      if ( this.skills[i].skillId === Id) {
-          this.editSkills.push(this.skills[i].skillId);
-          this.editSkills.push(this.skills[i].skillName);
-      }
+    this.skills.forEach((element, index) => {
+      if ( this.skills[index].skillId === Id) {
+        this.editSkills.push(this.skills[index].skillId);
+        this.editSkills.push(this.skills[index].skillName);
     }
+    });
+    // for (let i = 0; i < this.skills.length; i++) {
+    //   if ( this.skills[i].skillId === Id) {
+    //       this.editSkills.push(this.skills[i].skillId);
+    //       this.editSkills.push(this.skills[i].skillName);
+    //   }
+    // }
     const LSeditSkills = JSON.stringify(this.editSkills);
     localStorage.setItem('editSkills', LSeditSkills);
   }

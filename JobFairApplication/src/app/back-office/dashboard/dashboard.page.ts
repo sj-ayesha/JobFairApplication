@@ -117,6 +117,7 @@ export class DashboardPage implements OnInit {
     this.MANAGERSubscription = this.loginLogoutService.EmitMANAGER.subscribe(data => this.roleManager = data);
   }
 
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnDestroy() {
     this.MANAGERSubscription.unsubscribe();
   }
@@ -134,7 +135,10 @@ export class DashboardPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.ngOnInit();
+    // this.venueJobs = [];
+    // this.venues = [];
+    // this.ngOnInit();
+    // this.ionViewDidEnter();
 
     setTimeout(() => {
       event.target.complete();

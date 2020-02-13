@@ -1,6 +1,13 @@
 <ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-header>
     <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
       <ion-title>
         <div class="header-wrap">
           <div class="title">
@@ -141,10 +148,14 @@
               <ion-label>
                 <h5 class="title"><b>{{candidate.candidate.lastName}} {{candidate.candidate.firstName}}</b></h5>
                 <p class="text"><b>Level:</b> {{candidate.candidate.currentLevel}}</p>
-                <p class="text">
-                  <b>Available from:</b>
-                  {{candidate.candidate.availabilityDate}}
-                </p>
+                <div class="date-box">
+                  <div class="date-text">
+                    <p class="text"><b>Available from:</b></p>
+                  </div>
+                  <div class="date-available">
+                    <ion-datetime displayFormat="MMM D, YYYY" value="{{candidate.candidate.availabilityDate}}" readonly></ion-datetime>
+                  </div>
+                </div>
               </ion-label>
               <ion-label slot="end">
                 <p class="text"><b>Venue:</b> {{candidate.venueJob.venue.venueName}}</p>

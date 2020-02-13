@@ -179,9 +179,15 @@
 .job-box {
   border-bottom: 2px solid $color-light-red;
 
-  &:first-child {
-    border-top: 2px solid $color-light-red;
-  }
+  // &:first-child {
+  //   border-top: 2px solid $color-light-red;
+  // }
+  // &:last-child {
+  //   border-bottom: 1px solid $color-light-red;
+  // }
+}
+.top-accordeon:first-child{
+  border-top:2px solid$color-light-red;
 }
 
 .title-container {
@@ -227,6 +233,8 @@
 
   @media only screen and (max-width: 600px){
     flex-direction: column;
+    padding: 0;
+    padding-top: 10px;
   }
 
   &--section {

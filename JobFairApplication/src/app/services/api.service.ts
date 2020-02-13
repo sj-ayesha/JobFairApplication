@@ -19,6 +19,7 @@ import { ApiResponse } from '../model/ApiResponse';
 import { Dashboard } from '../model/dashboard';
 import { RoleDto } from '../model/roleDto';
 import { DownloadDto } from '../model/DownloadDto';
+import { ExcelDto } from '../model/ExcelDto';
 
 
 @Injectable({
@@ -29,8 +30,8 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   // baseUrl = 'https://3d4a5055.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
-  baseUrl = 'http://192.168.52.159:8081/'; // elca ip
-  // baseUrl = 'http://localhost:8081/';
+  // baseUrl = 'http://192.168.52.170:8081/'; // elca ip
+  baseUrl = 'http://localhost:8081/';
   // baseUrl = 'http://192.168.100.9:8081/'; // home ip
 
   // login
@@ -275,5 +276,11 @@ export class ApiService {
   getRoleDetails(roleName: string): Observable<RoleDto | any> {
     return this.http.get<RoleDto | any>(this.baseUrl + 'role/' + roleName);
   }
+
+  // Excel
+  getCandidateDetailsExcel(): Observable<DownloadDto | any> {
+    return this.http.get<DownloadDto | any>(this.baseUrl + 'excel/export');
+  }
+
 }
 

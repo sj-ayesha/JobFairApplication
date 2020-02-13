@@ -5,6 +5,9 @@
   </ion-refresher>
   <ion-header>
     <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
       <ion-title>
         <div class="header-wrap">
           <div class="title">
@@ -114,10 +117,11 @@
           <img class="not-found" src="../../../assets/img/Not Available/job-not-found.png">
         </ion-col>
       </ion-row>
-      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more jobs...">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+
     </ion-grid>
   </div>
+  <ion-infinite-scroll (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more jobs...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

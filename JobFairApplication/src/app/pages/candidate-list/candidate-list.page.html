@@ -5,6 +5,9 @@
   </ion-refresher>
   <ion-header>
     <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
       <ion-title>
         <div class="title">
           <img class="title-img" src='../../../assets/img//header_icons/candidate-1.png'>
@@ -59,7 +62,7 @@
               <ion-select-option value="All" selected="selected">All</ion-select-option>
               <ion-select-option value="rejected">Rejected</ion-select-option>
               <ion-select-option value="proceed-to-next-interview">Proceed to next interview</ion-select-option>
-              <ion-select-option value="approved">Approved</ion-select-option>
+              <ion-select-option value="accepted">Accepted</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -76,7 +79,7 @@
         </ion-col>
       </ion-row>
 
-    <div class="asc" *ngIf="resetAll">
+    <div class="asc">
       <div class="candidateNotFound" *ngIf="!candidateNotFound">
         <ion-card-content *ngIf="!noCandidatesAvailable">
           <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
@@ -90,159 +93,17 @@
             <ion-label class="ion-text-wrap">
               <h5><b>{{candidateVenueJob.candidate.lastName}} {{candidateVenueJob.candidate.firstName}}</b></h5>
               <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
-              <p>
-                <b>Available from:</b>
-                {{candidateVenueJob.candidate.availabilityDate}}
-              </p>
+              <div class="date-box">
+                <div class="date-text">
+                  <p><b>Available from:</b></p>
+                </div>
+                <div class="date-available">
+                  <ion-datetime displayFormat="MMM D, YYYY" value="{{candidateVenueJob.candidate.availabilityDate}}" readonly></ion-datetime>
+                </div>
+              </div>
+              
             </ion-label>
             <ion-label slot="end" class="mobile--hidden">
-              <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
-              <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
-              <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
-            </ion-label>
-          </ion-item>
-        </ion-card-content>
-      </div>
-    </div>
-
-    <div class="asc" *ngIf="resetASC">
-      <div class="candidateNotFound" *ngIf="!candidateNotFound">
-        <ion-card-content *ngIf="!noCandidatesAvailable">
-          <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
-            *ngFor="let candidateVenueJob of candidateVenueJobsListsASC">
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender == 'Male'" slot="start">
-              <img src="../../../assets/img/avatar_male.jpg" />
-            </ion-avatar>
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
-              <img src="../../../assets/img/avatar_female.jpg" />
-            </ion-avatar>
-            <ion-label class="ion-text-wrap">
-              <h5><b>{{candidateVenueJob.candidate.lastName}} {{candidateVenueJob.candidate.firstName}}</b></h5>
-              <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
-              <p>
-                <b>Available from:</b>
-                {{candidateVenueJob.candidate.availabilityDate}}
-              </p>
-            </ion-label>
-            <ion-label slot="end">
-              <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
-              <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
-              <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
-            </ion-label>
-          </ion-item>
-        </ion-card-content>
-      </div>
-    </div>
-
-
-    <div class="asc" *ngIf="resetDESC">
-      <div class="candidateNotFound" *ngIf="!candidateNotFound">
-        <ion-card-content *ngIf="!noCandidatesAvailable">
-          <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
-            *ngFor="let candidateVenueJob of candidateVenueJobsListsSDESC">
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender == 'Male'" slot="start">
-              <img src="../../../assets/img/avatar_male.jpg" />
-            </ion-avatar>
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
-              <img src="../../../assets/img/avatar_female.jpg" />
-            </ion-avatar>
-            <ion-label class="ion-text-wrap">
-              <h5><b>{{candidateVenueJob.candidate.lastName}} {{candidateVenueJob.candidate.firstName}}</b></h5>
-              <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
-              <p>
-                <b>Available from:</b>
-                {{candidateVenueJob.candidate.availabilityDate}}
-              </p>
-            </ion-label>
-            <ion-label slot="end">
-              <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
-              <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
-              <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
-            </ion-label>
-          </ion-item>
-        </ion-card-content>
-      </div>
-    </div>
-
-
-    <div class="asc" *ngIf="resetVenue">
-      <div class="candidateNotFound" *ngIf="!candidateNotFound">
-        <ion-card-content *ngIf="!noCandidatesAvailable">
-          <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
-            *ngFor="let candidateVenueJob of candidateVenueJobsListsVENUE">
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender == 'Male'" slot="start">
-              <img src="../../../assets/img/avatar_male.jpg" />
-            </ion-avatar>
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
-              <img src="../../../assets/img/avatar_female.jpg" />
-            </ion-avatar>
-            <ion-label class="ion-text-wrap">
-              <h5><b>{{candidateVenueJob.candidate.lastName}} {{candidateVenueJob.candidate.firstName}}</b></h5>
-              <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
-              <p>
-                <b>Available from:</b>
-                {{candidateVenueJob.candidate.availabilityDate}}
-              </p>
-            </ion-label>
-            <ion-label slot="end">
-              <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
-              <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
-              <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
-            </ion-label>
-          </ion-item>
-        </ion-card-content>
-      </div>
-    </div>
-
-    <div class="asc" *ngIf="resetScreen">
-      <div class="candidateNotFound" *ngIf="!candidateNotFound">
-        <ion-card-content *ngIf="!noCandidatesAvailable">
-          <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
-            *ngFor="let candidateVenueJob of candidateVenueJobsListsSCREEN">
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender == 'Male'" slot="start">
-              <img src="../../../assets/img/avatar_male.jpg" />
-            </ion-avatar>
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
-              <img src="../../../assets/img/avatar_female.jpg" />
-            </ion-avatar>
-            <ion-label class="ion-text-wrap">
-              <h5><b>{{candidateVenueJob.candidate.lastName}} {{candidateVenueJob.candidate.firstName}}</b></h5>
-              <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
-              <p>
-                <b>Available from:</b>
-                {{candidateVenueJob.candidate.availabilityDate}}
-              </p>
-            </ion-label>
-            <ion-label slot="end">
-              <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
-              <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
-              <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
-            </ion-label>
-          </ion-item>
-        </ion-card-content>
-      </div>
-    </div>
-
-    <div class="asc" *ngIf="resetLevel">
-      <div class="candidateNotFound" *ngIf="!candidateNotFound">
-        <ion-card-content *ngIf="!noCandidatesAvailable">
-          <ion-item class="candidate-item" (click)="routeTo(candidateVenueJob.candidate.candidateId)"
-            *ngFor="let candidateVenueJob of candidateVenueJobsListsLEVEL">
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender == 'Male'" slot="start">
-              <img src="../../../assets/img/avatar_male.jpg" />
-            </ion-avatar>
-            <ion-avatar *ngIf="candidateVenueJob.candidate.gender=='Female'" slot="start">
-              <img src="../../../assets/img/avatar_female.jpg" />
-            </ion-avatar>
-            <ion-label class="ion-text-wrap">
-              <h5><b>{{candidateVenueJob.candidate.lastName}} {{candidateVenueJob.candidate.firstName}}</b></h5>
-              <p><b>Level:</b> {{candidateVenueJob.candidate.currentLevel}}</p>
-              <p>
-                <b>Available from:</b>
-                {{candidateVenueJob.candidate.availabilityDate}}
-              </p>
-            </ion-label>
-            <ion-label slot="end">
               <p><b>Venue:</b> {{candidateVenueJob.venueJob.venue.venueName}}</p>
               <p><b>Job Applied:</b> {{candidateVenueJob.venueJob.job.title}}</p>
               <p><b>Job Type:</b> {{candidateVenueJob.candidate.jobType}}</p>
@@ -258,32 +119,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-infinite-scroll *ngIf="resetAll" threshold="100px" (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more candidates...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-
-    <ion-infinite-scroll *ngIf="resetASC" threshold="100px" (ionInfinite)="loadDataASC($event)">
-      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more candidates...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-
-    <ion-infinite-scroll *ngIf="resetDESC" threshold="100px" (ionInfinite)="loadDataDESC($event)">
-      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more candidates...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-
-    <ion-infinite-scroll *ngIf="resetVenue" threshold="100px" (ionInfinite)="loadDataByVenue($event)">
-      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more candidates...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-
-    <ion-infinite-scroll *ngIf="resetScreen" threshold="100px" (ionInfinite)="loadDataByScreeningStatus($event)">
-      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more candidates...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-
-    <ion-infinite-scroll *ngIf="resetLevel" threshold="100px" (ionInfinite)="loadDataByLevel($event)">
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more candidates...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
