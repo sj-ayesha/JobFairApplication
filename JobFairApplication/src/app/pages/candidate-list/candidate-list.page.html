@@ -18,25 +18,30 @@
   </ion-header>
 
   <div class="wrapper-content">
-      <ion-row class="filter-row" *ngIf="!noCandidatesAvailable">
+      <ion-row class="filter-row" >
         <ion-col size="6">
           <div class="btn-order">
             <div class="search-container">
-              <ion-searchbar placeholder="Search by last name..." type="text" #lastName
+              <ion-searchbar [(ngModel)]="selectedElementForSearch" placeholder="Search by last name..." type="text" #lastName
                 (ionInput)="searchByLastName(lastName.value)"></ion-searchbar>
             </div>
           </div>
         </ion-col>
 
         <ion-col size="6" class="ion-padding btn-order">
+          <div class="btn-reset ion-padding">
+            <ion-button (click)="resetFilters()" class="btn" color="dark"
+              size="small">Reset Filters
+            </ion-button>
+          </div>
           <div class="btn-asc ion-padding">
-            <ion-button [disabled]="disableASC" (click)="getAllCandidatesByAsc()" class="btn" color="light"
+            <ion-button (click)="getAllCandidatesByAsc()" class="btn" color="light"
               size="small">
               <img src="../../../assets/img/ascending.png">
             </ion-button>
           </div>
           <div class="btn-desc ion-padding-top ion-padding-bottom ion-padding-end">
-            <ion-button [disabled]="disableDESC" (click)="getAllCandidatesByDesc()" class="btn" color="light"
+            <ion-button (click)="getAllCandidatesByDesc()" class="btn" color="light"
               size="small">
               <img src="../../../assets/img/descending.png">
             </ion-button>
@@ -45,20 +50,20 @@
       </ion-row>
 
       <ion-row class="filter-section">
-        <ion-col size="4" class="ion-padding">
+        <ion-col size="6" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Filter Candidates by venue..</ion-label>
-            <ion-select (ionChange)="filterByVenue($event)" interface="popover" class="ion-float-left">
+            <ion-select [(ngModel)]="selectedElementForVenue" #venueFilter (ionChange)="filterByVenue($event)" interface="popover" class="ion-float-left">
               <ion-select-option value='0' selected="selected">All</ion-select-option>
               <ion-select-option *ngFor="let venue of venues" value={{venue.venueId}}>{{venue.venueName}} | {{venue.startDate}}
               </ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
-        <ion-col size="4" class="ion-padding">
+        <ion-col size="6" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Filter Candidates by screening status..</ion-label>
-            <ion-select (ionChange)="filterByScreeningStatus($event)" interface="popover" class="ion-float-left">
+            <ion-select [(ngModel)]="selectedElementForScreening" #screeningFilter (ionChange)="filterByScreeningStatus($event)" interface="popover" class="ion-float-left">
               <ion-select-option value="All" selected="selected">All</ion-select-option>
               <ion-select-option value="rejected">Rejected</ion-select-option>
               <ion-select-option value="proceed-to-next-interview">Proceed to next interview</ion-select-option>
@@ -66,7 +71,7 @@
             </ion-select>
           </ion-item>
         </ion-col>
-        <ion-col size="4" class="ion-padding">
+        <!-- <ion-col size="4" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Filter Candidates level..</ion-label>
             <ion-select (ionChange)="filterByLevel($event)" interface="popover" class="ion-float-left">
@@ -76,7 +81,7 @@
               <ion-select-option value="Senior">Senior</ion-select-option>
             </ion-select>
           </ion-item>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
 
     <div class="asc">

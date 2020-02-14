@@ -115,6 +115,13 @@ export class ApiService {
     (this.baseUrl + 'candidate-venue-job/candidates-level/' + level + '?pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
+  // tslint:disable-next-line: max-line-length
+  filterCandidates(pageNumber: number, pageSize: number, sortOrder: string, sortBy: string, venueId?: number, screeningStatus?: string, lastName?: string): Observable<CandidateVenueJobDtoResponseList[] | any> {
+    return this.http.get<CandidateVenueJobDtoResponseList[] | any>
+    // tslint:disable-next-line: max-line-length
+    (this.baseUrl + 'candidate-venue-job/filter?venueId=' + venueId + '&screeningStatus=' + screeningStatus + '&lastName=' + lastName + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+  }
+
   // candidate skills
 
   saveCandidateSkill(skill: Skills): Observable<Skills[]> {
