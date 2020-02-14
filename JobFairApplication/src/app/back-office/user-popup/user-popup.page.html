@@ -1,9 +1,93 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>user-popup</ion-title>
+    <div class="toolbar-content">
+      <div class="header-title">
+        <ion-title class="ion-text-left" *ngIf="!edit">Add Venue</ion-title>
+        <ion-title class="ion-text-left" *ngIf="edit">Edit Venue</ion-title>
+      </div>
+      <div class="modal-close">
+        <button (click)="closeModal()" class="modal__close-btn ion-float-right">X</button>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div id="addVenue" class="addVenue">
+    <form [formGroup]="formAddUser">
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item *ngIf="!edit">
+            <ion-label position="floating" color="medium">*Visa</ion-label>
+            <ion-input formControlName="visa" type="text"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Visa</ion-label>
+            <ion-input formControlName="visa" type="text" value=""></ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.visa">
+              <div class="error-message"
+                *ngIf="formAddUser.get('visa').hasError(error.type) && (formAddUser.get('visa').dirty || formAddUser.get('visa').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
 
+      <ion-row>
+        <ion-col col-md-6 size="12" size-sm>
+          <ion-item *ngIf="!edit">
+            <ion-label position="floating" color="medium">*Role</ion-label>
+            <ion-select formControlName="role" interface="popover" cancelText="Cancel" okText="OK">
+              <ion-select-option value="HR">HR</ion-select-option>
+              <ion-select-option value="MANAGER">Manager</ion-select-option>
+              <ion-select-option value="INTERVIEWER">Interviewer</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Role</ion-label>
+            <ion-select interface="popover" formControlName="role" cancelText="Cancel" okText="OK">
+              <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX">{{categoryX}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item> -->
+
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.role">
+              <div class="error-message"
+                *ngIf="formAddUser.get('role').hasError(error.type) && (formAddUser.get('role').dirty || formAddUser.get('role').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" size-md size="12" size-sm>
+          <div class="status">
+            <ion-radio-group formControlName="active" class="btn-radio-group">
+
+              <ion-item>
+                <ion-label>Active</ion-label>
+                <ion-radio color="success" slot="start" value="true" (ionSelect)="radioButtonValue($event)">
+                </ion-radio>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Inactive</ion-label>
+                <ion-radio color="danger" slot="start" value="false" (ionSelect)="radioButtonValue($event)">
+                </ion-radio>
+              </ion-item>
+
+            </ion-radio-group>
+          </div>
+        </ion-col>
+      </ion-row>
+
+    </form>
+  </div>
 </ion-content>

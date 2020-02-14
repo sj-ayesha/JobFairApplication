@@ -1,8 +1,8 @@
 <ion-content>
-  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+  <!-- <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
     </ion-refresher-content>
-  </ion-refresher>
+  </ion-refresher> -->
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -28,11 +28,13 @@
       <tr class="header">
         <th>Visa</th>
         <th>Role</th>
+        <th>Active</th>
         <th>Edit</th>
       </tr>
       <tr >
-        <td data-th='Name'></td>
-        <td></td>
+        <td data-th='Visa'>ASJ</td>
+        <td data-th="Role">HR</td>
+        <td data-th="Active">true</td>
         <td class="Edit" data-th="Edit" >
           <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
         </td>

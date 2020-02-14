@@ -19,8 +19,9 @@ import { AuthService } from './services/auth.service';
 
 import { VenuePopupPageModule } from './back-office/venue-popup/venue-popup.module';
 import { SkillPopupPageModule } from './back-office/skill-popup/skill-popup.module';
-import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
 import { JobsPopupPageModule } from './back-office/jobs-popup/jobs-popup.module';
+import { AuthFrontOfficeGuard } from './services/auth-frontOffice.guard';
+import { UserPopupPageModule } from './back-office/user-popup/user-popup.module';
 import { TokenInterceptor } from './services/interceptor';
 import { ApiService } from './services/api.service';
 
@@ -41,6 +42,7 @@ import { ApiService } from './services/api.service';
     VenuePopupPageModule,
     SkillPopupPageModule,
     JobsPopupPageModule,
+    UserPopupPageModule,
     HttpClientModule
   ],
   providers: [

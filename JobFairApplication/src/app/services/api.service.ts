@@ -282,5 +282,10 @@ export class ApiService {
     return this.http.get<DownloadDto | any>(this.baseUrl + 'excel/export');
   }
 
+  // Users
+  getAllUsers(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'excel/export');
+  }
+
 }
 

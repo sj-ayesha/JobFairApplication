@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 import { AlertController, ModalController } from '@ionic/angular';
+import { UserPopupPage } from '../user-popup/user-popup.page';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-user',
@@ -9,15 +11,29 @@ import { AlertController, ModalController } from '@ionic/angular';
 })
 export class UserPage implements OnInit {
 
-  constructor(private addEditPopupService: AddEditPopupService, private modalController: ModalController,) { }
+  constructor(
+    private addEditPopupService: AddEditPopupService,
+    private modalController: ModalController,
+    private apiService: ApiService) { }
 
   ngOnInit() {
   }
 
   openAddModal() {
     this.addEditPopupService.showEdit(false);
-    // this.modalController.create({component: SkillPopupPage}).then((modalElement) => {
-    //   modalElement.present();
-    // });
+    this.modalController.create({component: UserPopupPage}).then((modalElement) => {
+      modalElement.present();
+    });
+  }
+
+  openEditModal() {
+    this.addEditPopupService.showEdit(true);
+    this.modalController.create({component: UserPopupPage}).then((modalElement) => {
+      modalElement.present();
+    });
+  }
+
+  getAllUsers() {
+  
   }
 }
