@@ -1,0 +1,42 @@
+<ion-content>
+  <ion-refresher class="refresh" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="header-wrap">
+          <div class="title">
+            <img class="title-img" src='../../../assets/img//header_icons/users.png'>
+            <h3>User Management</h3>
+          </div>
+          <div class="add-button">
+            <ion-button color='danger' (click)="openAddModal()">
+              <ion-icon ios="ios-add" md="md-add"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="wrapper-content">
+    <table class="rwd-table">
+      <tr class="header">
+        <th>Visa</th>
+        <th>Role</th>
+        <th>Edit</th>
+      </tr>
+      <tr >
+        <td data-th='Name'></td>
+        <td></td>
+        <td class="Edit" data-th="Edit" >
+          <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
+        </td>
+      </tr>
+    </table>
+  </div>
+</ion-content>

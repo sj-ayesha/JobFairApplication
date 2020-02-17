@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class CandidateListPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
+  @ViewChild('venueFilter', {static: false}) venueFilter;
 
   candidateDetails: any[];
   candidateVenueJobsLists: CandidateVenueJob[] = [];
@@ -27,32 +28,23 @@ export class CandidateListPage implements OnInit {
 
   totalPages = 0;
   totalCandidates = 0;
-  filterText: number;
-  filterTextScreening: string;
+  filterTextVenue = 0;
+  filterTextScreening = 'All';
   filterTextLevel: string;
-  lastname: string;
+  filterTextSortOrder = 'DESC';
+  filterTextSortBy = 'candidate.registrationDate';
+  filterTextLastname = '';
 
   data: any;
   message: any;
+  selectedElementForVenue: '0';
+  selectedElementForScreening: 'All';
+  selectedElementForSearch: '';
   public responseData: any;
   public countCandidates: any;
 
   noCandidatesAvailable = false;
   candidateNotFound = false;
-
-  disableASC = false;
-  disableDESC = false;
-
-  subAll: Subscription;
-  subASC: Subscription;
-  subDESC: Subscription;
-
-  populateCandidates = false;
-  populateCandidatesByVenue = false;
-  populateCandidatesByScreeningStatus = false;
-  populateCandidatesByLevel = false;
-  populateCandidatesByAsc = false;
-  populateCandidatesByDesc = false;
 
   constructor(
     private router: Router,
@@ -60,8 +52,8 @@ export class CandidateListPage implements OnInit {
   }
 
   ngOnInit() {
-    this.populateAllCandidates();
     this.getVenueByActive();
+    this.filter();
   }
 
 
@@ -75,7 +67,6 @@ export class CandidateListPage implements OnInit {
 
   onSelect(id: number) {
     this.router.navigate(['/candidate-list', id]);
-    this.populateCandidateByVenue();
   }
 
   routeTo(candidateId: number) {
@@ -86,6 +77,31 @@ export class CandidateListPage implements OnInit {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
+  filter(event?, isLoadevent?) {
+    if (!isLoadevent) {
+      this.page = 0;
+      this.candidateVenueJobsLists = [];
+      this.totalCandidates = 0;
+    }
+    this.apiService.filterCandidates(this.page, this.limit, this.filterTextSortOrder,
+    this.filterTextSortBy, this.filterTextVenue, this.filterTextScreening, this.filterTextLastname).subscribe(
+      (data: CandidateVenueJobDtoResponseList) => {
+      this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
+      this.totalPages = data.totalPages;
+      this.totalCandidates = this.totalCandidates + data.totalElements;
+
+      if (this.totalPages === 0) {
+        this.noCandidatesAvailable = true;
+      } else {
+        this.noCandidatesAvailable = false;
+      }
+
+      if (event) {
+        event.target.complete();
+      }
+    });
+  }
+
   // VENUE
   getVenueByActive() {
     this.apiService.getVenueByActive(true).subscribe(data => {
@@ -93,286 +109,59 @@ export class CandidateListPage implements OnInit {
     });
   }
 
-  // FOR ALL CANDIDATES
-  populateAllCandidates(event?, isLoadevent?) {
-    this.populateCandidates = true;
-    this.populateCandidatesByVenue = false;
-    this.populateCandidatesByScreeningStatus = false;
-    this.populateCandidatesByLevel = false;
-    this.populateCandidatesByAsc = false;
-    this.populateCandidatesByDesc = false;
-    this.totalPages = 0;
-    if (!isLoadevent) {
-      this.page = 0;
-      this.candidateVenueJobsLists = [];
-      this.totalCandidates = 0;
-    }
-
-    this.subAll = this.apiService.getAllCandidatesVenueJob(this.page, this.limit).subscribe(
-      (data: CandidateVenueJobDtoResponseList) => {
-        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
-        this.totalPages = data.totalPages;
-        this.totalCandidates = this.totalCandidates + data.totalElements;
-
-        if (this.candidateVenueJobsLists.length === 0) {
-          this.noCandidatesAvailable = true;
-        } else {
-          this.noCandidatesAvailable = false;
-        }
-
-        if (event) {
-          event.target.complete();
-        }
-      });
-  }
-
   // FOR CANDIDATES BASED ON VENUE
   filterByVenue(event) {
-    this.populateCandidates = false;
-    this.populateCandidatesByVenue = true;
-    this.populateCandidatesByScreeningStatus = false;
-    this.populateCandidatesByLevel = false;
-    this.populateCandidatesByAsc = false;
-    this.populateCandidatesByDesc = false;
-    this.filterText = event.target.value;
-    if (this.filterText == 0) {
-      // this.candidateVenueJobsLists = [];
-      this.populateAllCandidates();
-    } else {
-      this.populateCandidateByVenue();
-    }
+    this.filterTextVenue = event.target.value;
+    this.filter();
   }
 
-  populateCandidateByVenue(event?, isLoadevent?) {
-    if (!isLoadevent) {
-      this.page = 0;
-      this.candidateVenueJobsLists = [];
-      this.totalCandidates = 0;
-      this.totalPages = 0;
-    }
-    // tslint:disable-next-line: radix
-    this.apiService.getCandidatesByVenueId(this.filterText, this.page, this.limit).subscribe(
-      (data: CandidateVenueJobDtoResponseList) => {
-        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
-        this.totalPages = data.totalPages;
-        this.totalCandidates = this.totalCandidates + data.totalElements;
-
-        if (this.totalPages === 0) {
-          this.noCandidatesAvailable = true;
-        } else {
-          this.noCandidatesAvailable = false;
-        }
-
-        if (event) {
-          event.target.complete();
-        }
-      });
-
-  }
 
   // SCREENING STATUS
   filterByScreeningStatus(event) {
-    this.populateCandidates = false;
-    this.populateCandidatesByVenue = false;
-    this.populateCandidatesByScreeningStatus = true;
-    this.populateCandidatesByLevel = false;
-    this.populateCandidatesByAsc = false;
-    this.populateCandidatesByDesc = false;
     this.filterTextScreening = event.target.value;
-    if (this.filterTextScreening === 'All') {
-      this.populateAllCandidates();
-    } else {
-      this.populateCandidateByScreeningStatus();
-    }
-  }
-
-  populateCandidateByScreeningStatus(event?, isLoadevent?) {
-    if (!isLoadevent) {
-      this.page = 0;
-      this.candidateVenueJobsLists = [];
-      this.totalCandidates = 0;
-      // this.totalPages = 0;
-    }
-    // tslint:disable-next-line: radix
-    this.apiService.getAllCandidatesByScreeningStatus(this.filterTextScreening, this.page, this.limit).subscribe(
-      (data: CandidateVenueJobDtoResponseList) => {
-        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
-        this.totalPages = data.totalPages;
-        this.totalCandidates = this.totalCandidates + data.totalElements;
-
-        if (this.totalPages === 0) {
-          this.noCandidatesAvailable = true;
-        } else {
-          this.noCandidatesAvailable = false;
-        }
-
-        if (event) {
-          event.target.complete();
-        }
-      });
-
+    this.filter();
   }
 
   // LEVEL
   filterByLevel(event) {
-    this.populateCandidates = false;
-    this.populateCandidatesByVenue = false;
-    this.populateCandidatesByScreeningStatus = false;
-    this.populateCandidatesByLevel = true;
-    this.populateCandidatesByAsc = false;
-    this.populateCandidatesByDesc = false;
     this.filterTextLevel = event.target.value;
-    if (this.filterTextLevel === 'All') {
-      this.populateAllCandidates();
-    } else {
-      this.populateCandidateByLevel();
-    }
+    this.filter();
   }
 
-
-  populateCandidateByLevel(event?, isLoadevent?) {
-    if (!isLoadevent) {
-      this.page = 0;
-      this.candidateVenueJobsLists = [];
-      this.totalCandidates = 0;
-      this.totalPages = 0;
-    }
-    // tslint:disable-next-line: radix
-    this.apiService.getAllCandidatesByLevel(this.filterTextLevel, this.page, this.limit).subscribe(
-      (data: CandidateVenueJobDtoResponseList) => {
-        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
-        this.totalPages = data.totalPages;
-        console.log(this.totalPages)
-        this.totalCandidates = this.totalCandidates + data.totalElements;
-
-        if (this.totalPages === 0) {
-          this.noCandidatesAvailable = true;
-        } else {
-          this.noCandidatesAvailable = false;
-        }
-
-        if (event) {
-          event.target.complete();
-        }
-      });
-
+  getAllCandidatesByAsc() {
+    this.filterTextSortBy = 'candidate.lastName';
+    this.filterTextSortOrder = 'ASC';
+    this.filter();
   }
 
-  getAllCandidatesByAsc(event?, isLoadevent?) {
-    // this.disableASC = true;
-    // this.disableDESC = false;
-    this.populateCandidates = false;
-    this.populateCandidatesByVenue = false;
-    this.populateCandidatesByScreeningStatus = false;
-    this.populateCandidatesByLevel = false;
-    this.populateCandidatesByAsc = true;
-    this.populateCandidatesByDesc = false;
-    if (!isLoadevent) {
-      this.page = 0;
-      this.candidateVenueJobsLists = [];
-      this.totalCandidates = 0;
-    }
-
-    this.subASC = this.apiService.getAllCandidateByASC(this.page, this.limit).subscribe(
-      (data: CandidateVenueJobDtoResponseList) => {
-        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
-        this.totalPages = data.totalPages;
-        console.log(this.totalPages);
-        this.totalCandidates = this.totalCandidates + data.totalElements;
-
-        if (event) {
-          event.target.complete();
-        } else {
-        }
-      });
+  getAllCandidatesByDesc() {
+    this.filterTextSortBy = 'candidate.lastName';
+    this.filterTextSortOrder = 'DESC';
+    this.filter();
   }
 
-  getAllCandidatesByDesc(event?, isLoadevent?) {
-    // this.disableASC = false;
-    // this.disableDESC = true;
-    this.populateCandidates = false;
-    this.populateCandidatesByVenue = false;
-    this.populateCandidatesByScreeningStatus = false;
-    this.populateCandidatesByLevel = false;
-    this.populateCandidatesByAsc = false;
-    this.populateCandidatesByDesc = true;
+  resetFilters() {
+    this.filterTextVenue = 0;
+    this.filterTextScreening = 'All';
+    this.filterTextSortBy = 'candidate.registrationDate';
+    this.filterTextSortOrder = 'DESC';
+    this.filterTextLastname = '';
+    this.filter();
+    this.selectedElementForVenue = '0';
+    this.selectedElementForScreening = 'All';
+    this.selectedElementForSearch = '';
+  }
 
-    if (!isLoadevent) {
-      this.page = 0;
-      this.candidateVenueJobsLists = [];
-      this.totalCandidates = 0;
-    }
-
-    this.subDESC = this.apiService.getAllCandidateByDESC(this.page, this.limit).subscribe(
-      (data: CandidateVenueJobDtoResponseList) => {
-        this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
-        this.totalPages = data.totalPages;
-        this.totalCandidates = this.totalCandidates + data.totalElements;
-
-        console.log(this.candidateVenueJobsLists);
-        if (event) {
-          event.target.complete();
-        } else {
-        }
-      });
+  loadData(event) {
+    setTimeout(() => {
+      this.page++;
+      this.filter(event, true);
+    }, 500);
   }
 
   searchByLastName(lastName: any) {
-    this.candidateNotFound = false;
-    if (lastName === '' ) {
-      this.populateAllCandidates();
-    } else {
-      this.totalCandidates = 0;
-      this.apiService.getCandidateByLastName(lastName).subscribe(data => {
-        if (data.message === 'NO_CANDIDATE_VENUE_JOB_AVAILABLE') {
-          this.candidateNotFound = true;
-        } else {
-          this.candidateVenueJobsLists = data;
-          this.totalCandidates = this.candidateVenueJobsLists.length;
-          return this.candidateVenueJobsLists;
-        }
-      });
-    }
-  }
-
-  // LOADING FOR INFINITE SCROLL
-  loadData(event) {
-    console.log(this.page);
-    if (this.populateCandidates === true) {
-      setTimeout(() => {
-        this.page++;
-        this.populateAllCandidates(event, true);
-      }, 500);
-    } else if (this.populateCandidatesByVenue === true) {
-      setTimeout(() => {
-        this.page++;
-        this.populateCandidateByVenue(event, true);
-      }, 500);
-    } else if (this.populateCandidatesByScreeningStatus === true) {
-      setTimeout(() => {
-        this.page++;
-        this.populateCandidateByScreeningStatus(event, true);
-      }, 500);
-    }  else if (this.populateCandidatesByLevel === true) {
-      setTimeout(() => {
-        this.page++;
-        this.populateCandidateByLevel(event, true);
-      }, 500);
-    } else if (this.populateCandidatesByAsc === true) {
-      setTimeout(() => {
-        this.page++;
-        this.getAllCandidatesByAsc(event, true);
-      }, 500);
-    } else if (this.populateCandidatesByDesc === true) {
-      setTimeout(() => {
-        this.page++;
-        this.getAllCandidatesByDesc(event, true);
-      }, 500);
-    }
-
-    // if (this.page === this.totalPages) {
-    //   event.target.disabled = true;
-    // }
+    this.filterTextLastname = lastName;
+    this.filter();
   }
 
   countCandidatesByVenue() {
