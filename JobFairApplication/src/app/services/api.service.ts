@@ -20,6 +20,7 @@ import { Dashboard } from '../model/dashboard';
 import { RoleDto } from '../model/roleDto';
 import { DownloadDto } from '../model/DownloadDto';
 import { ExcelDto } from '../model/ExcelDto';
+import { UserRoleDto, UserRoleDtoResponseList } from '../model/UserRoleDto';
 
 
 @Injectable({
@@ -283,8 +284,8 @@ export class ApiService {
   }
 
   // Users
-  getAllUsers(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + 'excel/export');
+  getAllUsers(): Observable<UserRoleDtoResponseList[] | any> {
+    return this.http.get<UserRoleDtoResponseList[] | any>(this.baseUrl + 'user/all');
   }
 
 }

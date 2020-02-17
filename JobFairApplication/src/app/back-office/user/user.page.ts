@@ -3,6 +3,7 @@ import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { UserPopupPage } from '../user-popup/user-popup.page';
 import { ApiService } from 'src/app/services/api.service';
+import { UserRoleDtoResponseList } from 'src/app/model/UserRoleDto';
 
 @Component({
   selector: 'app-user',
@@ -11,12 +12,15 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class UserPage implements OnInit {
 
+  userRole: any[];
+
   constructor(
     private addEditPopupService: AddEditPopupService,
     private modalController: ModalController,
     private apiService: ApiService) { }
 
   ngOnInit() {
+    this.getAllUsers();
   }
 
   openAddModal() {
@@ -34,6 +38,11 @@ export class UserPage implements OnInit {
   }
 
   getAllUsers() {
-  
+    this.apiService.getAllUsers().subscribe(data  => {
+
+      this.userRole = data;
+
+      console.log('user', this.userRole);
+    })
   }
 }

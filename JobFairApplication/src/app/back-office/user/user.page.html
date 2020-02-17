@@ -31,10 +31,10 @@
         <th>Active</th>
         <th>Edit</th>
       </tr>
-      <tr >
-        <td data-th='Visa'>ASJ</td>
+      <tr *ngFor="let user of userRole">
+        <td data-th='Visa'>{{ user.visa }}</td>
         <td data-th="Role">HR</td>
-        <td data-th="Active">true</td>
+        <td data-th="Active">{{ user.active }}</td>
         <td class="Edit" data-th="Edit" >
           <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
         </td>
