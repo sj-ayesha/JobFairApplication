@@ -149,10 +149,12 @@ const routes: Routes = [
   {
     path: 'not-authorized',
     loadChildren: () => import('./pages/not-authorized/not-authorized.module').then( m => m.NotAuthorizedPageModule)
-  },  {
-    path: 'user-popup',
-    loadChildren: () => import('./back-office/user-popup/user-popup.module').then( m => m.UserPopupPageModule)
   }
+  // ,
+  // {
+  //   path: 'user-popup',
+  //   loadChildren: () => import('./back-office/user-popup/user-popup.module').then( m => m.UserPopupPageModule)
+  // }
 
 
 ];
