@@ -47,14 +47,6 @@
             </ion-select>
           </ion-item>
 
-          <!-- <ion-item *ngIf="edit">
-            <ion-label position="floating" color="medium">*Role</ion-label>
-            <ion-select interface="popover" formControlName="role" cancelText="Cancel" okText="OK">
-              <ion-select-option *ngFor="let categoryX of categories" [value]="categoryX">{{categoryX}}
-              </ion-select-option>
-            </ion-select>
-          </ion-item> -->
-
           <div class="error-messages">
             <ng-container *ngFor="let error of errorMessages.role">
               <div class="error-message"
