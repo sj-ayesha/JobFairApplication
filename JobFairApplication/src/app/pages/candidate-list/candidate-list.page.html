@@ -48,7 +48,7 @@
     </ion-row>
 
     <ion-row class="filter-section">
-      <ion-col size="6" class="ion-padding">
+      <ion-col size="4" class="ion-padding">
         <ion-item class="venue-input">
           <ion-label position="floating" color="medium">Filter Candidates by venue..</ion-label>
           <ion-select (ionChange)="filterByVenue($event)" interface="popover"
@@ -60,7 +60,7 @@
           </ion-select>
         </ion-item>
       </ion-col>
-      <ion-col size="6" class="ion-padding">
+      <ion-col size="4" class="ion-padding">
         <ion-item class="venue-input">
           <ion-label position="floating" color="medium">Filter Candidates by screening status..</ion-label>
           <ion-select (ionChange)="filterByScreeningStatus($event)"
@@ -72,17 +72,17 @@
           </ion-select>
         </ion-item>
       </ion-col>
-      <!-- <ion-col size="4" class="ion-padding">
+      <ion-col size="4" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Filter Candidates level..</ion-label>
-            <ion-select (ionChange)="filterByLevel($event)" interface="popover" class="ion-float-left">
+            <ion-select (ionChange)="filterByLevel($event)" interface="popover" class="ion-float-left" [(ngModel)]="selectedElementForLevel">
               <ion-select-option value="All" selected="selected">All</ion-select-option>
               <ion-select-option value="Fresher">Fresher</ion-select-option>
               <ion-select-option value="Junior">Junior</ion-select-option>
               <ion-select-option value="Senior">Senior</ion-select-option>
             </ion-select>
           </ion-item>
-        </ion-col> -->
+        </ion-col>
     </ion-row>
 
     <div class="asc">

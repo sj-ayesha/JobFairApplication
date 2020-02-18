@@ -116,10 +116,10 @@ export class ApiService {
   }
 
   // tslint:disable-next-line: max-line-length
-  filterCandidates(pageNumber: number, pageSize: number, sortOrder: string, sortBy: string, venueId?: number, screeningStatus?: string, lastName?: string): Observable<CandidateVenueJobDtoResponseList[] | any> {
+  filterCandidates(pageNumber: number, pageSize: number, sortOrder: string, sortBy: string, venueId?: number, screeningStatus?: string, lastName?: string, level?: string): Observable<CandidateVenueJobDtoResponseList[] | any> {
     return this.http.get<CandidateVenueJobDtoResponseList[] | any>
     // tslint:disable-next-line: max-line-length
-    (this.baseUrl + 'candidate-venue-job/filter?venueId=' + venueId + '&screeningStatus=' + screeningStatus + '&lastName=' + lastName + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+    (this.baseUrl + 'candidate-venue-job/filter?venueId=' + venueId + '&screeningStatus=' + screeningStatus + '&lastName=' + lastName + '&level=' + level + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   // candidate skills

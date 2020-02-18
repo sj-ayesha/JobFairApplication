@@ -27,7 +27,7 @@ export class CandidateListPage implements OnInit {
   totalCandidates = 0;
   filterTextVenue = 0;
   filterTextScreening = 'All';
-  filterTextLevel: string;
+  filterTextLevel = 'All';
   filterTextSortOrder = 'DESC';
   filterTextSortBy = 'candidate.registrationDate';
   filterTextLastname = '';
@@ -37,6 +37,7 @@ export class CandidateListPage implements OnInit {
   selectedElementForVenue = '0';
   selectedElementForScreening = 'All';
   selectedElementForSearch = '';
+  selectedElementForLevel = 'All';
   public responseData: any;
   public countCandidates: any;
 
@@ -81,7 +82,7 @@ export class CandidateListPage implements OnInit {
       this.totalCandidates = 0;
     }
     this.apiService.filterCandidates(this.page, this.limit, this.filterTextSortOrder,
-      this.filterTextSortBy, this.filterTextVenue, this.filterTextScreening, this.selectedElementForSearch).subscribe(
+      this.filterTextSortBy, this.filterTextVenue, this.filterTextScreening, this.filterTextLastname, this.filterTextLevel).subscribe(
         (data: CandidateVenueJobDtoResponseList) => {
           this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
           this.totalPages = data.totalPages;
@@ -144,12 +145,14 @@ export class CandidateListPage implements OnInit {
     this.filterTextSortBy = 'candidate.registrationDate';
     this.filterTextLastname = '';
     this.filterTextSortOrder = 'DESC';
+    this.filterTextLevel = 'All';
 
 
     this.filter();
     // this.selectedElementForVenue = '0';
     // this.selectedElementForScreening = 'All';
     // this.selectedElementForSearch = '';
+    // this.selectedElementForLevel = 'All';
   }
 
   loadData(event) {
