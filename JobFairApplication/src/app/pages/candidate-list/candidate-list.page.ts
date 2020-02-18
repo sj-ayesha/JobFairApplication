@@ -45,7 +45,6 @@ export class CandidateListPage implements OnInit {
   candidateNotFound = false;
   usingNgModel = false;
   disableResetFilter = false;
-  usingFilter = true;
   constructor(
     private router: Router,
     private apiService: ApiService) {
@@ -160,8 +159,6 @@ export class CandidateListPage implements OnInit {
 
 
     this.filter();
-    this.usingFilter = true; 
-
     this.disableResetFilter = true;
     setTimeout(() => {
       this.disableResetFilter = false;
@@ -170,7 +167,6 @@ export class CandidateListPage implements OnInit {
     this.selectedElementForScreening = 'All';
     this.selectedElementForLevel = 'All';
     this.selectedElementForSearch = '';
-    this.usingFilter = false;
   }
 
   loadData(event) {
