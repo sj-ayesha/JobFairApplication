@@ -30,7 +30,7 @@
 
       <ion-col size="6" class="ion-padding btn-order">
         <div class="btn-reset ion-padding">
-          <ion-button (click)="resetFilters()" class="btn" color="dark" size="small">
+          <ion-button [disabled]="disableResetFilter" (click)="resetFilters()" class="btn" color="dark" size="small">
             <ion-icon class="refresh" ios="ios-refresh" md="md-refresh"></ion-icon>Reset Filters
           </ion-button>
         </div>

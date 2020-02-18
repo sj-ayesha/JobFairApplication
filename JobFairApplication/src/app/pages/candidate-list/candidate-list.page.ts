@@ -44,6 +44,8 @@ export class CandidateListPage implements OnInit {
   noCandidatesAvailable = false;
   candidateNotFound = false;
   usingNgModel = false;
+  disableResetFilter = false;
+  usingFilter = true;
   constructor(
     private router: Router,
     private apiService: ApiService) {
@@ -110,7 +112,10 @@ export class CandidateListPage implements OnInit {
   // FOR CANDIDATES BASED ON VENUE
   filterByVenue(event) {
     this.filterTextVenue = event.target.value;
-    this.filter();
+    if (this.selectedElementForVenue === '0') {
+    } else {
+      this.filter();
+    }
     // console.log();
   }
 
@@ -118,13 +123,19 @@ export class CandidateListPage implements OnInit {
   // SCREENING STATUS
   filterByScreeningStatus(event) {
     this.filterTextScreening = event.target.value;
-    this.filter();
+    if (this.selectedElementForScreening === 'All') {
+    } else {
+      this.filter();
+    }
   }
 
   // LEVEL
   filterByLevel(event) {
     this.filterTextLevel = event.target.value;
-    this.filter();
+    if (this.selectedElementForLevel === 'All') {
+    } else {
+      this.filter();
+    }
   }
 
   getAllCandidatesByAsc() {
@@ -149,10 +160,17 @@ export class CandidateListPage implements OnInit {
 
 
     this.filter();
-    // this.selectedElementForVenue = '0';
-    // this.selectedElementForScreening = 'All';
-    // this.selectedElementForSearch = '';
-    // this.selectedElementForLevel = 'All';
+    this.usingFilter = true; 
+
+    this.disableResetFilter = true;
+    setTimeout(() => {
+      this.disableResetFilter = false;
+    }, 2000);
+    this.selectedElementForVenue = '0';
+    this.selectedElementForScreening = 'All';
+    this.selectedElementForLevel = 'All';
+    this.selectedElementForSearch = '';
+    this.usingFilter = false;
   }
 
   loadData(event) {
