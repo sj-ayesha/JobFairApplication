@@ -67,10 +67,33 @@ img.title-img {
     margin-bottom: 7px;
 }
 
+.refresh{
+    padding-right: 10px;
+}
 
 @media only screen and (max-width: 600px){
     .filter-section {
         display: block;
+    }
+
+    .filter-row{
+        display: block;
+        .btn-order{
+            display: -webkit-box;
+            -webkit-box-pack: unset;
+            justify-content: unset;
+            .btn-reset{
+                padding: 0 5px;
+            }
+            .btn-asc{
+                padding: 0;
+                // padding-left: 4.5vh;
+                padding-right: 5px;
+            }
+            .btn-desc{
+                padding: 0;
+            }
+        }
     }
 
     .card-content {
@@ -103,6 +126,6 @@ img.title-img {
     .btn-order {
         padding: 0;
     }
-  }
+}
 
   

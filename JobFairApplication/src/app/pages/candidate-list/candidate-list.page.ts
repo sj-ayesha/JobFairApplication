@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { CandidatesService } from '../../services/candidates.service';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
-import { Candidate, CandidateResponseList } from 'src/app/model/candidate';
+import { Candidate } from 'src/app/model/candidate';
 import { CandidateVenueJob, CandidateVenueJobDtoResponseList } from 'src/app/model/candidateVenueJob';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Venue } from 'src/app/model/venue';
-import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-candidate-list',
@@ -15,13 +14,11 @@ import { Subscription } from 'rxjs';
 })
 export class CandidateListPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
-  @ViewChild('venueFilter', {static: false}) venueFilter;
 
   candidateDetails: any[];
   candidateVenueJobsLists: CandidateVenueJob[] = [];
   allCandidates: Candidate[] = [];
   venues: Venue[];
-  public dataSet: [];
 
   limit = 10;
   page = 0;
@@ -37,15 +34,15 @@ export class CandidateListPage implements OnInit {
 
   data: any;
   message: any;
-  selectedElementForVenue: '0';
-  selectedElementForScreening: 'All';
-  selectedElementForSearch: '';
+  selectedElementForVenue = '0';
+  selectedElementForScreening = 'All';
+  selectedElementForSearch = '';
   public responseData: any;
   public countCandidates: any;
 
   noCandidatesAvailable = false;
   candidateNotFound = false;
-
+  usingNgModel = false;
   constructor(
     private router: Router,
     private apiService: ApiService) {
@@ -55,7 +52,6 @@ export class CandidateListPage implements OnInit {
     this.getVenueByActive();
     this.filter();
   }
-
 
   doRefresh(event) {
     this.ngOnInit();
@@ -78,28 +74,29 @@ export class CandidateListPage implements OnInit {
   }
 
   filter(event?, isLoadevent?) {
+    console.log('page', this.page);
     if (!isLoadevent) {
       this.page = 0;
       this.candidateVenueJobsLists = [];
       this.totalCandidates = 0;
     }
     this.apiService.filterCandidates(this.page, this.limit, this.filterTextSortOrder,
-    this.filterTextSortBy, this.filterTextVenue, this.filterTextScreening, this.filterTextLastname).subscribe(
-      (data: CandidateVenueJobDtoResponseList) => {
-      this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
-      this.totalPages = data.totalPages;
-      this.totalCandidates = this.totalCandidates + data.totalElements;
+      this.filterTextSortBy, this.filterTextVenue, this.filterTextScreening, this.selectedElementForSearch).subscribe(
+        (data: CandidateVenueJobDtoResponseList) => {
+          this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
+          this.totalPages = data.totalPages;
+          this.totalCandidates = this.totalCandidates + data.totalElements;
 
-      if (this.totalPages === 0) {
-        this.noCandidatesAvailable = true;
-      } else {
-        this.noCandidatesAvailable = false;
-      }
+          if (this.totalPages === 0) {
+            this.noCandidatesAvailable = true;
+          } else {
+            this.noCandidatesAvailable = false;
+          }
 
-      if (event) {
-        event.target.complete();
-      }
-    });
+          if (event) {
+            event.target.complete();
+          }
+        });
   }
 
   // VENUE
@@ -113,6 +110,7 @@ export class CandidateListPage implements OnInit {
   filterByVenue(event) {
     this.filterTextVenue = event.target.value;
     this.filter();
+    // console.log();
   }
 
 
@@ -144,12 +142,14 @@ export class CandidateListPage implements OnInit {
     this.filterTextVenue = 0;
     this.filterTextScreening = 'All';
     this.filterTextSortBy = 'candidate.registrationDate';
-    this.filterTextSortOrder = 'DESC';
     this.filterTextLastname = '';
+    this.filterTextSortOrder = 'DESC';
+
+
     this.filter();
-    this.selectedElementForVenue = '0';
-    this.selectedElementForScreening = 'All';
-    this.selectedElementForSearch = '';
+    // this.selectedElementForVenue = '0';
+    // this.selectedElementForScreening = 'All';
+    // this.selectedElementForSearch = '';
   }
 
   loadData(event) {
