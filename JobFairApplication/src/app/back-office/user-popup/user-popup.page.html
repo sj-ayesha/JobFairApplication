@@ -2,8 +2,8 @@
   <ion-toolbar>
     <div class="toolbar-content">
       <div class="header-title">
-        <ion-title class="ion-text-left" *ngIf="!edit">Add Venue</ion-title>
-        <ion-title class="ion-text-left" *ngIf="edit">Edit Venue</ion-title>
+        <ion-title class="ion-text-left" *ngIf="!edit">Add User</ion-title>
+        <ion-title class="ion-text-left" *ngIf="edit">Edit User</ion-title>
       </div>
       <div class="modal-close">
         <button (click)="closeModal()" class="modal__close-btn ion-float-right">X</button>
@@ -23,7 +23,7 @@
           </ion-item>
           <ion-item *ngIf="edit">
             <ion-label position="floating" color="medium">*Visa</ion-label>
-            <ion-input formControlName="visa" type="text" value=""></ion-input>
+            <ion-input formControlName="visa" type="text" value="{{visa}}"></ion-input>
           </ion-item>
           <div class="error-messages">
             <ng-container *ngFor="let error of errorMessages.visa">
@@ -42,8 +42,17 @@
             <ion-label position="floating" color="medium">*Role</ion-label>
             <ion-select formControlName="role" interface="popover" cancelText="Cancel" okText="OK">
               <ion-select-option value="HR">HR</ion-select-option>
-              <ion-select-option value="MANAGER">Manager</ion-select-option>
-              <ion-select-option value="INTERVIEWER">Interviewer</ion-select-option>
+              <ion-select-option value="MANAGER">MANAGER</ion-select-option>
+              <ion-select-option value="INTERVIEWER">INTERVIEWER</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item *ngIf="edit">
+            <ion-label position="floating" color="medium">*Role</ion-label>
+            <ion-select formControlName="role" interface="popover" cancelText="Cancel" okText="OK">
+              <ion-select-option value="HR">HR</ion-select-option>
+              <ion-select-option value="MANAGER">MANAGER</ion-select-option>
+              <ion-select-option value="INTERVIEWER">INTERVIEWER</ion-select-option>
             </ion-select>
           </ion-item>
 
@@ -79,6 +88,12 @@
           </div>
         </ion-col>
       </ion-row>
+
+      <div class="option-button ion-text-right">
+        <ion-button class="btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
+        <ion-button class='btn' *ngIf="!edit" color="dark" (click)="onSubmit()">Add</ion-button>
+        <ion-button class='btn' *ngIf="edit" color="dark" (click)="onSubmit()">Save</ion-button>
+      </div>
 
     </form>
   </div>

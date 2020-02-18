@@ -5,3 +5,32 @@
         display: flex;
     }
 }
+
+
+ion-title{
+    font-size: 25px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+
+    &-title {
+        ion-title {
+            padding: 0 20px;
+        }
+    }
+}
+.addVenue{
+    margin-top:10px;
+}
+.btn-radio-group{
+    display: flex;
+}
+
+.btn{
+    padding-left: 12px;
+}
+.ion-text-right{
+    width: 100%;
+}
+  

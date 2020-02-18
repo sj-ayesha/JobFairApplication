@@ -33,10 +33,10 @@
         <th>Edit</th>
       </tr>
       <tr *ngFor="let user of userRole">
-        <td data-th='Visa'>{{ user.visa }}</td>
-        <td data-th="Role">HR</td>
-        <td data-th="Active">{{ user.active }}</td>
-        <td class="Edit" data-th="Edit" >
+        <td data-th='Visa'>{{ user.user.visa }}</td>
+        <td data-th="Role">{{ user.role.name }}</td>
+        <td data-th="Active">{{ user.user.active }}</td>
+        <td class="Edit" data-th="Edit" (click)="edit(user.userRoleId)">
           <ion-icon class="edit-btn" ios="ios-create" md="md-create"></ion-icon>
         </td>
       </tr>

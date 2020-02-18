@@ -74,6 +74,7 @@ export class JobsPopupPage implements OnInit {
         this.minimumExperience = this.jobs[5];
         this.qualificationNeeded = this.jobs[6];
       }
+      console.log(this.level)
 
       // change value format of modal to value format by what is required in back-end
       if (this.jobs[3] === 'software-engineer') {

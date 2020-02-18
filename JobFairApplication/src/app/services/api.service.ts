@@ -292,7 +292,7 @@ export class ApiService {
 
   // Users
   getAllUsers(): Observable<UserRoleDtoResponseList[] | any> {
-    return this.http.get<UserRoleDtoResponseList[] | any>(this.baseUrl + 'user/all');
+    return this.http.get<UserRoleDtoResponseList[] | any>(this.baseUrl + 'user-role/all');
   }
 
 }
