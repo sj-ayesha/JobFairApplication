@@ -11,7 +11,7 @@
           <h3 class="ion-text-uppercase">Job list</h3>
         </ion-col>
       </ion-row>
-      <ion-row class="filter-row" *ngIf="!noJobsAvailable">
+      <ion-row class="filter-row">
         <ion-col size="6" class="filter-search ion-padding">
           <ion-searchbar placeholder="Search..." type="text" #title (ionInput)="searchByTitle(title.value)">
           </ion-searchbar>
@@ -19,8 +19,8 @@
         <ion-col size="6" class="ion-padding">
           <ion-item class="venue-input">
             <ion-label position="floating" color="medium">Please select position..</ion-label>
-            <ion-select (ionChange)="filter($event)" interface="popover" class="ion-float-left">
-              <ion-select-option value="all" selected="selected">All</ion-select-option>
+            <ion-select (ionChange)="filterByPosition($event)" interface="popover" class="ion-float-left">
+              <ion-select-option value="All" selected="selected">All</ion-select-option>
               <ion-select-option value="fresher">Fresher</ion-select-option>
               <ion-select-option value="junior">Junior</ion-select-option>
               <ion-select-option value="senior">Senior</ion-select-option>

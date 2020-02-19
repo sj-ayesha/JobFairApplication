@@ -45,6 +45,7 @@ export class CandidateListPage implements OnInit {
   candidateNotFound = false;
   usingNgModel = false;
   disableResetFilter = false;
+  x = false;
   constructor(
     private router: Router,
     private apiService: ApiService) {
@@ -111,7 +112,7 @@ export class CandidateListPage implements OnInit {
   // FOR CANDIDATES BASED ON VENUE
   filterByVenue(event) {
     this.filterTextVenue = event.target.value;
-    if (this.selectedElementForVenue === '0') {
+    if (this.x === true) {
     } else {
       this.filter();
     }
@@ -122,7 +123,7 @@ export class CandidateListPage implements OnInit {
   // SCREENING STATUS
   filterByScreeningStatus(event) {
     this.filterTextScreening = event.target.value;
-    if (this.selectedElementForScreening === 'All') {
+    if (this.x === true) {
     } else {
       this.filter();
     }
@@ -131,7 +132,7 @@ export class CandidateListPage implements OnInit {
   // LEVEL
   filterByLevel(event) {
     this.filterTextLevel = event.target.value;
-    if (this.selectedElementForLevel === 'All') {
+    if (this.x === true) {
     } else {
       this.filter();
     }
@@ -150,6 +151,7 @@ export class CandidateListPage implements OnInit {
   }
 
   resetFilters() {
+    this.x = true;
     this.filterTextVenue = 0;
     this.filterTextScreening = 'All';
     this.filterTextSortBy = 'candidate.registrationDate';
@@ -162,6 +164,7 @@ export class CandidateListPage implements OnInit {
     this.disableResetFilter = true;
     setTimeout(() => {
       this.disableResetFilter = false;
+      this.x = false;
     }, 2000);
     this.selectedElementForVenue = '0';
     this.selectedElementForScreening = 'All';

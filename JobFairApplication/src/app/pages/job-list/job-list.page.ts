@@ -6,6 +6,7 @@ import { VenueJob, VenueJobResponseList } from 'src/app/model/venueJob';
 import { ToastController, IonInfiniteScroll } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { timingSafeEqual } from 'crypto';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-job-list',
@@ -18,7 +19,7 @@ export class JobListPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
 
   // jobs: any;
-  jobs: Job[];
+  // jobs: Job[];
   public venueJobs: VenueJob[] = [];
   priority = [];
 
@@ -37,10 +38,13 @@ export class JobListPage implements OnInit {
   totalPages = 0;
   spontaneousId: number;
 
+  filterTextTitle = '';
+  filterTextCategory = 'All';
+  filterTextPosition = 'All';
+
   category: string;
   jobPriority: string;
   jobId: string;
-  public searchTerm: string = '';
   filterText: string;
 
   data: any;
@@ -56,20 +60,19 @@ export class JobListPage implements OnInit {
   ) {
     const allJobsByVenueId: string = this.route.snapshot.paramMap.get('jobQueryParam');
     if (allJobsByVenueId === 'by-venue') {
-      this.getAllJobsByVenueId();
+      this.filter();
     } else {
       this.getAllJobsByVenueIdAndCategory();
     }
   }
 
   ngOnInit() {
-
   }
 
   doRefresh(event) {
-    if (this.category == null) {
+    if (this.filterTextCategory == null) {
       this.venueJobs = [];
-      this.getAllJobsByVenueId();
+      this.filter();
       setTimeout(() => {
         event.target.complete();
       }, 2000);
@@ -88,52 +91,142 @@ export class JobListPage implements OnInit {
     window.localStorage.setItem('jobId', '');
   }
 
-  filter(event) {
-    this.filterText = event.target.value;
-    if (this.filterText === 'all') {
+  filter(event?, isLoadevent?) {
+    if (!isLoadevent) {
+      this.page = 0;
       this.venueJobs = [];
-      if (this.category == null) {
-        this.getAllJobsByVenueId();
-      } else {
-        this.getAllJobsByVenueIdAndCategory();
-      }
-    } else {
-      this.getJobByLevel();
+      this.totalPages = 0;
     }
+    // tslint:disable-next-line: max-line-length
+    this.apiService.filterVenueJobs(this.page, this.limit, parseInt(window.localStorage.getItem('venue_id')), this.filterTextTitle, this.filterTextPosition, this.filterTextCategory).subscribe(
+      (data: VenueJobResponseList) => {
+        console.log(this.filterTextPosition)
+        this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
+        setTimeout(() => {
+          this.styleAccordion();
+        }, 0);
+
+        this.totalPages = data.totalPages;
+
+        if (this.venueJobs.length === 0) {
+          this.noJobsAvailable = true;
+        } else {
+          this.noJobsAvailable = false;
+        }
+
+        this.venueJobs.forEach((element, index) => {
+          if (this.venueJobs[index].job.title === 'Spontaneous Application') {
+            this.spontaneousId = this.venueJobs[index].job.jobId;
+            console.log(this.spontaneousId);
+            this.showQuickApply = true;
+          } else {
+            this.showQuickApply = false;
+          }
+        });
+
+        if (event) {
+          event.target.complete();
+        }
+    });
+  }
+
+  filterByPosition(event) {
+    this.filterTextPosition = event.target.value;
+    this.filter();
+  }
+
+  searchByTitle(title: string) {
+    this.filterTextTitle = title;
+    this.filter();
   }
 
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
-  getJobByLevel() {
-    // tslint:disable-next-line: radix
-    const venueId = parseInt(window.localStorage.getItem('venue_id'));
-    if (this.category == null) {
-      this.apiService.searchJobByLevel(parseInt(window.localStorage.getItem('venue_id')), this.filterText).subscribe(data => {
-        this.jobNotFound = false;
-        if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
-          this.jobNotFound = true;
-        } else {
-          this.venueJobs = data;
-          setTimeout(() => {
-            this.styleAccordion();
-          }, 0);
-        }
-      });
-    } else {
-      this.apiService.getJobByCategoryAndLevel(venueId, this.category, this.filterText).subscribe(data => {
-        this.jobNotFound = false;
-        if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
-          this.jobNotFound = true;
-        } else {
-          this.venueJobs = data;
-          setTimeout(() => {
-            this.styleAccordion();
-          }, 0);
-        }
-      });
+  loadData(event) {
+    setTimeout(() => {
+      this.page++;
+      this.filter(event, true);
+    }, 500);
+    setTimeout(() => {
+      this.styleAccordion();
+    }, 0);
+    if (this.page === this.totalPages) {
+      event.target.disabled = true;
     }
+  }
+
+  getAllJobsByVenueIdAndCategory() {
+    this.filterTextCategory = this.route.snapshot.paramMap.get('jobQueryParam');
+    console.log(this.filterTextCategory);
+    this.filter();
+  }
+
+  addPriority(event: CustomEvent, jobId: number) {
+    if (event.detail.checked) {
+      this.priority.push(jobId);
+      localStorage.setItem('priority', JSON.stringify(this.priority));
+    } else {
+      const index = this.priority.indexOf(jobId);
+      if (index > -1) {
+        this.priority.splice(index, 1);
+      }
+      localStorage.setItem('priority', JSON.stringify(this.priority));
+    }
+  }
+
+  setJobId() {
+    this.jobPriority = JSON.parse(localStorage.getItem('priority'));
+    this.jobId = this.jobPriority[0];
+    localStorage.setItem('jobId', this.jobId);
+  }
+
+  routeToJob(jobQueryParam: string) {
+    this.router.navigate(['/job-list', jobQueryParam]);
+  }
+
+  applyOnlyFive() {
+    const count = JSON.parse(localStorage.priority).length;
+
+    if (count > 5) {
+      this.unsuccessMsg();
+    } else if (count <= 0) {
+      if ( this.spontaneousId != null) {
+        this.unsuccessMsgEmptyQuickA();
+      } else {
+        this.unsuccessMsgEmptyNoQuickA();
+      }
+    } else {
+      this.router.navigate(['candidate-add-profile']);
+    }
+  }
+
+  back() {
+    this.router.navigate(['/home']);
+    // window.localStorage.setItem('priority', '[]');
+    // this.priority = JSON.parse(localStorage.getItem('priority'));
+    // this.priority.forEach((element, index) => {
+    //   this.priority.splice(index);
+    // });
+  }
+
+
+  quickApplication() {
+    localStorage.setItem('jobId', JSON.stringify(this.spontaneousId));
+    this.priority.pop();
+    this.priority.push(this.spontaneousId);
+    localStorage.setItem('priority', JSON.stringify(this.priority));
+
+    if  (localStorage.getItem('jobId') == JSON.stringify(this.spontaneousId)) {
+      this.routeToApplyJob();
+    } else {
+      this.applyOnlyFive();
+    }
+  }
+
+  routeToApplyJob() {
+    this.router.navigate(['candidate-add-profile']);
   }
 
   async unsuccessMsg() {
@@ -189,175 +282,5 @@ export class JobListPage implements OnInit {
     this.checkboxes.forEach((element) => {
       element.nativeElement.checked = false;
     });
-  }
-
-
-  getAllJobsByVenueId(event?) {
-    // tslint:disable-next-line: radix
-    this.jobNotFound = false;
-    this.apiService.getJobsByVenueId(parseInt(window.localStorage.getItem('venue_id')), this.page, this.limit).subscribe(
-      (data: VenueJobResponseList) => {
-        this.venueJobs = [...this.venueJobs, ...data.venueJobDtoList];
-        setTimeout(() => {
-          this.styleAccordion();
-        }, 0);
-
-        this.totalPages = data.totalPages;
-
-        if (this.venueJobs.length === 0) {
-          this.noJobsAvailable = true;
-        } else {
-          this.noJobsAvailable = false;
-        }
-
-        this.venueJobs.forEach((element, index) => {
-          if (this.venueJobs[index].job.title === 'Spontaneous Application') {
-            this.spontaneousId = this.venueJobs[index].job.jobId;
-            console.log(this.spontaneousId);
-            this.showQuickApply = true;
-          }
-          else {
-            this.showQuickApply = false;
-          }
-        });
-
-        if (event) {
-          event.target.complete();
-        }
-      }
-    );
-  }
-
-
-
-  loadData(event) {
-    setTimeout(() => {
-      this.page++;
-      this.getAllJobsByVenueId(event);
-    }, 500);
-    setTimeout(() => {
-      this.styleAccordion();
-    }, 0);
-    if (this.page === this.totalPages) {
-      event.target.disabled = true;
-    }
-  }
-
-  getAllJobsByVenueIdAndCategory() {
-    this.jobNotFound = false;
-    this.venueJobs = [];
-    this.category = this.route.snapshot.paramMap.get('jobQueryParam');
-    this.apiService.getJobsByVenueIdAndCategory(parseInt(window.localStorage.getItem('venue_id')), this.category).subscribe(data => {
-      if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
-        this.noJobsAvailable = true;
-      } else {
-        this.venueJobs = data;
-        setTimeout(() => {
-          this.styleAccordion();
-        }, 0);
-      }
-    },
-      error => {
-        this.noJobsAvailable = true;
-      }
-    );
-  }
-
-  addPriority(event: CustomEvent, jobId: number) {
-    if (event.detail.checked) {
-      this.priority.push(jobId);
-      localStorage.setItem('priority', JSON.stringify(this.priority));
-    } else {
-      const index = this.priority.indexOf(jobId);
-      if (index > -1) {
-        this.priority.splice(index, 1);
-      }
-      localStorage.setItem('priority', JSON.stringify(this.priority));
-    }
-  }
-
-  setJobId() {
-    this.jobPriority = JSON.parse(localStorage.getItem('priority'));
-    this.jobId = this.jobPriority[0];
-    localStorage.setItem('jobId', this.jobId);
-  }
-
-  routeToJob(jobQueryParam: string) {
-    this.router.navigate(['/job-list', jobQueryParam]);
-  }
-
-  applyOnlyFive() {
-    const count = JSON.parse(localStorage.priority).length;
-
-    if (count > 5) {
-      this.unsuccessMsg();
-    } else if (count <= 0) {
-      if ( this.spontaneousId != null){
-        this.unsuccessMsgEmptyQuickA();
-      }
-      else {
-        this.unsuccessMsgEmptyNoQuickA();
-      }
-    } else {
-      this.router.navigate(['candidate-add-profile']);
-    }
-  }
-
-  back() {
-    this.router.navigate(['/home']);
-    // window.localStorage.setItem('priority', '[]');
-    // this.priority = JSON.parse(localStorage.getItem('priority'));
-    // this.priority.forEach((element, index) => {
-    //   this.priority.splice(index);
-    // });
-  }
-
-  searchByTitle(title: string) {
-    this.jobNotFound = false;
-    const venueId = parseInt(window.localStorage.getItem('venue_id'));
-    if (this.category == null) {
-        this.apiService.searchJobByTitle(venueId, title).subscribe(data => {
-          if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
-            this.jobNotFound = true;
-          } else {
-            this.venueJobs = data;
-            setTimeout(() => {
-              this.styleAccordion();
-            }, 0);
-          }
-        });
-    } else {
-      if (title === '') {
-        this.getAllJobsByVenueIdAndCategory();
-      } else {
-        this.apiService.searchJobByCategoryAndTitle(venueId, this.category, title).subscribe(data => {
-          if (data.message === 'NO_VENUE_JOB_AVAILABLE') {
-            this.jobNotFound = true;
-          } else {
-            this.venueJobs = data;
-            setTimeout(() => {
-              this.styleAccordion();
-            }, 0);
-          }
-        });
-      }
-    }
-  }
-
-  quickApplication() {
-    localStorage.setItem('jobId', JSON.stringify(this.spontaneousId));
-    this.priority.pop();
-    this.priority.push(this.spontaneousId);
-    localStorage.setItem('priority', JSON.stringify(this.priority));
-
-    if  (localStorage.getItem('jobId') == JSON.stringify(this.spontaneousId)) {
-      this.routeToApplyJob();
-    } else {
-      this.applyOnlyFive();
-    }
-  }
-
-  routeToApplyJob() {
-    this.router.navigate(['candidate-add-profile']);
   }
 }

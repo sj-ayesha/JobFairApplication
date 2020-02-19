@@ -32,8 +32,8 @@ export class ApiService {
   // baseUrl = 'https://3d4a5055.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
   // baseUrl = 'http://192.168.53.209:8081/'; // elca ip
-  // baseUrl = 'http://localhost:8081/';
-  baseUrl = 'http://192.168.52.247:8081/'; // home ip
+  baseUrl = 'http://localhost:8081/';
+  // baseUrl = 'http://192.168.52.247:8081/'; // home ip
 
   // login
   authenticateUser(user: UserDto): Observable<ApiResponse> {
@@ -158,6 +158,13 @@ export class ApiService {
   searchAllJobsByLevel(level: string): Observable<Job[] | any> {
     return this.http.get<Job[]>(this.baseUrl + 'job/level' + '?level=' + level);
   }
+
+  filterJobs(pageNumber: number, pageSize: number, title?: string, position?: string, category?: string): Observable<Job[] | any> {
+    return this.http.get<Job[] | any>
+    // tslint:disable-next-line: max-line-length
+    (this.baseUrl + 'job/filter?title=' + title + '&position=' + position + '&category=' + category + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+  }
+
   // venue-job
 
   getJobsByVenueId(venueId: number, pageNumber: number, pageSize: number): Observable<VenueJob[] | any> {
@@ -190,6 +197,12 @@ export class ApiService {
 
   saveMultipleVenueJob(multipleVenueJob: VenueJobMultipleSaveDto): Observable<VenueJobMultipleSaveDto | any> {
     return this.http.post<VenueJobMultipleSaveDto>(this.baseUrl + 'venue-job/multiple-job', multipleVenueJob);
+  }
+
+  filterVenueJobs(pageNumber: number, pageSize: number, venueId?: number, title?: string, position?: string, category?: string): Observable<VenueJob[] | any> {
+    return this.http.get<VenueJob[] | any>
+    // tslint:disable-next-line: max-line-length
+    (this.baseUrl + 'venue-job/filter?venueId=' + venueId + '&title=' + title + '&position=' + position + '&category=' + category + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   // venue
