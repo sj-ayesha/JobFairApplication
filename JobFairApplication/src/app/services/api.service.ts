@@ -32,8 +32,8 @@ export class ApiService {
   // baseUrl = 'https://3d4a5055.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
   // baseUrl = 'http://192.168.53.209:8081/'; // elca ip
-  baseUrl = 'http://localhost:8081/';
-  // baseUrl = 'http://192.168.100.9:8081/'; // home ip
+  // baseUrl = 'http://localhost:8081/';
+  baseUrl = 'http://192.168.52.247:8081/'; // home ip
 
   // login
   authenticateUser(user: UserDto): Observable<ApiResponse> {
@@ -295,5 +295,8 @@ export class ApiService {
     return this.http.get<UserRoleDtoResponseList[] | any>(this.baseUrl + 'user-role/all');
   }
 
+  saveUser(userRole: UserRoleDto): Observable<UserRoleDto> {
+    return this.http.post<UserRoleDto>(this.baseUrl + 'user-role', userRole);
+  }
 }
 

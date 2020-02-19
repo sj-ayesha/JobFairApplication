@@ -3,6 +3,7 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-user-popup',
@@ -23,6 +24,7 @@ export class UserPopupPage implements OnInit {
   role: string;
   roleDescription: string;
   active: string;
+  
 
   errorMessages = {
     visa: [
@@ -41,7 +43,8 @@ export class UserPopupPage implements OnInit {
     private formBuilder: FormBuilder,
     private addEditPopupService: AddEditPopupService,
     private toastCtrl: ToastController,
-    private dropdowns: DropdownsService) { }
+    private dropdowns: DropdownsService,
+    private apiService: ApiService) { }
 
   ngOnInit() {
     this.roles = this.dropdowns.roles;
@@ -118,7 +121,19 @@ export class UserPopupPage implements OnInit {
 
 
   addUser() {
-
+    // const user = {
+    //   userId: null,
+    //   visa: this.formAddUser.get('visa').value,
+    //   password: this.formAddUser.get('visa').value + '1234',
+    //   active: this.status
+    // };
+    // console.log(user);
+    // this.apiService.saveUser(user).subscribe(
+    //   data => {
+    //   },
+    //   error => {
+    //   }
+    // );
   }
 
   editUser() {
