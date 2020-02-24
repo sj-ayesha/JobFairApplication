@@ -23,9 +23,6 @@ export class JobsBoPage implements OnInit {
   jobNotFound = false;
   checked = true;
   refreshCheck = false;
-  public searchTerm: '';
-  level: string;
-  category: string;
   public isReload: boolean;
   filterTextTitle = '';
   filterTextCategory = 'All';
@@ -37,7 +34,6 @@ export class JobsBoPage implements OnInit {
   public items: any;
   public splitJobDescriptions;
 
-
   constructor(
     private apiService: ApiService,
     private toastCtrl: ToastController,
@@ -47,9 +43,6 @@ export class JobsBoPage implements OnInit {
 
   ngOnInit() {
     this.addEditPopupService.castReload.subscribe(data => this.isReload = data);
-
-    window.localStorage.setItem('priority', '[]');
-    window.localStorage.setItem('jobId', '');
     this.filter();
 
     if (this.isReload === true) {

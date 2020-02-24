@@ -4,6 +4,9 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { AddEditPopupService } from 'src/app/services/add-edit-popup.service';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
 import { ApiService } from 'src/app/services/api.service';
+import { RoleDto } from 'src/app/model/roleDto';
+import { SaveUserRole } from 'src/app/model/SaveUserRoleDto';
+import { UserDto } from 'src/app/model/UserDto';
 
 @Component({
   selector: 'app-user-popup',
@@ -15,17 +18,19 @@ export class UserPopupPage implements OnInit {
   formAddUser: FormGroup;
   status = true;
   submitted = false;
-  roles: Array<string>;
+  roles: RoleDto;
 
-  user: string;
+  user: string
   userId: string;
   visa: string;
   roleId: string;
   role: string;
   roleDescription: string;
   active: string;
-  
 
+  userX: UserDto;
+  roleX: RoleDto;
+  
   errorMessages = {
     visa: [
       { type: 'required', message: '⚠ Visa is required' },
@@ -47,7 +52,10 @@ export class UserPopupPage implements OnInit {
     private apiService: ApiService) { }
 
   ngOnInit() {
-    this.roles = this.dropdowns.roles;
+    // this.roles = this.dropdowns.roles;
+    this.getRoles();
+
+
 
     this.addEditPopupService.cast.subscribe(edit => this.edit = edit);
     if (this.edit === true) {
@@ -58,7 +66,7 @@ export class UserPopupPage implements OnInit {
       this.roleId = this.user[3];
       this.role = this.user[4];
       this.roleDescription = this.user[5];
-      console.log(this.role);
+      // console.log(this.role);
 
       this.formAddUser = this.formBuilder.group({
         visa: new FormControl('',
@@ -119,21 +127,48 @@ export class UserPopupPage implements OnInit {
     this.status = getValue.target.value;
   }
 
+  getRoles() {
+    this.apiService.getAllRoles().subscribe(data => {
+      this.roles = data;
+    });
+  }
+
 
   addUser() {
-    // const user = {
-    //   userId: null,
-    //   visa: this.formAddUser.get('visa').value,
-    //   password: this.formAddUser.get('visa').value + '1234',
-    //   active: this.status
-    // };
-    // console.log(user);
-    // this.apiService.saveUser(user).subscribe(
-    //   data => {
-    //   },
-    //   error => {
-    //   }
-    // );
+    this.userX = {
+      visa: this.formAddUser.get('visa').value,
+      password: this.formAddUser.get('visa').value + '1234',
+      active: this.status
+    };
+
+    this.roleX = {
+      roleId: this.formAddUser.get('role').value,
+      name: null,
+      description: null,
+      candidateAdd: null,
+      candidateDetail: null,
+      candidateList: null,
+      home: null,
+      jobList: null,
+      venuePage: null,
+      dashboard: null,
+      jobBo: null,
+      skillBo: null,
+      venueBo: null,
+      venueJobBo: null
+    };
+
+    const userRole = {
+      user: this.userX,
+      role: this.roleX
+    };
+    console.log(userRole);
+    this.apiService.saveUser(userRole).subscribe(
+      data => {
+      },
+      error => {
+      }
+    );
   }
 
   editUser() {

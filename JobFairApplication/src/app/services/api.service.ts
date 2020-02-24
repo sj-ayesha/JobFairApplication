@@ -21,6 +21,7 @@ import { RoleDto } from '../model/roleDto';
 import { DownloadDto } from '../model/DownloadDto';
 import { ExcelDto } from '../model/ExcelDto';
 import { UserRoleDto, UserRoleDtoResponseList } from '../model/UserRoleDto';
+import { SaveUserRole } from '../model/SaveUserRoleDto';
 
 
 @Injectable({
@@ -31,7 +32,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   // baseUrl = 'https://3d4a5055.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
-  // baseUrl = 'http://192.168.53.209:8081/'; // elca ip
+  // baseUrl = 'http://192.168.52.227:8081/'; // elca ip
   baseUrl = 'http://localhost:8081/';
   // baseUrl = 'http://192.168.52.247:8081/'; // home ip
 
@@ -294,6 +295,10 @@ export class ApiService {
   }
 
   // Role
+  getAllRoles(): Observable<RoleDto | any> {
+    return this.http.get<RoleDto | any>(this.baseUrl + 'role/all');
+  }
+
   getRoleDetails(roleName: string): Observable<RoleDto | any> {
     return this.http.get<RoleDto | any>(this.baseUrl + 'role/' + roleName);
   }
@@ -308,8 +313,8 @@ export class ApiService {
     return this.http.get<UserRoleDtoResponseList[] | any>(this.baseUrl + 'user-role/all');
   }
 
-  saveUser(userRole: UserRoleDto): Observable<UserRoleDto> {
-    return this.http.post<UserRoleDto>(this.baseUrl + 'user-role', userRole);
+  saveUser(userRole: SaveUserRole): Observable<SaveUserRole> {
+    return this.http.post<SaveUserRole>(this.baseUrl + 'user-role', userRole);
   }
 }
 
