@@ -32,9 +32,9 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   // baseUrl = 'https://3d4a5055.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
-  // baseUrl = 'http://192.168.52.227:8081/'; // elca ip
-  baseUrl = 'http://localhost:8081/';
-  // baseUrl = 'http://192.168.52.247:8081/'; // home ip
+  // baseUrl = 'http://10.50.242.199:8081/'; // elca ip
+  // baseUrl = 'http://localhost:8081/';
+  baseUrl = 'http://192.168.100.8:8081/'; // home ip
 
   // login
   authenticateUser(user: UserDto): Observable<ApiResponse> {
@@ -118,10 +118,10 @@ export class ApiService {
   }
 
   // tslint:disable-next-line: max-line-length
-  filterCandidates(pageNumber: number, pageSize: number, sortOrder: string, sortBy: string, venueId?: number, screeningStatus?: string, lastName?: string, level?: string): Observable<CandidateVenueJobDtoResponseList[] | any> {
+  filterCandidates(pageNumber: number, pageSize: number, sortOrder: string, sortBy: string, venueId?: number, screeningStatus?: string, lastName?: string, level?: string, jobType?: string): Observable<CandidateVenueJobDtoResponseList[] | any> {
     return this.http.get<CandidateVenueJobDtoResponseList[] | any>
     // tslint:disable-next-line: max-line-length
-    (this.baseUrl + 'candidate-venue-job/filter?venueId=' + venueId + '&screeningStatus=' + screeningStatus + '&lastName=' + lastName + '&level=' + level + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize);
+    (this.baseUrl + 'candidate-venue-job/filter?venueId=' + venueId + '&screeningStatus=' + screeningStatus + '&lastName=' + lastName + '&level=' + level + '&jobType=' + jobType + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   // candidate skills

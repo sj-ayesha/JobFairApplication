@@ -61,7 +61,7 @@ export class CandidateAddProfilePage implements OnInit {
       { type: 'required', message: '⚠ First Name is required' },
       {
         type: 'maxLength',
-        message: '⚠ First Name must be less than 30 letters'
+        message: '⚠ First Name must be less than 50 letters'
       },
       { type: 'pattern', message: '⚠ First Name is invalid' }
     ],
@@ -69,7 +69,7 @@ export class CandidateAddProfilePage implements OnInit {
       { type: 'required', message: '⚠ Last Name is required' },
       {
         type: 'maxLength',
-        message: '⚠ Last Name must be less than 30 letters'
+        message: '⚠ Last Name must be less than 50 letters'
       },
       { type: 'pattern', message: '⚠ Last Name is invalid' }
     ],
@@ -96,7 +96,7 @@ export class CandidateAddProfilePage implements OnInit {
       { type: 'required', message: '⚠ First Name is required' },
       {
         type: 'maxLength',
-        message: '⚠ First Name must be less than 30 letters'
+        message: '⚠ First Name must be less than 50 letters'
       },
       { type: 'pattern', message: '⚠ First Name is invalid' }
     ],
@@ -104,7 +104,7 @@ export class CandidateAddProfilePage implements OnInit {
       { type: 'required', message: '⚠ Last Name is required' },
       {
         type: 'maxLength',
-        message: '⚠ Last Name must be less than 30 letters'
+        message: '⚠ Last Name must be less than 50 letters'
       },
       { type: 'pattern', message: '⚠ Last Name is invalid' }
     ],
@@ -128,7 +128,7 @@ export class CandidateAddProfilePage implements OnInit {
       firstName: new FormControl(
         '',
         Validators.compose([
-          Validators.maxLength(30),
+          Validators.maxLength(50),
           Validators.pattern('[a-zA-Z ]*'),
           Validators.required
         ])
@@ -136,7 +136,7 @@ export class CandidateAddProfilePage implements OnInit {
       lastName: new FormControl(
         '',
         Validators.compose([
-          Validators.maxLength(30),
+          Validators.maxLength(50),
           Validators.pattern('[a-zA-Z ]*'),
           Validators.required
         ])

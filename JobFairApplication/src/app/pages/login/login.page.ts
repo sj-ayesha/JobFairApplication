@@ -77,7 +77,8 @@ export class LoginPage implements OnInit {
       this.loggedIn = true;
       const loginUser = {
         visa: this.formLogin.get('username').value,
-        password: this.formLogin.get('password').value
+        password: this.formLogin.get('password').value,
+        active: null
       };
 
       this.apiService.authenticateUser(loginUser).subscribe(data => {{

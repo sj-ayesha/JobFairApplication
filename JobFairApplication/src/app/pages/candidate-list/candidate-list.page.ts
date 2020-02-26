@@ -31,6 +31,7 @@ export class CandidateListPage implements OnInit {
   filterTextSortOrder = 'DESC';
   filterTextSortBy = 'candidate.registrationDate';
   filterTextLastname = '';
+  filterTextJobType = 'All';
 
   data: any;
   message: any;
@@ -38,6 +39,7 @@ export class CandidateListPage implements OnInit {
   selectedElementForScreening = 'All';
   selectedElementForSearch = '';
   selectedElementForLevel = 'All';
+  selectedElementForJobType = 'All';
   public responseData: any;
   public countCandidates: any;
 
@@ -84,7 +86,7 @@ export class CandidateListPage implements OnInit {
       this.totalCandidates = 0;
     }
     this.apiService.filterCandidates(this.page, this.limit, this.filterTextSortOrder,
-      this.filterTextSortBy, this.filterTextVenue, this.filterTextScreening, this.filterTextLastname, this.filterTextLevel).subscribe(
+      this.filterTextSortBy, this.filterTextVenue, this.filterTextScreening, this.filterTextLastname, this.filterTextLevel, this.filterTextJobType).subscribe(
         (data: CandidateVenueJobDtoResponseList) => {
           this.candidateVenueJobsLists = [...this.candidateVenueJobsLists, ...data.candidateVenueJobDtoList];
           this.totalPages = data.totalPages;
@@ -138,6 +140,15 @@ export class CandidateListPage implements OnInit {
     }
   }
 
+  // JOB TYPE
+  filterByJobType(event) {
+    this.filterTextJobType = event.target.value;
+    if (this.x === true) {
+    } else {
+      this.filter();
+    }
+  }
+
   getAllCandidatesByAsc() {
     this.filterTextSortBy = 'candidate.lastName';
     this.filterTextSortOrder = 'ASC';
@@ -158,6 +169,7 @@ export class CandidateListPage implements OnInit {
     this.filterTextLastname = '';
     this.filterTextSortOrder = 'DESC';
     this.filterTextLevel = 'All';
+    this.filterTextJobType = 'All';
 
 
     this.filter();
@@ -170,6 +182,7 @@ export class CandidateListPage implements OnInit {
     this.selectedElementForScreening = 'All';
     this.selectedElementForLevel = 'All';
     this.selectedElementForSearch = '';
+    this.selectedElementForJobType = 'All';
   }
 
   loadData(event) {

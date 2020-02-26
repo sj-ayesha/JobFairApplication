@@ -23,7 +23,7 @@ export class DropdownsService {
     this.jobTypes = [
       'Full-Time',
       'Part-Time',
-      'Intern-ship'
+      'Internship'
     ];
 
     this.currentLevels = [
