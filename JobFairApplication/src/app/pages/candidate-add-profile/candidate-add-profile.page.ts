@@ -172,7 +172,7 @@ export class CandidateAddProfilePage implements OnInit {
 
       registrationDate: new FormControl(new Date()),
 
-      currentLevel: new FormControl('Fresher', Validators.required),
+      currentLevel: new FormControl('Fresher Graduate', Validators.required),
       title: new FormControl('Degree'),
       division: new FormControl(),
       institution: new FormControl(),
