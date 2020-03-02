@@ -180,6 +180,7 @@ export class CandidateAddProfilePage implements OnInit {
       candidateId: new FormControl(),
       position: new FormControl(),
       companyName: new FormControl(),
+      course: new FormControl(),
       duration: new FormControl(),
       skillId: new FormControl(),
       cvUpload: new FormControl()
@@ -255,6 +256,7 @@ export class CandidateAddProfilePage implements OnInit {
     this.arrayQualification = [
       {
         title: this.formCandidateDetails.get('title').value,
+        course: this.formCandidateDetails.get('course').value,
         division: this.formCandidateDetails.get('division').value,
         institution: this.formCandidateDetails.get('institution').value,
         graduationDate: this.formCandidateDetails.get('graduationDate').value
@@ -366,6 +368,7 @@ export class CandidateAddProfilePage implements OnInit {
     this.arrayQualification = [
       {
         title: this.formCandidateDetails.get('title').value,
+        course: this.formCandidateDetails.get('course').value,
         division: this.formCandidateDetails.get('division').value,
         institution: this.formCandidateDetails.get('institution').value,
         graduationDate: this.formCandidateDetails.get('graduationDate').value
@@ -380,7 +383,7 @@ export class CandidateAddProfilePage implements OnInit {
       this.arrayExperience[0].companyName == null &&
       this.arrayExperience[0].position == null &&
       this.arrayExperience[0].duration == null) {
-        this.arrayExperience = [];
+      this.arrayExperience = [];
     }
 
     this.arrayFile = [];

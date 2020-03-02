@@ -33,8 +33,8 @@ export class ApiService {
   // baseUrl = 'https://3d4a5055.ngrok.io/'; // url to access backend
   // baseUrl = 'http://10.9.0.85:8081/';
   // baseUrl = 'http://10.50.242.199:8081/'; // elca ip
-  // baseUrl = 'http://localhost:8081/';
-  baseUrl = 'http://192.168.100.8:8081/'; // home ip
+  baseUrl = 'http://localhost:8081/';
+  // baseUrl = 'http://192.168.100.8:8081/'; // home ip
 
   // login
   authenticateUser(user: UserDto): Observable<ApiResponse> {

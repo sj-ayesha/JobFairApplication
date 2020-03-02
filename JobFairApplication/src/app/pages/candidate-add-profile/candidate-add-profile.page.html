@@ -217,19 +217,19 @@
           </ion-col>
           <ion-col size="6" size-md size="12" size-sm>
             <ion-item>
-              <ion-label position="floating" color="medium">Division</ion-label>
-              <ion-select interface="popover" formControlName="division" cancelText="Cancel" okText="OK">
-                <ion-select-option *ngFor="let division of divisions" [value]="division">{{ division }}
-                </ion-select-option>
-              </ion-select>
+              <ion-label position="floating" color="medium">Course</ion-label>
+              <ion-input formControlName="course" type="text"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="6" size-md size="12" size-sm>
             <ion-item>
-              <ion-label position="floating" color="medium">Institution</ion-label>
-              <ion-input formControlName="institution" type="text"></ion-input>
+              <ion-label position="floating" color="medium">Division</ion-label>
+              <ion-select interface="popover" formControlName="division" cancelText="Cancel" okText="OK">
+                <ion-select-option *ngFor="let division of divisions" [value]="division">{{ division }}
+                </ion-select-option>
+              </ion-select>
             </ion-item>
           </ion-col>
           <ion-col size="6" size-md size="12" size-sm>
@@ -241,7 +241,14 @@
             </ion-item>
           </ion-col>
         </ion-row>
-        <ion-input formControlName="candidateId" type="text" hidden></ion-input>
+        <ion-row>
+          <ion-col size="12" size-md size="12" size-sm>
+            <ion-item>
+              <ion-label position="floating" color="medium">Institution</ion-label>
+              <ion-input formControlName="institution" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
         <h4>Experience</h4>
 
@@ -272,7 +279,6 @@
               </ion-select>
             </ion-item>
           </ion-col>
-          <ion-input formControlName="candidateId" type="text" hidden></ion-input>
         </ion-row>
 
         <div id="content"></div>
@@ -291,7 +297,6 @@
               </ion-item>
             </ion-list>
           </ion-col>
-          <ion-input formControlName="candidateId" type="text" hidden></ion-input>
         </ion-row>
 
         <div class="btn-actions">

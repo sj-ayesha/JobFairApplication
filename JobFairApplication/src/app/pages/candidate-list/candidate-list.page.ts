@@ -20,7 +20,7 @@ export class CandidateListPage implements OnInit {
   allCandidates: Candidate[] = [];
   venues: Venue[];
 
-  limit = 10;
+  limit = 20;
   page = 0;
 
   totalPages = 0;

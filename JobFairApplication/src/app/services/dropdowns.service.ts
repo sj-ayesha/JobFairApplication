@@ -51,6 +51,7 @@ export class DropdownsService {
       'PHD'
     ];
     this.divisions = [
+      'Ongoing',
       '1st Class Honours',
       '2nd Class 1st Division Honours',
       '2nd Class 2nd Division Honours',
