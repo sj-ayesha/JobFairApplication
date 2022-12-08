@@ -52,6 +52,12 @@ export class SkillsBoPage implements OnInit {
   openAddModal() {
     this.addEditPopupService.showEdit(false);
     this.modalController.create({component: SkillPopupPage}).then((modalElement) => {
+      modalElement.onDidDismiss().then((data) => {
+        if (data) {
+          this.skills = [];
+          this.getAllSkills();
+        }
+      })
       modalElement.present();
     });
   }
@@ -59,6 +65,12 @@ export class SkillsBoPage implements OnInit {
   openEditModal() {
     this.addEditPopupService.showEdit(true);
     this.modalController.create({component: SkillPopupPage}).then((modalElement) => {
+      modalElement.onDidDismiss().then((data) => {
+        if (data) {
+          this.skills = [];
+          this.getAllSkills();
+        }
+      })
       modalElement.present();
     });
   }

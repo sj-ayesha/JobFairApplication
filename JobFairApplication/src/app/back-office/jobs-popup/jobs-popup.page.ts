@@ -270,13 +270,13 @@ export class JobsPopupPage implements OnInit {
         this.editJob();
         this.successEditMsg();
         this.formAddJob.reset();
-        this.modalController.dismiss();
+        this.modalController.dismiss(true);
         this.addEditPopupService.reloadComponent(true);
       } else {
         this.addJob();
         this.successMsg();
         this.formAddJob.reset();
-        this.modalController.dismiss();
+        this.modalController.dismiss(true);
       }
     }
   }

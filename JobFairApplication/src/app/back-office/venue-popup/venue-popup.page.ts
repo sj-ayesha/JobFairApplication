@@ -59,7 +59,7 @@ export class VenuePopupPage implements OnInit {
       this.formAddVenue = this.formBuilder.group({
         venueName: new FormControl('',
           Validators.compose([
-            Validators.maxLength(30)
+            Validators.maxLength(100)
           ])
         ),
         address: new FormControl(''),
@@ -71,7 +71,7 @@ export class VenuePopupPage implements OnInit {
       this.formAddVenue = this.formBuilder.group({
         venueName: new FormControl('',
           Validators.compose([
-            Validators.maxLength(30),
+            Validators.maxLength(100),
             Validators.required
           ])
         ),
@@ -183,12 +183,12 @@ export class VenuePopupPage implements OnInit {
         this.editVenue();
         this.successEditMsg();
         this.formAddVenue.reset();
-        this.modalController.dismiss();
+        this.modalController.dismiss(true);
       } else {
         this.addVenue();
         this.successMsg();
         this.formAddVenue.reset();
-        this.modalController.dismiss();
+        this.modalController.dismiss(true);
       }
     }
   }

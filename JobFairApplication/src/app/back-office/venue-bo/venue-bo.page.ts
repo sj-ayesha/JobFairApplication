@@ -79,6 +79,12 @@ export class VenueBoPage implements OnInit {
   openAddModal() {
     this.addEditPopupService.showEdit(false);
     this.modalController.create({component: VenuePopupPage}).then((modalElement) => {
+      modalElement.onDidDismiss().then((data) => {
+        if (data) {
+          this.venues = [];
+          this.getAllVenue();
+        }
+      })
       modalElement.present();
     });
   }
@@ -86,6 +92,12 @@ export class VenueBoPage implements OnInit {
   openEditModal() {
     this.addEditPopupService.showEdit(true);
     this.modalController.create({component: VenuePopupPage}).then((modalElement) => {
+      modalElement.onDidDismiss().then((data) => {
+        if (data) {
+          this.venues = [];
+          this.getAllVenue();
+        }
+      })
       modalElement.present();
     });
   }

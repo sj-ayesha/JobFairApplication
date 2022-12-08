@@ -154,6 +154,12 @@ export class JobsBoPage implements OnInit {
       component: JobsPopupPage,
       cssClass: 'modal-container'
     }).then((modalElement) => {
+      modalElement.onDidDismiss().then((data) => {
+        if (data) {
+          this.jobs = [];
+          this.filter();
+        }
+      })
       modalElement.present();
     });
   }
@@ -162,6 +168,12 @@ export class JobsBoPage implements OnInit {
   openEditModal() {
     this.addEditPopupService.showEdit(true);
     this.modalController.create({ component: JobsPopupPage, cssClass: 'modal-container'}).then((modalElement) => {
+      modalElement.onDidDismiss().then((data) => {
+        if (data) {
+          this.jobs = [];
+          this.filter();
+        }
+      })
       modalElement.present();
     });
   }

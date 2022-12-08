@@ -155,12 +155,12 @@ export class SkillPopupPage implements OnInit {
         this.editSkill();
         this.successEditMsg();
         this.formAddSkill.reset();
-        this.modalController.dismiss();
+        this.modalController.dismiss(true);
       } else {
         this.addSkill();
         this.successMsg();
         this.formAddSkill.reset();
-        this.modalController.dismiss();
+        this.modalController.dismiss(true);
       }
     }
   }
